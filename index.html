@@ -95,6 +95,24 @@ body {
 
 .sidebar-link:hover { text-decoration: underline; color: var(--chrome-active); }
 
+.sidebar-tools { position: relative; display: inline-block; margin-left: 14px; margin-top: 12px; }
+.sidebar-tools-btn {
+  background: none; border: none; padding: 0; cursor: pointer;
+  font: inherit; margin: 0;
+}
+.sidebar-tools-btn .caret { font-size: 10px; margin-left: 3px; }
+.sidebar-tools-menu {
+  position: absolute; top: 100%; left: 0; margin-top: 6px;
+  background: white; border: 1px solid var(--border, #d8d3cc);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  min-width: 170px; z-index: 1200; padding: 6px 0;
+}
+.sidebar-tools-menu a {
+  display: block; padding: 7px 14px; font-size: 13px;
+  color: var(--chrome-fg); text-decoration: none; font-weight: 500;
+}
+.sidebar-tools-menu a:hover { background: var(--tint, #f5f2ed); color: var(--chrome-active); }
+
 #sidebar-search-wrap {
   margin-top: 10px;
   padding-top: 10px;
@@ -1175,12 +1193,18 @@ mark.search-hl-active {
   <aside id="sidebar">
     <div id="sidebar-header">
       <h1>Digital Archive</h1>
-      <a href="inventory.html" id="inventory-link">Inventory</a>
       <a href="sources.html" class="sidebar-link">Sources &amp; Attribution</a>
-      <a href="translators.html" class="sidebar-link">Translator Index</a>
-      <a href="issues.html" class="sidebar-link">Issues</a>
-      <a href="source_status.html" class="sidebar-link">Source Status</a>
-      <a href="metadata_audit.html" class="sidebar-link">Metadata Audit</a>
+      <div class="sidebar-tools">
+        <button type="button" id="tools-btn" class="sidebar-link sidebar-tools-btn"
+          aria-expanded="false">Tools <span class="caret">&#9662;</span></button>
+        <div id="tools-menu" class="sidebar-tools-menu" hidden>
+          <a href="inventory.html">Inventory</a>
+          <a href="translators.html">Translator Index</a>
+          <a href="issues.html">Issues</a>
+          <a href="source_status.html">Source Status</a>
+          <a href="metadata_audit.html">Metadata Audit</a>
+        </div>
+      </div>
       <div id="sidebar-search-wrap">
         <input type="search" id="sidebar-search" placeholder="Search texts…" autocomplete="off">
       </div>
@@ -3254,6 +3278,24 @@ wire('ctrl-size',    '--reader-size',    'r-size',    v => v + 'px', 'ctrl-size-
 wire('ctrl-spacing', '--reader-leading', 'r-leading', v => v,        'ctrl-spacing-val');
 wire('ctrl-bg',      '--reader-bg',      'r-bg',      v => v,        null);
 wire('ctrl-fg',      '--reader-fg',      'r-fg',      v => v,        null);
+
+// ── Tools dropdown ────────────────────────────────────────────────────────────
+(() => {
+  const btn = document.getElementById('tools-btn');
+  const menu = document.getElementById('tools-menu');
+  if (!btn || !menu) return;
+  const close = () => { menu.hidden = true; btn.setAttribute('aria-expanded','false'); };
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const willOpen = menu.hidden;
+    menu.hidden = !willOpen;
+    btn.setAttribute('aria-expanded', String(willOpen));
+  });
+  document.addEventListener('click', (e) => {
+    if (!menu.hidden && !menu.contains(e.target) && e.target !== btn) close();
+  });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+})();
 
 // ── Boot ──────────────────────────────────────────────────────────────────────
 
