@@ -1,0 +1,3264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Digital Archive</title>
+  <style>
+
+/* ── Reset ─────────────────────────────────────────────────────────────────── */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── CSS variables ─────────────────────────────────────────────────────────── */
+
+:root {
+  --reader-font:    Georgia, serif;
+  --reader-size:    18px;
+  --reader-leading: 1.9;
+  --reader-bg:      #faf8f5;
+  --reader-fg:      #2c2c2c;
+
+  --chrome-bg:      #eeebe5;
+  --chrome-fg:      #3a3530;
+  --chrome-border:  #d8d3cc;
+  --chrome-muted:   #8a7a6a;
+  --chrome-active:  #7a5c3a;
+  --sidebar-width:  260px;
+}
+
+/* ── Layout ─────────────────────────────────────────────────────────────────── */
+
+html, body { height: 100%; overflow: hidden; }
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background: var(--chrome-bg);
+  color: var(--chrome-fg);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+#shell {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* ── Sidebar ─────────────────────────────────────────────────────────────────── */
+
+#sidebar {
+  width: var(--sidebar-width);
+  min-width: var(--sidebar-width);
+  background: var(--chrome-bg);
+  border-right: 1px solid var(--chrome-border);
+  display: flex;
+  flex-direction: column;
+}
+
+#sidebar-header {
+  padding: 18px 16px 14px;
+  border-bottom: 1px solid var(--chrome-border);
+}
+
+#sidebar-header h1 {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--chrome-muted);
+}
+
+#inventory-link {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--chrome-active);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+}
+
+#inventory-link:hover { text-decoration: underline; }
+
+.sidebar-link {
+  display: inline-block;
+  margin-top: 12px;
+  margin-left: 14px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--chrome-muted);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+}
+
+.sidebar-link:hover { text-decoration: underline; color: var(--chrome-active); }
+
+#sidebar-search-wrap {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--chrome-border);
+}
+
+#sidebar-search {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 7px 10px;
+  font-size: 13px;
+  border: 1px solid var(--chrome-border);
+  border-radius: 4px;
+  background: #f3efe8;
+  color: var(--chrome-fg);
+  outline: none;
+}
+
+#sidebar-search:focus {
+  border-color: var(--chrome-active);
+  background: #fff;
+}
+
+.sb-hidden { display: none !important; }
+
+#text-list {
+  list-style: none;
+  flex: 1;
+  overflow-y: scroll;
+  padding: 6px 0;
+}
+
+/* ── Collection header (Sacred / Other dividers) ─────────────────────────── */
+
+.collection-header {
+  padding: 20px 16px 10px 16px;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #8a7a5c;
+  text-align: center;
+  user-select: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  margin-bottom: 4px;
+  transition: color 0.15s;
+}
+.collection-header:hover { color: var(--chrome-fg); }
+.collection-header:first-child { padding-top: 14px; }
+
+/* Divider before non-first collections (OTHER, etc.) */
+.collection-header:not(:first-child) {
+  margin-top: 12px;
+  padding-top: 22px;
+  border-top: 1px solid var(--chrome-border);
+}
+
+/* Small collapse arrow for collection headers */
+.collection-header .col-arrow {
+  font-size: 9px;
+  display: inline-block;
+  transition: transform 0.15s;
+  opacity: 0.5;
+}
+.collection-header.collapsed .col-arrow { transform: rotate(-90deg); }
+
+/* When collapsed, hide all subsequent tradition-header + tradition-items
+   until the next collection-header. Managed via JS toggling .col-hidden. */
+.col-hidden { display: none !important; }
+
+/* ── Tradition header (collapsible, e.g. "Christian (20)") ───────────────── */
+
+.tradition-header {
+  padding: 9px 16px 9px 20px;
+  cursor: pointer;
+  border-left: 3px solid transparent;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  transition: background 0.15s, border-color 0.15s;
+}
+.tradition-header:hover {
+  background: rgba(122, 92, 58, 0.07);
+}
+
+.tradition-header .t-arrow {
+  font-size: 9px;
+  color: var(--chrome-muted);
+  width: 10px;
+  display: inline-block;
+  transition: transform 0.15s;
+  flex-shrink: 0;
+}
+.tradition-header.expanded .t-arrow { transform: rotate(90deg); }
+
+.tradition-header .t-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--chrome-fg);
+  flex: 1;
+  line-height: 1.35;
+}
+
+.tradition-header .t-count {
+  font-size: 10px;
+  color: var(--chrome-muted);
+  font-weight: 400;
+  opacity: 0.55;
+  min-width: 16px;
+  text-align: right;
+}
+
+.tradition-items {
+  display: none;
+}
+.tradition-items.expanded { display: block; }
+
+/* ── Group header (one per multi-translation text, e.g. Bible KJV/ASV) ───── */
+
+.text-group-header {
+  padding: 8px 16px 8px 34px;
+  cursor: pointer;
+  border-left: 3px solid transparent;
+  user-select: none;
+  transition: background 0.15s;
+}
+
+.text-group-header:hover {
+  background: rgba(122, 92, 58, 0.06);
+}
+
+.text-group-header .t-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--chrome-fg);
+  line-height: 1.3;
+}
+
+.text-group-header .t-sub {
+  font-size: 11px;
+  color: var(--chrome-muted);
+  margin-top: 2px;
+}
+
+.text-group-header .t-count {
+  font-size: 10px;
+  color: var(--chrome-muted);
+  font-weight: 400;
+  opacity: 0.55;
+  margin-left: 5px;
+}
+
+.text-group-header .t-arrow {
+  font-size: 9px;
+  color: var(--chrome-muted);
+  margin-right: 5px;
+  display: inline-block;
+  transition: transform 0.15s;
+}
+
+.text-group-header.expanded .t-arrow {
+  transform: rotate(90deg);
+}
+
+/* ── Translation items (indented under group) ────────────────────────────── */
+
+.text-group-items {
+  display: none;
+}
+
+.text-group-items.expanded {
+  display: block;
+}
+
+.text-item {
+  padding: 7px 16px 7px 48px;
+  cursor: pointer;
+  border-left: 3px solid transparent;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.text-item:hover {
+  background: rgba(122, 92, 58, 0.06);
+}
+
+.text-item.active {
+  border-left-color: var(--chrome-active);
+  background: rgba(122, 92, 58, 0.10);
+}
+.text-item.active .t-title {
+  font-weight: 600;
+  color: #3a2a18;
+}
+
+.text-item .t-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--chrome-fg);
+  line-height: 1.35;
+}
+
+.q-star {
+  color: #c9a144;
+  font-size: 11px;
+  margin-right: 5px;
+  vertical-align: 1px;
+}
+
+.text-item .t-sub {
+  font-size: 11px;
+  color: var(--chrome-muted);
+  margin-top: 2px;
+  opacity: 0.7;
+}
+
+/* ── Solo items (text with 1 translation, nested directly under tradition)─ */
+
+.text-item.solo {
+  padding: 7px 16px 7px 34px;
+}
+
+.text-item.solo .t-title {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.text-item.solo .t-sub {
+  display: none;
+}
+
+/* ── Right panel ─────────────────────────────────────────────────────────────── */
+
+#panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── Controls bar ─────────────────────────────────────────────────────────────── */
+
+#controls {
+  background: #e4e0d9;
+  border-bottom: 1px solid var(--chrome-border);
+  padding: 11px 20px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+.ctrl-group {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.ctrl-group label {
+  color: var(--chrome-muted);
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+
+.ctrl-group select {
+  font-size: 13px;
+  border: 1px solid var(--chrome-border);
+  background: #f0ede8;
+  color: var(--chrome-fg);
+  padding: 4px 7px;
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+}
+
+.ctrl-group select:focus { border-color: var(--chrome-active); }
+
+.ctrl-group input[type="range"] {
+  width: 100px;
+  cursor: pointer;
+  accent-color: var(--chrome-active);
+}
+
+.ctrl-group .val {
+  color: var(--chrome-muted);
+  min-width: 34px;
+  font-size: 12px;
+}
+
+.ctrl-group input[type="color"] {
+  width: 32px;
+  height: 26px;
+  border: 1px solid var(--chrome-border);
+  border-radius: 3px;
+  cursor: pointer;
+  padding: 1px;
+  background: none;
+}
+
+#ctrl-book-group {
+  display: none;
+  border-left: 1px solid var(--chrome-border);
+  padding-left: 18px;
+  margin-left: 0;
+}
+
+/* ── Status bar ─────────────────────────────────────────────────────────────── */
+
+#status {
+  font-size: 11px;
+  color: var(--chrome-muted);
+  background: #e4e0d9;
+  border-bottom: 1px solid var(--chrome-border);
+  padding: 4px 16px;
+  display: none;
+}
+
+/* ── Reader area ─────────────────────────────────────────────────────────────── */
+
+#reader {
+  flex: 1;
+  overflow-y: auto;
+  padding: 48px 40px 100px;
+  background: var(--reader-bg);
+  color: var(--reader-fg);
+  font-family: var(--reader-font);
+  font-size: var(--reader-size);
+  line-height: var(--reader-leading);
+}
+
+#reader-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ── Welcome / empty state ─────────────────────────────────────────────────── */
+
+#welcome {
+  margin-top: 80px;
+  text-align: center;
+  color: var(--chrome-muted);
+  font-size: 16px;
+  font-family: Georgia, serif;
+}
+
+#welcome-hint {
+  font-style: italic;
+  margin-bottom: 48px;
+}
+
+.welcome-section-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--chrome-muted);
+  margin: 32px 0 12px;
+}
+
+#continue-btn {
+  background: #5a4a1e;
+  color: #faf6ec;
+  border: none;
+  font-family: Georgia, serif;
+  font-size: 15px;
+  padding: 10px 24px;
+  border-radius: 999px;
+  cursor: pointer;
+  max-width: 90%;
+  white-space: normal;
+  line-height: 1.35;
+}
+#continue-btn:hover { background: #3d3210; }
+
+#recent-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 520px;
+  text-align: left;
+}
+#recent-list li {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--chrome-border);
+  cursor: pointer;
+  font-style: normal;
+  color: var(--reader-fg);
+  font-size: 14px;
+}
+#recent-list li:hover { background: rgba(0,0,0,0.04); }
+#welcome-search {
+  max-width: 640px;
+  margin: 0 auto 12px;
+  text-align: left;
+}
+#global-search {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 14px;
+  font-size: 15px;
+  font-family: var(--reader-font);
+  border: 1px solid var(--chrome-border);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--reader-fg);
+  outline: none;
+}
+#global-search:focus { border-color: #5a4a1e; }
+#global-search-status {
+  font-size: 12px;
+  color: var(--chrome-muted);
+  margin-top: 6px;
+  font-style: italic;
+}
+#global-search-results {
+  list-style: none;
+  padding: 0;
+  margin: 14px 0 0 0;
+  max-height: 360px;
+  overflow-y: auto;
+}
+#global-search-results li {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--chrome-border);
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--reader-fg);
+}
+#global-search-results li:hover { background: rgba(0,0,0,0.04); }
+#global-search-results li .gs-sub {
+  display: block;
+  font-size: 12px;
+  color: var(--chrome-muted);
+  margin-top: 2px;
+  font-style: italic;
+}
+#recent-list li .recent-sub {
+  display: block;
+  font-size: 12px;
+  color: var(--chrome-muted);
+  margin-top: 2px;
+}
+
+.passage-highlight {
+  background: #fff3b8;
+  transition: background 1.5s ease-out;
+}
+.ref.clickable-ref { cursor: pointer; }
+.ref.clickable-ref:hover { opacity: 1; color: var(--chrome-active); }
+.copy-toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 13px;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+}
+.copy-toast.show { opacity: 0.95; }
+
+/* ── Text cover page ──────────────────────────────────────────────────────── */
+
+#text-cover {
+  margin: 120px auto 0;
+  max-width: 640px;
+  text-align: center;
+  font-family: var(--reader-font);
+  color: var(--reader-fg);
+  padding: 0 20px 80px;
+}
+
+#cover-title {
+  font-size: 2.6em;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+  margin-bottom: 0.7em;
+}
+
+#cover-author {
+  font-size: 1.15em;
+  font-style: italic;
+  color: var(--chrome-muted);
+  margin-bottom: 0.3em;
+}
+
+#cover-translator {
+  font-size: 0.95em;
+  color: var(--chrome-muted);
+  margin-bottom: 0.3em;
+}
+
+#cover-year {
+  font-size: 1em;
+  color: var(--chrome-muted);
+  letter-spacing: 0.05em;
+  margin-bottom: 2.2em;
+}
+
+#cover-begin {
+  display: inline-block;
+  background: #5a4a1e;
+  color: #faf6ec;
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 12px 34px;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  transition: background 0.1s, box-shadow 0.1s, transform 0.05s;
+}
+
+#cover-begin:hover {
+  background: #3d3210;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+
+#cover-begin:active {
+  transform: translateY(1px);
+}
+
+/* ── Table of contents page ───────────────────────────────────────────────── */
+
+#text-toc {
+  margin: 80px auto 0;
+  max-width: 760px;
+  font-family: var(--reader-font);
+  color: var(--reader-fg);
+  padding: 0 24px 80px;
+}
+
+#toc-title {
+  font-size: 1.8em;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 0.04em;
+  margin-bottom: 6px;
+}
+
+#toc-subtitle {
+  font-size: 0.95em;
+  font-style: italic;
+  color: var(--chrome-muted);
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+#toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 32px 0;
+  border-top: 1px solid var(--chrome-border);
+}
+
+#toc-list li {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 11px 8px;
+  border-bottom: 1px solid var(--chrome-border);
+  cursor: pointer;
+  transition: background 0.08s;
+}
+
+#toc-list li:hover {
+  background: rgba(90, 74, 30, 0.06);
+}
+
+#toc-list .toc-num {
+  flex: 0 0 auto;
+  min-width: 2.4em;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.78em;
+  font-weight: 600;
+  color: var(--chrome-muted);
+  letter-spacing: 0.04em;
+  text-align: right;
+}
+
+#toc-list .toc-name {
+  flex: 1;
+  font-size: 1em;
+  line-height: 1.35;
+}
+
+#toc-list .toc-sub {
+  display: block;
+  font-size: 0.82em;
+  color: var(--chrome-muted);
+  font-style: italic;
+  margin-top: 2px;
+}
+
+#toc-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.toc-link {
+  background: none;
+  border: 1px solid var(--chrome-border);
+  color: var(--chrome-fg);
+  font-family: var(--reader-font);
+  font-size: 14px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.toc-link:hover { background: rgba(0,0,0,0.04); }
+
+.toc-link.primary {
+  background: #5a4a1e;
+  border-color: #5a4a1e;
+  color: #faf6ec;
+  font-weight: 600;
+}
+.toc-link.primary:hover { background: #3d3210; }
+
+/* ── Passage rendering ─────────────────────────────────────────────────────── */
+
+.passage {
+  position: relative;
+  padding-left: 110px;
+  margin-bottom: 1.1em;
+}
+
+/* Compare (parallel translations) view */
+#compare-btn {
+  background: #f5efdd;
+  border: 1px solid #c9b982;
+  color: #5a4a1e;
+  font-size: 12px;
+  padding: 3px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-left: 8px;
+}
+#compare-btn:hover   { background: #eee4c5; }
+#compare-btn.active  { background: #5a4a1e; color: #faf6ec; border-color: #5a4a1e; }
+#compare-select {
+  font-size: 12px;
+  border: 1px solid var(--chrome-border);
+  background: #f0ede8;
+  color: var(--chrome-fg);
+  padding: 3px 7px;
+  border-radius: 3px;
+  outline: none;
+  margin-left: 6px;
+  max-width: 280px;
+}
+#compare-note {
+  font-size: 11px;
+  color: var(--chrome-muted);
+  margin-left: 10px;
+  font-style: italic;
+}
+#reader-inner.compare-mode .passage {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  padding-left: 0;
+  padding-top: 28px;
+  border-top: 1px dashed var(--chrome-border);
+}
+#reader-inner.compare-mode .passage .ref {
+  position: static;
+  display: block;
+  text-align: left;
+  width: auto;
+  margin-bottom: 6px;
+  grid-column: 1 / 3;
+}
+#reader-inner.compare-mode .passage .cmp-col {
+  padding: 0 4px;
+  border-left: 2px solid transparent;
+}
+#reader-inner.compare-mode .passage .cmp-col.primary {
+  border-left-color: #c9b982;
+  padding-left: 12px;
+}
+#reader-inner.compare-mode .passage .cmp-col.secondary {
+  border-left-color: #a89266;
+  padding-left: 12px;
+  color: var(--reader-fg);
+  opacity: 0.92;
+}
+#reader-inner.compare-mode .passage .cmp-col.secondary.empty {
+  color: var(--chrome-muted);
+  font-style: italic;
+  opacity: 0.55;
+}
+
+.ref {
+  position: absolute;
+  left: 0;
+  top: 0.25em;
+  width: 100px;
+  text-align: right;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.62em;
+  font-weight: 600;
+  color: var(--chrome-muted);
+  letter-spacing: 0.03em;
+  line-height: var(--reader-leading);
+  user-select: none;
+  opacity: 0.65;
+}
+
+/* ── Scrollbars ────────────────────────────────────────────────────────────── */
+
+#reader::-webkit-scrollbar,
+#text-list::-webkit-scrollbar         { width: 4px; }
+
+#reader::-webkit-scrollbar-track,
+#text-list::-webkit-scrollbar-track   { background: transparent; }
+
+#reader::-webkit-scrollbar-thumb,
+#text-list::-webkit-scrollbar-thumb   { background: rgba(0,0,0,0.15); border-radius: 2px; }
+
+#reader::-webkit-scrollbar-thumb:hover,
+#text-list::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.30); }
+
+/* ── Search ────────────────────────────────────────────────────────────────── */
+
+#ctrl-search {
+  font-size: 13px;
+  border: 1px solid var(--chrome-border);
+  background: #f0ede8;
+  color: var(--chrome-fg);
+  padding: 4px 7px;
+  border-radius: 3px;
+  outline: none;
+  width: 160px;
+}
+
+#ctrl-search:focus { border-color: var(--chrome-active); }
+
+#ctrl-search-count {
+  font-size: 11px;
+  color: var(--chrome-muted);
+  min-width: 50px;
+}
+
+.search-nav-btn {
+  background: none;
+  border: 1px solid var(--chrome-border);
+  border-radius: 3px;
+  color: var(--chrome-fg);
+  font-size: 12px;
+  padding: 2px 6px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.search-nav-btn:hover { background: rgba(0,0,0,0.06); }
+.search-nav-btn:disabled { opacity: 0.35; cursor: default; }
+
+/* ── Search highlighting ──────────────────────────────────────────────────── */
+
+mark.search-hl {
+  background: #f5e6a3;
+  color: inherit;
+  border-radius: 2px;
+  padding: 0 1px;
+}
+
+mark.search-hl-active {
+  background: #e8a735;
+  outline: 2px solid #e8a735;
+}
+
+/* ── Annotations ─────────────────────────────────────────────────────────── */
+
+.annotation-marker {
+  display: inline;
+  font-size: 0.78em;
+  font-weight: 700;
+  color: #1e5fbf;
+  cursor: pointer;
+  vertical-align: super;
+  line-height: 1;
+  margin-left: 2px;
+  user-select: none;
+}
+
+.annotation-marker:hover { color: #0d3f8a; text-decoration: underline; }
+
+.annotation-note {
+  display: none;
+  background: #eef3fb;
+  border-left: 3px solid #1e5fbf;
+  padding: 8px 12px;
+  margin: 6px 0 4px 0;
+  font-size: 0.85em;
+  line-height: 1.5;
+  color: var(--chrome-fg, #3b3428);
+  border-radius: 2px;
+}
+
+.annotation-note.open { display: block; }
+
+/* ── Front matter (preface, intro, contents, etc.) ───────────────────────── */
+
+.front-matter {
+  margin: 8px 0 24px 0;
+  padding: 12px 16px 4px 16px;
+  background: #faf6ec;
+  border: 1px solid #e8dcb6;
+  border-radius: 3px;
+}
+
+.front-matter-title {
+  font-size: 0.78em;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #7a6a3a;
+  margin: 0 0 8px 0;
+}
+
+.front-matter-entry {
+  margin: 0 0 6px 0;
+  border-top: 1px solid #ece1bf;
+}
+.front-matter-entry:first-of-type { border-top: none; }
+
+.front-matter-summary {
+  cursor: pointer;
+  padding: 8px 0 8px 4px;
+  font-size: 0.95em;
+  font-weight: 600;
+  color: #4a3d18;
+  list-style: none;
+  outline: none;
+}
+.front-matter-summary::-webkit-details-marker { display: none; }
+.front-matter-summary::before {
+  content: "▸ ";
+  display: inline-block;
+  width: 1em;
+  color: #9a8a4a;
+  transition: transform 0.1s ease;
+}
+.front-matter-entry[open] > .front-matter-summary::before {
+  content: "▾ ";
+}
+
+.front-matter-kind {
+  font-size: 0.72em;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #9a8a4a;
+  margin-left: 8px;
+}
+
+.front-matter-body {
+  padding: 4px 4px 12px 1.5em;
+  font-size: 0.92em;
+  line-height: 1.55;
+  color: #3b3428;
+  white-space: pre-wrap;
+}
+
+/* ── Metadata panel ───────────────────────────────────────────────────────── */
+
+#text-meta {
+  display: none;
+  background: var(--chrome-bg);
+  border-bottom: 1px solid var(--chrome-border);
+  padding: 36px 32px 40px;
+  font-size: 16px;
+  color: var(--chrome-fg);
+  line-height: 1.6;
+  text-align: center;
+}
+
+#text-meta .meta-title {
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0 auto 14px;
+  max-width: 720px;
+  letter-spacing: 0.01em;
+}
+
+#text-meta .meta-desc {
+  font-size: 17px;
+  color: var(--chrome-fg);
+  font-style: italic;
+  margin: 0 auto 22px;
+  max-width: 720px;
+  line-height: 1.55;
+}
+
+#text-meta .meta-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 28px;
+  max-width: 760px;
+  margin: 0 auto;
+  font-size: 14px;
+}
+
+#text-meta .meta-item {
+  white-space: nowrap;
+}
+
+#text-meta .meta-label {
+  color: var(--chrome-muted);
+  margin-right: 6px;
+  font-weight: 500;
+}
+
+#text-meta .meta-link {
+  color: var(--chrome-active);
+  text-decoration: none;
+}
+
+#text-meta .meta-link:hover { text-decoration: underline; }
+
+#info-bar {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: var(--chrome-bg);
+  border-bottom: 1px solid var(--chrome-border);
+  padding: 10px 20px;
+  flex-shrink: 0;
+}
+
+#meta-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: #f5efdd;
+  border: 1px solid #c9b982;
+  color: #5a4a1e;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  padding: 8px 20px;
+  border-radius: 999px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+  transition: background 0.1s, border-color 0.1s, color 0.1s, box-shadow 0.1s;
+}
+
+#meta-toggle:hover {
+  background: #eee4c5;
+  border-color: #b09f68;
+  color: #3d3210;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.12);
+}
+
+#meta-toggle .info-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #c9b982;
+  color: #fff;
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 1;
+}
+
+#meta-toggle.active {
+  background: #d9c88a;
+  border-color: #9a8a4a;
+}
+
+.meta-front-matter {
+  margin-top: 18px;
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+
+/* ── Translation switcher ─────────────────────────────────────────────────── */
+
+#translation-bar {
+  display: none;
+  background: #e4e0d9;
+  border-bottom: 1px solid var(--chrome-border);
+  padding: 6px 20px;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+#translation-bar label {
+  color: var(--chrome-muted);
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+#translation-select {
+  font-size: 12px;
+  border: 1px solid var(--chrome-border);
+  background: #f0ede8;
+  color: var(--chrome-fg);
+  padding: 3px 7px;
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+  max-width: 320px;
+}
+
+#translation-select:focus { border-color: var(--chrome-active); }
+
+/* ── Nav bar ──────────────────────────────────────────────────────────────── */
+
+#nav-bar {
+  display: none;
+  background: #e4e0d9;
+  border-bottom: 1px solid var(--chrome-border);
+  padding: 6px 20px;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+#nav-bar button {
+  background: none;
+  border: 1px solid var(--chrome-border);
+  border-radius: 3px;
+  color: var(--chrome-fg);
+  font-size: 12px;
+  padding: 3px 10px;
+  cursor: pointer;
+}
+
+#nav-bar button:hover { background: rgba(0,0,0,0.06); }
+#nav-bar button:disabled { opacity: 0.35; cursor: default; }
+
+#nav-location {
+  color: var(--chrome-muted);
+  flex: 1;
+  text-align: center;
+  font-weight: 500;
+}
+
+  </style>
+</head>
+<body>
+
+<div id="shell">
+
+  <aside id="sidebar">
+    <div id="sidebar-header">
+      <h1>Digital Archive</h1>
+      <a href="inventory.html" id="inventory-link">Inventory</a>
+      <a href="sources.html" class="sidebar-link">Sources &amp; Attribution</a>
+      <a href="translators.html" class="sidebar-link">Translator Index</a>
+      <a href="issues.html" class="sidebar-link">Issues</a>
+      <a href="source_status.html" class="sidebar-link">Source Status</a>
+      <a href="metadata_audit.html" class="sidebar-link">Metadata Audit</a>
+      <div id="sidebar-search-wrap">
+        <input type="search" id="sidebar-search" placeholder="Search texts…" autocomplete="off">
+      </div>
+    </div>
+    <ul id="text-list"></ul>
+  </aside>
+
+  <div id="panel">
+
+    <div id="controls">
+      <div class="ctrl-group">
+        <label>Font</label>
+        <select id="ctrl-font">
+          <option value="Georgia, serif">Georgia</option>
+          <option value="'Palatino Linotype', Palatino, serif">Palatino</option>
+          <option value="'Times New Roman', Times, serif">Times New Roman</option>
+          <option value="system-ui, -apple-system, sans-serif">System Sans</option>
+          <option value="'Courier New', Courier, monospace">Courier</option>
+        </select>
+      </div>
+      <div class="ctrl-group">
+        <label>Size</label>
+        <input type="range" id="ctrl-size" min="12" max="30" step="1" value="18">
+        <span class="val" id="ctrl-size-val">18px</span>
+      </div>
+      <div class="ctrl-group">
+        <label>Spacing</label>
+        <input type="range" id="ctrl-spacing" min="1.2" max="3.0" step="0.1" value="1.9">
+        <span class="val" id="ctrl-spacing-val">1.9</span>
+      </div>
+      <div class="ctrl-group">
+        <label>Background</label>
+        <input type="color" id="ctrl-bg" value="#faf8f5">
+      </div>
+      <div class="ctrl-group">
+        <label>Text</label>
+        <input type="color" id="ctrl-fg" value="#2c2c2c">
+      </div>
+      <div class="ctrl-group" id="ctrl-book-group">
+        <label>Book</label>
+        <select id="ctrl-book"></select>
+      </div>
+      <div class="ctrl-group" id="ctrl-search-group" style="display:none;border-left:1px solid var(--chrome-border);padding-left:18px;">
+        <label>Search</label>
+        <input type="search" id="ctrl-search" placeholder="within this text…">
+        <span id="ctrl-search-count"></span>
+        <button class="search-nav-btn" id="search-prev" disabled title="Previous match">&#9650;</button>
+        <button class="search-nav-btn" id="search-next" disabled title="Next match">&#9660;</button>
+      </div>
+    </div>
+
+    <div id="info-bar">
+      <button id="meta-toggle" title="Show text info, front matter, and sources">
+        <span class="info-icon" aria-hidden="true">i</span>
+        <span class="info-label">About this text</span>
+      </button>
+    </div>
+
+    <div id="text-meta">
+      <div class="meta-title" id="meta-title"></div>
+      <div class="meta-desc" id="meta-desc"></div>
+      <div class="meta-grid" id="meta-grid"></div>
+      <div class="meta-front-matter" id="meta-front-matter"></div>
+    </div>
+
+    <div id="translation-bar">
+      <label id="translation-bar-title"></label>
+      <select id="translation-select"></select>
+      <button id="compare-btn" type="button" style="display:none;">Compare&hellip;</button>
+      <select id="compare-select" style="display:none;"></select>
+      <span id="compare-note"></span>
+    </div>
+
+    <div id="nav-bar">
+      <button id="nav-prev" disabled>&#9664; Prev</button>
+      <span id="nav-location"></span>
+      <button id="nav-next" disabled>Next &#9654;</button>
+    </div>
+
+    <div id="status"></div>
+
+    <div id="reader">
+      <div id="reader-inner">
+        <div id="welcome">
+          <div id="welcome-hint">Select a text from the left to begin reading.</div>
+          <div id="welcome-search">
+            <div class="welcome-section-label">Search across the corpus</div>
+            <input type="search" id="global-search" placeholder="Find texts containing &hellip;" autocomplete="off">
+            <div id="global-search-status"></div>
+            <ul id="global-search-results"></ul>
+          </div>
+          <div id="welcome-continue" style="display:none;">
+            <div class="welcome-section-label">Continue reading</div>
+            <button type="button" id="continue-btn"></button>
+          </div>
+          <div id="welcome-recent" style="display:none;">
+            <div class="welcome-section-label">Recently read</div>
+            <ul id="recent-list"></ul>
+          </div>
+        </div>
+        <div id="text-cover" style="display:none;">
+          <div id="cover-title"></div>
+          <div id="cover-author"></div>
+          <div id="cover-year"></div>
+          <div id="cover-translator"></div>
+          <button id="cover-begin" type="button">View contents</button>
+        </div>
+        <div id="text-toc" style="display:none;">
+          <div id="toc-title">Contents</div>
+          <div id="toc-subtitle"></div>
+          <ul id="toc-list"></ul>
+          <div id="toc-actions">
+            <button id="toc-back" type="button" class="toc-link">&larr; Back to title</button>
+            <button id="toc-begin" type="button" class="toc-link primary">Read from beginning &rarr;</button>
+          </div>
+        </div>
+        <div id="passages"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+
+// ── Surah name map (1-indexed) ────────────────────────────────────────────────
+
+const SURAH_NAMES = {
+  1:'Al-Fatihah', 2:'Al-Baqarah', 3:"Ali 'Imran", 4:"An-Nisa'",
+  5:"Al-Ma'idah", 6:"Al-An'am", 7:"Al-A'raf", 8:'Al-Anfal',
+  9:'At-Tawbah', 10:'Yunus', 11:'Hud', 12:'Yusuf', 13:"Ar-Ra'd",
+  14:'Ibrahim', 15:'Al-Hijr', 16:'An-Nahl', 17:"Al-Isra'",
+  18:'Al-Kahf', 19:'Maryam', 20:'Ta-Ha', 21:"Al-Anbiya'",
+  22:'Al-Hajj', 23:"Al-Mu'minun", 24:'An-Nur', 25:'Al-Furqan',
+  26:"Ash-Shu'ara'", 27:'An-Naml', 28:'Al-Qasas', 29:"Al-'Ankabut",
+  30:'Ar-Rum', 31:'Luqman', 32:'As-Sajdah', 33:'Al-Ahzab',
+  34:"Saba'", 35:'Fatir', 36:'Ya-Sin', 37:'As-Saffat',
+  38:'Sad', 39:'Az-Zumar', 40:'Ghafir', 41:'Fussilat',
+  42:'Ash-Shura', 43:'Az-Zukhruf', 44:'Ad-Dukhan', 45:'Al-Jathiyah',
+  46:'Al-Ahqaf', 47:'Muhammad', 48:'Al-Fath', 49:'Al-Hujurat',
+  50:'Qaf', 51:'Adh-Dhariyat', 52:'At-Tur', 53:'An-Najm',
+  54:'Al-Qamar', 55:'Ar-Rahman', 56:"Al-Waqi'ah", 57:'Al-Hadid',
+  58:'Al-Mujadila', 59:'Al-Hashr', 60:'Al-Mumtahanah', 61:'As-Saf',
+  62:"Al-Jumu'ah", 63:'Al-Munafiqun', 64:'At-Taghabun', 65:'At-Talaq',
+  66:'At-Tahrim', 67:'Al-Mulk', 68:'Al-Qalam', 69:'Al-Haqqah',
+  70:"Al-Ma'arij", 71:'Nuh', 72:'Al-Jinn', 73:'Al-Muzzammil',
+  74:'Al-Muddaththir', 75:'Al-Qiyamah', 76:'Al-Insan', 77:'Al-Mursalat',
+  78:"An-Naba'", 79:"An-Nazi'at", 80:"'Abasa", 81:'At-Takwir',
+  82:'Al-Infitar', 83:'Al-Mutaffifin', 84:'Al-Inshiqaq', 85:'Al-Buruj',
+  86:'At-Tariq', 87:"Al-A'la", 88:'Al-Ghashiyah', 89:'Al-Fajr',
+  90:'Al-Balad', 91:'Ash-Shams', 92:'Al-Layl', 93:'Ad-Duha',
+  94:'Ash-Sharh', 95:'At-Tin', 96:"Al-'Alaq", 97:'Al-Qadr',
+  98:'Al-Bayyinah', 99:'Az-Zalzalah', 100:"Al-'Adiyat", 101:"Al-Qari'ah",
+  102:'At-Takathur', 103:'Al-Asr', 104:'Al-Humazah', 105:'Al-Fil',
+  106:'Quraysh', 107:"Al-Ma'un", 108:'Al-Kawthar', 109:'Al-Kafirun',
+  110:'An-Nasr', 111:'Al-Masad', 112:'Al-Ikhlas', 113:'Al-Falaq',
+  114:'An-Nas',
+};
+
+// ── Upanishad name map ────────────────────────────────────────────────────────
+
+const UPANISHAD_NAMES = {
+  chandogya:      'Chandogya',
+  kena:           'Kena',
+  kaushitaki:     'Kaushitaki',
+  isha:           'Isha',
+  katha:          'Katha',
+  mundaka:        'Mundaka',
+  taittiriya:     'Taittiriya',
+  brihadaranyaka: 'Brihadaranyaka',
+  svetasvatara:   'Svetasvatara',
+  prasna:         'Prasna',
+};
+
+// ── Sutta name maps (Suttacentral / Sujato) ──────────────────────────────────
+
+const SUTTA_NAMES_DN = {
+  1: 'DN 1 — The Divine Net',
+  2: 'DN 2 — The Fruits of the Ascetic Life',
+  3: 'DN 3 — With Ambaṭṭha',
+  4: 'DN 4 — With Soṇadaṇḍa',
+  5: 'DN 5 — With Kūṭadanta',
+  6: 'DN 6 — With Mahāli',
+  7: 'DN 7 — With Jāliya',
+  8: 'DN 8 — The Lion’s Roar (Naked Ascetic Kassapa)',
+  9: 'DN 9 — With Poṭṭhapāda',
+  10: 'DN 10 — With Subha',
+  11: 'DN 11 — With Kevaḍḍha',
+  12: 'DN 12 — With Lohicca',
+  13: 'DN 13 — Experts in the Three Vedas',
+  14: 'DN 14 — Traces Left Behind',
+  15: 'DN 15 — The Great Discourse on Causation',
+  16: 'DN 16 — The Buddha’s Extinguishment',
+  17: 'DN 17 — King Mahāsudassana',
+  18: 'DN 18 — With Janavasabha',
+  19: 'DN 19 — The Great Steward',
+  20: 'DN 20 — The Great Congregation',
+  21: 'DN 21 — Sakka’s Questions',
+  22: 'DN 22 — The Longer Discourse on Mindfulness',
+  23: 'DN 23 — With Pāyāsi',
+  24: 'DN 24 — About Pāṭikaputta',
+  25: 'DN 25 — The Lion’s Roar (Udumbarikā)',
+  26: 'DN 26 — The Wheel-Turning Monarch',
+  27: 'DN 27 — What Came First',
+  28: 'DN 28 — Inspiring Confidence',
+  29: 'DN 29 — An Impressive Discourse',
+  30: 'DN 30 — The Marks of a Great Man',
+  31: 'DN 31 — Advice to Sigālaka',
+  32: 'DN 32 — The Āṭānāṭiya Protection',
+  33: 'DN 33 — Reciting in Concert',
+  34: 'DN 34 — Up to Ten',
+};
+
+const SUTTA_NAMES_MN = {
+  1: 'MN 1 — The Root of All Things',
+  2: 'MN 2 — All the Defilements',
+  3: 'MN 3 — Heirs in the Teaching',
+  4: 'MN 4 — Fear and Dread',
+  5: 'MN 5 — Unblemished',
+  6: 'MN 6 — One Might Wish',
+  7: 'MN 7 — The Simile of the Cloth',
+  8: 'MN 8 — Self-Effacement',
+  9: 'MN 9 — Right View',
+  10: 'MN 10 — Mindfulness Meditation',
+  11: 'MN 11 — The Shorter Discourse on the Lion’s Roar',
+  12: 'MN 12 — The Longer Discourse on the Lion’s Roar',
+  13: 'MN 13 — The Longer Discourse on the Mass of Suffering',
+  14: 'MN 14 — The Shorter Discourse on the Mass of Suffering',
+  15: 'MN 15 — Measuring Up',
+  16: 'MN 16 — Hard-heartedness',
+  17: 'MN 17 — Jungle Thickets',
+  18: 'MN 18 — The Honey-Cake',
+  19: 'MN 19 — Two Kinds of Thought',
+  20: 'MN 20 — How to Stop Thinking',
+  21: 'MN 21 — The Simile of the Saw',
+  22: 'MN 22 — The Simile of the Cobra',
+  23: 'MN 23 — The Termite Mound',
+  24: 'MN 24 — Chariots at the Ready',
+  25: 'MN 25 — Sowing',
+  26: 'MN 26 — The Noble Quest',
+  27: 'MN 27 — The Shorter Simile of the Elephant’s Footprint',
+  28: 'MN 28 — The Longer Simile of the Elephant’s Footprint',
+  29: 'MN 29 — The Longer Simile of the Heartwood',
+  30: 'MN 30 — The Shorter Simile of the Heartwood',
+  31: 'MN 31 — The Shorter Discourse at Gosiṅga',
+  32: 'MN 32 — The Longer Discourse at Gosiṅga',
+  33: 'MN 33 — The Longer Discourse on the Cowherd',
+  34: 'MN 34 — The Shorter Discourse on the Cowherd',
+  35: 'MN 35 — The Shorter Discourse With Saccaka',
+  36: 'MN 36 — The Longer Discourse With Saccaka',
+  37: 'MN 37 — The Shorter Discourse on the Ending of Craving',
+  38: 'MN 38 — The Longer Discourse on the Ending of Craving',
+  39: 'MN 39 — The Longer Discourse at Assapura',
+  40: 'MN 40 — The Shorter Discourse at Assapura',
+  41: 'MN 41 — The People of Sālā',
+  42: 'MN 42 — The People of Verañjā',
+  43: 'MN 43 — The Great Elaboration',
+  44: 'MN 44 — The Shorter Elaboration',
+  45: 'MN 45 — The Shorter Discourse on Taking Up Practices',
+  46: 'MN 46 — The Great Discourse on Taking Up Practices',
+  47: 'MN 47 — The Inquirer',
+  48: 'MN 48 — The Mendicants of Kosambī',
+  49: 'MN 49 — On the Invitation of Divinity',
+  50: 'MN 50 — The Condemnation of Māra',
+  51: 'MN 51 — With Kandaraka',
+  52: 'MN 52 — The Wealthy Citizen',
+  53: 'MN 53 — A Trainee',
+  54: 'MN 54 — With Potaliya the Householder',
+  55: 'MN 55 — With Jīvaka',
+  56: 'MN 56 — With Upāli',
+  57: 'MN 57 — The Ascetic Who Behaved Like a Dog',
+  58: 'MN 58 — With Prince Abhaya',
+  59: 'MN 59 — The Many Kinds of Feeling',
+  60: 'MN 60 — Unfailing',
+  61: 'MN 61 — Advice to Rāhula at Ambalaṭṭhika',
+  62: 'MN 62 — The Longer Advice to Rāhula',
+  63: 'MN 63 — The Shorter Discourse With Māluṅkyaputta',
+  64: 'MN 64 — The Longer Discourse With Māluṅkya',
+  65: 'MN 65 — With Bhaddāli',
+  66: 'MN 66 — The Simile of the Quail',
+  67: 'MN 67 — At Cātumā',
+  68: 'MN 68 — At Naḷakapāna',
+  69: 'MN 69 — With Gulissāni',
+  70: 'MN 70 — At Kīṭāgiri',
+  71: 'MN 71 — To Vacchagotta on the Three Knowledges',
+  72: 'MN 72 — With Vacchagotta on Fire',
+  73: 'MN 73 — The Longer Discourse With Vacchagotta',
+  74: 'MN 74 — With Dīghanakha',
+  75: 'MN 75 — With Māgaṇḍiya',
+  76: 'MN 76 — With Sandaka',
+  77: 'MN 77 — The Longer Discourse with Sakuludāyī',
+  78: 'MN 78 — With Uggāhamāna Samaṇamaṇḍikāputta',
+  79: 'MN 79 — The Shorter Discourse With Sakuludāyī',
+  80: 'MN 80 — With Vekhanasa',
+  81: 'MN 81 — With Ghaṭīkāra',
+  82: 'MN 82 — With Raṭṭhapāla',
+  83: 'MN 83 — About King Maghadeva',
+  84: 'MN 84 — At Madhurā',
+  85: 'MN 85 — With Prince Bodhi',
+  86: 'MN 86 — With Aṅgulimāla',
+  87: 'MN 87 — Born From the Beloved',
+  88: 'MN 88 — The Imported Cloth',
+  89: 'MN 89 — Shrines to the Teaching',
+  90: 'MN 90 — At Kaṇṇakatthala',
+  91: 'MN 91 — With Brahmāyu',
+  92: 'MN 92 — With Sela',
+  93: 'MN 93 — With Assalāyana',
+  94: 'MN 94 — With Ghoṭamukha',
+  95: 'MN 95 — With Caṅkī',
+  96: 'MN 96 — With Esukārī',
+  97: 'MN 97 — With Dhanañjāni',
+  98: 'MN 98 — With Vāseṭṭha',
+  99: 'MN 99 — With Subha',
+  100: 'MN 100 — With Saṅgārava',
+  101: 'MN 101 — At Devadaha',
+  102: 'MN 102 — The Five and Three',
+  103: 'MN 103 — Is This What You Think Of Me?',
+  104: 'MN 104 — At Sāmagāma',
+  105: 'MN 105 — With Sunakkhatta',
+  106: 'MN 106 — Conducive to the Imperturbable',
+  107: 'MN 107 — With Moggallāna the Accountant',
+  108: 'MN 108 — With Moggallāna the Guardian',
+  109: 'MN 109 — The Longer Discourse on the Full-Moon Night',
+  110: 'MN 110 — The Shorter Discourse on the Full-Moon Night',
+  111: 'MN 111 — One by One',
+  112: 'MN 112 — The Sixfold Purification',
+  113: 'MN 113 — A True Person',
+  114: 'MN 114 — What Should and Should Not Be Cultivated',
+  115: 'MN 115 — Many Elements',
+  116: 'MN 116 — At Isigili',
+  117: 'MN 117 — The Great Forty',
+  118: 'MN 118 — Mindfulness of Breathing',
+  119: 'MN 119 — Mindfulness of the Body',
+  120: 'MN 120 — Rebirth by Choice',
+  121: 'MN 121 — The Shorter Discourse on Emptiness',
+  122: 'MN 122 — The Longer Discourse on Emptiness',
+  123: 'MN 123 — Incredible and Amazing',
+  124: 'MN 124 — With Bakkula',
+  125: 'MN 125 — The Level of the Tamed',
+  126: 'MN 126 — With Bhūmija',
+  127: 'MN 127 — With Anuruddha',
+  128: 'MN 128 — Corruptions',
+  129: 'MN 129 — The Foolish and the Astute',
+  130: 'MN 130 — Messengers of the Gods',
+  131: 'MN 131 — One Fine Night',
+  132: 'MN 132 — Ānanda and One Fine Night',
+  133: 'MN 133 — Mahākaccāna and One Fine Night',
+  134: 'MN 134 — Lomasakaṅgiya and One Fine Night',
+  135: 'MN 135 — The Shorter Analysis of Deeds',
+  136: 'MN 136 — The Longer Analysis of Deeds',
+  137: 'MN 137 — The Analysis of the Six Sense Fields',
+  138: 'MN 138 — A Summary Recital and its Analysis',
+  139: 'MN 139 — The Analysis of No Strife',
+  140: 'MN 140 — The Analysis of the Elements',
+  141: 'MN 141 — The Analysis of the Truths',
+  142: 'MN 142 — The Analysis of Religious Donations',
+  143: 'MN 143 — Advice to Anāthapiṇḍika',
+  144: 'MN 144 — Advice to Channa',
+  145: 'MN 145 — Advice to Puṇṇa',
+  146: 'MN 146 — Advice from Nandaka',
+  147: 'MN 147 — The Shorter Advice to Rāhula',
+  148: 'MN 148 — Six By Six',
+  149: 'MN 149 — The Great Discourse on What Relates to the Six Sense Fields',
+  150: 'MN 150 — With the People of Nagaravinda',
+  151: 'MN 151 — The Purification of Alms',
+  152: 'MN 152 — The Development of the Faculties',
+};
+
+// Snp name map — keys are STRING compound IDs ('1.1', '5.19'), not numbers.
+const SUTTA_NAMES_SNP = {
+  '1.1': 'Snp 1.1 — The Serpent',
+  '1.2': 'Snp 1.2 — The Wealthy Rancher',
+  '1.3': 'Snp 1.3 — The Horned Rhino',
+  '1.4': 'Snp 1.4 — With Bhāradvāja the Farmer',
+  '1.5': 'Snp 1.5 — With Cunda',
+  '1.6': 'Snp 1.6 — Downfalls',
+  '1.7': 'Snp 1.7 — The Lowlife',
+  '1.8': 'Snp 1.8 — The Discourse on Love',
+  '1.9': 'Snp 1.9 — With Hemavata',
+  '1.10': 'Snp 1.10 — With Āḷavaka',
+  '1.11': 'Snp 1.11 — Victory Over Desire for the Body',
+  '1.12': 'Snp 1.12 — The Sage',
+  '2.1': 'Snp 2.1 — Gems',
+  '2.2': 'Snp 2.2 — Putrefaction',
+  '2.3': 'Snp 2.3 — Conscientious Companionship',
+  '2.4': 'Snp 2.4 — Blessings',
+  '2.5': 'Snp 2.5 — With Spiky',
+  '2.6': 'Snp 2.6 — A Righteous Life',
+  '2.7': 'Snp 2.7 — Brahmanical Traditions',
+  '2.8': 'Snp 2.8 — The Boat',
+  '2.9': 'Snp 2.9 — What Morality?',
+  '2.10': 'Snp 2.10 — Get Up!',
+  '2.11': 'Snp 2.11 — With Rāhula',
+  '2.12': 'Snp 2.12 — Vaṅgīsa and His Mentor Nigrodhakappa',
+  '2.13': 'Snp 2.13 — The Right Way to Wander',
+  '2.14': 'Snp 2.14 — With Dhammika',
+  '3.1': 'Snp 3.1 — Going Forth',
+  '3.2': 'Snp 3.2 — Striving',
+  '3.3': 'Snp 3.3 — Well-Spoken Words',
+  '3.4': 'Snp 3.4 — With Bhāradvāja of Sundarikā on the Sacrificial Cake',
+  '3.5': 'Snp 3.5 — With Māgha',
+  '3.6': 'Snp 3.6 — With Sabhiya',
+  '3.7': 'Snp 3.7 — With Sela',
+  '3.8': 'Snp 3.8 — The Dart',
+  '3.9': 'Snp 3.9 — With Vāseṭṭha',
+  '3.10': 'Snp 3.10 — With Kokālika',
+  '3.11': 'Snp 3.11 — About Nālaka',
+  '3.12': 'Snp 3.12 — Contemplating Pairs',
+  '4.1': 'Snp 4.1 — Sensual Pleasures',
+  '4.2': 'Snp 4.2 — Eight on the Cave',
+  '4.3': 'Snp 4.3 — Eight on Malice',
+  '4.4': 'Snp 4.4 — Eight on the Pure',
+  '4.5': 'Snp 4.5 — Eight on the Ultimate',
+  '4.6': 'Snp 4.6 — Old Age',
+  '4.7': 'Snp 4.7 — With Tissametteyya',
+  '4.8': 'Snp 4.8 — With Pasūra',
+  '4.9': 'Snp 4.9 — With Māgaṇḍiya',
+  '4.10': 'Snp 4.10 — Before the Breakup',
+  '4.11': 'Snp 4.11 — Quarrels and Disputes',
+  '4.12': 'Snp 4.12 — The Shorter Discourse on Arrayed for Battle',
+  '4.13': 'Snp 4.13 — The Longer Discourse on Arrayed for Battle',
+  '4.14': 'Snp 4.14 — Speedy',
+  '4.15': 'Snp 4.15 — Taking Up Arms',
+  '4.16': 'Snp 4.16 — With Sāriputta',
+  '5.1': 'Snp 5.1 — Introductory Verses',
+  '5.2': 'Snp 5.2 — The Questions of Ajita',
+  '5.3': 'Snp 5.3 — The Questions of Tissametteyya',
+  '5.4': 'Snp 5.4 — The Questions of Puṇṇaka',
+  '5.5': 'Snp 5.5 — The Questions of Mettagū',
+  '5.6': 'Snp 5.6 — The Questions of Dhotaka',
+  '5.7': 'Snp 5.7 — The Questions of Upasīva',
+  '5.8': 'Snp 5.8 — The Questions of Nanda',
+  '5.9': 'Snp 5.9 — The Questions of Hemaka',
+  '5.10': 'Snp 5.10 — The Questions of Todeyya',
+  '5.11': 'Snp 5.11 — The Questions of Kappa',
+  '5.12': 'Snp 5.12 — The Questions of Jatukaṇṇī',
+  '5.13': 'Snp 5.13 — The Questions of Bhadrāvudha',
+  '5.14': 'Snp 5.14 — The Questions of Udaya',
+  '5.15': 'Snp 5.15 — The Question of Posāla',
+  '5.16': 'Snp 5.16 — The Questions of Mogharāja',
+  '5.17': 'Snp 5.17 — The Questions of Piṅgiya',
+  '5.18': 'Snp 5.18 — Homage to the Way to the Far Shore',
+  '5.19': 'Snp 5.19 — Preserving the Way to the Far Shore',
+};
+
+// SN: 1685 suttas across 53 saṁyuttas — too many for a per-sutta map.
+// Instead we name the SAṂYUTTAS only and use them as <optgroup> labels in
+// the book selector; individual sutta entries are labeled "SN N.M".
+const SAMYUTTA_NAMES_SN = {
+  1: 'Linked Discourses With Deities',
+  2: 'Linked Discourses on Godlings',
+  3: 'Linked Discourses With King Pasenadi of Kosala',
+  4: 'Linked Discourses With Māra',
+  5: 'Linked Discourses With Nuns',
+  6: 'Linked Discourses With Divinities',
+  7: 'Linked Discourses with Brahmins',
+  8: 'Linked Discourses With Vaṅgīsa',
+  9: 'Linked Discourses in the Woods',
+  10: 'Linked Discourses with Spirits',
+  11: 'Linked Discourses with Sakka',
+  12: 'Linked Discourses on Causation',
+  13: 'Linked Discourses on Comprehension',
+  14: 'Linked Discourses on the Elements',
+  15: 'Linked Discourses on the Unknowable Beginning',
+  16: 'Linked Discourses with Kassapa',
+  17: 'Linked Discourses on Gains and Honor',
+  18: 'Linked Discourses with Rāhula',
+  19: 'Linked Discourses with Lakkhaṇa',
+  20: 'Linked Discourses with Similes',
+  21: 'Linked Discourses with Monks',
+  22: 'Linked Discourses on the Aggregates',
+  23: 'Linked Discourses with Rādha',
+  24: 'Linked Discourses on Views',
+  25: 'Linked Discourses on Arrival at the Truth',
+  26: 'Linked Discourses on Arising',
+  27: 'Linked Discourses on Corruptions',
+  28: 'Linked Discourses with Sāriputta',
+  29: 'Linked Discourses on Dragons',
+  30: 'Linked Discourses on Phoenixes',
+  31: 'Linked Discourses on Centaurs',
+  32: 'Linked Discourses on Cloud Gods',
+  33: 'Linked Discourses with Vacchagotta',
+  34: 'Linked Discourses on Absorption',
+  35: 'Linked Discourses on the Six Sense Fields',
+  36: 'Linked Discourses on Feelings',
+  37: 'Linked Discourses on Females',
+  38: 'Linked Discourses with Jambukhādaka',
+  39: 'Linked Discourses with Sāmaṇḍaka',
+  40: 'Linked Discourses with Moggallāna',
+  41: 'Linked Discourses with Citta the Householder',
+  42: 'Linked Discourses with Chiefs',
+  43: 'Linked Discourses on the Unconditioned',
+  44: 'Linked Discourses on the Undeclared',
+  45: 'Linked Discourses on the Eightfold Path',
+  46: 'Linked Discourses on the Awakening Factors',
+  47: 'Linked Discourses on Mindfulness Meditation',
+  48: 'Linked Discourses on the Faculties',
+  49: 'Linked Discourses on the Right Efforts',
+  50: 'Linked Discourses on the Five Powers',
+  51: 'Linked Discourses on the Bases of Psychic Power',
+  52: 'Linked Discourses with Anuruddha',
+  53: 'Linked Discourses on Absorption',
+  54: 'Linked Discourses on Breath Meditation',
+  55: 'Linked Discourses on Stream-Entry',
+  56: 'Linked Discourses on the Truths',
+};
+
+// AN: 1408 sutta IDs (1313 singles + 95 ranges) across 11 nipātas ("Books").
+// Like SN we use the nipāta-level map for <optgroup> labels.
+const NIPATA_NAMES_AN = {
+  1:  'The Book of the Ones',
+  2:  'The Book of the Twos',
+  3:  'The Book of the Threes',
+  4:  'The Book of the Fours',
+  5:  'The Book of the Fives',
+  6:  'The Book of the Sixes',
+  7:  'The Book of the Sevens',
+  8:  'The Book of the Eights',
+  9:  'The Book of the Nines',
+  10: 'The Book of the Tens',
+  11: 'The Book of the Elevens',
+};
+
+// ── Book name map ─────────────────────────────────────────────────────────────
+
+const BOOK_NAMES = {
+  gen:'Genesis', exo:'Exodus', lev:'Leviticus', num:'Numbers', deu:'Deuteronomy',
+  jos:'Joshua', jdg:'Judges', rut:'Ruth', '1sa':'1 Samuel', '2sa':'2 Samuel',
+  '1ki':'1 Kings', '2ki':'2 Kings', '1ch':'1 Chronicles', '2ch':'2 Chronicles',
+  ezr:'Ezra', neh:'Nehemiah', est:'Esther', job:'Job', psa:'Psalms',
+  pro:'Proverbs', ecc:'Ecclesiastes', sng:'Song of Solomon', isa:'Isaiah',
+  jer:'Jeremiah', lam:'Lamentations', eze:'Ezekiel', dan:'Daniel',
+  hos:'Hosea', joe:'Joel', amo:'Amos', oba:'Obadiah', jon:'Jonah',
+  mic:'Micah', nah:'Nahum', hab:'Habakkuk', zep:'Zephaniah', hag:'Haggai',
+  zec:'Zechariah', mal:'Malachi',
+  mat:'Matthew', mrk:'Mark', luk:'Luke', jhn:'John', act:'Acts',
+  rom:'Romans', '1co':'1 Corinthians', '2co':'2 Corinthians', gal:'Galatians',
+  eph:'Ephesians', php:'Philippians', col:'Colossians', '1th':'1 Thessalonians',
+  '2th':'2 Thessalonians', '1ti':'1 Timothy', '2ti':'2 Timothy', tit:'Titus',
+  phm:'Philemon', heb:'Hebrews', jas:'James', '1pe':'1 Peter', '2pe':'2 Peter',
+  '1jn':'1 John', '2jn':'2 John', '3jn':'3 John', jud:'Jude', rev:'Revelation',
+  tob:'Tobit', jdt:'Judith', esth:'Esther (Greek)', wis:'Wisdom of Solomon',
+  sir:'Sirach', bar:'Baruch', s3y:'Song of Three Young Men', sus:'Susanna',
+  bel:'Bel and the Dragon', '1ma':'1 Maccabees', '2ma':'2 Maccabees',
+  '1es':'1 Esdras', man:'Prayer of Manasseh', '2es':'2 Esdras',
+  // Extended apocrypha (Eastern Orthodox / LXX canon)
+  ps151:'Psalm 151', lje:'Letter of Jeremiah',
+  '3ma':'3 Maccabees', '4ma':'4 Maccabees', dag:'Daniel (Greek)',
+  // Peshitta-specific apocrypha (Syriac canon)
+  '2ba':'2 Baruch', pss:'Psalms of Solomon', ode:'Odes',
+  lba:'Letter of Baruch', apsl:'Apocryphal Psalms',
+};
+
+// ── DOM references ────────────────────────────────────────────────────────────
+
+const $textList     = document.getElementById('text-list');
+const $passages     = document.getElementById('passages');
+const $welcome      = document.getElementById('welcome');
+const $status       = document.getElementById('status');
+const $reader       = document.getElementById('reader');
+const $bookGroup    = document.getElementById('ctrl-book-group');
+const $bookSelect   = document.getElementById('ctrl-book');
+const $searchGroup  = document.getElementById('ctrl-search-group');
+const $search       = document.getElementById('ctrl-search');
+const $searchCount  = document.getElementById('ctrl-search-count');
+const $searchPrev   = document.getElementById('search-prev');
+const $searchNext   = document.getElementById('search-next');
+const $metaPanel    = document.getElementById('text-meta');
+const $metaTitle    = document.getElementById('meta-title');
+const $metaDesc     = document.getElementById('meta-desc');
+const $metaGrid     = document.getElementById('meta-grid');
+const $metaToggle   = document.getElementById('meta-toggle');
+const $metaFrontMatter = document.getElementById('meta-front-matter');
+const $infoBar      = document.getElementById('info-bar');
+const $sidebarSearch= document.getElementById('sidebar-search');
+const $cover       = document.getElementById('text-cover');
+const $coverTitle  = document.getElementById('cover-title');
+const $coverAuthor = document.getElementById('cover-author');
+const $coverYear   = document.getElementById('cover-year');
+const $coverTrans  = document.getElementById('cover-translator');
+const $coverBegin  = document.getElementById('cover-begin');
+const $toc         = document.getElementById('text-toc');
+const $tocSubtitle = document.getElementById('toc-subtitle');
+const $tocList     = document.getElementById('toc-list');
+const $tocBack     = document.getElementById('toc-back');
+const $tocBegin    = document.getElementById('toc-begin');
+const $welcomeHint = document.getElementById('welcome-hint');
+const $welcomeContinue = document.getElementById('welcome-continue');
+const $continueBtn = document.getElementById('continue-btn');
+const $welcomeRecent = document.getElementById('welcome-recent');
+const $recentList  = document.getElementById('recent-list');
+const $globalSearch  = document.getElementById('global-search');
+const $globalStatus  = document.getElementById('global-search-status');
+const $globalResults = document.getElementById('global-search-results');
+let globalIndex = null;
+let globalIndexLoading = false;
+const $navBar       = document.getElementById('nav-bar');
+const $navPrev      = document.getElementById('nav-prev');
+const $navNext      = document.getElementById('nav-next');
+const $navLocation  = document.getElementById('nav-location');
+const $trBar        = document.getElementById('translation-bar');
+const $trBarTitle   = document.getElementById('translation-bar-title');
+const $trSelect     = document.getElementById('translation-select');
+const $compareBtn   = document.getElementById('compare-btn');
+const $compareSelect= document.getElementById('compare-select');
+const $compareNote  = document.getElementById('compare-note');
+const $readerInner  = document.getElementById('reader-inner');
+let compareData     = null;   // secondary translation's {id -> text} map
+let compareEntry    = null;   // sibling entry
+let compareActive   = false;
+
+// ── State ─────────────────────────────────────────────────────────────────────
+
+let allPassages    = [];
+let currentMeta    = null;
+let currentData    = null;
+let currentBook    = null;
+let activeItem     = null;
+let groupKeys      = [];
+let groupIndex     = -1;
+let searchMatches  = [];
+let searchMatchIdx = -1;
+let metaVisible    = false;
+let currentEntry   = null;          // currently loaded index entry
+let indexGroups    = {};             // text_id → [entry, ...]
+const dataFileToEntry = {};           // data_file → {entry, li}
+let pendingPid     = null;            // passage id to jump to on enterReading
+let bookmarkTimer  = null;
+let entryToLi     = new Map();      // entry → sidebar <li> element
+
+// ── Fetch ─────────────────────────────────────────────────────────────────────
+
+const _bustCache = Date.now();
+async function getJSON(url) {
+  const sep = url.includes('?') ? '&' : '?';
+  const qs  = sep + '_v=' + _bustCache;
+  // Try pre-gzipped first (production), fall back to raw JSON (local dev)
+  const gzUrl = url.endsWith('.gz') ? url : url + '.gz';
+  try {
+    const r = await fetch(gzUrl + qs);
+    if (r.ok) {
+      const ds = new DecompressionStream('gzip');
+      const text = await new Response(r.body.pipeThrough(ds)).text();
+      return JSON.parse(text);
+    }
+  } catch (e) { /* fall through */ }
+  const r = await fetch(url + qs);
+  if (!r.ok) throw new Error(`HTTP ${r.status}: ${url}`);
+  return r.json();
+}
+
+// ── Reference formatting ──────────────────────────────────────────────────────
+
+function formatRef(p) {
+  const path = p.path;
+  const hier = currentMeta && currentMeta.hierarchy;
+
+  if (hier && hier[0] === 'book') {
+    const book = BOOK_NAMES[path[0]] || path[0];
+    if (path.length === 3) {
+      const verse = p.range_end ? `${path[2]}\u2013${p.range_end}` : path[2];
+      return `${book}\u2009${path[1]}:${verse}`;
+    }
+    const verse = p.range_end ? `${path[1]}\u2013${p.range_end}` : path[1];
+    return `${book}:${verse}`;
+  }
+
+  if (hier && hier[0] === 'surah') {
+    const name = SURAH_NAMES[path[0]] || `Surah ${path[0]}`;
+    const ayah = p.range_end ? `${path[1]}\u2013${p.range_end}` : path[1];
+    return `${name}\u2009${path[0]}:${ayah}`;
+  }
+
+  if (hier && hier[0] === 'upanishad') {
+    const name  = UPANISHAD_NAMES[path[0]] || path[0];
+    const verse = p.range_end ? `${path[2]}\u2013${p.range_end}` : path[2];
+    return `${name}\u2009${path[1]}:${verse}`;
+  }
+
+  if (hier && hier[0] === 'sutta') {
+    // Reference shape: "DN 22 5.7" / "Snp 1.1 5" (omits section when it's 0,
+    // which means the passage is in the pre-section region of its sutta).
+    const id = currentEntry && currentEntry.id;
+    const prefix = id === 'long-discourses-sujato'     ? `DN ${path[0]}`
+                 : id === 'middle-discourses-sujato'   ? `MN ${path[0]}`
+                 : id === 'sutta-nipata-sujato'        ? `Snp ${path[0]}`
+                 : id === 'linked-discourses-sujato'   ? `SN ${path[0]}`
+                 : id === 'numbered-discourses-sujato' ? `AN ${path[0]}`
+                 : id === 'itivuttaka-sujato'          ? `Iti ${path[0]}`
+                 : id === 'udana-sujato'               ? `Ud ${path[0]}`
+                 : id === 'theragatha-sujato'          ? `Thag ${path[0]}`
+                 : id === 'therigatha-sujato'          ? `Thig ${path[0]}`
+                 : id === 'dhammapada-sujato'          ? `Dhp ${path[0]}`
+                 : id === 'upayika-dhammadinna'        ? `Upāyikā ${path[0]}`
+                 : `Sutta ${path[0]}`;
+    if (path.length === 3) {
+      const verse = p.range_end ? `${path[2]}\u2013${p.range_end}` : path[2];
+      if (path[1] === 0) {
+        return `${prefix}\u2009${verse}`;
+      }
+      return `${prefix}\u2009${path[1]}.${verse}`;
+    }
+    const verse = p.range_end ? `${path[1]}\u2013${p.range_end}` : path[1];
+    return `${prefix}\u2009${verse}`;
+  }
+
+  if (hier && hier[0] === 'rune') {
+    const verse = p.range_end ? `${path[1]}\u2013${p.range_end}` : path[1];
+    return `Rune ${toRoman(Number(path[0]))}\u2009${verse}`;
+  }
+
+  if (path.length === 1) {
+    const v = p.range_end ? `${path[0]}\u2013${p.range_end}` : path[0];
+    return `\u00a7\u2009${v}`;
+  }
+
+  if (hier && hier[0] === 'biography') {
+    const name = String(path[0]).replace(/-/g, ' ')
+      .replace(/\b\w/g, c => c.toUpperCase());
+    if (path.length === 3) {
+      const verse = p.range_end ? `${path[2]}\u2013${p.range_end}` : path[2];
+      return `${name}\u2009${path[1]}.${verse}`;
+    }
+    const verse = p.range_end ? `${path[1]}\u2013${p.range_end}` : path[1];
+    return `${name}\u2009${verse}`;
+  }
+
+  if (hier && hier[0] === 'rule') {
+    if (path.length === 3) {
+      const verse = p.range_end ? `${path[2]}\u2013${p.range_end}` : path[2];
+      return `${path[0]}\u2009${path[1]}.${verse}`;
+    }
+    const verse = p.range_end ? `${path[1]}\u2013${p.range_end}` : path[1];
+    return `${path[0]}\u2009${verse}`;
+  }
+
+  if (hier && hier[0] === 'chapter') {
+    if (path.length === 3) {
+      const verse = p.range_end ? `${path[2]}\u2013${p.range_end}` : path[2];
+      return `Ch ${path[0]}.${path[1]}.${verse}`;
+    }
+    const verse = p.range_end ? `${path[1]}\u2013${p.range_end}` : path[1];
+    return `Ch ${path[0]}.${verse}`;
+  }
+
+  if (hier && hier[0] === 'parva') {
+    const titles = currentData && currentData.chapter_titles;
+    const full = titles && (titles[path[0]] || titles[String(path[0])]);
+    // Use just the parva short name (first word before " — " or " Parva")
+    let label = full ? full.split(' \u2014 ')[0] : `Parva ${path[0]}`;
+    label = label.replace(/\s+Parva$/, '');
+    if (path.length === 3) {
+      const verse = p.range_end ? `${path[2]}\u2013${p.range_end}` : path[2];
+      return `${label}\u2009${path[1]}.${verse}`;
+    }
+    const verse = p.range_end ? `${path[1]}\u2013${p.range_end}` : path[1];
+    return `${label}\u2009${verse}`;
+  }
+
+  const verse = p.range_end ? `${path[1]}\u2013${p.range_end}` : path[1];
+  return `${path[0]}.${verse}`;
+}
+
+// ── Group name helper ─────────────────────────────────────────────────────────
+
+function groupName(key) {
+  const level = topLevel();
+  if (level === 'book')      return BOOK_NAMES[key] || key;
+  if (level === 'surah')     return SURAH_NAMES[Number(key)] || `Surah ${key}`;
+  if (level === 'upanishad') return UPANISHAD_NAMES[key] || key;
+  if (level === 'sutta') {
+    // Sutta-id name maps are picked per-text via the meta `id`. Some
+    // collections key by integer (DN/MN: '5'); others key by compound
+    // string ('1.1' for Snp). Try string lookup first, then numeric.
+    // SN has too many suttas for a per-sutta map; we label by `SN N.M`
+    // and rely on the optgroup label in the book selector to provide
+    // saṁyutta context.
+    const id = currentEntry && currentEntry.id;
+    if (id === 'linked-discourses-sujato')   return `SN ${key}`;
+    if (id === 'numbered-discourses-sujato') return `AN ${key}`;
+    if (id === 'itivuttaka-sujato') return `Iti ${key}`;
+    if (id === 'udana-sujato')      return `Ud ${key}`;
+    if (id === 'theragatha-sujato') return `Thag ${key}`;
+    if (id === 'therigatha-sujato') return `Thig ${key}`;
+    if (id === 'dhammapada-sujato') return `Dhp ${key}`;
+    if (id === 'upayika-dhammadinna') return `Upāyikā ${key}`;
+    const map = id === 'long-discourses-sujato'   ? SUTTA_NAMES_DN
+              : id === 'middle-discourses-sujato' ? SUTTA_NAMES_MN
+              : id === 'sutta-nipata-sujato'      ? SUTTA_NAMES_SNP
+              : null;
+    if (map) {
+      const v = map[key] || map[Number(key)];
+      if (v) return v;
+    }
+    return `Sutta ${key}`;
+  }
+  if (level === 'rune') {
+    const titles = currentData && currentData.chapter_titles;
+    const t = titles && (titles[key] || titles[Number(key)]);
+    const r = toRoman(Number(key));
+    return t ? `Rune ${r} \u2014 ${t}` : `Rune ${r}`;
+  }
+  if (level === 'parva') {
+    const titles = currentData && currentData.chapter_titles;
+    const t = titles && (titles[key] || titles[Number(key)]);
+    return t || `Parva ${key}`;
+  }
+  if (level === 'chapter') {
+    const titles = currentData && currentData.chapter_titles;
+    const t = titles && (titles[key] || titles[Number(key)]);
+    return t ? `Chapter ${key} \u2014 ${t}` : `Chapter ${key}`;
+  }
+  if (level === 'biography') {
+    // Path keys are slugs like "alkibiades" or "alkibiades-and-coriolanus"
+    return String(key).replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+  }
+  if (level === 'rule') {
+    return String(key);
+  }
+  return key;
+}
+
+// ── Render passages (with optional search highlighting) ──────────────────────
+
+function escapeHTML(s) {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function highlightText(text, query) {
+  if (!query) return escapeHTML(text);
+  const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const re = new RegExp(escaped, 'gi');
+  // Split on matches, interleave escaped text with highlight marks
+  const parts = [];
+  let last = 0;
+  text.replace(re, (match, offset) => {
+    parts.push(escapeHTML(text.slice(last, offset)));
+    parts.push('<mark class="search-hl">' + escapeHTML(match) + '</mark>');
+    last = offset + match.length;
+  });
+  parts.push(escapeHTML(text.slice(last)));
+  return parts.join('');
+}
+
+function renderFrontMatter() {
+  // Render the current text's front_matter as a collapsible labeled area.
+  // Returns null when there is nothing to show. Front matter is shown only
+  // when the user is at the natural top of the text — no active search and
+  // (for grouped texts) no specific group selected.
+  if (!currentData || !currentData.front_matter || !currentData.front_matter.length) {
+    return null;
+  }
+
+  const wrap = document.createElement('div');
+  wrap.className = 'front-matter';
+
+  const title = document.createElement('div');
+  title.className = 'front-matter-title';
+  title.textContent = 'Front matter';
+  wrap.appendChild(title);
+
+  for (const fm of currentData.front_matter) {
+    const det = document.createElement('details');
+    det.className = 'front-matter-entry';
+
+    const sum = document.createElement('summary');
+    sum.className = 'front-matter-summary';
+    sum.textContent = fm.label || fm.kind;
+    if (fm.kind && fm.kind !== fm.label) {
+      const kind = document.createElement('span');
+      kind.className = 'front-matter-kind';
+      kind.textContent = fm.kind.replace(/_/g, ' ');
+      sum.appendChild(kind);
+    }
+    det.appendChild(sum);
+
+    const body = document.createElement('div');
+    body.className = 'front-matter-body';
+    body.textContent = fm.body || '';
+    det.appendChild(body);
+
+    wrap.appendChild(det);
+  }
+  return wrap;
+}
+
+function render(passages, query) {
+  const frag = document.createDocumentFragment();
+
+  for (const p of passages) {
+    const div = document.createElement('div');
+    div.className = 'passage';
+    div.dataset.pid = p.id;
+
+    const ref = document.createElement('span');
+    ref.className   = 'ref clickable-ref';
+    ref.textContent = formatRef(p);
+    ref.title       = 'Click to copy link to this passage';
+    ref.addEventListener('click', (e) => {
+      e.stopPropagation();
+      copyPassageLink(p.id);
+    });
+
+    div.appendChild(ref);
+
+    const flatText = p.text.replace(/\n/g, ' ');
+    if (compareActive && compareData) {
+      // Primary column
+      const primary = document.createElement('div');
+      primary.className = 'cmp-col primary';
+      if (query) primary.innerHTML = highlightText(flatText, query);
+      else       primary.textContent = flatText;
+      div.appendChild(primary);
+
+      // Secondary column (lookup by id)
+      const secondary = document.createElement('div');
+      secondary.className = 'cmp-col secondary';
+      const match = compareData[p.id];
+      if (match) {
+        secondary.textContent = match.replace(/\n/g, ' ');
+      } else {
+        secondary.classList.add('empty');
+        secondary.textContent = '— no corresponding passage —';
+      }
+      div.appendChild(secondary);
+    } else if (query) {
+      const span = document.createElement('span');
+      span.innerHTML = highlightText(flatText, query);
+      div.appendChild(span);
+    } else {
+      div.appendChild(document.createTextNode(flatText));
+    }
+
+    // Annotations: render clickable markers + expandable note blocks
+    if (p.annotations && p.annotations.length) {
+      for (const a of p.annotations) {
+        const marker = document.createElement('span');
+        marker.className = 'annotation-marker';
+        marker.textContent = a.label;
+        marker.setAttribute('role', 'button');
+        marker.setAttribute('aria-expanded', 'false');
+        const noteId = p.id + '-' + a.id;
+        marker.setAttribute('aria-controls', noteId);
+        div.appendChild(marker);
+
+        const note = document.createElement('div');
+        note.className = 'annotation-note';
+        note.id = noteId;
+        note.textContent = a.text;
+        div.appendChild(note);
+
+        marker.addEventListener('click', function() {
+          const open = note.classList.toggle('open');
+          marker.setAttribute('aria-expanded', String(open));
+        });
+      }
+    }
+
+    frag.appendChild(div);
+  }
+  $passages.innerHTML = '';
+  $passages.appendChild(frag);
+}
+
+// ── Group selector (Bible books / Quran surahs / Upanishads) ─────────────────
+
+function topLevel() {
+  return currentMeta && currentMeta.hierarchy && currentMeta.hierarchy[0];
+}
+
+function needsGroupSelector() {
+  const t = topLevel();
+  return t === 'book' || t === 'surah' || t === 'upanishad' || t === 'sutta'
+      || t === 'rune' || t === 'parva' || t === 'chapter'
+      || t === 'biography' || t === 'rule';
+}
+
+function toRoman(n) {
+  const map = [[1000,'M'],[900,'CM'],[500,'D'],[400,'CD'],[100,'C'],[90,'XC'],
+               [50,'L'],[40,'XL'],[10,'X'],[9,'IX'],[5,'V'],[4,'IV'],[1,'I']];
+  let s = '', x = n;
+  for (const [v,r] of map) { while (x >= v) { s += r; x -= v; } }
+  return s;
+}
+
+function buildBookSelector() {
+  if (!needsGroupSelector()) {
+    $bookGroup.style.display = 'none';
+    $navBar.style.display    = 'none';
+    groupKeys = [];
+    groupIndex = -1;
+    return;
+  }
+
+  const level = topLevel();
+
+  document.querySelector('#ctrl-book-group label').textContent =
+    level === 'book' ? 'Book' : level === 'surah' ? 'Surah' :
+    level === 'sutta' ? 'Sutta' : level === 'rune' ? 'Rune' :
+    level === 'parva' ? 'Parva' : level === 'chapter' ? 'Chapter' :
+    level === 'biography' ? 'Life' : level === 'rule' ? 'Rule' : 'Text';
+
+  const seen = new Set();
+  groupKeys  = [];
+  for (const p of allPassages) {
+    const k = String(p.path[0]);
+    if (!seen.has(k)) { seen.add(k); groupKeys.push(k); }
+  }
+
+  $bookSelect.innerHTML = '';
+
+  // SN (1685 suttas / 53 saṁyuttas) and AN (1408 sutta IDs / 11 nipātas)
+  // are too long for a flat dropdown — group them by their top-level
+  // structural divisions using <optgroup>. Other texts get a flat list.
+  const id = currentEntry && currentEntry.id;
+  const groupedTopLevel =
+      id === 'linked-discourses-sujato'   ? {prefix: 'SN', map: SAMYUTTA_NAMES_SN, label: 'Saṁyutta'}
+    : id === 'numbered-discourses-sujato' ? {prefix: 'AN', map: NIPATA_NAMES_AN,    label: 'Nipāta'}
+    : null;
+
+  if (groupedTopLevel) {
+    const {prefix, map, label} = groupedTopLevel;
+    let currentTop = null;
+    let currentOptgroup = null;
+    for (const k of groupKeys) {
+      const top = parseInt(k.split('.')[0], 10);
+      if (top !== currentTop) {
+        currentTop = top;
+        currentOptgroup = document.createElement('optgroup');
+        const name = map[top] || `${label} ${top}`;
+        currentOptgroup.label = `${prefix} ${top} — ${name}`;
+        $bookSelect.appendChild(currentOptgroup);
+      }
+      const opt = document.createElement('option');
+      opt.value       = k;
+      opt.textContent = `${prefix} ${k}`;
+      currentOptgroup.appendChild(opt);
+    }
+  } else {
+    for (const k of groupKeys) {
+      const opt = document.createElement('option');
+      opt.value       = k;
+      opt.textContent = groupName(k);
+      $bookSelect.appendChild(opt);
+    }
+  }
+
+  // Respect a pre-set currentBook (permalink / resume); otherwise default to first.
+  let startIdx = groupKeys.indexOf(String(currentBook));
+  if (startIdx < 0) startIdx = 0;
+  groupIndex  = startIdx;
+  currentBook = groupKeys[startIdx];
+  $bookSelect.value        = currentBook;
+  $bookGroup.style.display = 'flex';
+  $navBar.style.display    = 'flex';
+  updateNav();
+}
+
+// ── Navigation ───────────────────────────────────────────────────────────────
+
+function updateNav() {
+  if (!needsGroupSelector() || groupKeys.length === 0) {
+    $navBar.style.display = 'none';
+    return;
+  }
+  $navBar.style.display = 'flex';
+  $navPrev.disabled = (groupIndex <= 0);
+  $navNext.disabled = (groupIndex >= groupKeys.length - 1);
+  $navLocation.textContent =
+    `${groupName(groupKeys[groupIndex])} (${groupIndex + 1} of ${groupKeys.length})`;
+}
+
+function navTo(idx) {
+  if (idx < 0 || idx >= groupKeys.length) return;
+  groupIndex  = idx;
+  currentBook = groupKeys[idx];
+  $bookSelect.value = currentBook;
+  updateNav();
+  clearSearch();
+  filterAndRender();
+  $reader.scrollTop = 0;
+}
+
+$navPrev.addEventListener('click', () => navTo(groupIndex - 1));
+$navNext.addEventListener('click', () => navTo(groupIndex + 1));
+
+// ── Search ───────────────────────────────────────────────────────────────────
+
+function clearSearch() {
+  $search.value = '';
+  $searchCount.textContent = '';
+  searchMatches  = [];
+  searchMatchIdx = -1;
+  updateSearchNav();
+}
+
+function updateSearchNav() {
+  const has = searchMatches.length > 0;
+  $searchPrev.disabled = !has || searchMatchIdx <= 0;
+  $searchNext.disabled = !has || searchMatchIdx >= searchMatches.length - 1;
+}
+
+function scrollToMatch(idx) {
+  if (idx < 0 || idx >= searchMatches.length) return;
+  searchMatchIdx = idx;
+
+  // Remove previous active highlight
+  const prev = $passages.querySelector('.search-hl-active');
+  if (prev) prev.classList.remove('search-hl-active');
+
+  // Activate current
+  searchMatches[idx].classList.add('search-hl-active');
+  searchMatches[idx].scrollIntoView({ behavior: 'smooth', block: 'center' });
+  updateSearchNav();
+}
+
+function filterAndRender() {
+  let passages = needsGroupSelector() && currentBook
+    ? allPassages.filter(p => String(p.path[0]) === currentBook)
+    : allPassages;
+
+  const query = $search.value.trim();
+  const queryLower = query.toLowerCase();
+
+  if (queryLower) {
+    passages = passages.filter(p => p.text.toLowerCase().includes(queryLower));
+  }
+
+  render(passages, queryLower ? query : '');
+
+  // Collect all highlight marks
+  searchMatches = Array.from($passages.querySelectorAll('mark.search-hl'));
+  searchMatchIdx = -1;
+
+  if (queryLower) {
+    $searchCount.textContent = searchMatches.length
+      ? `${searchMatches.length} match${searchMatches.length === 1 ? '' : 'es'}`
+      : '0 matches';
+    if (searchMatches.length > 0) {
+      scrollToMatch(0);
+      $searchCount.textContent = `1 of ${searchMatches.length}`;
+    }
+  } else {
+    $searchCount.textContent = '';
+    searchMatches  = [];
+    searchMatchIdx = -1;
+  }
+
+  updateSearchNav();
+}
+
+$bookSelect.addEventListener('change', () => {
+  groupIndex  = groupKeys.indexOf($bookSelect.value);
+  currentBook = $bookSelect.value;
+  updateNav();
+  clearSearch();
+  filterAndRender();
+  $reader.scrollTop = 0;
+});
+
+$search.addEventListener('input', () => {
+  filterAndRender();
+});
+
+$searchPrev.addEventListener('click', () => {
+  if (searchMatchIdx > 0) {
+    scrollToMatch(searchMatchIdx - 1);
+    $searchCount.textContent = `${searchMatchIdx + 1} of ${searchMatches.length}`;
+  }
+});
+
+$searchNext.addEventListener('click', () => {
+  if (searchMatchIdx < searchMatches.length - 1) {
+    scrollToMatch(searchMatchIdx + 1);
+    $searchCount.textContent = `${searchMatchIdx + 1} of ${searchMatches.length}`;
+  }
+});
+
+// Keyboard shortcuts for search navigation
+$search.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    if (e.shiftKey) {
+      $searchPrev.click();
+    } else {
+      $searchNext.click();
+    }
+  }
+});
+
+// ── Metadata panel ───────────────────────────────────────────────────────────
+
+function showMeta(data) {
+  $metaTitle.textContent = data.title || '';
+  $metaDesc.textContent  = data.description || '';
+
+  const items = [];
+  if (data.author && data.author.length) {
+    items.push({ label: 'Author', value: data.author.join(', ') });
+  }
+  if (data.tradition) {
+    items.push({ label: 'Tradition', value: data.tradition });
+  }
+  if (data.date) {
+    items.push({ label: 'Date', value: data.date });
+  }
+  const tr = data.translation;
+  if (tr) {
+    if (tr.translator && tr.translator.length) {
+      items.push({ label: 'Translator', value: tr.translator.join(', ') });
+    }
+    if (tr.year) {
+      items.push({ label: 'Translation year', value: String(tr.year) });
+    }
+    if (tr.source) {
+      const val = tr.url
+        ? `<a class="meta-link" href="${escapeHTML(tr.url)}" target="_blank" rel="noopener">${escapeHTML(tr.source)}</a>`
+        : escapeHTML(tr.source);
+      items.push({ label: 'Source', html: val });
+    }
+  }
+
+  $metaGrid.innerHTML = items.map(it => {
+    const val = it.html || escapeHTML(it.value);
+    return `<span class="meta-item"><span class="meta-label">${escapeHTML(it.label)}:</span> ${val}</span>`;
+  }).join('');
+
+  $metaFrontMatter.innerHTML = '';
+  const fm = renderFrontMatter();
+  if (fm) $metaFrontMatter.appendChild(fm);
+
+  if (metaVisible) {
+    $metaPanel.style.display = 'block';
+  }
+}
+
+$metaToggle.addEventListener('click', () => {
+  metaVisible = !metaVisible;
+  $metaPanel.style.display = metaVisible ? 'block' : 'none';
+  $metaToggle.classList.toggle('active', metaVisible);
+  $metaToggle.querySelector('.info-label').textContent =
+    metaVisible ? 'Hide text info' : 'About this text';
+});
+
+// ── Cover page ───────────────────────────────────────────────────────────────
+
+function showCover(data, entry) {
+  $cover.style.display    = 'block';
+  $toc.style.display      = 'none';
+  $coverTitle.textContent  = data.title || '';
+  const authorTxt = (data.author && data.author.length) ? data.author.join(', ') : '';
+  $coverAuthor.textContent = authorTxt;
+  $coverAuthor.style.display = authorTxt ? 'block' : 'none';
+
+  const tr = data.translation;
+  const trTxt = (tr && tr.translator && tr.translator.length)
+    ? 'Translated by ' + tr.translator.join(', ')
+    : '';
+  $coverTrans.textContent = trTxt;
+  $coverTrans.style.display = trTxt ? 'block' : 'none';
+
+  const parts = [];
+  if (data.date)         parts.push(data.date);
+  if (tr && tr.year)     parts.push('Translation ' + tr.year);
+  $coverYear.textContent = parts.join(' \u00b7 ');
+  $coverYear.style.display = parts.length ? 'block' : 'none';
+
+  $cover.style.display    = 'block';
+  $passages.style.display = 'none';
+  $infoBar.style.display  = 'flex';
+  $searchGroup.style.display = 'none';
+  $navBar.style.display      = 'none';
+  $trBar.style.display       = 'none';
+  $bookGroup.style.display   = 'none';
+}
+
+function enterReading(targetGroupKey) {
+  if (targetGroupKey != null) currentBook = String(targetGroupKey);
+  $cover.style.display    = 'none';
+  $toc.style.display      = 'none';
+  $passages.style.display = '';
+
+  buildBookSelector();
+  buildTranslationSwitcher(currentEntry);
+
+  if (!needsGroupSelector()) {
+    $navBar.style.display    = 'flex';
+    $navPrev.disabled        = true;
+    $navNext.disabled        = true;
+    $navLocation.textContent = `${allPassages.length} passages`;
+  }
+
+  filterAndRender();
+  $searchGroup.style.display = 'flex';
+  $reader.scrollTop = 0;
+}
+
+function showToc(data, entry) {
+  $cover.style.display    = 'none';
+  $toc.style.display      = 'block';
+  $passages.style.display = 'none';
+  $infoBar.style.display  = 'flex';
+  $searchGroup.style.display = 'none';
+  $navBar.style.display      = 'none';
+  $trBar.style.display       = 'none';
+  $bookGroup.style.display   = 'none';
+
+  const hier = data.hierarchy || [];
+  const titles = data.chapter_titles || {};
+
+  // Compute distinct top-level group keys in order
+  const seen = new Set();
+  const keys = [];
+  for (const p of data.passages) {
+    const k = String(p.path[0]);
+    if (!seen.has(k)) { seen.add(k); keys.push(k); }
+  }
+
+  const grouped = needsGroupSelector() && keys.length > 1;
+  $tocSubtitle.textContent = grouped
+    ? `${keys.length} ${hier[0]}s \u00b7 ${data.passages.length.toLocaleString()} passages`
+    : `${data.passages.length.toLocaleString()} passages`;
+
+  $tocList.innerHTML = '';
+  if (grouped) {
+    keys.forEach((k, i) => {
+      const li = document.createElement('li');
+      const num = document.createElement('span');
+      num.className = 'toc-num';
+      num.textContent = String(i + 1);
+      const name = document.createElement('span');
+      name.className = 'toc-name';
+      name.textContent = groupName(k);
+      li.appendChild(num);
+      li.appendChild(name);
+      li.addEventListener('click', () => enterReading(k));
+      $tocList.appendChild(li);
+    });
+  } else {
+    const li = document.createElement('li');
+    const name = document.createElement('span');
+    name.className = 'toc-name';
+    name.textContent = 'Read from beginning';
+    li.appendChild(name);
+    li.addEventListener('click', () => enterReading());
+    $tocList.appendChild(li);
+  }
+}
+
+$coverBegin.addEventListener('click', () => showToc(currentData, currentEntry));
+$tocBack.addEventListener('click', () => showCover(currentData, currentEntry));
+$tocBegin.addEventListener('click', () => enterReading());
+
+// ── Permalinks, bookmarks, recents ───────────────────────────────────────────
+
+let toastTimer = null;
+function showToast(msg) {
+  let el = document.querySelector('.copy-toast');
+  if (!el) {
+    el = document.createElement('div');
+    el.className = 'copy-toast';
+    document.body.appendChild(el);
+  }
+  el.textContent = msg;
+  requestAnimationFrame(() => el.classList.add('show'));
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 1400);
+}
+
+function passageLinkURL(pid) {
+  if (!currentEntry) return location.href;
+  const url = new URL(location);
+  url.searchParams.set('text', currentEntry.data_file);
+  if (pid) url.searchParams.set('p', pid);
+  else url.searchParams.delete('p');
+  return url.toString();
+}
+
+function copyPassageLink(pid) {
+  const url = passageLinkURL(pid);
+  const done = () => showToast('Link copied');
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(url).then(done, () => showToast(url));
+  } else {
+    const ta = document.createElement('textarea');
+    ta.value = url; document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); done(); } catch (e) { showToast(url); }
+    document.body.removeChild(ta);
+  }
+}
+
+function passageById(pid) {
+  return allPassages.find(p => p.id === pid);
+}
+
+function jumpToPassage(pid, highlight) {
+  const el = $passages.querySelector(`.passage[data-pid="${CSS.escape(pid)}"]`);
+  if (!el) return false;
+  el.scrollIntoView({ block: 'center' });
+  if (highlight) {
+    el.classList.add('passage-highlight');
+    setTimeout(() => el.classList.remove('passage-highlight'), 2000);
+  }
+  return true;
+}
+
+function setUrlPassage(pid) {
+  if (!currentEntry) return;
+  const url = new URL(location);
+  if (pid) url.searchParams.set('p', pid);
+  else     url.searchParams.delete('p');
+  history.replaceState(null, '', url);
+}
+
+// Find the top-most visible passage in the reader viewport
+function topVisiblePassage() {
+  const readerTop = $reader.getBoundingClientRect().top;
+  const nodes = $passages.querySelectorAll('.passage[data-pid]');
+  for (const n of nodes) {
+    const r = n.getBoundingClientRect();
+    if (r.bottom >= readerTop + 10) return n.dataset.pid;
+  }
+  return null;
+}
+
+function saveBookmark() {
+  if (!currentEntry) return;
+  const pid = topVisiblePassage();
+  if (!pid) return;
+  const rec = { data_file: currentEntry.data_file, title: currentEntry.title,
+                translator: (currentEntry.translator || []).join(', '),
+                pid, t: Date.now() };
+  try {
+    localStorage.setItem('da-last', JSON.stringify(rec));
+    // Update recents (dedupe by data_file, cap 5)
+    const raw = localStorage.getItem('da-recents');
+    let list = []; try { list = raw ? JSON.parse(raw) : []; } catch (e) {}
+    list = list.filter(x => x.data_file !== rec.data_file);
+    list.unshift({ data_file: rec.data_file, title: rec.title,
+                   translator: rec.translator, pid, t: rec.t });
+    list = list.slice(0, 5);
+    localStorage.setItem('da-recents', JSON.stringify(list));
+  } catch (e) {}
+}
+
+function scheduleBookmark() {
+  clearTimeout(bookmarkTimer);
+  bookmarkTimer = setTimeout(() => {
+    saveBookmark();
+    const pid = topVisiblePassage();
+    if (pid) setUrlPassage(pid);
+  }, 400);
+}
+
+function renderWelcome() {
+  let last = null, recents = [];
+  try { last = JSON.parse(localStorage.getItem('da-last') || 'null'); } catch (e) {}
+  try { recents = JSON.parse(localStorage.getItem('da-recents') || '[]'); } catch (e) {}
+
+  if (last && dataFileToEntry[last.data_file]) {
+    $continueBtn.textContent = last.title + (last.translator ? ' — ' + last.translator : '');
+    $continueBtn.onclick = () => {
+      const { entry, li } = dataFileToEntry[last.data_file];
+      pendingPid = last.pid;
+      loadText(entry, li);
+    };
+    $welcomeContinue.style.display = 'block';
+  } else {
+    $welcomeContinue.style.display = 'none';
+  }
+
+  if (recents.length > 1) {
+    $recentList.innerHTML = '';
+    for (const r of recents) {
+      if (!dataFileToEntry[r.data_file]) continue;
+      if (last && r.data_file === last.data_file) continue;
+      const li = document.createElement('li');
+      const sub = r.translator ? `<span class="recent-sub">${escapeHTML(r.translator)}</span>` : '';
+      li.innerHTML = escapeHTML(r.title) + sub;
+      li.addEventListener('click', () => {
+        const { entry, li: sidebarLi } = dataFileToEntry[r.data_file];
+        pendingPid = r.pid;
+        loadText(entry, sidebarLi);
+      });
+      $recentList.appendChild(li);
+    }
+    $welcomeRecent.style.display = $recentList.children.length ? 'block' : 'none';
+  } else {
+    $welcomeRecent.style.display = 'none';
+  }
+}
+
+$reader.addEventListener('scroll', scheduleBookmark, { passive: true });
+
+// ── Global corpus search ─────────────────────────────────────────────────────
+
+async function ensureGlobalIndex() {
+  if (globalIndex || globalIndexLoading) return;
+  globalIndexLoading = true;
+  $globalStatus.textContent = 'Loading search index (~8 MB) …';
+  try {
+    globalIndex = await getJSON('data/search_index.json');
+    $globalStatus.textContent = `${Object.keys(globalIndex.words).length.toLocaleString()} words indexed across ${globalIndex.texts.length} texts.`;
+  } catch (e) {
+    $globalStatus.textContent = 'Could not load search index. Run: python 05_scripts/build_search_index.py';
+  } finally {
+    globalIndexLoading = false;
+  }
+}
+
+function runGlobalSearch(qRaw) {
+  $globalResults.innerHTML = '';
+  const q = (qRaw || '').trim().toLowerCase();
+  if (!q || !globalIndex) {
+    if (q && !globalIndex) $globalStatus.textContent = 'Index not loaded yet…';
+    return;
+  }
+  const terms = q.match(/[a-z][a-z'\-]{2,}/g) || [];
+  if (!terms.length) {
+    $globalStatus.textContent = 'Type at least one word (3+ letters).';
+    return;
+  }
+  // Intersect text-id sets across terms
+  let result = null;
+  for (const t of terms) {
+    const ids = globalIndex.words[t];
+    if (!ids) {
+      $globalStatus.textContent = `No texts contain "${t}".`;
+      return;
+    }
+    const set = new Set(ids);
+    if (result === null) result = set;
+    else result = new Set([...result].filter(x => set.has(x)));
+    if (!result.size) {
+      $globalStatus.textContent = `No texts contain all of: ${terms.join(', ')}.`;
+      return;
+    }
+  }
+  const matches = [...result].map(i => globalIndex.texts[i]);
+  $globalStatus.textContent = `${matches.length} text${matches.length === 1 ? '' : 's'} contain ${terms.length === 1 ? `"${terms[0]}"` : 'all those terms'}.`;
+  for (const m of matches.slice(0, 80)) {
+    const li = document.createElement('li');
+    const sub = [m.tradition, m.translator].filter(Boolean).join(' \u00b7 ');
+    li.innerHTML = escapeHTML(m.title) + (sub ? `<span class="gs-sub">${escapeHTML(sub)}</span>` : '');
+    li.addEventListener('click', () => {
+      const target = dataFileToEntry[m.data_file];
+      if (target) loadText(target.entry, target.li);
+    });
+    $globalResults.appendChild(li);
+  }
+}
+
+let globalSearchTimer = null;
+$globalSearch.addEventListener('focus', ensureGlobalIndex);
+$globalSearch.addEventListener('input', () => {
+  clearTimeout(globalSearchTimer);
+  globalSearchTimer = setTimeout(() => runGlobalSearch($globalSearch.value), 200);
+});
+
+// Keyboard shortcuts
+document.addEventListener('keydown', (e) => {
+  const tag = (e.target && e.target.tagName) || '';
+  const inField = tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT';
+  if (e.key === '/' && !inField) {
+    e.preventDefault();
+    if ($searchGroup.style.display !== 'none') $search.focus();
+    else $sidebarSearch.focus();
+    return;
+  }
+  if (e.key === 'Escape') {
+    if (document.activeElement === $search) { $search.value = ''; $search.blur(); filterAndRender(); }
+    else if (document.activeElement === $sidebarSearch) { $sidebarSearch.value = ''; $sidebarSearch.blur(); filterSidebar(''); }
+    return;
+  }
+  if (inField) return;
+  if ((e.key === 'ArrowLeft' || e.key === 'ArrowRight') && $bookGroup.style.display !== 'none') {
+    e.preventDefault();
+    navTo(groupIndex + (e.key === 'ArrowRight' ? 1 : -1));
+  }
+});
+
+// ── Load text ─────────────────────────────────────────────────────────────────
+
+async function loadText(entry, listItem) {
+  if (activeItem) activeItem.classList.remove('active');
+  listItem.classList.add('active');
+  activeItem = listItem;
+  currentEntry = entry;
+
+  $welcome.style.display     = 'none';
+  $passages.innerHTML        = '';
+  $cover.style.display       = 'none';
+  $toc.style.display         = 'none';
+  $bookGroup.style.display   = 'none';
+  $searchGroup.style.display = 'none';
+  $navBar.style.display      = 'none';
+  $trBar.style.display       = 'none';
+  $metaPanel.style.display   = 'none';
+  $infoBar.style.display     = 'none';
+  compareActive = false;
+  compareData   = null;
+  $readerInner.classList.remove('compare-mode');
+  clearSearch();
+  setStatus(`Loading ${entry.title}\u2026`);
+
+  try {
+    const data   = await getJSON(`data/${entry.data_file}`);
+    currentData  = data;
+    currentMeta  = { hierarchy: data.hierarchy };
+    allPassages  = data.passages;
+    currentBook  = null;
+
+    showMeta(data);
+
+    // Update URL without reload
+    const url = new URL(location);
+    url.searchParams.set('text', entry.data_file);
+    if (!pendingPid) url.searchParams.delete('p');
+    history.replaceState(null, '', url);
+
+    if (pendingPid) {
+      const target = passageById(pendingPid);
+      if (target) {
+        // Jump past the cover, honor the group the passage lives in
+        if (target.path && target.path.length) {
+          currentBook = String(target.path[0]);
+        }
+        $infoBar.style.display = 'flex';
+        enterReading();
+        requestAnimationFrame(() => jumpToPassage(pendingPid, true));
+        pendingPid = null;
+      } else {
+        pendingPid = null;
+        showCover(data, entry);
+      }
+    } else {
+      showCover(data, entry);
+    }
+    $reader.scrollTop = 0;
+
+    clearStatus();
+  } catch (err) {
+    setStatus(`Error: ${err.message}`);
+    console.error(err);
+  }
+}
+
+// ── Translation switcher ─────────────────────────────────────────────────────
+
+function buildTranslationSwitcher(entry) {
+  const siblings = indexGroups[entry.id] || [];
+
+  // Hide for solo texts
+  if (siblings.length <= 1) {
+    $trBar.style.display = 'none';
+    $compareBtn.style.display = 'none';
+    $compareSelect.style.display = 'none';
+    return;
+  }
+
+  $trBarTitle.textContent = entry.title + ' \u2014';
+  $trSelect.innerHTML = '';
+
+  for (const sib of siblings) {
+    const opt = document.createElement('option');
+    opt.value = sib.data_file;
+    opt.textContent = translationLabel(sib);
+    if (sib.data_file === entry.data_file) opt.selected = true;
+    $trSelect.appendChild(opt);
+  }
+
+  // Compare dropdown: every sibling except the currently loaded one
+  $compareSelect.innerHTML = '';
+  for (const sib of siblings) {
+    if (sib.data_file === entry.data_file) continue;
+    const opt = document.createElement('option');
+    opt.value = sib.data_file;
+    opt.textContent = translationLabel(sib);
+    $compareSelect.appendChild(opt);
+  }
+  $compareBtn.style.display = 'inline-block';
+  $compareBtn.classList.toggle('active', compareActive);
+  $compareBtn.textContent = compareActive ? 'Exit compare' : 'Compare\u2026';
+  $compareSelect.style.display = compareActive ? 'inline-block' : 'none';
+  $compareNote.textContent = '';
+
+  $trBar.style.display = 'flex';
+}
+
+async function activateCompare() {
+  if (!currentEntry) return;
+  const dataFile = $compareSelect.value;
+  if (!dataFile) return;
+  try {
+    setStatus('Loading secondary translation\u2026');
+    const secondary = await getJSON(`data/${dataFile}`);
+    clearStatus();
+    compareEntry = secondary;
+    // Build {id → text} map
+    const map = {};
+    for (const p of secondary.passages) map[p.id] = p.text;
+    compareData = map;
+    // Alignment feedback
+    let matches = 0;
+    for (const p of allPassages) if (map[p.id]) matches++;
+    const pct = allPassages.length ? Math.round(100 * matches / allPassages.length) : 0;
+    $compareNote.textContent =
+      pct >= 60 ? `(${matches}/${allPassages.length} passages aligned)` :
+      pct >= 10 ? `(partial alignment — ${matches} shared)` :
+                  `(these translations don't share passage IDs — shown side-by-side only)`;
+    compareActive = true;
+    $readerInner.classList.add('compare-mode');
+    $compareBtn.classList.add('active');
+    $compareBtn.textContent = 'Exit compare';
+    filterAndRender();
+  } catch (e) {
+    clearStatus();
+    $compareNote.textContent = 'Failed to load.';
+  }
+}
+
+function deactivateCompare() {
+  compareActive = false;
+  compareData   = null;
+  compareEntry  = null;
+  $readerInner.classList.remove('compare-mode');
+  $compareBtn.classList.remove('active');
+  $compareBtn.textContent = 'Compare\u2026';
+  $compareSelect.style.display = 'none';
+  $compareNote.textContent = '';
+  filterAndRender();
+}
+
+$compareBtn.addEventListener('click', () => {
+  if (compareActive) {
+    deactivateCompare();
+  } else {
+    $compareSelect.style.display = 'inline-block';
+    activateCompare();
+  }
+});
+$compareSelect.addEventListener('change', () => {
+  if (compareActive) activateCompare();
+});
+
+$trSelect.addEventListener('change', () => {
+  const dataFile = $trSelect.value;
+  // Find the entry and its sidebar <li>
+  for (const [entry, li] of entryToLi) {
+    if (entry.data_file === dataFile) {
+      loadText(entry, li);
+      // Ensure all enclosing collapsible groups are open: walk up from
+      // the clicked <li>, opening any text-group-items / tradition-items
+      // we encounter.
+      let node = li.parentElement;
+      while (node) {
+        if (node.classList && (node.classList.contains('text-group-items') ||
+                               node.classList.contains('tradition-items'))) {
+          if (!node.classList.contains('expanded')) {
+            node.classList.add('expanded');
+            const hdr = node.previousElementSibling;
+            if (hdr) hdr.classList.add('expanded');
+          }
+        }
+        node = node.parentElement;
+      }
+      return;
+    }
+  }
+});
+
+// ── Status bar ────────────────────────────────────────────────────────────────
+
+function setStatus(msg) {
+  $status.textContent   = msg;
+  $status.style.display = 'block';
+}
+
+function clearStatus() {
+  $status.style.display = 'none';
+}
+
+// ── Sidebar ───────────────────────────────────────────────────────────────────
+
+function translationLabel(entry) {
+  // Prefer explicit metadata labels from index.json
+  if (entry.translation_short_label) return entry.translation_short_label;
+  if (entry.translation_label)       return entry.translation_label;
+
+  // Fallback: derive from data_file (for older index.json without labels)
+  const raw = entry.data_file
+    .replace(entry.id + '_', '')
+    .replace('.json', '');
+  if (raw.length <= 4) return raw.toUpperCase();
+  return raw.replace(/[-_]/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+}
+
+async function loadIndex() {
+  let index;
+  try {
+    index = await getJSON('data/index.json');
+  } catch (err) {
+    $textList.innerHTML =
+      '<li style="padding:14px 16px;font-size:12px;color:#c00">' +
+      'Could not load data/index.json.<br>Run: python 05_scripts/export_reader_data.py</li>';
+    return;
+  }
+
+  const params = new URLSearchParams(location.search);
+  const requestedText = params.get('text');
+  const requestedPid  = params.get('p');
+  let autoLoaded = false;
+  // Tradition <li>s that need to be auto-expanded after the tree is built.
+  const traditionsToExpand = new Set();
+
+  // ── Step 1: collect entries grouped by text id (preserving order) ──────
+  const textGroups = [];
+  const textGroupMap = {};
+  for (const entry of index.texts) {
+    if (!textGroupMap[entry.id]) {
+      textGroupMap[entry.id] = { id: entry.id, title: entry.title,
+        tradition: entry.tradition, collection: entry.collection, entries: [] };
+      textGroups.push(textGroupMap[entry.id]);
+    }
+    textGroupMap[entry.id].entries.push(entry);
+    // Build global lookup for translation switcher
+    if (!indexGroups[entry.id]) indexGroups[entry.id] = [];
+    indexGroups[entry.id].push(entry);
+  }
+
+  // ── Step 2: bucket text-groups into collection > tradition ─────────────
+  // Preserve insertion order so the existing sort (sacred-first, then
+  // tradition, then title) flows through naturally.
+  const byCollection = new Map();   // collection -> Map(tradition -> textGroup[])
+  for (const tg of textGroups) {
+    const col = tg.collection || 'other';
+    const trd = tg.tradition  || '—';
+    if (!byCollection.has(col)) byCollection.set(col, new Map());
+    const trMap = byCollection.get(col);
+    if (!trMap.has(trd)) trMap.set(trd, []);
+    trMap.get(trd).push(tg);
+  }
+
+  const COLLECTION_LABELS = { sacred: 'Sacred', other: 'Other' };
+
+  // ── Step 3: render the tree ────────────────────────────────────────────
+  for (const [col, trMap] of byCollection) {
+    const colLi = document.createElement('li');
+    colLi.className = 'collection-header';
+    colLi.innerHTML =
+      `<span class="col-arrow">&#9660;</span>` +
+      `${escapeHTML(COLLECTION_LABELS[col] || col)}`;
+    // Click toggles collapse of all traditions in this collection
+    colLi.addEventListener('click', () => {
+      const collapsed = colLi.classList.toggle('collapsed');
+      let sib = colLi.nextElementSibling;
+      while (sib && !sib.classList.contains('collection-header')) {
+        sib.classList.toggle('col-hidden', collapsed);
+        sib = sib.nextElementSibling;
+      }
+    });
+    $textList.appendChild(colLi);
+
+    for (const [trd, tgs] of trMap) {
+      // Tradition header
+      const trHeader = document.createElement('li');
+      trHeader.className = 'tradition-header';
+      const totalCount = tgs.reduce((n, g) => n + g.entries.length, 0);
+      trHeader.innerHTML =
+        `<span class="t-arrow">&#9654;</span>` +
+        `<span class="t-title">${escapeHTML(trd)}</span>` +
+        `<span class="t-count">${totalCount}</span>`;
+
+      // Tradition items container
+      const trItems = document.createElement('li');
+      trItems.className = 'tradition-items';
+      const trUl = document.createElement('ul');
+      trUl.style.listStyle = 'none';
+      trUl.style.padding = '0';
+      trUl.style.margin = '0';
+
+      // Click toggles expand/collapse
+      trHeader.addEventListener('click', () => {
+        const open = trHeader.classList.toggle('expanded');
+        trItems.classList.toggle('expanded', open);
+      });
+
+      // Render each text-group inside this tradition
+      for (const group of tgs) {
+        if (group.entries.length === 1) {
+          // Solo text — single flat item
+          const entry = group.entries[0];
+          const li = document.createElement('li');
+          li.className = 'text-item solo';
+          const sub = entry.translator && entry.translator.length
+            ? entry.translator.join(', ')
+            : '';
+          const star = entry.quality === 'primary'
+            ? `<span class="q-star" title="Primary/canonical translation">&#9733;</span>` : '';
+          li.innerHTML =
+            `<div class="t-title">${star}${escapeHTML(entry.title)}</div>` +
+            (sub ? `<div class="t-sub">${escapeHTML(sub)}</div>` : '');
+          li.dataset.search = [entry.title, sub, group.title, trd, col].join(' ').toLowerCase();
+          li.addEventListener('click', () => loadText(entry, li));
+          dataFileToEntry[entry.data_file] = { entry, li };
+          entryToLi.set(entry, li);
+          trUl.appendChild(li);
+
+          if (requestedText && entry.data_file === requestedText && !autoLoaded) {
+            autoLoaded = true;
+            traditionsToExpand.add(trHeader);
+            if (requestedPid) pendingPid = requestedPid;
+            loadText(entry, li);
+          }
+          continue;
+        }
+
+        // Multi-translation group — header + nested ul
+        const header = document.createElement('li');
+        header.className = 'text-group-header';
+        header.innerHTML =
+          `<div class="t-title"><span class="t-arrow">&#9654;</span>${escapeHTML(group.title)}<span class="t-count">(${group.entries.length})</span></div>`;
+
+        const itemsContainer = document.createElement('li');
+        itemsContainer.className = 'text-group-items';
+
+        const innerUl = document.createElement('ul');
+        innerUl.style.listStyle = 'none';
+        innerUl.style.padding = '0';
+        innerUl.style.margin = '0';
+
+        let needsExpandInner = false;
+
+        for (const entry of group.entries) {
+          const li = document.createElement('li');
+          li.className = 'text-item';
+          const label = translationLabel(entry);
+          const sub = entry.translator && entry.translator.length
+            ? entry.translator.join(', ')
+            : '';
+          const star = entry.quality === 'primary'
+            ? `<span class="q-star" title="Primary/canonical translation">&#9733;</span>` : '';
+          li.innerHTML =
+            `<div class="t-title">${star}${escapeHTML(label)}</div>` +
+            (sub ? `<div class="t-sub">${escapeHTML(sub)}</div>` : '');
+          li.dataset.search = [entry.title, label, sub, group.title, trd, col].join(' ').toLowerCase();
+          li.addEventListener('click', () => loadText(entry, li));
+          dataFileToEntry[entry.data_file] = { entry, li };
+          entryToLi.set(entry, li);
+          innerUl.appendChild(li);
+
+          if (requestedText && entry.data_file === requestedText && !autoLoaded) {
+            autoLoaded = true;
+            needsExpandInner = true;
+            traditionsToExpand.add(trHeader);
+            if (requestedPid) pendingPid = requestedPid;
+            loadText(entry, li);
+          }
+        }
+
+        itemsContainer.appendChild(innerUl);
+        trUl.appendChild(header);
+        trUl.appendChild(itemsContainer);
+
+        header.addEventListener('click', () => {
+          const open = header.classList.toggle('expanded');
+          itemsContainer.classList.toggle('expanded', open);
+        });
+
+        if (needsExpandInner) {
+          header.classList.add('expanded');
+          itemsContainer.classList.add('expanded');
+        }
+      }
+
+      trItems.appendChild(trUl);
+      $textList.appendChild(trHeader);
+      $textList.appendChild(trItems);
+    }
+  }
+
+  // ── Step 4: auto-expand traditions that contain the deep-linked text ──
+  for (const trHeader of traditionsToExpand) {
+    trHeader.classList.add('expanded');
+    trHeader.nextElementSibling.classList.add('expanded');
+  }
+
+  if (!autoLoaded) renderWelcome();
+}
+
+// ── Sidebar text search ───────────────────────────────────────────────────────
+
+function filterSidebar(qRaw) {
+  const q = (qRaw || '').trim().toLowerCase();
+  const searching = q.length > 0;
+
+  $textList.querySelectorAll('.text-item').forEach(li => {
+    const haystack = li.dataset.search || li.textContent.toLowerCase();
+    const match = !searching || haystack.includes(q);
+    li.classList.toggle('sb-hidden', !match);
+  });
+
+  // Multi-translation group headers
+  $textList.querySelectorAll('.text-group-header').forEach(h => {
+    const items = h.nextElementSibling;
+    if (!items) return;
+    const any = Array.from(items.querySelectorAll('.text-item'))
+      .some(li => !li.classList.contains('sb-hidden'));
+    h.classList.toggle('sb-hidden', !any);
+    items.classList.toggle('sb-hidden', !any);
+    if (searching && any) {
+      h.classList.add('expanded');
+      items.classList.add('expanded');
+    }
+  });
+
+  // Tradition headers
+  $textList.querySelectorAll('.tradition-header').forEach(h => {
+    const items = h.nextElementSibling;
+    if (!items) return;
+    const any = Array.from(items.querySelectorAll('.text-item'))
+      .some(li => !li.classList.contains('sb-hidden'));
+    h.classList.toggle('sb-hidden', !any);
+    items.classList.toggle('sb-hidden', !any);
+    if (searching && any) {
+      h.classList.add('expanded');
+      items.classList.add('expanded');
+    }
+  });
+
+  // Collection headers: hide if no following tradition has visible items
+  $textList.querySelectorAll('.collection-header').forEach(h => {
+    let sib = h.nextElementSibling;
+    let any = false;
+    while (sib && !sib.classList.contains('collection-header')) {
+      if (sib.classList.contains('tradition-header') && !sib.classList.contains('sb-hidden')) {
+        any = true; break;
+      }
+      sib = sib.nextElementSibling;
+    }
+    h.classList.toggle('sb-hidden', searching && !any);
+  });
+}
+
+$sidebarSearch.addEventListener('input', () => filterSidebar($sidebarSearch.value));
+
+// ── Typography controls ───────────────────────────────────────────────────────
+
+const root = document.documentElement;
+
+function wire(id, prop, storageKey, toCSS, displayId) {
+  const el    = document.getElementById(id);
+  const saved = localStorage.getItem(storageKey);
+
+  if (saved !== null) {
+    el.value = saved;
+    root.style.setProperty(prop, toCSS(saved));
+    if (displayId) document.getElementById(displayId).textContent = toCSS(saved);
+  }
+
+  el.addEventListener('input', () => {
+    const cssVal = toCSS(el.value);
+    root.style.setProperty(prop, cssVal);
+    localStorage.setItem(storageKey, el.value);
+    if (displayId) document.getElementById(displayId).textContent = cssVal;
+  });
+}
+
+wire('ctrl-font',    '--reader-font',    'r-font',    v => v,        null);
+wire('ctrl-size',    '--reader-size',    'r-size',    v => v + 'px', 'ctrl-size-val');
+wire('ctrl-spacing', '--reader-leading', 'r-leading', v => v,        'ctrl-spacing-val');
+wire('ctrl-bg',      '--reader-bg',      'r-bg',      v => v,        null);
+wire('ctrl-fg',      '--reader-fg',      'r-fg',      v => v,        null);
+
+// ── Boot ──────────────────────────────────────────────────────────────────────
+
+loadIndex();
+
+</script>
+</body>
+</html>

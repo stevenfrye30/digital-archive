@@ -1,0 +1,17 @@
+# Only ship gzipped data to keep the repo under GitHub Pages's 1 GB cap.
+data/*.json
+!data/.gitkeep
+
+# Dev-only pages — not for public visitors
+old.html
+inventory.html
+inventory_source.html
+issues.html
+metadata_audit.html
+source_status.html
+
+# Local runtime
+.server.pid
+.claude/
+.DS_Store
+Thumbs.db

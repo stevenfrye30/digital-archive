@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Digital Archive — Translator Index</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:#faf8f5; --fg:#2c2c2c; --muted:#8a7a6a;
+      --border:#d8d3cc; --chrome:#eeebe5; --active:#7a5c3a; --tint:#f5f2ed;
+    }
+    body { font-family: Georgia, serif; background: var(--bg); color: var(--fg);
+           line-height: 1.55; font-size: 16px; }
+    .page { max-width: 1100px; margin: 0 auto; padding: 40px 28px 100px; }
+    header { border-bottom: 1px solid var(--border); padding-bottom: 20px; margin-bottom: 28px; }
+    h1 { font-size: 28px; font-weight: 600; margin-bottom: 6px; }
+    .subtitle { color: var(--muted); font-style: italic; font-size: 15px; }
+    .back { display:inline-block; margin-bottom: 18px; color: var(--active);
+            text-decoration: none; font-size: 14px; }
+    .back:hover { text-decoration: underline; }
+    .summary { background: var(--tint); border: 1px solid var(--border);
+               padding: 14px 18px; margin-bottom: 20px; font-size: 15px; }
+    .summary strong { color: var(--active); }
+    .controls { display: flex; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+    .controls input, .controls select {
+      padding: 8px 12px; font: inherit; font-size: 14px;
+      border: 1px solid var(--border); background: white; color: var(--fg);
+    }
+    .controls input { flex: 1; min-width: 220px; }
+    #count { color: var(--muted); font-size: 14px; margin-bottom: 12px; }
+
+    .tr-group { border-bottom: 1px solid var(--border); padding: 14px 0; }
+    .tr-head {
+      display: flex; justify-content: space-between; align-items: baseline;
+      cursor: pointer; gap: 12px;
+    }
+    .tr-name {
+      font-size: 17px; font-weight: 600; color: var(--fg);
+      flex: 1;
+    }
+    .tr-name .arrow {
+      display: inline-block; width: 12px; color: var(--muted);
+      font-size: 10px; transition: transform 0.15s;
+    }
+    .tr-group.open .tr-name .arrow { transform: rotate(90deg); }
+    .tr-meta { font-size: 13px; color: var(--muted); white-space: nowrap; }
+    .tr-count { color: var(--active); font-weight: 600; }
+    .tr-works {
+      display: none; margin-top: 10px; padding-left: 18px;
+    }
+    .tr-group.open .tr-works { display: block; }
+    .work {
+      padding: 4px 0; font-size: 14px; display: flex; gap: 12px;
+      align-items: baseline;
+    }
+    .work a { color: var(--active); text-decoration: none; flex: 1; }
+    .work a:hover { text-decoration: underline; }
+    .work .w-author { color: var(--muted); font-style: italic; font-size: 13px; }
+    .work .w-year { color: var(--muted); font-size: 13px; min-width: 42px; text-align: right; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <a class="back" href="index.html">← Back to reader</a>
+    <header>
+      <h1>Translator Index</h1>
+      <div class="subtitle">Every translator represented in the archive, with the works they rendered into English.</div>
+    </header>
+
+    <div class="summary" id="summary">Loading…</div>
+
+    <div class="controls">
+      <input id="q" placeholder="Filter by translator name…" autofocus>
+      <select id="sort">
+        <option value="count">Sort: most works</option>
+        <option value="name">Sort: name (A–Z)</option>
+      </select>
+    </div>
+
+    <div id="count"></div>
+    <div id="list"></div>
+  </div>
+
+  <script>
+    let groups = [];
+
+    function esc(s) {
+      return String(s ?? "").replace(/[&<>"]/g,
+        c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+    }
+
+    async function fetchJSON(url) {
+      try {
+        const r = await fetch(url + ".gz");
+        if (r.ok) {
+          const ds = new DecompressionStream("gzip");
+          const t = await new Response(r.body.pipeThrough(ds)).text();
+          return JSON.parse(t);
+        }
+      } catch (e) {}
+      const r = await fetch(url);
+      return r.json();
+    }
+
+    async function load() {
+      const m = await fetchJSON("data/sources.json");
+
+      const byName = new Map();
+      for (const e of m.texts) {
+        const name = (e.translator || "Anonymous").trim();
+        if (!byName.has(name)) byName.set(name, []);
+        byName.get(name).push(e);
+      }
+      groups = Array.from(byName.entries()).map(([name, works]) => ({
+        name, works,
+      }));
+
+      document.getElementById("summary").innerHTML = `
+        <strong>${groups.length}</strong> translators ·
+        <strong>${m.total_translations}</strong> translations across
+        <strong>${new Set(m.texts.map(e=>e.text_id)).size}</strong> source texts`;
+      render();
+    }
+
+    function render() {
+      const q = document.getElementById("q").value.toLowerCase();
+      const sort = document.getElementById("sort").value;
+
+      let filtered = groups.filter(g => !q || g.name.toLowerCase().includes(q));
+      if (sort === "count") {
+        filtered.sort((a,b) => b.works.length - a.works.length
+          || a.name.localeCompare(b.name));
+      } else {
+        filtered.sort((a,b) => {
+          // Sort by last name when possible
+          const lastA = a.name.split(/\s|,/).filter(Boolean).pop() || a.name;
+          const lastB = b.name.split(/\s|,/).filter(Boolean).pop() || b.name;
+          return lastA.localeCompare(lastB);
+        });
+      }
+
+      document.getElementById("count").textContent =
+        `${filtered.length} of ${groups.length} translators`;
+
+      const html = filtered.map(g => {
+        const works = g.works
+          .slice()
+          .sort((a,b) => (a.title||"").localeCompare(b.title||""))
+          .map(w => `
+            <div class="work">
+              <a href="index.html#${encodeURIComponent(w.text_id)}">${esc(w.title)}</a>
+              <span class="w-author">${esc(w.author || "")}</span>
+              <span class="w-year">${esc(w.year || "")}</span>
+            </div>`).join("");
+        return `
+          <div class="tr-group">
+            <div class="tr-head">
+              <div class="tr-name"><span class="arrow">&#9654;</span> ${esc(g.name)}</div>
+              <div class="tr-meta"><span class="tr-count">${g.works.length}</span>
+                work${g.works.length===1?"":"s"}</div>
+            </div>
+            <div class="tr-works">${works}</div>
+          </div>`;
+      }).join("");
+      document.getElementById("list").innerHTML = html;
+
+      document.querySelectorAll(".tr-group").forEach(el => {
+        el.querySelector(".tr-head").addEventListener("click", () => {
+          el.classList.toggle("open");
+        });
+      });
+    }
+
+    document.getElementById("q").addEventListener("input", render);
+    document.getElementById("sort").addEventListener("change", render);
+
+    load();
+  </script>
+</body>
+</html>

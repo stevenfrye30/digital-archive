@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Digital Archive — Sources &amp; Attribution</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:#faf8f5; --fg:#2c2c2c; --muted:#8a7a6a;
+      --border:#d8d3cc; --chrome:#eeebe5; --active:#7a5c3a; --tint:#f5f2ed;
+    }
+    body { font-family: Georgia, serif; background: var(--bg); color: var(--fg);
+           line-height: 1.55; font-size: 16px; }
+    .page { max-width: 1200px; margin: 0 auto; padding: 40px 28px 100px; }
+    header { border-bottom: 1px solid var(--border); padding-bottom: 20px; margin-bottom: 28px; }
+    h1 { font-size: 28px; font-weight: 600; margin-bottom: 6px; }
+    .subtitle { color: var(--muted); font-style: italic; font-size: 15px; }
+    .back { display:inline-block; margin-bottom: 18px; color: var(--active);
+            text-decoration: none; font-size: 14px; }
+    .back:hover { text-decoration: underline; }
+    .summary { background: var(--tint); border: 1px solid var(--border);
+               padding: 16px 20px; margin-bottom: 24px; font-size: 15px; }
+    .summary strong { color: var(--active); }
+    .summary .row { display: flex; flex-wrap: wrap; gap: 24px; }
+    .controls { display: flex; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+    .controls input, .controls select {
+      padding: 8px 12px; font: inherit; font-size: 14px;
+      border: 1px solid var(--border); background: white; color: var(--fg);
+    }
+    .controls input { flex: 1; min-width: 220px; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { padding: 8px 10px; text-align: left; vertical-align: top;
+             border-bottom: 1px solid var(--border); }
+    th { background: var(--chrome); font-weight: 600; font-size: 13px;
+         letter-spacing: 0.02em; text-transform: uppercase; color: var(--muted);
+         position: sticky; top: 0; cursor: pointer; user-select: none; }
+    th:hover { background: var(--border); }
+    tr:hover td { background: var(--tint); }
+    td a { color: var(--active); text-decoration: none; }
+    td a:hover { text-decoration: underline; }
+    .license { display: inline-block; padding: 2px 8px; font-size: 12px;
+               border-radius: 10px; font-weight: 600; }
+    .license.public-domain { background: #e7efe0; color: #3d5a2a; }
+    .license.cc { background: #e0e7ef; color: #2a435a; }
+    .license.other { background: #efe0e0; color: #5a2a2a; }
+    .muted { color: var(--muted); font-style: italic; }
+    #count { color: var(--muted); font-size: 14px; margin-bottom: 8px; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <a class="back" href="index.html">← Back to reader</a>
+    <header>
+      <h1>Sources &amp; Attribution</h1>
+      <div class="subtitle">Every translation in the archive, with publisher, year, and license.</div>
+    </header>
+
+    <div class="summary" id="summary">Loading…</div>
+
+    <div class="controls">
+      <input id="q" placeholder="Filter by title, author, translator, publisher…" autofocus>
+      <select id="lic">
+        <option value="">All licenses</option>
+        <option value="public-domain">Public domain</option>
+        <option value="cc">Creative Commons</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+
+    <div id="count"></div>
+
+    <table id="tbl">
+      <thead>
+        <tr>
+          <th data-k="title">Title</th>
+          <th data-k="author">Author</th>
+          <th data-k="translator">Translator</th>
+          <th data-k="publisher">Publisher</th>
+          <th data-k="year">Year</th>
+          <th data-k="license">License</th>
+          <th>Source</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script>
+    let rows = [];
+    let sortKey = "title";
+    let sortDir = 1;
+
+    async function fetchJSON(url) {
+      try {
+        const r = await fetch(url + ".gz");
+        if (r.ok) {
+          const ds = new DecompressionStream("gzip");
+          const t = await new Response(r.body.pipeThrough(ds)).text();
+          return JSON.parse(t);
+        }
+      } catch (e) {}
+      const r = await fetch(url);
+      return r.json();
+    }
+
+    async function load() {
+      const m = await fetchJSON("data/sources.json");
+      rows = m.texts;
+      document.getElementById("summary").innerHTML = `
+        <div class="row">
+          <div><strong>${m.total_translations}</strong> translations</div>
+          <div><strong>${m.licenses["public-domain"]||0}</strong> public domain</div>
+          <div><strong>${m.licenses["cc"]||0}</strong> Creative Commons</div>
+          <div><strong>${m.licenses["other"]||0}</strong> other</div>
+        </div>
+        <div style="margin-top:8px; font-size:13px; color:var(--muted);">
+          Top publishers:
+          ${Object.entries(m.publishers).slice(0,6)
+            .map(([p,n])=>`${p} (${n})`).join(" · ")}
+        </div>`;
+      render();
+    }
+
+    function render() {
+      const q = document.getElementById("q").value.toLowerCase();
+      const lic = document.getElementById("lic").value;
+      let filtered = rows.filter(r => {
+        if (lic && r.license !== lic) return false;
+        if (!q) return true;
+        const hay = [r.title, r.author, r.translator, r.publisher, r.source_title]
+          .join(" ").toLowerCase();
+        return hay.includes(q);
+      });
+      filtered.sort((a,b) => {
+        const av = (a[sortKey] ?? "").toString().toLowerCase();
+        const bv = (b[sortKey] ?? "").toString().toLowerCase();
+        if (sortKey === "year") return ((+a.year||0) - (+b.year||0)) * sortDir;
+        return av < bv ? -sortDir : av > bv ? sortDir : 0;
+      });
+      document.getElementById("count").textContent =
+        `${filtered.length} of ${rows.length} translations`;
+      const tb = document.querySelector("#tbl tbody");
+      tb.innerHTML = filtered.map(r => {
+        const readUrl = `index.html#${encodeURIComponent(r.text_id)}`;
+        const srcCell = r.source_url
+          ? `<a href="${r.source_url}" target="_blank" rel="noopener">view</a>`
+          : `<span class="muted">—</span>`;
+        return `<tr>
+          <td><a href="${readUrl}">${esc(r.title)}</a></td>
+          <td>${esc(r.author)}</td>
+          <td>${esc(r.translator)}</td>
+          <td>${esc(r.publisher) || '<span class="muted">—</span>'}</td>
+          <td>${esc(r.year ?? "")}</td>
+          <td><span class="license ${r.license}">${r.license.replace("-"," ")}</span></td>
+          <td>${srcCell}</td>
+        </tr>`;
+      }).join("");
+    }
+
+    function esc(s) {
+      return String(s ?? "").replace(/[&<>"]/g,
+        c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+    }
+
+    document.getElementById("q").addEventListener("input", render);
+    document.getElementById("lic").addEventListener("change", render);
+    document.querySelectorAll("th[data-k]").forEach(th => {
+      th.addEventListener("click", () => {
+        const k = th.dataset.k;
+        if (sortKey === k) sortDir = -sortDir;
+        else { sortKey = k; sortDir = 1; }
+        render();
+      });
+    });
+
+    load();
+  </script>
+</body>
+</html>
