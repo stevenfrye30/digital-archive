@@ -70,6 +70,19 @@ body {
   color: var(--chrome-muted);
 }
 
+#hub-link {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--chrome-muted);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  margin-bottom: 10px;
+  opacity: 0.8;
+}
+
+#hub-link:hover { color: var(--chrome-active); opacity: 1; }
+
 #inventory-link {
   display: inline-block;
   margin-top: 12px;
@@ -1192,6 +1205,7 @@ mark.search-hl-active {
 
   <aside id="sidebar">
     <div id="sidebar-header">
+      <a href="https://stevenfrye30.github.io/workspace-hub/" id="hub-link">&larr; Workspace</a>
       <h1>Digital Archive</h1>
       <a href="sources.html" class="sidebar-link">Sources &amp; Attribution</a>
       <div class="sidebar-tools">
