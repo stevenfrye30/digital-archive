@@ -126,6 +126,34 @@ body {
 }
 .sidebar-tools-menu a:hover { background: var(--tint, #f5f2ed); color: var(--chrome-active); }
 
+#sidebar-filter {
+  display: flex;
+  gap: 6px;
+  padding: 8px 16px 10px;
+}
+.filter-pill {
+  flex: 1;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 10px;
+  border: 1px solid var(--chrome-border);
+  background: transparent;
+  color: var(--chrome-muted);
+  cursor: pointer;
+  border-radius: 14px;
+  letter-spacing: 0.02em;
+  transition: all 0.15s;
+}
+.filter-pill:hover { color: var(--chrome-fg); }
+.filter-pill.active {
+  background: var(--chrome-active, #7a5c3a);
+  color: white;
+  border-color: var(--chrome-active, #7a5c3a);
+}
+.filter-pill .star { color: #c9a144; margin-right: 2px; }
+.filter-pill.active .star { color: white; }
+
 #sidebar-search-wrap {
   margin-top: 10px;
   padding-top: 10px;
@@ -1232,6 +1260,12 @@ mark.search-hl-active {
       <div id="sidebar-search-wrap">
         <input type="search" id="sidebar-search" placeholder="Search texts…" autocomplete="off">
       </div>
+      <div id="sidebar-filter">
+        <button type="button" id="filter-primary" class="filter-pill">
+          <span class="star">&#9733;</span> Primary
+        </button>
+        <button type="button" id="filter-all" class="filter-pill">All</button>
+      </div>
     </div>
     <ul id="text-list"></ul>
   </aside>
@@ -1781,6 +1815,28 @@ const BOOK_NAMES = {
   '2ba':'2 Baruch', pss:'Psalms of Solomon', ode:'Odes',
   lba:'Letter of Baruch', apsl:'Apocryphal Psalms',
 };
+
+// ── Sidebar bucketing ────────────────────────────────────────────────────────
+const BUCKET_ORDER = ['Religion', 'Philosophy', 'Literature', 'Esoteric & Science'];
+const BUCKET_FOR_TRADITION = {
+  Christian:'Religion', Hindu:'Religion', Buddhist:'Religion',
+  Jewish:'Religion', Sufi:'Religion', Islam:'Religion',
+  Confucian:'Religion', Taoist:'Religion', Egyptian:'Religion',
+  Mesoamerican:'Religion', Mesopotamian:'Religion', Norse:'Religion',
+  Celtic:'Religion', Shinto:'Religion', Gnostic:'Religion',
+  Jain:'Religion', Finnish:'Religion', 'Comparative Religion':'Religion',
+  'Modern Philosophy':'Philosophy', 'Greek Philosophy':'Philosophy',
+  'Roman Philosophy':'Philosophy', 'Political Philosophy':'Philosophy',
+  Stoic:'Philosophy', Legalist:'Philosophy',
+  'Japanese Philosophy':'Philosophy', 'Chinese Strategy':'Philosophy',
+  'Greek Literature':'Literature', Greek:'Literature',
+  'Persian Literature':'Literature',
+  Hermetic:'Esoteric & Science',
+};
+const bucketFor = trd => BUCKET_FOR_TRADITION[trd] || 'Other';
+
+let _cachedTextGroups = null;
+let primaryOnly = localStorage.getItem('sidebar-primary-only') !== 'false';
 
 // ── DOM references ────────────────────────────────────────────────────────────
 
@@ -3037,13 +3093,6 @@ async function loadIndex() {
     return;
   }
 
-  const params = new URLSearchParams(location.search);
-  const requestedText = params.get('text');
-  const requestedPid  = params.get('p');
-  let autoLoaded = false;
-  // Tradition <li>s that need to be auto-expanded after the tree is built.
-  const traditionsToExpand = new Set();
-
   // ── Step 1: collect entries grouped by text id (preserving order) ──────
   const textGroups = [];
   const textGroupMap = {};
@@ -3058,23 +3107,50 @@ async function loadIndex() {
     if (!indexGroups[entry.id]) indexGroups[entry.id] = [];
     indexGroups[entry.id].push(entry);
   }
+  _cachedTextGroups = textGroups;
+  renderSidebarTree({ firstLoad: true });
+}
 
-  // ── Step 2: bucket text-groups into collection > tradition ─────────────
-  // Preserve insertion order so the existing sort (sacred-first, then
-  // tradition, then title) flows through naturally.
-  const byCollection = new Map();   // collection -> Map(tradition -> textGroup[])
-  for (const tg of textGroups) {
-    const col = tg.collection || 'other';
-    const trd = tg.tradition  || '—';
-    if (!byCollection.has(col)) byCollection.set(col, new Map());
-    const trMap = byCollection.get(col);
+function renderSidebarTree({ firstLoad = false } = {}) {
+  $textList.innerHTML = '';
+  for (const k of Object.keys(dataFileToEntry)) delete dataFileToEntry[k];
+  entryToLi = new Map();
+  const textGroups = _cachedTextGroups || [];
+
+  const params = new URLSearchParams(location.search);
+  const requestedText = firstLoad ? params.get('text') : null;
+  const requestedPid  = firstLoad ? params.get('p') : null;
+  let autoLoaded = false;
+  // Tradition <li>s that need to be auto-expanded after the tree is built.
+  const traditionsToExpand = new Set();
+
+  // ── Step 2: apply primary-only filter ──────────────────────────────────
+  let filteredGroups = textGroups;
+  if (primaryOnly) {
+    filteredGroups = textGroups
+      .map(tg => ({ ...tg, entries: tg.entries.filter(e => e.quality === 'primary') }))
+      .filter(tg => tg.entries.length > 0);
+  }
+
+  // ── Step 3: bucket text-groups into bucket > tradition ─────────────────
+  const byCollection = new Map();   // bucket -> Map(tradition -> textGroup[])
+  for (const bucket of BUCKET_ORDER) byCollection.set(bucket, new Map());
+  for (const tg of filteredGroups) {
+    const trd = tg.tradition || '—';
+    const bucket = bucketFor(trd);
+    if (!byCollection.has(bucket)) byCollection.set(bucket, new Map());
+    const trMap = byCollection.get(bucket);
     if (!trMap.has(trd)) trMap.set(trd, []);
     trMap.get(trd).push(tg);
   }
+  // Drop empty buckets
+  for (const [b, m] of Array.from(byCollection.entries())) {
+    if (m.size === 0) byCollection.delete(b);
+  }
 
-  const COLLECTION_LABELS = { sacred: 'Sacred', other: 'Other' };
+  const COLLECTION_LABELS = {};
 
-  // ── Step 3: render the tree ────────────────────────────────────────────
+  // ── Step 4: render the tree ────────────────────────────────────────────
   for (const [col, trMap] of byCollection) {
     const colLi = document.createElement('li');
     colLi.className = 'collection-header';
@@ -3221,7 +3297,7 @@ async function loadIndex() {
     trHeader.nextElementSibling.classList.add('expanded');
   }
 
-  if (!autoLoaded) renderWelcome();
+  if (firstLoad && !autoLoaded) renderWelcome();
 }
 
 // ── Sidebar text search ───────────────────────────────────────────────────────
@@ -3307,6 +3383,32 @@ wire('ctrl-size',    '--reader-size',    'r-size',    v => v + 'px', 'ctrl-size-
 wire('ctrl-spacing', '--reader-leading', 'r-leading', v => v,        'ctrl-spacing-val');
 wire('ctrl-bg',      '--reader-bg',      'r-bg',      v => v,        null);
 wire('ctrl-fg',      '--reader-fg',      'r-fg',      v => v,        null);
+
+// ── Primary-only filter toggle ────────────────────────────────────────────────
+(() => {
+  const primaryBtn = document.getElementById('filter-primary');
+  const allBtn = document.getElementById('filter-all');
+  if (!primaryBtn || !allBtn) return;
+  const sync = () => {
+    primaryBtn.classList.toggle('active', primaryOnly);
+    allBtn.classList.toggle('active', !primaryOnly);
+  };
+  sync();
+  primaryBtn.addEventListener('click', () => {
+    if (primaryOnly) return;
+    primaryOnly = true;
+    localStorage.setItem('sidebar-primary-only', 'true');
+    sync();
+    renderSidebarTree();
+  });
+  allBtn.addEventListener('click', () => {
+    if (!primaryOnly) return;
+    primaryOnly = false;
+    localStorage.setItem('sidebar-primary-only', 'false');
+    sync();
+    renderSidebarTree();
+  });
+})();
 
 // ── Tools dropdown ────────────────────────────────────────────────────────────
 (() => {
