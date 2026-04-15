@@ -225,6 +225,14 @@ body {
 }
 .collection-header.collapsed .col-arrow { transform: rotate(-90deg); }
 
+.collection-header .col-count {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  opacity: 0.55;
+  font-variant-numeric: tabular-nums;
+}
+
 /* When collapsed, hide all subsequent tradition-header + tradition-items
    until the next collection-header. Managed via JS toggling .col-hidden. */
 .col-hidden { display: none !important; }
@@ -1258,7 +1266,7 @@ mark.search-hl-active {
         </div>
       </div>
       <div id="sidebar-search-wrap">
-        <input type="search" id="sidebar-search" placeholder="Search texts…" autocomplete="off">
+        <input type="search" id="sidebar-search" placeholder="Search title, author, tradition…" autocomplete="off">
       </div>
       <div id="sidebar-filter">
         <button type="button" id="filter-primary" class="filter-pill">
@@ -1817,7 +1825,7 @@ const BOOK_NAMES = {
 };
 
 // ── Sidebar bucketing ────────────────────────────────────────────────────────
-const BUCKET_ORDER = ['Religion', 'Philosophy', 'Literature', 'Esoteric & Science'];
+const BUCKET_ORDER = ['Religion', 'Philosophy', 'Literature', 'Esoteric'];
 const BUCKET_FOR_TRADITION = {
   Christian:'Religion', Hindu:'Religion', Buddhist:'Religion',
   Jewish:'Religion', Sufi:'Religion', Islam:'Religion',
@@ -1825,13 +1833,17 @@ const BUCKET_FOR_TRADITION = {
   Mesoamerican:'Religion', Mesopotamian:'Religion', Norse:'Religion',
   Celtic:'Religion', Shinto:'Religion', Gnostic:'Religion',
   Jain:'Religion', Finnish:'Religion', 'Comparative Religion':'Religion',
+  Sikh:'Religion', Zoroastrian:'Religion', 'Tibetan Buddhist':'Religion',
+  Bahai:'Religion', Mandaean:'Religion', Rastafari:'Religion',
+  Slavic:'Religion', Mohist:'Religion',
   'Modern Philosophy':'Philosophy', 'Greek Philosophy':'Philosophy',
   'Roman Philosophy':'Philosophy', 'Political Philosophy':'Philosophy',
   Stoic:'Philosophy', Legalist:'Philosophy',
   'Japanese Philosophy':'Philosophy', 'Chinese Strategy':'Philosophy',
   'Greek Literature':'Literature', Greek:'Literature',
   'Persian Literature':'Literature',
-  Hermetic:'Esoteric & Science',
+  Hermetic:'Esoteric', Theosophy:'Esoteric',
+  'Witchcraft / Folk Religion':'Esoteric',
 };
 const bucketFor = trd => BUCKET_FOR_TRADITION[trd] || 'Other';
 
@@ -3151,12 +3163,17 @@ function renderSidebarTree({ firstLoad = false } = {}) {
   const COLLECTION_LABELS = {};
 
   // ── Step 4: render the tree ────────────────────────────────────────────
+  const collapseAllCollections = !requestedText;
   for (const [col, trMap] of byCollection) {
     const colLi = document.createElement('li');
     colLi.className = 'collection-header';
+    if (collapseAllCollections) colLi.classList.add('collapsed');
+    const colTotal = Array.from(trMap.values())
+      .reduce((n, tgs) => n + tgs.reduce((m, g) => m + g.entries.length, 0), 0);
     colLi.innerHTML =
       `<span class="col-arrow">&#9660;</span>` +
-      `${escapeHTML(COLLECTION_LABELS[col] || col)}`;
+      `${escapeHTML(COLLECTION_LABELS[col] || col)}` +
+      `<span class="col-count">${colTotal}</span>`;
     // Click toggles collapse of all traditions in this collection
     colLi.addEventListener('click', () => {
       const collapsed = colLi.classList.toggle('collapsed');
@@ -3177,6 +3194,7 @@ function renderSidebarTree({ firstLoad = false } = {}) {
       // Tradition header
       const trHeader = document.createElement('li');
       trHeader.className = 'tradition-header';
+      if (collapseAllCollections) trHeader.classList.add('col-hidden');
       const totalCount = tgs.reduce((n, g) => n + g.entries.length, 0);
       trHeader.innerHTML =
         `<span class="t-arrow">&#9654;</span>` +
@@ -3186,6 +3204,7 @@ function renderSidebarTree({ firstLoad = false } = {}) {
       // Tradition items container
       const trItems = document.createElement('li');
       trItems.className = 'tradition-items';
+      if (collapseAllCollections) trItems.classList.add('col-hidden');
       const trUl = document.createElement('ul');
       trUl.style.listStyle = 'none';
       trUl.style.padding = '0';
@@ -3212,7 +3231,8 @@ function renderSidebarTree({ firstLoad = false } = {}) {
           li.innerHTML =
             `<div class="t-title">${star}${escapeHTML(entry.title)}</div>` +
             (sub ? `<div class="t-sub">${escapeHTML(sub)}</div>` : '');
-          li.dataset.search = [entry.title, sub, group.title, trd, col].join(' ').toLowerCase();
+          const auth = (entry.author || []).join(' ');
+          li.dataset.search = [entry.title, sub, auth, group.title, trd, col].join(' ').toLowerCase();
           li.addEventListener('click', () => loadText(entry, li));
           dataFileToEntry[entry.data_file] = { entry, li };
           entryToLi.set(entry, li);
@@ -3255,7 +3275,8 @@ function renderSidebarTree({ firstLoad = false } = {}) {
           li.innerHTML =
             `<div class="t-title">${star}${escapeHTML(label)}</div>` +
             (sub ? `<div class="t-sub">${escapeHTML(sub)}</div>` : '');
-          li.dataset.search = [entry.title, label, sub, group.title, trd, col].join(' ').toLowerCase();
+          const auth = (entry.author || []).join(' ');
+          li.dataset.search = [entry.title, label, sub, auth, group.title, trd, col].join(' ').toLowerCase();
           li.addEventListener('click', () => loadText(entry, li));
           dataFileToEntry[entry.data_file] = { entry, li };
           entryToLi.set(entry, li);
@@ -3296,6 +3317,25 @@ function renderSidebarTree({ firstLoad = false } = {}) {
     trHeader.classList.add('expanded');
     trHeader.nextElementSibling.classList.add('expanded');
   }
+
+  // ── Step 5: collapse all collection headers by default; leave open only
+  //    those whose traditions contain an auto-expanded tradition. ─────────
+  $textList.querySelectorAll('.collection-header').forEach(colLi => {
+    let sib = colLi.nextElementSibling;
+    let hasExpandedTradition = false;
+    const siblings = [];
+    while (sib && !sib.classList.contains('collection-header')) {
+      siblings.push(sib);
+      if (sib.classList.contains('tradition-header') && sib.classList.contains('expanded')) {
+        hasExpandedTradition = true;
+      }
+      sib = sib.nextElementSibling;
+    }
+    if (!hasExpandedTradition) {
+      colLi.classList.add('collapsed');
+      siblings.forEach(s => s.classList.add('col-hidden'));
+    }
+  });
 
   if (firstLoad && !autoLoaded) renderWelcome();
 }
