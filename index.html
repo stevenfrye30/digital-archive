@@ -709,6 +709,90 @@ body {
   transform: translateY(1px);
 }
 
+#cover-source-summary {
+  max-width: 520px;
+  margin: 32px auto 0;
+  padding: 14px 20px;
+  border-top: 1px solid var(--chrome-border, #d8d1c4);
+  border-bottom: 1px solid var(--chrome-border, #d8d1c4);
+  font-size: 0.88em;
+  line-height: 1.55;
+  font-style: normal;
+  color: var(--chrome-muted, #6a5f4b);
+  text-align: center;
+}
+#cover-source-summary em {
+  color: var(--reader-fg, #3a3228);
+  font-style: italic;
+}
+
+/* Group cover (multi-translation book chooser) */
+#group-cover {
+  margin: 80px auto 0;
+  max-width: 640px;
+  padding: 0 24px 60px;
+  text-align: center;
+  font-family: var(--reader-font);
+  color: var(--reader-fg);
+}
+#group-cover-title {
+  font-size: 2em;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin-bottom: 6px;
+}
+#group-cover-author {
+  font-size: 1em;
+  color: var(--chrome-muted, #6a5f4b);
+  margin-bottom: 36px;
+  font-style: italic;
+}
+#group-cover-hint {
+  font-size: 0.85em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--chrome-muted, #6a5f4b);
+  margin-bottom: 18px;
+}
+#group-cover-translations {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: stretch;
+}
+.group-translation-btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 14px 20px;
+  background: var(--tint, #f5f2ed);
+  border: 1px solid var(--chrome-border, #d8d1c4);
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 1em;
+  color: inherit;
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s;
+}
+.group-translation-btn:hover {
+  background: #eee5d4;
+  border-color: var(--chrome-active, #864);
+}
+.group-translation-btn .gt-label {
+  font-weight: 600;
+  display: block;
+}
+.group-translation-btn .gt-sub {
+  display: block;
+  font-size: 0.85em;
+  color: var(--chrome-muted, #6a5f4b);
+  margin-top: 3px;
+}
+.group-translation-btn .gt-star {
+  color: var(--chrome-active, #864);
+  margin-right: 6px;
+}
+
 /* ── Table of contents page ───────────────────────────────────────────────── */
 
 #text-toc {
@@ -811,6 +895,32 @@ body {
 
 /* ── Passage rendering ─────────────────────────────────────────────────────── */
 
+.passage .fn-ref {
+  display: inline-block;
+  font-size: 0.75em;
+  vertical-align: super;
+  line-height: 0;
+  color: var(--chrome-active, #864);
+  text-decoration: none;
+  margin: 0 1px;
+  padding: 0 2px;
+  border-radius: 3px;
+}
+.passage .fn-ref:hover {
+  background: var(--tint, #f5f2ed);
+  text-decoration: underline;
+}
+.passage.footnote-body {
+  font-size: 0.85em;
+  color: #666;
+  padding-left: 24px;
+  border-left: 2px solid #ddd;
+  margin-left: 8px;
+  transition: background-color 0.3s;
+}
+.passage.footnote-body.fn-flash {
+  background-color: #fffbcc;
+}
 .passage {
   position: relative;
   padding-left: 110px;
@@ -1375,7 +1485,14 @@ mark.search-hl-active {
           <div id="cover-author"></div>
           <div id="cover-year"></div>
           <div id="cover-translator"></div>
+          <div id="cover-source-summary"></div>
           <button id="cover-begin" type="button">View contents</button>
+        </div>
+        <div id="group-cover" style="display:none;">
+          <div id="group-cover-title"></div>
+          <div id="group-cover-author"></div>
+          <div id="group-cover-hint">Choose a translation:</div>
+          <div id="group-cover-translations"></div>
         </div>
         <div id="text-toc" style="display:none;">
           <div id="toc-title">Contents</div>
@@ -1876,6 +1993,11 @@ const $coverTitle  = document.getElementById('cover-title');
 const $coverAuthor = document.getElementById('cover-author');
 const $coverYear   = document.getElementById('cover-year');
 const $coverTrans  = document.getElementById('cover-translator');
+const $coverSourceSummary = document.getElementById('cover-source-summary');
+const $groupCover         = document.getElementById('group-cover');
+const $groupCoverTitle    = document.getElementById('group-cover-title');
+const $groupCoverAuthor   = document.getElementById('group-cover-author');
+const $groupCoverTranslations = document.getElementById('group-cover-translations');
 const $coverBegin  = document.getElementById('cover-begin');
 const $toc         = document.getElementById('text-toc');
 const $tocSubtitle = document.getElementById('toc-subtitle');
@@ -2202,6 +2324,41 @@ function render(passages, query) {
     div.appendChild(ref);
 
     const flatText = p.text.replace(/\n/g, ' ');
+
+    // Detect footnote-body passages: text starting "[N] ..."
+    const fnBodyMatch = flatText.match(/^\[(\d+)\]\s+(.+)$/s);
+    if (fnBodyMatch) {
+      div.classList.add('footnote-body');
+      div.dataset.fnNumber = fnBodyMatch[1];
+    }
+
+    // Render text with inline [N] references as clickable anchors
+    function renderTextWithFnRefs(targetNode, rawText) {
+      const parts = rawText.split(/(\[\d+\])/);
+      for (const part of parts) {
+        const m = part.match(/^\[(\d+)\]$/);
+        if (m && !fnBodyMatch) {
+          const a = document.createElement('a');
+          a.className = 'fn-ref';
+          a.href = '#';
+          a.textContent = part;
+          a.dataset.fnTarget = m[1];
+          a.addEventListener('click', (e) => {
+            e.preventDefault();
+            const target = $passages.querySelector(`.footnote-body[data-fn-number="${m[1]}"]`);
+            if (target) {
+              target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              target.classList.add('fn-flash');
+              setTimeout(() => target.classList.remove('fn-flash'), 1500);
+            }
+          });
+          targetNode.appendChild(a);
+        } else {
+          targetNode.appendChild(document.createTextNode(part));
+        }
+      }
+    }
+
     if (compareActive && compareData) {
       // Primary column
       const primary = document.createElement('div');
@@ -2224,9 +2381,43 @@ function render(passages, query) {
     } else if (query) {
       const span = document.createElement('span');
       span.innerHTML = highlightText(flatText, query);
+      // Post-process: turn any [N] tokens inside the highlighted HTML into fn-refs
+      span.querySelectorAll(':not(.fn-ref)').length;  // no-op; walk text nodes manually below
+      (function linkifyFnRefs(root) {
+        const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+        const textNodes = [];
+        let n; while ((n = walker.nextNode())) textNodes.push(n);
+        for (const tn of textNodes) {
+          if (!/\[\d+\]/.test(tn.nodeValue)) continue;
+          const parts = tn.nodeValue.split(/(\[\d+\])/);
+          const frag2 = document.createDocumentFragment();
+          for (const part of parts) {
+            const m = part.match(/^\[(\d+)\]$/);
+            if (m && !fnBodyMatch) {
+              const a = document.createElement('a');
+              a.className = 'fn-ref';
+              a.href = '#';
+              a.textContent = part;
+              a.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = $passages.querySelector(`.footnote-body[data-fn-number="${m[1]}"]`);
+                if (target) {
+                  target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                  target.classList.add('fn-flash');
+                  setTimeout(() => target.classList.remove('fn-flash'), 1500);
+                }
+              });
+              frag2.appendChild(a);
+            } else {
+              frag2.appendChild(document.createTextNode(part));
+            }
+          }
+          tn.parentNode.replaceChild(frag2, tn);
+        }
+      })(span);
       div.appendChild(span);
     } else {
-      div.appendChild(document.createTextNode(flatText));
+      renderTextWithFnRefs(div, flatText);
     }
 
     // Annotations: render clickable markers + expandable note blocks
@@ -2542,7 +2733,67 @@ $metaToggle.addEventListener('click', () => {
 
 // ── Cover page ───────────────────────────────────────────────────────────────
 
+function showGroupCover(group, listItem) {
+  // Activate this sidebar item
+  if (activeItem) activeItem.classList.remove('active');
+  listItem.classList.add('active');
+  activeItem = listItem;
+  currentEntry = null;
+
+  $welcome.style.display     = 'none';
+  $cover.style.display       = 'none';
+  $toc.style.display         = 'none';
+  $passages.style.display    = 'none';
+  $bookGroup.style.display   = 'none';
+  $searchGroup.style.display = 'none';
+  $navBar.style.display      = 'none';
+  $trBar.style.display       = 'none';
+  $metaPanel.style.display   = 'none';
+  $infoBar.style.display     = 'none';
+  $readerInner.classList.remove('compare-mode');
+  clearSearch();
+
+  const primaryEntry = group.entries.find(e => e.quality === 'primary') || group.entries[0];
+  const authors = (primaryEntry.author && primaryEntry.author.length)
+    ? primaryEntry.author.join(', ') : '';
+
+  $groupCoverTitle.textContent = group.title;
+  $groupCoverAuthor.textContent = authors;
+  $groupCoverAuthor.style.display = authors ? 'block' : 'none';
+
+  $groupCoverTranslations.innerHTML = '';
+  // Sort: primary first, then by translator name
+  const sortedEntries = group.entries.slice().sort((a, b) => {
+    if ((a.quality === 'primary') !== (b.quality === 'primary')) {
+      return a.quality === 'primary' ? -1 : 1;
+    }
+    const at = (a.translator || []).join(' ');
+    const bt = (b.translator || []).join(' ');
+    return at.localeCompare(bt);
+  });
+  for (const entry of sortedEntries) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'group-translation-btn';
+    const label = translationLabel(entry);
+    const translator = (entry.translator && entry.translator.length)
+      ? entry.translator.join(', ') : '';
+    const star = entry.quality === 'primary' ? '<span class="gt-star">\u2605</span>' : '';
+    const yearTxt = entry.year ? ` · ${entry.year}` : '';
+    btn.innerHTML =
+      `<span class="gt-label">${star}${escapeHTML(label)}</span>` +
+      (translator ? `<span class="gt-sub">${escapeHTML(translator)}${escapeHTML(yearTxt)}</span>` : '');
+    btn.addEventListener('click', () => loadText(entry, listItem));
+    $groupCoverTranslations.appendChild(btn);
+  }
+
+  $groupCover.style.display = 'block';
+  $infoBar.style.display = 'flex';
+  $reader.scrollTop = 0;
+}
+
 function showCover(data, entry) {
+  $groupCover.style.display = 'none';
   $cover.style.display    = 'block';
   $toc.style.display      = 'none';
   $coverTitle.textContent  = data.title || '';
@@ -2562,6 +2813,17 @@ function showCover(data, entry) {
   if (tr && tr.year)     parts.push('Translation ' + tr.year);
   $coverYear.textContent = parts.join(' \u00b7 ');
   $coverYear.style.display = parts.length ? 'block' : 'none';
+
+  // Source/transcription summary — brief description of where this edition came from
+  const ss = data.source_summary;
+  if (ss && $coverSourceSummary) {
+    // Render basic markdown italics (*word*) as <em>
+    const html = escapeHTML(ss).replace(/\*([^*]+)\*/g, '<em>$1</em>');
+    $coverSourceSummary.innerHTML = html;
+    $coverSourceSummary.style.display = 'block';
+  } else if ($coverSourceSummary) {
+    $coverSourceSummary.style.display = 'none';
+  }
 
   $cover.style.display    = 'block';
   $passages.style.display = 'none';
@@ -2888,6 +3150,7 @@ async function loadText(entry, listItem) {
   $welcome.style.display     = 'none';
   $passages.innerHTML        = '';
   $cover.style.display       = 'none';
+  if ($groupCover) $groupCover.style.display = 'none';
   $toc.style.display         = 'none';
   $bookGroup.style.display   = 'none';
   $searchGroup.style.display = 'none';
@@ -3081,6 +3344,8 @@ function clearStatus() {
 // ── Sidebar ───────────────────────────────────────────────────────────────────
 
 function translationLabel(entry) {
+  // Prefer per-volume label (for multi-volume works grouped under one id)
+  if (entry.volume_label) return entry.volume_label;
   // Prefer explicit metadata labels from index.json
   if (entry.translation_short_label) return entry.translation_short_label;
   if (entry.translation_label)       return entry.translation_label;
@@ -3232,6 +3497,9 @@ function renderSidebarTree({ firstLoad = false } = {}) {
             (sub ? `<div class="t-sub">${escapeHTML(sub)}</div>` : '');
           const auth = (entry.author || []).join(' ');
           li.dataset.search = [entry.title, sub, auth, group.title, trd, col].join(' ').toLowerCase();
+          if (entry.source_summary) {
+            li.title = entry.source_summary.replace(/\*([^*]+)\*/g, '$1');
+          }
           li.addEventListener('click', () => loadText(entry, li));
           dataFileToEntry[entry.data_file] = { entry, li };
           entryToLi.set(entry, li);
@@ -3246,63 +3514,37 @@ function renderSidebarTree({ firstLoad = false } = {}) {
           continue;
         }
 
-        // Multi-translation group — header + nested ul
-        const header = document.createElement('li');
-        header.className = 'text-group-header';
-        header.innerHTML =
-          `<div class="t-title"><span class="t-arrow">&#9654;</span>${escapeHTML(group.title)}<span class="t-count">(${group.entries.length})</span></div>`;
+        // Multi-translation group — one sidebar item; click shows chooser cover
+        const li = document.createElement('li');
+        li.className = 'text-item group';
+        const star = group.entries.some(e => e.quality === 'primary')
+          ? `<span class="q-star" title="Primary/canonical translation available">&#9733;</span>` : '';
+        li.innerHTML =
+          `<div class="t-title">${star}${escapeHTML(group.title)}` +
+          `<span class="t-count">(${group.entries.length})</span></div>`;
+        const searchBits = [group.title, trd, col];
+        for (const e of group.entries) {
+          searchBits.push(e.title, translationLabel(e), (e.translator || []).join(' '));
+        }
+        li.dataset.search = searchBits.join(' ').toLowerCase();
+        const firstSum = group.entries.find(e => e.source_summary);
+        if (firstSum) {
+          li.title = firstSum.source_summary.replace(/\*([^*]+)\*/g, '$1');
+        }
+        li.addEventListener('click', () => showGroupCover(group, li));
 
-        const itemsContainer = document.createElement('li');
-        itemsContainer.className = 'text-group-items';
-
-        const innerUl = document.createElement('ul');
-        innerUl.style.listStyle = 'none';
-        innerUl.style.padding = '0';
-        innerUl.style.margin = '0';
-
-        let needsExpandInner = false;
-
+        // Register each entry for deep-link lookups / tr-switcher
         for (const entry of group.entries) {
-          const li = document.createElement('li');
-          li.className = 'text-item';
-          const label = translationLabel(entry);
-          const sub = entry.translator && entry.translator.length
-            ? entry.translator.join(', ')
-            : '';
-          const star = entry.quality === 'primary'
-            ? `<span class="q-star" title="Primary/canonical translation">&#9733;</span>` : '';
-          li.innerHTML =
-            `<div class="t-title">${star}${escapeHTML(label)}</div>` +
-            (sub ? `<div class="t-sub">${escapeHTML(sub)}</div>` : '');
-          const auth = (entry.author || []).join(' ');
-          li.dataset.search = [entry.title, label, sub, auth, group.title, trd, col].join(' ').toLowerCase();
-          li.addEventListener('click', () => loadText(entry, li));
           dataFileToEntry[entry.data_file] = { entry, li };
           entryToLi.set(entry, li);
-          innerUl.appendChild(li);
-
           if (requestedText && entry.data_file === requestedText && !autoLoaded) {
             autoLoaded = true;
-            needsExpandInner = true;
             traditionsToExpand.add(trHeader);
             if (requestedPid) pendingPid = requestedPid;
             loadText(entry, li);
           }
         }
-
-        itemsContainer.appendChild(innerUl);
-        trUl.appendChild(header);
-        trUl.appendChild(itemsContainer);
-
-        header.addEventListener('click', () => {
-          const open = header.classList.toggle('expanded');
-          itemsContainer.classList.toggle('expanded', open);
-        });
-
-        if (needsExpandInner) {
-          header.classList.add('expanded');
-          itemsContainer.classList.add('expanded');
-        }
+        trUl.appendChild(li);
       }
 
       trItems.appendChild(trUl);
