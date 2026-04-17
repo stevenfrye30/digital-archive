@@ -53,7 +53,7 @@ body {
   min-width: var(--sidebar-width);
   background: var(--chrome-bg);
   border-right: 1px solid var(--chrome-border);
-  display: flex;
+  display: none;  /* Hidden — browse tiles replace sidebar navigation */
   flex-direction: column;
 }
 
@@ -709,37 +709,89 @@ body {
   transform: translateY(1px);
 }
 
-/* ── Sidebar category browse buttons ──────────────────────────────── */
+/* ── Home screen (4 category buttons) ────────────────────────────── */
 
-#sidebar-browse {
+#welcome-home {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  padding: 12px 14px;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  padding: 40px 20px;
 }
-.cat-btn {
-  display: block;
-  width: 100%;
-  padding: 14px 16px;
+#home-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+#home-hub-link {
+  font-size: 13px;
+  color: var(--chrome-muted);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+}
+#home-hub-link:hover { text-decoration: underline; }
+#home-title {
   font-family: Georgia, serif;
-  font-size: 16px;
+  font-size: 36px;
   font-weight: normal;
+  color: var(--chrome-active);
+  margin: 12px 0 8px;
+}
+#home-subtitle {
+  font-size: 15px;
+  color: var(--chrome-muted);
+  font-family: Georgia, serif;
+}
+#home-categories {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  max-width: 480px;
+  width: 100%;
+}
+.home-cat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 24px;
+  font-family: Georgia, serif;
+  font-size: 20px;
   color: var(--chrome-fg);
   background: var(--reader-bg);
   border: 1px solid var(--chrome-border);
-  border-radius: 6px;
+  border-radius: 10px;
   cursor: pointer;
-  text-align: left;
-  transition: background 0.15s, border-color 0.15s;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.1s;
 }
-.cat-btn:hover {
-  background: #f5f0ea;
+.home-cat:hover {
   border-color: var(--chrome-active);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  transform: translateY(-2px);
 }
-.cat-btn.active {
-  background: var(--chrome-active);
-  color: white;
-  border-color: var(--chrome-active);
+.home-cat .home-cat-label { font-weight: normal; }
+.home-cat .home-cat-count {
+  font-size: 13px;
+  color: var(--chrome-muted);
+  margin-top: 6px;
+  font-family: system-ui, sans-serif;
+}
+#home-footer {
+  margin-top: 48px;
+  display: flex;
+  gap: 24px;
+  font-size: 13px;
+}
+#home-footer a {
+  color: var(--chrome-muted);
+  text-decoration: none;
+}
+#home-footer a:hover { text-decoration: underline; color: var(--chrome-active); }
+
+@media (max-width: 500px) {
+  #home-categories { grid-template-columns: 1fr; max-width: 280px; }
+  #home-title { font-size: 28px; }
+  .home-cat { padding: 24px 20px; font-size: 18px; }
 }
 
 /* ── Browse view (center area tile navigation) ───────────────────── */
@@ -1581,8 +1633,37 @@ mark.search-hl-active {
     <div id="reader">
       <div id="reader-inner">
         <div id="welcome">
-          <div id="welcome-hint">Select a text from the left to begin reading.</div>
-          <div id="welcome-search">
+          <div id="welcome-home">
+            <div id="home-header">
+              <a href="https://stevenfrye30.github.io/workspace-hub/" id="home-hub-link">&larr; Workspace</a>
+              <h1 id="home-title">Digital Archive</h1>
+              <p id="home-subtitle">A verified digital library of sacred, philosophical, and literary texts</p>
+            </div>
+            <div id="home-categories">
+              <button class="home-cat" data-cat="Religion">
+                <span class="home-cat-label">Religion</span>
+                <span class="home-cat-count"></span>
+              </button>
+              <button class="home-cat" data-cat="Philosophy">
+                <span class="home-cat-label">Philosophy</span>
+                <span class="home-cat-count"></span>
+              </button>
+              <button class="home-cat" data-cat="Literature">
+                <span class="home-cat-label">Literature</span>
+                <span class="home-cat-count"></span>
+              </button>
+              <button class="home-cat" data-cat="Esoteric">
+                <span class="home-cat-label">Esoteric</span>
+                <span class="home-cat-count"></span>
+              </button>
+            </div>
+            <div id="home-footer">
+              <a href="sources.html">Sources &amp; Attribution</a>
+              <a href="integrity.html">Integrity</a>
+              <a href="translators.html">Translators</a>
+            </div>
+          </div>
+          <div id="welcome-search" style="display:none;">
             <div class="welcome-section-label">Search across the corpus</div>
             <input type="search" id="global-search" placeholder="Find texts containing &hellip;" autocomplete="off">
             <div id="global-search-status"></div>
@@ -3710,6 +3791,7 @@ function renderSidebarTree({ firstLoad = false } = {}) {
   });
 
   if (firstLoad && !autoLoaded) renderWelcome();
+  if (firstLoad) updateHomeCounts();
 }
 
 // ── Sidebar text search ───────────────────────────────────────────────────────
@@ -3846,7 +3928,6 @@ const $browse       = document.getElementById('browse');
 const $browseCrumb  = document.getElementById('browse-breadcrumb');
 const $browseTitle  = document.getElementById('browse-title');
 const $browseTiles  = document.getElementById('browse-tiles');
-const $sidebarBrowse = document.getElementById('sidebar-browse');
 
 function escH(s) {
   return String(s||'').replace(/[&<>"']/g, c =>
@@ -3899,9 +3980,7 @@ function browseCategory(cat) {
   if (!browseTree) browseTree = buildBrowseData();
   showBrowse();
 
-  // Highlight sidebar button
-  document.querySelectorAll('.cat-btn').forEach(b =>
-    b.classList.toggle('active', b.dataset.cat === cat));
+  // (no sidebar to highlight)
 
   // Breadcrumb
   $browseCrumb.innerHTML = `<a onclick="browseHome()">Home</a><span class="sep">›</span>${escH(cat)}`;
@@ -3925,8 +4004,7 @@ function browseTradition(cat, trd) {
   if (!browseTree) browseTree = buildBrowseData();
   showBrowse();
 
-  document.querySelectorAll('.cat-btn').forEach(b =>
-    b.classList.toggle('active', b.dataset.cat === cat));
+  // (no sidebar to highlight)
 
   $browseCrumb.innerHTML =
     `<a onclick="browseHome()">Home</a><span class="sep">›</span>` +
@@ -3958,7 +4036,7 @@ function browseText(cat, trd, textId) {
     // Single translation — open directly
     $browse.style.display = 'none';
     document.getElementById('controls').style.display = '';
-    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+    // (no sidebar state to reset)
     loadText(group[0]);
     return;
   }
@@ -3966,8 +4044,7 @@ function browseText(cat, trd, textId) {
   // Multiple translations — show chooser tiles
   showBrowse();
 
-  document.querySelectorAll('.cat-btn').forEach(b =>
-    b.classList.toggle('active', b.dataset.cat === cat));
+  // (no sidebar to highlight)
 
   const title = group[0].title;
   $browseCrumb.innerHTML =
@@ -4007,7 +4084,7 @@ function browseOpen(dataFile) {
       if (e.data_file === dataFile) {
         $browse.style.display = 'none';
         document.getElementById('controls').style.display = '';
-        document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+        // (no sidebar state to reset)
         loadText(e);
         return;
       }
@@ -4019,12 +4096,24 @@ function browseOpen(dataFile) {
 function browseHome() {
   $browse.style.display = 'none';
   document.getElementById('controls').style.display = '';
-  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-  renderWelcome();
+  document.getElementById('welcome').style.display = '';
 }
 
-// Wire sidebar category buttons
-document.querySelectorAll('.cat-btn').forEach(btn => {
+/** Populate category counts on the home screen after index loads */
+function updateHomeCounts() {
+  if (!browseTree) browseTree = buildBrowseData();
+  document.querySelectorAll('.home-cat').forEach(btn => {
+    const cat = btn.dataset.cat;
+    const traditions = browseTree[cat] || {};
+    const textCount = Object.values(traditions).reduce((s, t) => s + t.length, 0);
+    const tradCount = Object.keys(traditions).length;
+    btn.querySelector('.home-cat-count').textContent =
+      `${textCount} texts · ${tradCount} traditions`;
+  });
+}
+
+// Wire home-screen category buttons
+document.querySelectorAll('.home-cat').forEach(btn => {
   btn.addEventListener('click', () => browseCategory(btn.dataset.cat));
 });
 
