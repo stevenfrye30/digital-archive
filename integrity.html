@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Library Integrity — Digital Archive</title>
+<style>
+:root {
+  --reader-bg:     #faf8f5;
+  --reader-fg:     #2c2c2c;
+  --chrome-bg:     #eeebe5;
+  --chrome-fg:     #3a3530;
+  --chrome-border: #d8d3cc;
+  --chrome-muted:  #8a7a6a;
+  --chrome-active: #7a5c3a;
+  --good:          #4f7a3a;
+  --warn:          #b58728;
+  --bad:           #a04040;
+  --reader-font:   Georgia, serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background: var(--chrome-bg);
+  color: var(--chrome-fg);
+  line-height: 1.55;
+  min-height: 100vh;
+}
+header {
+  background: var(--reader-bg);
+  border-bottom: 1px solid var(--chrome-border);
+  padding: 24px 32px;
+}
+header h1 {
+  font-family: var(--reader-font);
+  font-size: 28px;
+  font-weight: normal;
+  color: var(--chrome-active);
+}
+header .breadcrumb {
+  font-size: 14px;
+  color: var(--chrome-muted);
+  margin-bottom: 4px;
+}
+header .breadcrumb a {
+  color: var(--chrome-active);
+  text-decoration: none;
+}
+header .breadcrumb a:hover {
+  text-decoration: underline;
+}
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px;
+}
+section {
+  background: var(--reader-bg);
+  border: 1px solid var(--chrome-border);
+  border-radius: 6px;
+  padding: 24px 28px;
+  margin-bottom: 24px;
+}
+section h2 {
+  font-family: var(--reader-font);
+  font-size: 20px;
+  font-weight: normal;
+  color: var(--chrome-active);
+  border-bottom: 1px solid var(--chrome-border);
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+}
+p { margin-bottom: 12px; }
+.prose { font-family: var(--reader-font); font-size: 16px; color: var(--reader-fg); }
+.muted { color: var(--chrome-muted); font-size: 14px; }
+
+/* Summary card */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin: 20px 0 16px;
+}
+.kpi {
+  background: var(--chrome-bg);
+  border: 1px solid var(--chrome-border);
+  border-radius: 4px;
+  padding: 16px 18px;
+}
+.kpi .label {
+  font-size: 12px;
+  color: var(--chrome-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 6px;
+}
+.kpi .value {
+  font-family: var(--reader-font);
+  font-size: 28px;
+  color: var(--chrome-active);
+}
+.kpi .sub {
+  font-size: 13px;
+  color: var(--chrome-muted);
+  margin-top: 4px;
+}
+.kpi.good .value { color: var(--good); }
+.kpi.warn .value { color: var(--warn); }
+
+/* Distribution bar */
+.dist-bar {
+  display: flex;
+  height: 32px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 16px 0;
+  border: 1px solid var(--chrome-border);
+}
+.dist-seg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  min-width: 20px;
+}
+.dist-100  { background: #4f7a3a; }
+.dist-99   { background: #6a9c4a; }
+.dist-95   { background: #9cba5a; }
+.dist-80   { background: #d4a95a; }
+.dist-50   { background: #c97f4a; }
+.dist-low  { background: #a04040; }
+.dist-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 13px;
+  color: var(--chrome-muted);
+  margin-top: 8px;
+}
+.dist-legend .sw {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+
+/* Table */
+.text-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.text-table th, .text-table td {
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--chrome-border);
+  vertical-align: top;
+}
+.text-table th {
+  background: var(--chrome-bg);
+  color: var(--chrome-fg);
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+  position: sticky;
+  top: 0;
+  white-space: nowrap;
+}
+.text-table th:hover { background: #e4dfd6; }
+.text-table td.rate  { text-align: right; font-variant-numeric: tabular-nums; }
+.text-table td.title { font-family: var(--reader-font); }
+.text-table td.meta  { color: var(--chrome-muted); font-size: 13px; }
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+.badge-100  { background: #d8e8ca; color: #3a5d28; }
+.badge-99   { background: #e4edd2; color: #4a6c35; }
+.badge-95   { background: #f0ecc8; color: #5e5520; }
+.badge-80   { background: #f5d9b5; color: #6b4a1c; }
+.badge-low  { background: #efc8c8; color: #7a2a2a; }
+.badge-skip { background: #e4dfd6; color: #7a7066; }
+
+/* Filter bar */
+.filter-bar {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.filter-bar input[type="search"] {
+  flex: 1;
+  min-width: 200px;
+  padding: 8px 12px;
+  border: 1px solid var(--chrome-border);
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 14px;
+  background: white;
+}
+.filter-bar select {
+  padding: 8px 12px;
+  border: 1px solid var(--chrome-border);
+  border-radius: 4px;
+  background: white;
+  font-size: 14px;
+}
+.count-line {
+  font-size: 13px;
+  color: var(--chrome-muted);
+  margin-top: 8px;
+}
+
+/* Hash codeblock */
+code.hash {
+  font-family: "SF Mono", Consolas, monospace;
+  font-size: 11px;
+  color: var(--chrome-muted);
+  background: var(--chrome-bg);
+  padding: 1px 4px;
+  border-radius: 2px;
+}
+a.source-link {
+  color: var(--chrome-active);
+  text-decoration: none;
+}
+a.source-link:hover { text-decoration: underline; }
+
+/* Tradition table */
+.trad-table th.num, .trad-table td.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  color: var(--chrome-muted);
+}
+
+@media (max-width: 720px) {
+  main { padding: 16px; }
+  section { padding: 16px; }
+  .text-table td.meta { display: none; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="breadcrumb"><a href="index.html">← Digital Archive</a></div>
+  <h1>Library Integrity</h1>
+</header>
+
+<main>
+
+<section class="prose">
+<h2>What this page shows</h2>
+<p>Every text in this library comes from a specific source edition — a Project Gutenberg file, a SacredTexts transcription, an eBible JSON, etc. We've done two things to let you verify what you're reading:</p>
+<p><strong>1. Every raw source file is cryptographically anchored.</strong> Each file has a SHA-256 hash stored in a manifest. If a source file changes — by accident or on purpose — the integrity check will flag it.</p>
+<p><strong>2. Every reader-facing passage is verified against the raw source.</strong> After normalizing for harmless formatting (whitespace, smart quotes, footnote markers), we check that every passage is a contiguous substring of the raw source. This catches silent corruption, wrong substitutions, or invented content.</p>
+<p class="muted">The numbers below are regenerated from the actual library state — not a static snapshot.</p>
+</section>
+
+<section>
+<h2>Summary</h2>
+<div id="summary-kpis" class="loading">Loading…</div>
+<div id="summary-distribution"></div>
+</section>
+
+<section>
+<h2>Per-text verification</h2>
+<div class="filter-bar">
+  <input type="search" id="search" placeholder="Search title, author, tradition, translator…" autocomplete="off">
+  <select id="status-filter">
+    <option value="">All statuses</option>
+    <option value="100">100% verified</option>
+    <option value="95">≥95% verified</option>
+    <option value="fail">Below 95% (needs attention)</option>
+    <option value="skip">Not yet verified</option>
+  </select>
+</div>
+<div id="text-count" class="count-line"></div>
+<div id="text-table-wrap"></div>
+</section>
+
+<section>
+<h2>Per-tradition breakdown</h2>
+<div id="tradition-table"></div>
+</section>
+
+<section class="prose muted">
+<h2>How to reproduce these results</h2>
+<p>From the repo root:</p>
+<pre style="background: var(--chrome-bg); padding: 12px; border-radius: 4px; font-size: 13px; overflow-x: auto;">python 05_scripts/build_source_hashes.py --verify
+python 05_scripts/validate_metadata.py
+python 05_scripts/passage_subsequence_proof.py --save
+python 05_scripts/build_integrity_report.py</pre>
+<p>The first command proves no raw source has changed since the manifest was built. The third regenerates the per-text verification data this page consumes. The fourth bakes the data into <code>03_web_app/data/integrity.json</code>.</p>
+</section>
+
+</main>
+
+<script>
+(async function () {
+  function $(id) { return document.getElementById(id); }
+  function esc(s) {
+    return String(s || "").replace(/[&<>"']/g, c => (
+      {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]
+    ));
+  }
+
+  let data;
+  try {
+    // Try gzipped first (GitHub Pages), fall back to raw JSON (local dev)
+    const bust = Date.now();
+    let resp;
+    try {
+      resp = await fetch("data/integrity.json.gz?_=" + bust);
+      if (resp.ok) {
+        const ds = new DecompressionStream('gzip');
+        const decompressed = resp.body.pipeThrough(ds);
+        const text = await new Response(decompressed).text();
+        data = JSON.parse(text);
+      } else { throw new Error("gz not available"); }
+    } catch {
+      resp = await fetch("data/integrity.json?_=" + bust);
+      if (!resp.ok) throw new Error("HTTP " + resp.status);
+      data = await resp.json();
+    }
+  } catch (e) {
+    $("summary-kpis").innerHTML =
+      '<p style="color: var(--bad)">Could not load integrity report: ' + esc(e.message) + '</p>';
+    return;
+  }
+
+  // ── Summary KPIs ──
+  const s = data.summary;
+  const ratePct = (s.overall_pass_rate * 100).toFixed(2) + "%";
+  const checked = s.pass_texts + s.partial_texts + s.fail_texts;
+  const verifiedShare = checked ? (s.pass_texts + s.partial_texts) / checked * 100 : 0;
+  const sizeMB = (s.raw_bytes_hashed / 1024 / 1024).toFixed(0);
+
+  $("summary-kpis").classList.remove("loading");
+  $("summary-kpis").innerHTML = `
+    <div class="kpi-grid">
+      <div class="kpi good">
+        <div class="label">Overall passage fidelity</div>
+        <div class="value">${ratePct}</div>
+        <div class="sub">${s.passages_verified.toLocaleString()} of ${s.passages_checked.toLocaleString()} passages verified as substrings of raw source</div>
+      </div>
+      <div class="kpi good">
+        <div class="label">Texts at 100%</div>
+        <div class="value">${s.pass_texts}</div>
+        <div class="sub">every passage verified letter-for-letter</div>
+      </div>
+      <div class="kpi good">
+        <div class="label">Texts at ≥95%</div>
+        <div class="value">${s.pass_texts + s.partial_texts}</div>
+        <div class="sub">of ${s.targets} total</div>
+      </div>
+      <div class="kpi">
+        <div class="label">Raw sources hashed</div>
+        <div class="value">${s.raw_files_hashed.toLocaleString()}</div>
+        <div class="sub">${sizeMB} MB SHA-256 anchored</div>
+      </div>
+    </div>
+    ${s.fail_texts ? `<p class="muted">${s.fail_texts} texts fall below 95% verification (listed below).
+       ${s.skip_texts ? s.skip_texts + ' texts are unverifiable — raw source not yet located.' : ''}</p>` : ''}
+  `;
+
+  // ── Distribution bar ──
+  const b = s.buckets;
+  const totalBucket = b["100%"] + b["99-100%"] + b["95-99%"] + b["80-95%"] + b["50-80%"] + b["<50%"];
+  if (totalBucket > 0) {
+    const cls = {
+      "100%": "dist-100", "99-100%": "dist-99", "95-99%": "dist-95",
+      "80-95%": "dist-80", "50-80%": "dist-50", "<50%": "dist-low",
+    };
+    let bar = '<div class="dist-bar">';
+    ["100%","99-100%","95-99%","80-95%","50-80%","<50%"].forEach(k => {
+      if (b[k] > 0) {
+        const w = (b[k] / totalBucket * 100).toFixed(2);
+        bar += `<div class="dist-seg ${cls[k]}" style="flex: ${b[k]}" title="${k}: ${b[k]} texts">
+                   ${b[k] > 4 ? b[k] : ''}
+                 </div>`;
+      }
+    });
+    bar += '</div>';
+    bar += '<div class="dist-legend">';
+    ["100%","99-100%","95-99%","80-95%","50-80%","<50%"].forEach(k => {
+      bar += `<span><span class="sw ${cls[k]}"></span>${k}: ${b[k]}</span>`;
+    });
+    bar += '</div>';
+    $("summary-distribution").innerHTML = bar;
+  }
+
+  // ── Per-tradition table ──
+  const tradBreakdown = data.tradition_breakdown || {};
+  const tradRows = Object.entries(tradBreakdown)
+    .sort((a, b) => b[1].total - a[1].total);
+  let tradHTML = '<table class="text-table trad-table"><thead><tr>' +
+                 '<th>Tradition</th><th class="num">Texts</th>' +
+                 '<th class="num">100%</th><th class="num">≥95%</th>' +
+                 '<th class="num">Passage rate</th></tr></thead><tbody>';
+  for (const [name, row] of tradRows) {
+    const rate = row.passages_total ? (row.passages_pass / row.passages_total * 100).toFixed(1) + "%" : "—";
+    tradHTML += `<tr>
+      <td>${esc(name)}</td>
+      <td class="num">${row.total}</td>
+      <td class="num">${row.verified_100}</td>
+      <td class="num">${row.verified_95}</td>
+      <td class="num">${rate}</td>
+    </tr>`;
+  }
+  tradHTML += '</tbody></table>';
+  $("tradition-table").innerHTML = tradHTML;
+
+  // ── Per-text table ──
+  const all = data.texts || [];
+
+  function rowClass(t) {
+    if (t.status === "SKIP") return "badge-skip";
+    const pr = t.pass_rate;
+    if (pr === 1.0) return "badge-100";
+    if (pr >= 0.99) return "badge-99";
+    if (pr >= 0.95) return "badge-95";
+    if (pr >= 0.80) return "badge-80";
+    return "badge-low";
+  }
+  function rateLabel(t) {
+    if (t.status === "SKIP") return "skip";
+    return (t.pass_rate * 100).toFixed(1) + "%";
+  }
+
+  let sortKey = "pass_rate", sortDir = "desc";
+  function renderTable() {
+    const q = $("search").value.trim().toLowerCase();
+    const filter = $("status-filter").value;
+    let rows = all.slice();
+    if (q) {
+      rows = rows.filter(t => {
+        const hay = [
+          t.title, (t.author || []).join(" "),
+          (t.translator || []).join(" "),
+          t.tradition, t.publisher, t.text_id,
+        ].join(" ").toLowerCase();
+        return hay.includes(q);
+      });
+    }
+    if (filter === "100") rows = rows.filter(t => t.pass_rate === 1.0);
+    else if (filter === "95") rows = rows.filter(t => t.pass_rate >= 0.95 && t.status !== "SKIP");
+    else if (filter === "fail") rows = rows.filter(t => t.status === "FAIL" || (t.status === "PARTIAL" && t.pass_rate < 0.95));
+    else if (filter === "skip") rows = rows.filter(t => t.status === "SKIP");
+
+    rows.sort((a, b) => {
+      let va = a[sortKey], vb = b[sortKey];
+      if (typeof va === "string") { va = va.toLowerCase(); vb = (vb || "").toLowerCase(); }
+      if (va == null) va = "";
+      if (vb == null) vb = "";
+      if (va < vb) return sortDir === "asc" ? -1 : 1;
+      if (va > vb) return sortDir === "asc" ? 1 : -1;
+      return 0;
+    });
+
+    let html = '<table class="text-table"><thead><tr>' +
+               '<th data-key="title">Text</th>' +
+               '<th data-key="tradition">Tradition</th>' +
+               '<th data-key="pass_rate" class="rate">Verified</th>' +
+               '<th>Source</th>' +
+               '</tr></thead><tbody>';
+    for (const t of rows) {
+      const who = (t.author || []).filter(x => x && x !== "Anonymous").join(", ");
+      const tr = (t.translator || []).filter(x => x && x !== "Anonymous").join(", ");
+      const srcTxt = t.publisher || "—";
+      const srcLink = t.url
+        ? `<a class="source-link" href="${esc(t.url)}" target="_blank" rel="noopener">${esc(srcTxt)}</a>`
+        : esc(srcTxt);
+      const hashShort = t.raw_sha256 ? t.raw_sha256.slice(0, 8) : null;
+      html += `<tr>
+        <td class="title">
+          <strong>${esc(t.title)}</strong>
+          <div class="meta">${esc(who)}${tr ? ' · tr. ' + esc(tr) : ''}</div>
+        </td>
+        <td class="meta">${esc(t.tradition || "")}</td>
+        <td class="rate"><span class="badge ${rowClass(t)}">${rateLabel(t)}</span>
+          ${t.passages_checked ?
+            `<div class="meta">${t.passages_pass}/${t.passages_checked}</div>` : ''}
+        </td>
+        <td class="meta">${srcLink}${hashShort ? ' · <code class="hash" title="SHA-256">' + hashShort + '…</code>' : ''}</td>
+      </tr>`;
+    }
+    html += '</tbody></table>';
+    $("text-count").textContent = `Showing ${rows.length} of ${all.length} texts`;
+    $("text-table-wrap").innerHTML = html;
+
+    $("text-table-wrap").querySelectorAll("th[data-key]").forEach(th => {
+      th.addEventListener("click", () => {
+        const k = th.dataset.key;
+        if (sortKey === k) {
+          sortDir = sortDir === "asc" ? "desc" : "asc";
+        } else {
+          sortKey = k;
+          sortDir = k === "pass_rate" ? "desc" : "asc";
+        }
+        renderTable();
+      });
+    });
+  }
+
+  $("search").addEventListener("input", renderTable);
+  $("status-filter").addEventListener("change", renderTable);
+  renderTable();
+})();
+</script>
+
+</body>
+</html>
