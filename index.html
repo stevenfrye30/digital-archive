@@ -3863,8 +3863,10 @@ function showBrowse() {
   $browse.style.display = 'block';
   // Hide reading controls
   document.getElementById('controls').style.display   = 'none';
-  document.getElementById('ctrl-translation').style.display = 'none';
-  document.getElementById('nav-bar').style.display     = 'none';
+  const ctrlTr = document.getElementById('ctrl-translation');
+  if (ctrlTr) ctrlTr.style.display = 'none';
+  const navBar = document.getElementById('nav-bar');
+  if (navBar) navBar.style.display = 'none';
 }
 
 /** Build the data structures needed for browse from indexGroups */
