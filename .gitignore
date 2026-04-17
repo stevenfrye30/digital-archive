@@ -1,5 +1,6 @@
 # Only ship gzipped data to keep the repo under GitHub Pages's 1 GB cap.
 data/*.json
+!data/integrity.json
 !data/.gitkeep
 
 # Dev-only pages — not for public visitors
