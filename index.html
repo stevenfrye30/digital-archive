@@ -709,6 +709,114 @@ body {
   transform: translateY(1px);
 }
 
+/* ── Sidebar category browse buttons ──────────────────────────────── */
+
+#sidebar-browse {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px 14px;
+}
+.cat-btn {
+  display: block;
+  width: 100%;
+  padding: 14px 16px;
+  font-family: Georgia, serif;
+  font-size: 16px;
+  font-weight: normal;
+  color: var(--chrome-fg);
+  background: var(--reader-bg);
+  border: 1px solid var(--chrome-border);
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s, border-color 0.15s;
+}
+.cat-btn:hover {
+  background: #f5f0ea;
+  border-color: var(--chrome-active);
+}
+.cat-btn.active {
+  background: var(--chrome-active);
+  color: white;
+  border-color: var(--chrome-active);
+}
+
+/* ── Browse view (center area tile navigation) ───────────────────── */
+
+#browse {
+  padding: 40px 48px 80px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+#browse-breadcrumb {
+  font-size: 14px;
+  color: var(--chrome-muted);
+  margin-bottom: 12px;
+}
+#browse-breadcrumb a {
+  color: var(--chrome-active);
+  text-decoration: none;
+  cursor: pointer;
+}
+#browse-breadcrumb a:hover {
+  text-decoration: underline;
+}
+#browse-breadcrumb .sep {
+  margin: 0 6px;
+  color: var(--chrome-border);
+}
+#browse-title {
+  font-family: Georgia, serif;
+  font-size: 26px;
+  color: var(--chrome-active);
+  margin-bottom: 28px;
+  font-weight: normal;
+}
+#browse-tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+}
+.browse-tile {
+  background: var(--reader-bg);
+  border: 1px solid var(--chrome-border);
+  border-radius: 8px;
+  padding: 18px 20px;
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.08s;
+}
+.browse-tile:hover {
+  border-color: var(--chrome-active);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transform: translateY(-1px);
+}
+.browse-tile .tile-title {
+  font-family: Georgia, serif;
+  font-size: 17px;
+  color: var(--chrome-fg);
+  margin-bottom: 4px;
+}
+.browse-tile .tile-count {
+  font-size: 13px;
+  color: var(--chrome-muted);
+}
+.browse-tile .tile-author {
+  font-size: 13px;
+  color: var(--chrome-muted);
+  margin-top: 4px;
+}
+.browse-tile .tile-star {
+  color: var(--chrome-active);
+  margin-right: 2px;
+}
+
+@media (max-width: 720px) {
+  #browse { padding: 20px 16px 60px; }
+  #browse-tiles { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; }
+  .browse-tile { padding: 14px 16px; }
+}
+
 #cover-source-summary {
   max-width: 520px;
   margin: 32px auto 0;
@@ -1386,6 +1494,14 @@ mark.search-hl-active {
       </div>
     </div>
     <ul id="text-list"></ul>
+
+    <!-- Category browse buttons (visible when no text is open) -->
+    <div id="sidebar-browse">
+      <button class="cat-btn" data-cat="Religion">Religion</button>
+      <button class="cat-btn" data-cat="Philosophy">Philosophy</button>
+      <button class="cat-btn" data-cat="Literature">Literature</button>
+      <button class="cat-btn" data-cat="Esoteric">Esoteric</button>
+    </div>
   </aside>
 
   <div id="panel">
@@ -1480,6 +1596,13 @@ mark.search-hl-active {
             <div class="welcome-section-label">Recently read</div>
             <ul id="recent-list"></ul>
           </div>
+        </div>
+
+        <!-- Browse view: drill-down tile navigation -->
+        <div id="browse" style="display:none;">
+          <div id="browse-breadcrumb"></div>
+          <div id="browse-title"></div>
+          <div id="browse-tiles"></div>
         </div>
         <div id="text-cover" style="display:none;">
           <div id="cover-title"></div>
@@ -3716,6 +3839,192 @@ wire('ctrl-fg',      '--reader-fg',      'r-fg',      v => v,        null);
   });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
 })();
+
+// ── Browse view (tile drill-down navigation) ─────────────────────────────────
+
+const $browse       = document.getElementById('browse');
+const $browseCrumb  = document.getElementById('browse-breadcrumb');
+const $browseTitle  = document.getElementById('browse-title');
+const $browseTiles  = document.getElementById('browse-tiles');
+const $sidebarBrowse = document.getElementById('sidebar-browse');
+
+function escH(s) {
+  return String(s||'').replace(/[&<>"']/g, c =>
+    ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+/** Hide all reader panels and show the browse view */
+function showBrowse() {
+  document.getElementById('welcome').style.display    = 'none';
+  document.getElementById('text-cover').style.display  = 'none';
+  document.getElementById('group-cover').style.display = 'none';
+  document.getElementById('text-toc').style.display    = 'none';
+  document.getElementById('passages').innerHTML        = '';
+  $browse.style.display = 'block';
+  // Hide reading controls
+  document.getElementById('controls').style.display   = 'none';
+  document.getElementById('ctrl-translation').style.display = 'none';
+  document.getElementById('nav-bar').style.display     = 'none';
+}
+
+/** Build the data structures needed for browse from indexGroups */
+function buildBrowseData() {
+  // buckets → traditions → text groups
+  const tree = {};
+  for (const bucket of BUCKET_ORDER) tree[bucket] = {};
+
+  for (const [id, entries] of Object.entries(indexGroups)) {
+    const e = entries[0];
+    const trd = e.tradition || 'Other';
+    const bucket = bucketFor(trd);
+    if (!tree[bucket]) tree[bucket] = {};
+    if (!tree[bucket][trd]) tree[bucket][trd] = [];
+    tree[bucket][trd].push({ id, entries, title: e.title, author: e.author });
+  }
+  // Sort traditions and texts
+  for (const bucket of Object.keys(tree)) {
+    for (const trd of Object.keys(tree[bucket])) {
+      tree[bucket][trd].sort((a, b) => a.title.localeCompare(b.title));
+    }
+  }
+  return tree;
+}
+
+let browseTree = null;
+
+/** Level 1: show traditions for a category */
+function browseCategory(cat) {
+  if (!browseTree) browseTree = buildBrowseData();
+  showBrowse();
+
+  // Highlight sidebar button
+  document.querySelectorAll('.cat-btn').forEach(b =>
+    b.classList.toggle('active', b.dataset.cat === cat));
+
+  // Breadcrumb
+  $browseCrumb.innerHTML = `<a onclick="browseHome()">Home</a><span class="sep">›</span>${escH(cat)}`;
+  $browseTitle.textContent = cat;
+
+  const traditions = browseTree[cat] || {};
+  const sorted = Object.entries(traditions).sort((a, b) => b[1].length - a[1].length);
+
+  let html = '';
+  for (const [trd, texts] of sorted) {
+    html += `<div class="browse-tile" onclick="browseTradition('${escH(cat)}','${escH(trd)}')">
+      <div class="tile-title">${escH(trd)}</div>
+      <div class="tile-count">${texts.length} text${texts.length !== 1 ? 's' : ''}</div>
+    </div>`;
+  }
+  $browseTiles.innerHTML = html;
+}
+
+/** Level 2: show texts for a tradition */
+function browseTradition(cat, trd) {
+  if (!browseTree) browseTree = buildBrowseData();
+  showBrowse();
+
+  document.querySelectorAll('.cat-btn').forEach(b =>
+    b.classList.toggle('active', b.dataset.cat === cat));
+
+  $browseCrumb.innerHTML =
+    `<a onclick="browseHome()">Home</a><span class="sep">›</span>` +
+    `<a onclick="browseCategory('${escH(cat)}')">${escH(cat)}</a>` +
+    `<span class="sep">›</span>${escH(trd)}`;
+  $browseTitle.textContent = trd;
+
+  const texts = (browseTree[cat] || {})[trd] || [];
+  let html = '';
+  for (const t of texts) {
+    const count = t.entries.length;
+    const authorStr = (t.author || []).filter(a => a && a !== 'Anonymous').join(', ');
+    const countBadge = count > 1 ? `<div class="tile-count">${count} translation${count > 1 ? 's' : ''}</div>` : '';
+    html += `<div class="browse-tile" onclick="browseText('${escH(cat)}','${escH(trd)}','${escH(t.id)}')">
+      <div class="tile-title">${escH(t.title)}</div>
+      ${authorStr ? `<div class="tile-author">${escH(authorStr)}</div>` : ''}
+      ${countBadge}
+    </div>`;
+  }
+  $browseTiles.innerHTML = html;
+}
+
+/** Level 3: show translations for a text, or open directly if only one */
+function browseText(cat, trd, textId) {
+  const group = indexGroups[textId];
+  if (!group || group.length === 0) return;
+
+  if (group.length === 1) {
+    // Single translation — open directly
+    $browse.style.display = 'none';
+    document.getElementById('controls').style.display = '';
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+    loadText(group[0]);
+    return;
+  }
+
+  // Multiple translations — show chooser tiles
+  showBrowse();
+
+  document.querySelectorAll('.cat-btn').forEach(b =>
+    b.classList.toggle('active', b.dataset.cat === cat));
+
+  const title = group[0].title;
+  $browseCrumb.innerHTML =
+    `<a onclick="browseHome()">Home</a><span class="sep">›</span>` +
+    `<a onclick="browseCategory('${escH(cat)}')">${escH(cat)}</a>` +
+    `<span class="sep">›</span>` +
+    `<a onclick="browseTradition('${escH(cat)}','${escH(trd)}')">${escH(trd)}</a>` +
+    `<span class="sep">›</span>${escH(title)}`;
+  $browseTitle.textContent = title;
+
+  // Sort: primary first, then by label
+  const sorted = group.slice().sort((a, b) => {
+    if (a.quality === 'primary' && b.quality !== 'primary') return -1;
+    if (b.quality === 'primary' && a.quality !== 'primary') return 1;
+    return (translationLabel(a) || '').localeCompare(translationLabel(b) || '');
+  });
+
+  let html = '';
+  for (const entry of sorted) {
+    const label = translationLabel(entry) || entry.data_file;
+    const star = entry.quality === 'primary' ? '<span class="tile-star">★</span>' : '';
+    const tr = (entry.translator || []).filter(t => t && t !== 'Anonymous').join(', ');
+    const year = entry.year ? ` (${entry.year})` : '';
+    html += `<div class="browse-tile" onclick="browseOpen('${escH(entry.data_file)}')">
+      <div class="tile-title">${star}${escH(label)}</div>
+      ${tr ? `<div class="tile-author">tr. ${escH(tr)}${year}</div>` : ''}
+    </div>`;
+  }
+  $browseTiles.innerHTML = html;
+}
+
+/** Open a specific translation by data_file */
+function browseOpen(dataFile) {
+  // Find the entry
+  for (const entries of Object.values(indexGroups)) {
+    for (const e of entries) {
+      if (e.data_file === dataFile) {
+        $browse.style.display = 'none';
+        document.getElementById('controls').style.display = '';
+        document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+        loadText(e);
+        return;
+      }
+    }
+  }
+}
+
+/** Return to home (show welcome) */
+function browseHome() {
+  $browse.style.display = 'none';
+  document.getElementById('controls').style.display = '';
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  renderWelcome();
+}
+
+// Wire sidebar category buttons
+document.querySelectorAll('.cat-btn').forEach(btn => {
+  btn.addEventListener('click', () => browseCategory(btn.dataset.cat));
+});
 
 // ── Boot ──────────────────────────────────────────────────────────────────────
 
