@@ -9568,7 +9568,7 @@
       "collection": "sacred",
       "hierarchy": [
         "chapter",
-        "verse"
+        "paragraph"
       ],
       "data_file": "book-of-enoch_charles.json",
       "source": "sacredtexts",
@@ -17708,8 +17708,8 @@
       "tradition": "Hermetic",
       "collection": "other",
       "hierarchy": [
-        "chapter",
-        "verse"
+        "letter",
+        "paragraph"
       ],
       "data_file": "demonology-witchcraft-scott_scott.json",
       "source": "sacredtexts",
