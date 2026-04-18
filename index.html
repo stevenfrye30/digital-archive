@@ -812,10 +812,34 @@ body {
   display: flex;
   flex-direction: column;
 }
-#browse-breadcrumb {
+#browse-nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+#browse-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 14px;
   font-size: 14px;
+  font-family: system-ui, sans-serif;
+  color: var(--chrome-active);
+  background: var(--reader-bg);
+  border: 1px solid var(--chrome-border);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  flex-shrink: 0;
+}
+#browse-back:hover {
+  background: #f0ece5;
+  border-color: var(--chrome-active);
+}
+#browse-breadcrumb {
+  font-size: 15px;
   color: var(--chrome-muted);
-  margin-bottom: 12px;
 }
 #browse-breadcrumb a {
   color: var(--chrome-active);
@@ -1695,7 +1719,10 @@ mark.search-hl-active {
 
         <!-- Browse view: drill-down tile navigation -->
         <div id="browse" style="display:none;">
-          <div id="browse-breadcrumb"></div>
+          <div id="browse-nav">
+            <button id="browse-back">&larr; Back</button>
+            <div id="browse-breadcrumb"></div>
+          </div>
           <div id="browse-title"></div>
           <div id="browse-tiles"></div>
         </div>
@@ -3989,13 +4016,13 @@ function buildBrowseData() {
 }
 
 let browseTree = null;
+let browseHistory = []; // stack of {fn, args} for back button
 
 /** Level 1: show traditions for a category */
 function browseCategory(cat) {
   if (!browseTree) browseTree = buildBrowseData();
   showBrowse();
-
-  // (no sidebar to highlight)
+  browseHistory = [{fn: browseHome}];
 
   // Breadcrumb
   $browseCrumb.innerHTML = `<a onclick="browseHome()">Home</a><span class="sep">›</span>${escH(cat)}`;
@@ -4018,8 +4045,7 @@ function browseCategory(cat) {
 function browseTradition(cat, trd) {
   if (!browseTree) browseTree = buildBrowseData();
   showBrowse();
-
-  // (no sidebar to highlight)
+  browseHistory = [{fn: browseHome}, {fn: browseCategory, args: [cat]}];
 
   $browseCrumb.innerHTML =
     `<a onclick="browseHome()">Home</a><span class="sep">›</span>` +
@@ -4058,8 +4084,7 @@ function browseText(cat, trd, textId) {
 
   // Multiple translations — show chooser tiles
   showBrowse();
-
-  // (no sidebar to highlight)
+  browseHistory = [{fn: browseHome}, {fn: browseCategory, args: [cat]}, {fn: browseTradition, args: [cat, trd]}];
 
   const title = group[0].title;
   $browseCrumb.innerHTML =
@@ -4130,6 +4155,16 @@ function updateHomeCounts() {
 // Wire home-screen category buttons
 document.querySelectorAll('.home-cat').forEach(btn => {
   btn.addEventListener('click', () => browseCategory(btn.dataset.cat));
+});
+
+// Wire browse back button
+document.getElementById('browse-back').addEventListener('click', () => {
+  if (browseHistory.length > 0) {
+    const prev = browseHistory[browseHistory.length - 1];
+    prev.fn(...(prev.args || []));
+  } else {
+    browseHome();
+  }
 });
 
 // ── Boot ──────────────────────────────────────────────────────────────────────
