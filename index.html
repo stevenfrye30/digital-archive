@@ -3215,9 +3215,17 @@ function scrollToMatch(idx) {
 }
 
 function filterAndRender() {
-  let passages = needsGroupSelector() && currentBook
-    ? allPassages.filter(p => String(p.path[0]) === currentBook)
-    : allPassages;
+  let passages;
+  if (currentBook === '__fm__') {
+    // Show only front-matter passages
+    passages = allPassages.filter(p => p.fm);
+  } else if (needsGroupSelector() && currentBook) {
+    // Show chapter, exclude front matter
+    passages = allPassages.filter(p => String(p.path[0]) === currentBook && !p.fm);
+  } else {
+    // Show all, exclude front matter
+    passages = allPassages.filter(p => !p.fm);
+  }
 
   const query = $search.value.trim();
   const queryLower = query.toLowerCase();
@@ -3455,7 +3463,15 @@ function showCover(data, entry) {
   } else {
     html += `<div class="cc-toc-sub">${data.passages.length.toLocaleString()} passages</div>`;
   }
+  // Check for front-matter passages
+  const hasFrontMatter = data.passages.some(p => p.fm);
+
   html += '<ul class="cc-toc-list">';
+
+  // Add Front Matter entry if any passages are tagged
+  if (hasFrontMatter) {
+    html += `<li data-book="__fm__" class="cc-toc-front"><span class="cc-toc-num">✦</span><span class="cc-toc-name">Front Matter</span></li>`;
+  }
 
   if (grouped) {
     keys.forEach((k, i) => {
@@ -3482,7 +3498,9 @@ function showCover(data, entry) {
   $textHeader.querySelectorAll('.cc-toc-list li').forEach(li => {
     li.addEventListener('click', () => {
       const book = li.dataset.book;
-      if (book === '__all__') {
+      if (book === '__fm__') {
+        enterReading('__fm__');
+      } else if (book === '__all__') {
         enterReading();
       } else {
         currentBook = book;
@@ -3528,10 +3546,11 @@ function enterReading(targetGroupKey) {
   // Add chapter title header above passages
   const existingHeader = $passages.querySelector('.chapter-heading');
   if (existingHeader) existingHeader.remove();
-  if (currentBook && needsGroupSelector()) {
+  const showHeading = currentBook === '__fm__' || (currentBook && needsGroupSelector());
+  if (showHeading) {
     const heading = document.createElement('div');
     heading.className = 'chapter-heading';
-    heading.textContent = groupName(currentBook);
+    heading.textContent = currentBook === '__fm__' ? 'Front Matter' : groupName(currentBook);
     $passages.prepend(heading);
   }
 
