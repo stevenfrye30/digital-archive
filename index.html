@@ -430,6 +430,21 @@ body {
   flex-shrink: 0;
 }
 
+#ctrl-home {
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: system-ui, sans-serif;
+  color: white;
+  background: var(--chrome-active);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 4px;
+  transition: background 0.15s;
+}
+#ctrl-home:hover { background: #5a3a1a; }
+
 .ctrl-group {
   display: flex;
   align-items: center;
@@ -802,8 +817,7 @@ body {
   .home-cat { padding: 28px 20px; font-size: 18px; }
 }
 
-/* Home: no scroll (4 buttons fit viewport). Everything else scrolls. */
-#reader.home     { overflow: hidden; }
+/* All views scroll when needed */
 
 /* ── Browse view (center area tile navigation) ───────────────────── */
 
@@ -1606,6 +1620,7 @@ mark.search-hl-active {
   <div id="panel">
 
     <div id="controls" style="display:none;">
+      <button id="ctrl-home" type="button" onclick="browseHome()" title="Back to home">&larr; Home</button>
       <div class="ctrl-group">
         <label>Font</label>
         <select id="ctrl-font">
@@ -4145,7 +4160,21 @@ function browseHome() {
   $browse.style.display = 'none';
   document.getElementById('controls').style.display = 'none';
   document.getElementById('welcome').style.display = '';
-  document.getElementById('reader').className = 'home';
+  // Hide any open text panels
+  document.getElementById('text-cover').style.display = 'none';
+  document.getElementById('group-cover').style.display = 'none';
+  document.getElementById('text-toc').style.display = 'none';
+  document.getElementById('passages').innerHTML = '';
+  const ctrlTr = document.getElementById('ctrl-translation');
+  if (ctrlTr) ctrlTr.style.display = 'none';
+  const navBar = document.getElementById('nav-bar');
+  if (navBar) navBar.style.display = 'none';
+  const trBar = document.getElementById('tr-bar');
+  if (trBar) trBar.style.display = 'none';
+  const infoBar = document.getElementById('info-bar');
+  if (infoBar) infoBar.style.display = 'none';
+  // Scroll to top
+  document.getElementById('reader').scrollTop = 0;
 }
 
 /** Populate category counts on the home screen after index loads */
