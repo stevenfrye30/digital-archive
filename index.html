@@ -726,6 +726,105 @@ body {
   transform: translateY(1px);
 }
 
+/* ── Continuous reading header (title + TOC inline) ──────────────── */
+
+#text-header { display: none; }
+
+#continuous-cover {
+  text-align: center;
+  max-width: 640px;
+  margin: 80px auto 0;
+  padding: 0 20px 0;
+}
+.cc-title {
+  font-size: 2.4em;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+  color: var(--reader-fg);
+  margin-bottom: 0.5em;
+}
+.cc-author {
+  font-size: 1.1em;
+  font-style: italic;
+  color: var(--chrome-muted);
+  margin-bottom: 0.2em;
+}
+.cc-translator {
+  font-size: 0.9em;
+  color: var(--chrome-muted);
+  margin-bottom: 0.2em;
+}
+.cc-year {
+  font-size: 0.9em;
+  color: var(--chrome-muted);
+  letter-spacing: 0.04em;
+  margin-bottom: 1.5em;
+}
+.cc-source {
+  font-size: 0.82em;
+  color: var(--chrome-muted);
+  max-width: 480px;
+  margin: 0 auto 1em;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+#continuous-toc {
+  max-width: 560px;
+  margin: 2em auto;
+  text-align: left;
+}
+.cc-toc-heading {
+  font-size: 1.3em;
+  font-weight: 600;
+  color: var(--chrome-active);
+  margin-bottom: 0.3em;
+}
+.cc-toc-sub {
+  font-size: 0.85em;
+  color: var(--chrome-muted);
+  margin-bottom: 1em;
+}
+.cc-toc-list {
+  list-style: none;
+  padding: 0;
+  columns: 2;
+  column-gap: 24px;
+}
+.cc-toc-list li {
+  padding: 6px 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  break-inside: avoid;
+  transition: background 0.15s;
+  font-size: 0.92em;
+}
+.cc-toc-list li:hover {
+  background: rgba(0,0,0,0.04);
+}
+.cc-toc-num {
+  display: inline-block;
+  width: 28px;
+  color: var(--chrome-muted);
+  font-size: 0.85em;
+}
+.cc-toc-name {
+  color: var(--chrome-fg);
+}
+.cc-divider {
+  width: 60px;
+  height: 1px;
+  background: var(--chrome-border);
+  margin: 3em auto 2em;
+}
+
+@media (max-width: 600px) {
+  .cc-toc-list { columns: 1; }
+  .cc-title { font-size: 1.8em; }
+  #continuous-cover { margin-top: 40px; }
+}
+
 /* ── Home screen (4 category buttons) ────────────────────────────── */
 
 /* ── Home: fixed viewport, no scroll ─────────────────────────────── */
@@ -1873,6 +1972,7 @@ mark.search-hl-active {
             <button id="toc-begin" type="button" class="toc-link primary">Read from beginning &rarr;</button>
           </div>
         </div>
+        <div id="text-header"></div>
         <div id="passages"></div>
       </div>
     </div>
@@ -3163,45 +3263,82 @@ function showGroupCover(group, listItem) {
 }
 
 function showCover(data, entry) {
+  // ── Continuous reading view: title → TOC → text in one scroll ──
+  const $textHeader = document.getElementById('text-header');
   $groupCover.style.display = 'none';
-  $cover.style.display    = 'block';
-  $toc.style.display      = 'none';
-  $coverTitle.textContent  = data.title || '';
-  const authorTxt = (data.author && data.author.length) ? data.author.join(', ') : '';
-  $coverAuthor.textContent = authorTxt;
-  $coverAuthor.style.display = authorTxt ? 'block' : 'none';
+  $cover.style.display      = 'none';
+  $toc.style.display        = 'none';
+  $infoBar.style.display    = 'flex';
 
+  // Build title block
+  const authorTxt = (data.author && data.author.length) ? data.author.join(', ') : '';
   const tr = data.translation;
   const trTxt = (tr && tr.translator && tr.translator.length)
-    ? 'Translated by ' + tr.translator.join(', ')
-    : '';
-  $coverTrans.textContent = trTxt;
-  $coverTrans.style.display = trTxt ? 'block' : 'none';
-
-  const parts = [];
-  if (data.date)         parts.push(data.date);
-  if (tr && tr.year)     parts.push('Translation ' + tr.year);
-  $coverYear.textContent = parts.join(' \u00b7 ');
-  $coverYear.style.display = parts.length ? 'block' : 'none';
-
-  // Source/transcription summary — brief description of where this edition came from
+    ? 'Translated by ' + tr.translator.join(', ') : '';
+  const dateParts = [];
+  if (data.date)     dateParts.push(data.date);
+  if (tr && tr.year) dateParts.push('Translation ' + tr.year);
   const ss = data.source_summary;
-  if (ss && $coverSourceSummary) {
-    // Render basic markdown italics (*word*) as <em>
-    const html = escapeHTML(ss).replace(/\*([^*]+)\*/g, '<em>$1</em>');
-    $coverSourceSummary.innerHTML = html;
-    $coverSourceSummary.style.display = 'block';
-  } else if ($coverSourceSummary) {
-    $coverSourceSummary.style.display = 'none';
+  const ssHtml = ss
+    ? escapeHTML(ss).replace(/\*([^*]+)\*/g, '<em>$1</em>')
+    : '';
+
+  let html = '<div id="continuous-cover">';
+  html += `<div class="cc-title">${escapeHTML(data.title || '')}</div>`;
+  if (authorTxt) html += `<div class="cc-author">${escapeHTML(authorTxt)}</div>`;
+  if (trTxt)     html += `<div class="cc-translator">${escapeHTML(trTxt)}</div>`;
+  if (dateParts.length) html += `<div class="cc-year">${escapeHTML(dateParts.join(' \u00b7 '))}</div>`;
+  if (ssHtml)    html += `<div class="cc-source">${ssHtml}</div>`;
+  html += '</div>';
+
+  // Build TOC if structured
+  const hier = data.hierarchy || [];
+  const seen = new Set();
+  const keys = [];
+  for (const p of data.passages) {
+    const k = String(p.path[0]);
+    if (!seen.has(k)) { seen.add(k); keys.push(k); }
+  }
+  const grouped = needsGroupSelector() && keys.length > 1;
+  if (grouped) {
+    html += '<div id="continuous-toc">';
+    html += `<div class="cc-toc-heading">Contents</div>`;
+    html += `<div class="cc-toc-sub">${keys.length} ${hier[0] || 'section'}s \u00b7 ${data.passages.length.toLocaleString()} passages</div>`;
+    html += '<ul class="cc-toc-list">';
+    keys.forEach((k, i) => {
+      html += `<li data-book="${escapeHTML(k)}"><span class="cc-toc-num">${i + 1}</span><span class="cc-toc-name">${escapeHTML(groupName(k))}</span></li>`;
+    });
+    html += '</ul></div>';
   }
 
-  $cover.style.display    = 'block';
-  $passages.style.display = 'none';
-  $infoBar.style.display  = 'flex';
-  $searchGroup.style.display = 'none';
-  $navBar.style.display      = 'none';
-  $trBar.style.display       = 'none';
-  $bookGroup.style.display   = 'none';
+  // Divider
+  html += '<div class="cc-divider"></div>';
+
+  // Put header in persistent container (survives passage re-renders)
+  $textHeader.innerHTML = html;
+  $textHeader.style.display = 'block';
+
+  // Wire TOC clicks
+  $textHeader.querySelectorAll('.cc-toc-list li').forEach(li => {
+    li.addEventListener('click', () => {
+      currentBook = li.dataset.book;
+      enterReading(currentBook);
+    });
+  });
+
+  // Set up controls + render passages directly below
+  buildBookSelector();
+  buildTranslationSwitcher(currentEntry);
+  $searchGroup.style.display = 'flex';
+
+  if (!grouped) {
+    // No book structure — render all passages immediately
+    enterReading();
+  } else {
+    // Structured text — TOC visible, user clicks to load a section
+    $passages.style.display = 'none';
+    $navBar.style.display = 'none';
+  }
 }
 
 function enterReading(targetGroupKey) {
@@ -3209,6 +3346,9 @@ function enterReading(targetGroupKey) {
   $cover.style.display    = 'none';
   $toc.style.display      = 'none';
   $passages.style.display = '';
+  // Keep text-header visible (title + TOC above passages)
+  const $th = document.getElementById('text-header');
+  if ($th) $th.style.display = 'block';
 
   buildBookSelector();
   buildTranslationSwitcher(currentEntry);
@@ -3518,6 +3658,8 @@ async function loadText(entry, listItem) {
 
   $welcome.style.display     = 'none';
   $passages.innerHTML        = '';
+  document.getElementById('text-header').innerHTML = '';
+  document.getElementById('text-header').style.display = 'none';
   $cover.style.display       = 'none';
   if ($groupCover) $groupCover.style.display = 'none';
   $toc.style.display         = 'none';
@@ -4302,6 +4444,8 @@ function browseHome() {
   document.getElementById('text-cover').style.display = 'none';
   document.getElementById('group-cover').style.display = 'none';
   document.getElementById('text-toc').style.display = 'none';
+  document.getElementById('text-header').style.display = 'none';
+  document.getElementById('text-header').innerHTML = '';
   document.getElementById('passages').innerHTML = '';
   const ctrlTr = document.getElementById('ctrl-translation');
   if (ctrlTr) ctrlTr.style.display = 'none';
