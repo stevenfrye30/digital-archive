@@ -739,71 +739,6 @@ body {
   transform: translateY(1px);
 }
 
-/* ── Wrap toggle button ──────────────────────────────────────────── */
-
-.ctrl-toggle {
-  padding: 4px 12px;
-  font-size: 12px;
-  font-family: system-ui, sans-serif;
-  border: 1px solid var(--chrome-border);
-  border-radius: 4px;
-  background: white;
-  color: var(--chrome-muted);
-  cursor: pointer;
-  transition: background 0.15s, color 0.15s, border-color 0.15s;
-}
-.ctrl-toggle.active {
-  background: var(--chrome-active);
-  color: white;
-  border-color: var(--chrome-active);
-}
-.ctrl-toggle:hover { border-color: var(--chrome-active); }
-
-/* ── Wrapped reading mode ────────────────────────────────────────── */
-
-#reader-inner.wrap-mode .passage {
-  display: inline;
-  padding: 0;
-  padding-left: 0;
-  margin: 0;
-  position: static;
-}
-#reader-inner.wrap-mode .passage::after {
-  content: ' ¶ ';
-  font-size: 0.7em;
-  color: var(--chrome-border);
-  margin: 0 2px;
-}
-#reader-inner.wrap-mode .passage:last-child::after {
-  content: '';
-}
-#reader-inner.wrap-mode .passage .ref {
-  font-size: 0.6em;
-  color: var(--chrome-muted);
-  vertical-align: super;
-  position: static !important;
-  left: auto !important;
-  width: auto !important;
-  text-align: left !important;
-  margin: 0 1px 0 2px;
-  padding: 0;
-  opacity: 0.35;
-  display: inline;
-}
-#reader-inner.wrap-mode .passage .ref:hover { opacity: 1; }
-#reader-inner.wrap-mode .footnote-body {
-  display: block;
-  margin: 12px 0;
-  padding-left: 0;
-}
-#reader-inner.wrap-mode .footnote-body::before {
-  content: none;
-}
-#reader-inner.wrap-mode .chapter-heading {
-  display: block;
-  margin: 40px 0 24px;
-}
-
 /* ── Chapter heading at top of reading view ──────────────────────── */
 
 .chapter-heading {
@@ -2241,10 +2176,6 @@ mark.search-hl-active {
       <div class="ctrl-group">
         <label>Text</label>
         <input type="color" id="ctrl-fg" value="#2c2c2c">
-      </div>
-      <div class="ctrl-group">
-        <label>Wrap</label>
-        <button type="button" id="ctrl-wrap" class="ctrl-toggle" title="Wrap verses into continuous prose">Off</button>
       </div>
       <div class="ctrl-group" id="ctrl-book-group">
         <label>Book</label>
@@ -5070,20 +5001,6 @@ function updateHomeCounts() {
       `${textCount} texts · ${tradCount} traditions`;
   });
 }
-
-// Wire wrap toggle
-(() => {
-  const btn = document.getElementById('ctrl-wrap');
-  const saved = localStorage.getItem('da-wrap') === 'true';
-  const $ri = document.getElementById('reader-inner');
-  if (saved) { btn.classList.add('active'); btn.textContent = 'On'; $ri.classList.add('wrap-mode'); }
-  btn.addEventListener('click', () => {
-    const on = btn.classList.toggle('active');
-    btn.textContent = on ? 'On' : 'Off';
-    $ri.classList.toggle('wrap-mode', on);
-    localStorage.setItem('da-wrap', on);
-  });
-})();
 
 // Wire browse toolbar
 document.querySelectorAll('.bt-btn').forEach(btn => {
