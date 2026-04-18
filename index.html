@@ -3072,7 +3072,8 @@ function needsGroupSelector() {
   const t = topLevel();
   return t === 'book' || t === 'surah' || t === 'upanishad' || t === 'sutta'
       || t === 'rune' || t === 'parva' || t === 'chapter'
-      || t === 'biography' || t === 'rule';
+      || t === 'biography' || t === 'rule' || t === 'part'
+      || t === 'section' || t === 'volume' || t === 'treatise';
 }
 
 function toRoman(n) {
