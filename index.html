@@ -818,6 +818,27 @@ body {
   background: var(--chrome-border);
   margin: 3em auto 2em;
 }
+.cc-begin {
+  display: inline-block;
+  margin: 0 auto;
+  padding: 10px 28px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #faf6ec;
+  background: #5a4a1e;
+  border-radius: 999px;
+  cursor: pointer;
+  text-align: center;
+  letter-spacing: 0.03em;
+  transition: background 0.15s;
+}
+.cc-begin:hover { background: #3d3210; }
+#continuous-toc + .cc-divider + .cc-begin,
+#continuous-toc ~ .cc-begin {
+  display: block;
+  width: fit-content;
+  margin: 0 auto 2em;
+}
 
 @media (max-width: 600px) {
   .cc-toc-list { columns: 1; }
@@ -3332,12 +3353,25 @@ function showCover(data, entry) {
   $searchGroup.style.display = 'flex';
 
   if (!grouped) {
-    // No book structure — render all passages immediately
+    // No book structure — render all passages immediately below header
     enterReading();
+    $reader.scrollTop = 0; // Start at title
   } else {
-    // Structured text — TOC visible, user clicks to load a section
+    // Structured text — show TOC, passages appear when user clicks a chapter
+    // or add a "Read from beginning" link
     $passages.style.display = 'none';
     $navBar.style.display = 'none';
+
+    // Add "Read from beginning" button after TOC
+    const beginBtn = document.createElement('div');
+    beginBtn.className = 'cc-begin';
+    beginBtn.innerHTML = 'Read from beginning &rarr;';
+    beginBtn.addEventListener('click', () => {
+      const firstKey = keys[0];
+      currentBook = firstKey;
+      enterReading(firstKey);
+    });
+    document.getElementById('text-header').appendChild(beginBtn);
   }
 }
 
@@ -3362,7 +3396,13 @@ function enterReading(targetGroupKey) {
 
   filterAndRender();
   $searchGroup.style.display = 'flex';
-  $reader.scrollTop = 0;
+
+  // If coming from TOC click, scroll to passages (past title/TOC header)
+  if (targetGroupKey != null) {
+    $passages.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } else {
+    $reader.scrollTop = 0;
+  }
 }
 
 function showToc(data, entry) {
