@@ -48,14 +48,7 @@ body {
 
 /* ── Sidebar ─────────────────────────────────────────────────────────────────── */
 
-#sidebar {
-  width: var(--sidebar-width);
-  min-width: var(--sidebar-width);
-  background: var(--chrome-bg);
-  border-right: 1px solid var(--chrome-border);
-  display: none;  /* Hidden — browse tiles replace sidebar navigation */
-  flex-direction: column;
-}
+/* Sidebar removed — browse tiles replace sidebar navigation */
 
 #sidebar-header {
   padding: 18px 16px 14px;
@@ -2106,43 +2099,8 @@ mark.search-hl-active {
 
 <div id="shell">
 
-  <aside id="sidebar">
-    <div id="sidebar-header">
-      <a href="https://stevenfrye30.github.io/workspace-hub/" id="hub-link">&larr; Workspace</a>
-      <h1>Digital Archive</h1>
-      <a href="sources.html" class="sidebar-link">Sources &amp; Attribution</a>
-      <div class="sidebar-tools">
-        <button type="button" id="tools-btn" class="sidebar-link sidebar-tools-btn"
-          aria-expanded="false">Tools <span class="caret">&#9662;</span></button>
-        <div id="tools-menu" class="sidebar-tools-menu" hidden>
-          <a href="inventory.html">Inventory</a>
-          <a href="translators.html">Translator Index</a>
-          <a href="issues.html">Issues</a>
-          <a href="source_status.html">Source Status</a>
-          <a href="metadata_audit.html">Metadata Audit</a>
-          <a href="integrity.html">Integrity</a>
-        </div>
-      </div>
-      <div id="sidebar-search-wrap">
-        <input type="search" id="sidebar-search" placeholder="Search title, author, tradition…" autocomplete="off">
-      </div>
-      <div id="sidebar-filter">
-        <button type="button" id="filter-primary" class="filter-pill">
-          <span class="star">&#9733;</span> Primary
-        </button>
-        <button type="button" id="filter-all" class="filter-pill">All</button>
-      </div>
-    </div>
-    <ul id="text-list"></ul>
-
-    <!-- Category browse buttons (visible when no text is open) -->
-    <div id="sidebar-browse">
-      <button class="cat-btn" data-cat="Religion">Religion</button>
-      <button class="cat-btn" data-cat="Philosophy">Philosophy</button>
-      <button class="cat-btn" data-cat="Literature">Literature</button>
-      <button class="cat-btn" data-cat="Esoteric">Esoteric</button>
-    </div>
-  </aside>
+  <!-- Hidden stubs for sidebar JS compatibility -->
+  <div style="display:none"><ul id="text-list"></ul><input id="sidebar-search"></div>
 
   <div id="panel">
 

@@ -11436,8 +11436,8 @@
       "tradition": "Mesopotamian",
       "collection": "sacred",
       "hierarchy": [
-        "chapter",
-        "verse"
+        "section",
+        "paragraph"
       ],
       "data_file": "babylonian-creation-king_king.json",
       "source": "sacredtexts",
@@ -25844,7 +25844,8 @@
       "tradition": "Roman Philosophy",
       "collection": "other",
       "hierarchy": [
-        "section"
+        "section",
+        "paragraph"
       ],
       "data_file": "cicero-brutus_jones.json",
       "source": "gutenberg",
