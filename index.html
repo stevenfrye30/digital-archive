@@ -739,6 +739,19 @@ body {
   transform: translateY(1px);
 }
 
+/* ── Chapter heading at top of reading view ──────────────────────── */
+
+.chapter-heading {
+  font-family: Georgia, serif;
+  font-size: 1.8em;
+  font-weight: 700;
+  color: var(--chrome-active);
+  text-align: center;
+  padding: 40px 0 32px;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+}
+
 /* ── Text title page + TOC (separate view from reading) ──────────── */
 
 #text-header { display: none; }
@@ -3511,6 +3524,17 @@ function enterReading(targetGroupKey) {
   }
 
   filterAndRender();
+
+  // Add chapter title header above passages
+  const existingHeader = $passages.querySelector('.chapter-heading');
+  if (existingHeader) existingHeader.remove();
+  if (currentBook && needsGroupSelector()) {
+    const heading = document.createElement('div');
+    heading.className = 'chapter-heading';
+    heading.textContent = groupName(currentBook);
+    $passages.prepend(heading);
+  }
+
   $searchGroup.style.display = 'flex';
   document.getElementById('ctrl-contents').style.display = '';
   $reader.scrollTop = 0;
