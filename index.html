@@ -1139,6 +1139,60 @@ body {
   margin-top: 6px;
   font-family: system-ui, sans-serif;
 }
+#home-search {
+  margin-top: clamp(16px, 3vh, 28px);
+  width: min(440px, 80vw);
+  position: relative;
+}
+#home-search-input {
+  width: 100%;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-family: system-ui, sans-serif;
+  border: 1px solid var(--chrome-border);
+  border-radius: 8px;
+  background: white;
+  color: var(--chrome-fg);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+#home-search-input:focus {
+  border-color: var(--chrome-active);
+  box-shadow: 0 0 0 3px rgba(122,92,58,0.12);
+}
+#home-search-input::placeholder { color: var(--chrome-muted); }
+#home-search-results {
+  list-style: none;
+  padding: 0;
+  margin: 4px 0 0;
+  max-height: 300px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid var(--chrome-border);
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  display: none;
+}
+#home-search-results.open { display: block; }
+#home-search-results li {
+  padding: 10px 14px;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  transition: background 0.12s;
+}
+#home-search-results li:hover { background: #f5f0ea; }
+#home-search-results li:last-child { border-bottom: none; }
+.hs-title {
+  font-family: Georgia, serif;
+  font-size: 14px;
+  color: var(--chrome-fg);
+}
+.hs-meta {
+  font-size: 11px;
+  color: var(--chrome-muted);
+  margin-top: 2px;
+}
+
 #home-footer {
   margin-top: clamp(12px, 3vh, 32px);
   display: flex;
@@ -2204,6 +2258,10 @@ mark.search-hl-active {
                 <span class="home-cat-label">Esoteric</span>
                 <span class="home-cat-count"></span>
               </button>
+            </div>
+            <div id="home-search">
+              <input type="search" id="home-search-input" placeholder="Search all texts…" autocomplete="off">
+              <ul id="home-search-results"></ul>
             </div>
             <div id="home-footer">
               <a href="sources.html">Sources &amp; Attribution</a>
@@ -4959,6 +5017,67 @@ function updateHomeCounts() {
       `${textCount} texts · ${tradCount} traditions`;
   });
 }
+
+// Wire home search
+(() => {
+  const input = document.getElementById('home-search-input');
+  const results = document.getElementById('home-search-results');
+  if (!input || !results) return;
+  let timer;
+  input.addEventListener('input', () => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      const q = input.value.trim().toLowerCase();
+      if (q.length < 2) { results.classList.remove('open'); results.innerHTML = ''; return; }
+      const matches = [];
+      for (const [id, entries] of Object.entries(indexGroups)) {
+        const e = entries[0];
+        const hay = [e.title, (e.author||[]).join(' '), e.tradition, id].join(' ').toLowerCase();
+        if (hay.includes(q)) {
+          matches.push(e);
+          if (matches.length >= 12) break;
+        }
+      }
+      if (matches.length === 0) {
+        results.innerHTML = '<li><span class="hs-meta">No results</span></li>';
+        results.classList.add('open');
+        return;
+      }
+      results.innerHTML = matches.map(e => {
+        const author = (e.author||[]).filter(a=>a&&a!=='Anonymous').join(', ');
+        const meta = [author, e.tradition, e.year].filter(Boolean).join(' · ');
+        const cat = bucketFor(e.tradition);
+        const trd = e.tradition || 'Other';
+        return `<li data-cat="${escapeHTML(cat)}" data-trd="${escapeHTML(trd)}" data-id="${escapeHTML(e.id)}">
+          <div class="hs-title">${escapeHTML(e.title)}</div>
+          ${meta ? `<div class="hs-meta">${escapeHTML(meta)}</div>` : ''}
+        </li>`;
+      }).join('');
+      results.classList.add('open');
+      results.querySelectorAll('li').forEach(li => {
+        li.addEventListener('click', () => {
+          const cat = li.dataset.cat;
+          const trd = li.dataset.trd;
+          const id = li.dataset.id;
+          input.value = '';
+          results.classList.remove('open');
+          results.innerHTML = '';
+          browseText(cat, trd, id);
+        });
+      });
+    }, 150);
+  });
+  // Close on click outside
+  document.addEventListener('click', (e) => {
+    if (!input.contains(e.target) && !results.contains(e.target)) {
+      results.classList.remove('open');
+    }
+  });
+  // Close on Escape
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') { input.value = ''; results.classList.remove('open'); input.blur(); }
+  });
+})();
 
 // Wire browse toolbar
 document.querySelectorAll('.bt-btn').forEach(btn => {
