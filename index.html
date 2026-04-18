@@ -4046,12 +4046,16 @@ function buildBrowseData() {
     const bucket = bucketFor(trd);
     if (!tree[bucket]) tree[bucket] = {};
     if (!tree[bucket][trd]) tree[bucket][trd] = [];
-    tree[bucket][trd].push({ id, entries, title: e.title, author: e.author });
+    const rank = e.importance_rank ?? 9999;
+    tree[bucket][trd].push({ id, entries, title: e.title, author: e.author, rank });
   }
-  // Sort traditions and texts
+  // Sort texts by importance (ranked first, then alphabetical)
   for (const bucket of Object.keys(tree)) {
     for (const trd of Object.keys(tree[bucket])) {
-      tree[bucket][trd].sort((a, b) => a.title.localeCompare(b.title));
+      tree[bucket][trd].sort((a, b) => {
+        if (a.rank !== b.rank) return a.rank - b.rank;
+        return a.title.localeCompare(b.title);
+      });
     }
   }
   return tree;
