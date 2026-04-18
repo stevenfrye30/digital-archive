@@ -444,6 +444,19 @@ body {
   transition: background 0.15s;
 }
 #ctrl-home:hover { background: #5a3a1a; }
+#ctrl-contents {
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: system-ui, sans-serif;
+  color: var(--chrome-active);
+  background: var(--reader-bg);
+  border: 1px solid var(--chrome-border);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+#ctrl-contents:hover { background: #f0ece5; border-color: var(--chrome-active); }
 
 .ctrl-group {
   display: flex;
@@ -726,124 +739,153 @@ body {
   transform: translateY(1px);
 }
 
-/* ── Continuous reading header (title + TOC inline) ──────────────── */
+/* ── Text title page + TOC (separate view from reading) ──────────── */
 
 #text-header { display: none; }
 
 #continuous-cover {
   text-align: center;
-  max-width: 640px;
-  margin: 80px auto 0;
-  padding: 0 20px 0;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 60px 24px 20px;
 }
 .cc-title {
-  font-size: 2.4em;
+  font-size: clamp(1.8em, 4vw, 2.6em);
   font-weight: 700;
-  line-height: 1.15;
+  line-height: 1.12;
   letter-spacing: 0.01em;
   color: var(--reader-fg);
-  margin-bottom: 0.5em;
+  margin-bottom: 0.4em;
 }
 .cc-author {
   font-size: 1.1em;
   font-style: italic;
   color: var(--chrome-muted);
-  margin-bottom: 0.2em;
+  margin-bottom: 0.15em;
 }
 .cc-translator {
-  font-size: 0.9em;
+  font-size: 0.88em;
   color: var(--chrome-muted);
-  margin-bottom: 0.2em;
+  margin-bottom: 0.15em;
 }
 .cc-year {
-  font-size: 0.9em;
+  font-size: 0.85em;
   color: var(--chrome-muted);
   letter-spacing: 0.04em;
-  margin-bottom: 1.5em;
+  margin-bottom: 0.8em;
 }
 .cc-source {
-  font-size: 0.82em;
+  font-size: 0.8em;
   color: var(--chrome-muted);
   max-width: 480px;
-  margin: 0 auto 1em;
+  margin: 0 auto;
   line-height: 1.5;
   font-style: italic;
 }
+.cc-rule {
+  width: 50px;
+  height: 1px;
+  background: var(--chrome-border);
+  margin: 28px auto;
+}
+
+/* ── TOC section ─────────────────────────────────────────────────── */
 
 #continuous-toc {
-  max-width: 560px;
-  margin: 2em auto;
-  text-align: left;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px 40px;
 }
 .cc-toc-heading {
-  font-size: 1.3em;
-  font-weight: 600;
+  font-family: Georgia, serif;
+  font-size: 1.4em;
+  font-weight: normal;
   color: var(--chrome-active);
-  margin-bottom: 0.3em;
+  text-align: center;
+  margin-bottom: 0.2em;
 }
 .cc-toc-sub {
-  font-size: 0.85em;
+  font-size: 0.82em;
   color: var(--chrome-muted);
-  margin-bottom: 1em;
+  text-align: center;
+  margin-bottom: 20px;
 }
 .cc-toc-list {
   list-style: none;
   padding: 0;
-  columns: 2;
-  column-gap: 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 6px;
 }
 .cc-toc-list li {
-  padding: 6px 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
   cursor: pointer;
-  border-radius: 4px;
-  break-inside: avoid;
-  transition: background 0.15s;
-  font-size: 0.92em;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  transition: background 0.15s, border-color 0.15s;
 }
 .cc-toc-list li:hover {
-  background: rgba(0,0,0,0.04);
+  background: rgba(0,0,0,0.03);
+  border-color: var(--chrome-border);
 }
 .cc-toc-num {
-  display: inline-block;
-  width: 28px;
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78em;
   color: var(--chrome-muted);
-  font-size: 0.85em;
+  background: var(--chrome-bg);
+  border-radius: 50%;
 }
 .cc-toc-name {
+  font-family: Georgia, serif;
+  font-size: 0.95em;
   color: var(--chrome-fg);
+  line-height: 1.3;
 }
-.cc-divider {
-  width: 60px;
-  height: 1px;
-  background: var(--chrome-border);
-  margin: 3em auto 2em;
+.cc-toc-list li.cc-toc-front {
+  border-color: var(--chrome-border);
+  background: var(--chrome-bg);
+}
+.cc-toc-list li.cc-toc-front .cc-toc-num {
+  background: var(--chrome-active);
+  color: white;
+}
+.cc-toc-list li.cc-toc-front:hover {
+  border-color: var(--chrome-active);
+}
+
+.cc-begin-wrap {
+  text-align: center;
+  margin-top: 24px;
 }
 .cc-begin {
   display: inline-block;
-  margin: 0 auto;
-  padding: 10px 28px;
+  padding: 11px 32px;
   font-size: 14px;
   font-weight: 600;
   color: #faf6ec;
   background: #5a4a1e;
   border-radius: 999px;
   cursor: pointer;
-  text-align: center;
   letter-spacing: 0.03em;
-  transition: background 0.15s;
+  transition: background 0.15s, box-shadow 0.15s;
 }
-.cc-begin:hover { background: #3d3210; }
-#continuous-toc + .cc-divider + .cc-begin,
-#continuous-toc ~ .cc-begin {
-  display: block;
-  width: fit-content;
-  margin: 0 auto 2em;
+.cc-begin:hover {
+  background: #3d3210;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
 }
 
 @media (max-width: 600px) {
-  .cc-toc-list { columns: 1; }
-  .cc-title { font-size: 1.8em; }
-  #continuous-cover { margin-top: 40px; }
+  .cc-toc-list { grid-template-columns: 1fr; }
+  .cc-title { font-size: 1.6em; }
+  #continuous-cover { padding-top: 36px; }
 }
 
 /* ── Home screen (4 category buttons) ────────────────────────────── */
@@ -1841,6 +1883,7 @@ mark.search-hl-active {
 
     <div id="controls" style="display:none;">
       <button id="ctrl-home" type="button" onclick="browseHome()" title="Back to home">&larr; Home</button>
+      <button id="ctrl-contents" type="button" onclick="backToContents()" title="Back to title &amp; contents" style="display:none;">&larr; Contents</button>
       <div class="ctrl-group">
         <label>Font</label>
         <select id="ctrl-font">
@@ -3284,12 +3327,17 @@ function showGroupCover(group, listItem) {
 }
 
 function showCover(data, entry) {
-  // ── Continuous reading view: title → TOC → text in one scroll ──
+  // ── Title page + TOC as separate view from reading ──
   const $textHeader = document.getElementById('text-header');
   $groupCover.style.display = 'none';
   $cover.style.display      = 'none';
   $toc.style.display        = 'none';
   $infoBar.style.display    = 'flex';
+  $passages.style.display   = 'none';
+  $navBar.style.display     = 'none';
+  $searchGroup.style.display = 'none';
+  $trBar.style.display      = 'none';
+  $bookGroup.style.display  = 'none';
 
   // Build title block
   const authorTxt = (data.author && data.author.length) ? data.author.join(', ') : '';
@@ -3310,9 +3358,10 @@ function showCover(data, entry) {
   if (trTxt)     html += `<div class="cc-translator">${escapeHTML(trTxt)}</div>`;
   if (dateParts.length) html += `<div class="cc-year">${escapeHTML(dateParts.join(' \u00b7 '))}</div>`;
   if (ssHtml)    html += `<div class="cc-source">${ssHtml}</div>`;
+  html += '<div class="cc-rule"></div>';
   html += '</div>';
 
-  // Build TOC if structured
+  // Build TOC
   const hier = data.hierarchy || [];
   const seen = new Set();
   const keys = [];
@@ -3321,68 +3370,71 @@ function showCover(data, entry) {
     if (!seen.has(k)) { seen.add(k); keys.push(k); }
   }
   const grouped = needsGroupSelector() && keys.length > 1;
+
+  html += '<div id="continuous-toc">';
+  html += `<div class="cc-toc-heading">Contents</div>`;
   if (grouped) {
-    html += '<div id="continuous-toc">';
-    html += `<div class="cc-toc-heading">Contents</div>`;
     html += `<div class="cc-toc-sub">${keys.length} ${hier[0] || 'section'}s \u00b7 ${data.passages.length.toLocaleString()} passages</div>`;
-    html += '<ul class="cc-toc-list">';
+  } else {
+    html += `<div class="cc-toc-sub">${data.passages.length.toLocaleString()} passages</div>`;
+  }
+  html += '<ul class="cc-toc-list">';
+
+  if (grouped) {
     keys.forEach((k, i) => {
       html += `<li data-book="${escapeHTML(k)}"><span class="cc-toc-num">${i + 1}</span><span class="cc-toc-name">${escapeHTML(groupName(k))}</span></li>`;
     });
-    html += '</ul></div>';
+  } else {
+    // Non-structured: single "Read" entry
+    html += `<li data-book="__all__"><span class="cc-toc-num">&rarr;</span><span class="cc-toc-name">Read the full text</span></li>`;
   }
+  html += '</ul>';
+  if (grouped) {
+    html += '<div class="cc-begin-wrap"><div class="cc-begin" id="cc-begin-btn">Read from beginning &rarr;</div></div>';
+  }
+  html += '</div>';
 
-  // Divider
-  html += '<div class="cc-divider"></div>';
-
-  // Put header in persistent container (survives passage re-renders)
   $textHeader.innerHTML = html;
   $textHeader.style.display = 'block';
 
-  // Wire TOC clicks
+  // Set up translation switcher in background
+  buildBookSelector();
+  buildTranslationSwitcher(currentEntry);
+
+  // Wire TOC clicks — each opens the reading view
   $textHeader.querySelectorAll('.cc-toc-list li').forEach(li => {
     li.addEventListener('click', () => {
-      currentBook = li.dataset.book;
-      enterReading(currentBook);
+      const book = li.dataset.book;
+      if (book === '__all__') {
+        enterReading();
+      } else {
+        currentBook = book;
+        enterReading(book);
+      }
     });
   });
 
-  // Set up controls + render passages directly below
-  buildBookSelector();
-  buildTranslationSwitcher(currentEntry);
-  $searchGroup.style.display = 'flex';
-
-  if (!grouped) {
-    // No book structure — render all passages immediately below header
-    enterReading();
-    $reader.scrollTop = 0; // Start at title
-  } else {
-    // Structured text — show TOC, passages appear when user clicks a chapter
-    // or add a "Read from beginning" link
-    $passages.style.display = 'none';
-    $navBar.style.display = 'none';
-
-    // Add "Read from beginning" button after TOC
-    const beginBtn = document.createElement('div');
-    beginBtn.className = 'cc-begin';
-    beginBtn.innerHTML = 'Read from beginning &rarr;';
+  // Wire "Read from beginning"
+  const beginBtn = document.getElementById('cc-begin-btn');
+  if (beginBtn) {
     beginBtn.addEventListener('click', () => {
-      const firstKey = keys[0];
-      currentBook = firstKey;
-      enterReading(firstKey);
+      currentBook = keys[0];
+      enterReading(keys[0]);
     });
-    document.getElementById('text-header').appendChild(beginBtn);
   }
+
+  $reader.scrollTop = 0;
 }
 
 function enterReading(targetGroupKey) {
   if (targetGroupKey != null) currentBook = String(targetGroupKey);
+
+  // Hide title/TOC view, show reading view
+  const $th = document.getElementById('text-header');
+  if ($th) $th.style.display = 'none';
   $cover.style.display    = 'none';
   $toc.style.display      = 'none';
   $passages.style.display = '';
-  // Keep text-header visible (title + TOC above passages)
-  const $th = document.getElementById('text-header');
-  if ($th) $th.style.display = 'block';
 
   buildBookSelector();
   buildTranslationSwitcher(currentEntry);
@@ -3396,13 +3448,8 @@ function enterReading(targetGroupKey) {
 
   filterAndRender();
   $searchGroup.style.display = 'flex';
-
-  // If coming from TOC click, scroll to passages (past title/TOC header)
-  if (targetGroupKey != null) {
-    $passages.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  } else {
-    $reader.scrollTop = 0;
-  }
+  document.getElementById('ctrl-contents').style.display = '';
+  $reader.scrollTop = 0;
 }
 
 function showToc(data, entry) {
@@ -4473,6 +4520,13 @@ function browseOpen(dataFile) {
       }
     }
   }
+}
+
+/** Return to title page + TOC for current text */
+function backToContents() {
+  if (!currentData || !currentEntry) return;
+  showCover(currentData, currentEntry);
+  document.getElementById('ctrl-contents').style.display = 'none';
 }
 
 /** Return to home (show welcome) */
