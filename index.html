@@ -745,6 +745,9 @@ body {
   margin-bottom: clamp(16px, 4vh, 36px);
 }
 #home-hub-link {
+  position: absolute;
+  top: 20px;
+  left: 24px;
   font-size: 12px;
   color: var(--chrome-muted);
   text-decoration: none;
@@ -903,19 +906,30 @@ body {
   margin-bottom: 28px;
   font-weight: normal;
 }
+/* ── Tradition-level tiles (compact pill grid) ───────────────────── */
+
 #browse-tiles {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-  gap: 14px;
   flex: 1;
   overflow-y: auto;
   align-content: start;
 }
+#browse-tiles.tile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 10px;
+}
+#browse-tiles.tile-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 8px;
+}
+
+/* Tradition tiles — compact, centered */
 .browse-tile {
   background: white;
   border: 1px solid var(--chrome-border);
-  border-radius: 10px;
-  padding: 22px 16px 18px;
+  border-radius: 8px;
+  padding: 16px 14px;
   cursor: pointer;
   text-align: center;
   transition: border-color 0.2s, box-shadow 0.2s, transform 0.12s, background 0.2s;
@@ -923,49 +937,92 @@ body {
 .browse-tile:hover {
   border-color: var(--chrome-active);
   background: #fdfaf6;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-  transform: translateY(-3px);
+  box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+  transform: translateY(-2px);
 }
 .browse-tile:active {
   transform: translateY(0);
-  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
 }
 .browse-tile .tile-title {
   font-family: Georgia, serif;
-  font-size: 16px;
+  font-size: 15px;
   color: var(--chrome-fg);
   line-height: 1.25;
-  margin-bottom: 0;
-}
-.browse-tile .tile-author {
-  font-size: 12px;
-  color: var(--chrome-muted);
-  margin-top: 6px;
-  font-family: system-ui, sans-serif;
-}
-.browse-tile .tile-year {
-  font-size: 11px;
-  color: var(--chrome-border);
-  margin-top: 3px;
-  font-family: system-ui, sans-serif;
 }
 .browse-tile .tile-count {
   font-size: 11px;
   color: var(--chrome-muted);
-  margin-top: 6px;
+  margin-top: 4px;
   font-family: system-ui, sans-serif;
-  letter-spacing: 0.02em;
 }
-.browse-tile .tile-star {
+
+/* Text tiles — horizontal row with left-aligned info */
+.text-tile {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: white;
+  border: 1px solid var(--chrome-border);
+  border-radius: 8px;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+}
+.text-tile:hover {
+  border-color: var(--chrome-active);
+  background: #fdfaf6;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+}
+.text-tile:active { box-shadow: none; }
+.text-tile .tt-star {
   color: #c49a3a;
-  margin-right: 2px;
+  font-size: 14px;
+  flex-shrink: 0;
+  width: 16px;
+  text-align: center;
 }
-.browse-tile .tile-divider {
-  width: 24px;
-  height: 1px;
-  background: var(--chrome-border);
-  margin: 8px auto 0;
+.text-tile .tt-info { flex: 1; min-width: 0; }
+.text-tile .tt-title {
+  font-family: Georgia, serif;
+  font-size: 15px;
+  color: var(--chrome-fg);
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
+.text-tile .tt-meta {
+  font-size: 11px;
+  color: var(--chrome-muted);
+  font-family: system-ui, sans-serif;
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.text-tile .tt-badge {
+  flex-shrink: 0;
+  font-size: 10px;
+  color: var(--chrome-muted);
+  background: var(--chrome-bg);
+  padding: 3px 8px;
+  border-radius: 10px;
+  font-family: system-ui, sans-serif;
+}
+
+/* Section dividers within text lists */
+.tile-section-label {
+  grid-column: 1 / -1;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--chrome-muted);
+  padding: 12px 0 4px;
+  border-bottom: 1px solid var(--chrome-border);
+  margin-bottom: 2px;
+}
+.tile-section-label:first-child { padding-top: 0; }
 
 @media (max-width: 720px) {
   #browse { padding: 20px 16px 60px; }
@@ -4104,15 +4161,34 @@ function browseCategory(cat) {
   const traditions = browseTree[cat] || {};
   const sorted = Object.entries(traditions).sort((a, b) => b[1].length - a[1].length);
 
+  $browseTiles.className = 'tile-grid';
   let html = '';
   for (const [trd, texts] of sorted) {
     html += `<div class="browse-tile" onclick="browseTradition('${escH(cat)}','${escH(trd)}')">
       <div class="tile-title">${escH(trd)}</div>
-      <div class="tile-divider"></div>
       <div class="tile-count">${texts.length} text${texts.length !== 1 ? 's' : ''}</div>
     </div>`;
   }
   $browseTiles.innerHTML = html;
+}
+
+/** Build HTML for a single text tile (compact row) */
+function _textTileHTML(t, cat, trd) {
+  const count = t.entries.length;
+  const authorArr = (t.author || []).filter(a => a && a !== 'Anonymous');
+  const authorStr = authorArr.join(', ');
+  const yearVal = t.entries[0].year;
+  const meta = [authorStr, yearVal].filter(Boolean).join(' · ');
+  const badge = count > 1 ? `<span class="tt-badge">${count} trans.</span>` : '';
+  const star = t.rank < 9999 ? '<span class="tt-star">★</span>' : '<span class="tt-star"></span>';
+  return `<div class="text-tile" onclick="browseText('${escH(cat)}','${escH(trd)}','${escH(t.id)}')">
+    ${star}
+    <div class="tt-info">
+      <div class="tt-title">${escH(t.title)}</div>
+      ${meta ? `<div class="tt-meta">${escH(meta)}</div>` : ''}
+    </div>
+    ${badge}
+  </div>`;
 }
 
 /** Level 2: show texts for a tradition */
@@ -4128,18 +4204,22 @@ function browseTradition(cat, trd) {
   $browseTitle.textContent = trd;
 
   const texts = (browseTree[cat] || {})[trd] || [];
+  $browseTiles.className = 'tile-list';
+  // Split into featured (ranked) and rest
+  const featured = texts.filter(t => t.rank < 9999);
+  const rest = texts.filter(t => t.rank >= 9999);
   let html = '';
-  for (const t of texts) {
-    const count = t.entries.length;
-    const authorStr = (t.author || []).filter(a => a && a !== 'Anonymous').join(', ');
-    const yearVal = t.entries[0].year;
-    const countBadge = count > 1 ? `<div class="tile-count">${count} translations</div>` : '';
-    html += `<div class="browse-tile" onclick="browseText('${escH(cat)}','${escH(trd)}','${escH(t.id)}')">
-      <div class="tile-title">${escH(t.title)}</div>
-      ${authorStr ? `<div class="tile-author">${escH(authorStr)}</div>` : ''}
-      ${yearVal ? `<div class="tile-year">${yearVal}</div>` : ''}
-      ${countBadge ? `<div class="tile-divider"></div>${countBadge}` : ''}
-    </div>`;
+  if (featured.length > 0 && rest.length > 0) {
+    html += '<div class="tile-section-label">Featured</div>';
+  }
+  for (const t of featured) {
+    html += _textTileHTML(t, cat, trd);
+  }
+  if (featured.length > 0 && rest.length > 0) {
+    html += '<div class="tile-section-label">All texts</div>';
+  }
+  for (const t of rest) {
+    html += _textTileHTML(t, cat, trd);
   }
   $browseTiles.innerHTML = html;
 }
@@ -4178,16 +4258,21 @@ function browseText(cat, trd, textId) {
     return (translationLabel(a) || '').localeCompare(translationLabel(b) || '');
   });
 
+  $browseTiles.className = 'tile-list';
   let html = '';
   for (const entry of sorted) {
     const label = translationLabel(entry) || entry.data_file;
-    const star = entry.quality === 'primary' ? '<span class="tile-star">★ </span>' : '';
+    const star = entry.quality === 'primary'
+      ? '<span class="tt-star">★</span>' : '<span class="tt-star"></span>';
     const tr = (entry.translator || []).filter(t => t && t !== 'Anonymous').join(', ');
     const yearStr = entry.year || '';
-    html += `<div class="browse-tile" onclick="browseOpen('${escH(entry.data_file)}')">
-      <div class="tile-title">${star}${escH(label)}</div>
-      ${tr ? `<div class="tile-author">tr. ${escH(tr)}</div>` : ''}
-      ${yearStr ? `<div class="tile-year">${yearStr}</div>` : ''}
+    const meta = [tr ? 'tr. ' + tr : '', yearStr].filter(Boolean).join(' · ');
+    html += `<div class="text-tile" onclick="browseOpen('${escH(entry.data_file)}')">
+      ${star}
+      <div class="tt-info">
+        <div class="tt-title">${escH(label)}</div>
+        ${meta ? `<div class="tt-meta">${escH(meta)}</div>` : ''}
+      </div>
     </div>`;
   }
   $browseTiles.innerHTML = html;
