@@ -716,12 +716,12 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 70vh;
-  padding: 40px 20px;
+  height: 100%;
+  padding: 0 20px;
 }
 #home-header {
   text-align: center;
-  margin-bottom: 48px;
+  margin-bottom: 40px;
 }
 #home-hub-link {
   font-size: 13px;
@@ -732,10 +732,10 @@ body {
 #home-hub-link:hover { text-decoration: underline; }
 #home-title {
   font-family: Georgia, serif;
-  font-size: 36px;
+  font-size: 38px;
   font-weight: normal;
   color: var(--chrome-active);
-  margin: 12px 0 8px;
+  margin: 14px 0 8px;
 }
 #home-subtitle {
   font-size: 15px;
@@ -745,8 +745,8 @@ body {
 #home-categories {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-  max-width: 480px;
+  gap: 20px;
+  max-width: 560px;
   width: 100%;
 }
 .home-cat {
@@ -754,30 +754,35 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 32px 24px;
+  padding: 36px 28px;
   font-family: Georgia, serif;
-  font-size: 20px;
+  font-size: 22px;
   color: var(--chrome-fg);
   background: var(--reader-bg);
-  border: 1px solid var(--chrome-border);
-  border-radius: 10px;
+  border: 2px solid var(--chrome-border);
+  border-radius: 12px;
   cursor: pointer;
-  transition: border-color 0.2s, box-shadow 0.2s, transform 0.1s;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.1s, background 0.2s;
 }
 .home-cat:hover {
   border-color: var(--chrome-active);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-  transform: translateY(-2px);
+  background: #f5f0ea;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.1);
+  transform: translateY(-3px);
+}
+.home-cat:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 .home-cat .home-cat-label { font-weight: normal; }
 .home-cat .home-cat-count {
   font-size: 13px;
   color: var(--chrome-muted);
-  margin-top: 6px;
+  margin-top: 8px;
   font-family: system-ui, sans-serif;
 }
 #home-footer {
-  margin-top: 48px;
+  margin-top: 40px;
   display: flex;
   gap: 24px;
   font-size: 13px;
@@ -791,15 +796,22 @@ body {
 @media (max-width: 500px) {
   #home-categories { grid-template-columns: 1fr; max-width: 280px; }
   #home-title { font-size: 28px; }
-  .home-cat { padding: 24px 20px; font-size: 18px; }
+  .home-cat { padding: 28px 20px; font-size: 18px; }
 }
+
+/* No scroll on home/browse — only reader passages scroll */
+#reader.browsing { overflow: hidden; }
+#reader.reading  { overflow-y: auto; }
 
 /* ── Browse view (center area tile navigation) ───────────────────── */
 
 #browse {
-  padding: 40px 48px 80px;
+  padding: 28px 48px 20px;
   max-width: 1100px;
   margin: 0 auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 #browse-breadcrumb {
   font-size: 14px;
@@ -827,14 +839,17 @@ body {
 }
 #browse-tiles {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+  flex: 1;
+  overflow-y: auto;
+  align-content: start;
 }
 .browse-tile {
   background: var(--reader-bg);
   border: 1px solid var(--chrome-border);
-  border-radius: 8px;
-  padding: 18px 20px;
+  border-radius: 6px;
+  padding: 14px 16px;
   cursor: pointer;
   transition: border-color 0.15s, box-shadow 0.15s, transform 0.08s;
 }
@@ -845,9 +860,9 @@ body {
 }
 .browse-tile .tile-title {
   font-family: Georgia, serif;
-  font-size: 17px;
+  font-size: 15px;
   color: var(--chrome-fg);
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 .browse-tile .tile-count {
   font-size: 13px;
@@ -1558,7 +1573,7 @@ mark.search-hl-active {
 
   <div id="panel">
 
-    <div id="controls">
+    <div id="controls" style="display:none;">
       <div class="ctrl-group">
         <label>Font</label>
         <select id="ctrl-font">
@@ -1630,7 +1645,7 @@ mark.search-hl-active {
 
     <div id="status"></div>
 
-    <div id="reader">
+    <div id="reader" class="browsing">
       <div id="reader-inner">
         <div id="welcome">
           <div id="welcome-home">
@@ -3941,13 +3956,15 @@ function showBrowse() {
   document.getElementById('group-cover').style.display = 'none';
   document.getElementById('text-toc').style.display    = 'none';
   document.getElementById('passages').innerHTML        = '';
-  $browse.style.display = 'block';
+  $browse.style.display = 'flex';
   // Hide reading controls
   document.getElementById('controls').style.display   = 'none';
   const ctrlTr = document.getElementById('ctrl-translation');
   if (ctrlTr) ctrlTr.style.display = 'none';
   const navBar = document.getElementById('nav-bar');
   if (navBar) navBar.style.display = 'none';
+  // No scroll in browse mode
+  document.getElementById('reader').className = 'browsing';
 }
 
 /** Build the data structures needed for browse from indexGroups */
@@ -4036,7 +4053,7 @@ function browseText(cat, trd, textId) {
     // Single translation — open directly
     $browse.style.display = 'none';
     document.getElementById('controls').style.display = '';
-    // (no sidebar state to reset)
+    document.getElementById('reader').className = 'reading';
     loadText(group[0]);
     return;
   }
@@ -4078,13 +4095,12 @@ function browseText(cat, trd, textId) {
 
 /** Open a specific translation by data_file */
 function browseOpen(dataFile) {
-  // Find the entry
   for (const entries of Object.values(indexGroups)) {
     for (const e of entries) {
       if (e.data_file === dataFile) {
         $browse.style.display = 'none';
         document.getElementById('controls').style.display = '';
-        // (no sidebar state to reset)
+        document.getElementById('reader').className = 'reading';
         loadText(e);
         return;
       }
@@ -4097,6 +4113,7 @@ function browseHome() {
   $browse.style.display = 'none';
   document.getElementById('controls').style.display = '';
   document.getElementById('welcome').style.display = '';
+  document.getElementById('reader').className = 'browsing';
 }
 
 /** Populate category counts on the home screen after index loads */
