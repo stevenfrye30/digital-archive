@@ -517,6 +517,7 @@ body {
 #reader {
   flex: 1;
   overflow-y: auto;
+  position: relative;
   padding: 48px 40px 100px;
   background: var(--reader-bg);
   color: var(--reader-fg);
@@ -533,7 +534,8 @@ body {
 /* ── Welcome / empty state ─────────────────────────────────────────────────── */
 
 #welcome {
-  margin-top: 80px;
+  position: absolute;
+  inset: 0;
   text-align: center;
   color: var(--chrome-muted);
   font-size: 16px;
@@ -726,98 +728,121 @@ body {
 
 /* ── Home screen (4 category buttons) ────────────────────────────── */
 
+/* ── Home: fixed viewport, no scroll ─────────────────────────────── */
+
 #welcome-home {
+  position: absolute;
+  inset: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%;
-  padding: 0 20px;
+  padding: 0 24px;
+  overflow: hidden;
 }
 #home-header {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: clamp(16px, 4vh, 36px);
 }
 #home-hub-link {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--chrome-muted);
   text-decoration: none;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 #home-hub-link:hover { text-decoration: underline; }
 #home-title {
   font-family: Georgia, serif;
-  font-size: 38px;
+  font-size: clamp(26px, 4vw, 40px);
   font-weight: normal;
   color: var(--chrome-active);
-  margin: 14px 0 8px;
+  margin: 10px 0 6px;
+  letter-spacing: -0.01em;
 }
 #home-subtitle {
-  font-size: 15px;
+  font-size: clamp(12px, 1.5vw, 15px);
   color: var(--chrome-muted);
   font-family: Georgia, serif;
+  font-style: italic;
 }
 #home-categories {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  max-width: 560px;
-  width: 100%;
+  gap: clamp(10px, 2vh, 18px);
+  width: min(520px, 80vw);
 }
 .home-cat {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 40px 28px;
+  aspect-ratio: 1.6;
+  padding: 12px 16px;
   font-family: Georgia, serif;
-  font-size: 24px;
+  font-size: clamp(18px, 2.5vw, 24px);
   color: white;
   border: none;
-  border-radius: 14px;
+  border-radius: 12px;
   cursor: pointer;
-  transition: box-shadow 0.2s, transform 0.15s, filter 0.2s;
-  border-left: 5px solid rgba(255,255,255,0.3);
+  transition: box-shadow 0.25s, transform 0.15s;
+  position: relative;
+  overflow: hidden;
 }
+.home-cat::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background: rgba(255,255,255,0.1);
+  transition: opacity 0.25s;
+}
+.home-cat:hover::before { opacity: 1; }
 .home-cat:hover {
-  box-shadow: 0 8px 28px rgba(0,0,0,0.18);
-  transform: translateY(-4px);
-  filter: brightness(1.08);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.22);
+  transform: translateY(-3px);
 }
 .home-cat:active {
   transform: translateY(0);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
-.home-cat[data-cat="Religion"]   { background: linear-gradient(135deg, #6b4e3d, #8a6a52); }
-.home-cat[data-cat="Philosophy"] { background: linear-gradient(135deg, #4a5e3d, #6a7e52); }
-.home-cat[data-cat="Literature"] { background: linear-gradient(135deg, #3d4e6b, #526a8a); }
-.home-cat[data-cat="Esoteric"]   { background: linear-gradient(135deg, #5e3d5e, #7a527a); }
-.home-cat .home-cat-label { font-weight: normal; letter-spacing: 0.02em; }
+.home-cat[data-cat="Religion"]   { background: linear-gradient(135deg, #5c3d2e, #8a6a4e); }
+.home-cat[data-cat="Philosophy"] { background: linear-gradient(135deg, #3a4e30, #5e7a45); }
+.home-cat[data-cat="Literature"] { background: linear-gradient(135deg, #2e3d5c, #4a6a8a); }
+.home-cat[data-cat="Esoteric"]   { background: linear-gradient(135deg, #4e2e4e, #7a4a7a); }
+.home-cat .home-cat-label {
+  font-weight: normal;
+  letter-spacing: 0.03em;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
 .home-cat .home-cat-count {
-  font-size: 13px;
-  color: rgba(255,255,255,0.7);
-  margin-top: 8px;
+  font-size: clamp(10px, 1.2vw, 13px);
+  color: rgba(255,255,255,0.65);
+  margin-top: 6px;
   font-family: system-ui, sans-serif;
 }
 #home-footer {
-  margin-top: 40px;
+  margin-top: clamp(12px, 3vh, 32px);
   display: flex;
-  gap: 24px;
-  font-size: 13px;
+  gap: 20px;
+  font-size: 12px;
 }
 #home-footer a {
   color: var(--chrome-muted);
   text-decoration: none;
+  letter-spacing: 0.03em;
 }
 #home-footer a:hover { text-decoration: underline; color: var(--chrome-active); }
 
 @media (max-width: 500px) {
-  #home-categories { grid-template-columns: 1fr; max-width: 280px; }
-  #home-title { font-size: 28px; }
-  .home-cat { padding: 28px 20px; font-size: 18px; }
+  #home-categories { grid-template-columns: 1fr; width: min(260px, 80vw); }
+  .home-cat { aspect-ratio: 2.5; }
 }
-
-/* All views scroll when needed */
+@media (max-height: 600px) {
+  #home-header { margin-bottom: 10px; }
+  .home-cat { aspect-ratio: 2; padding: 8px 12px; }
+  #home-footer { margin-top: 8px; }
+}
 
 /* ── Browse view (center area tile navigation) ───────────────────── */
 
@@ -1710,7 +1735,7 @@ mark.search-hl-active {
 
     <div id="status"></div>
 
-    <div id="reader" class="home">
+    <div id="reader" style="overflow:hidden;">
       <div id="reader-inner">
         <div id="welcome">
           <div id="welcome-home">
@@ -4030,8 +4055,10 @@ function showBrowse() {
   if (ctrlTr) ctrlTr.style.display = 'none';
   const navBar = document.getElementById('nav-bar');
   if (navBar) navBar.style.display = 'none';
-  // No scroll in browse mode
-  document.getElementById('reader').className = 'browsing';
+  // Restore scroll for browse
+  const reader = document.getElementById('reader');
+  reader.style.overflow = '';
+  reader.scrollTop = 0;
 }
 
 /** Build the data structures needed for browse from indexGroups */
@@ -4126,7 +4153,7 @@ function browseText(cat, trd, textId) {
     // Single translation — open directly
     $browse.style.display = 'none';
     document.getElementById('controls').style.display = '';
-    document.getElementById('reader').className = 'reading';
+    document.getElementById('reader').style.overflow = '';
     loadText(group[0]);
     return;
   }
@@ -4173,7 +4200,7 @@ function browseOpen(dataFile) {
       if (e.data_file === dataFile) {
         $browse.style.display = 'none';
         document.getElementById('controls').style.display = '';
-        document.getElementById('reader').className = 'reading';
+        document.getElementById('reader').style.overflow = '';
         loadText(e);
         return;
       }
@@ -4199,8 +4226,9 @@ function browseHome() {
   if (trBar) trBar.style.display = 'none';
   const infoBar = document.getElementById('info-bar');
   if (infoBar) infoBar.style.display = 'none';
-  // Scroll to top
-  document.getElementById('reader').scrollTop = 0;
+  const reader = document.getElementById('reader');
+  reader.scrollTop = 0;
+  reader.style.overflow = 'hidden';
 }
 
 /** Populate category counts on the home screen after index loads */
