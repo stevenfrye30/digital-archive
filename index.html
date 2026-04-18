@@ -754,30 +754,33 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 36px 28px;
+  padding: 40px 28px;
   font-family: Georgia, serif;
-  font-size: 22px;
-  color: var(--chrome-fg);
-  background: var(--reader-bg);
-  border: 2px solid var(--chrome-border);
-  border-radius: 12px;
+  font-size: 24px;
+  color: white;
+  border: none;
+  border-radius: 14px;
   cursor: pointer;
-  transition: border-color 0.2s, box-shadow 0.2s, transform 0.1s, background 0.2s;
+  transition: box-shadow 0.2s, transform 0.15s, filter 0.2s;
+  border-left: 5px solid rgba(255,255,255,0.3);
 }
 .home-cat:hover {
-  border-color: var(--chrome-active);
-  background: #f5f0ea;
-  box-shadow: 0 6px 24px rgba(0,0,0,0.1);
-  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.18);
+  transform: translateY(-4px);
+  filter: brightness(1.08);
 }
 .home-cat:active {
   transform: translateY(0);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
 }
-.home-cat .home-cat-label { font-weight: normal; }
+.home-cat[data-cat="Religion"]   { background: linear-gradient(135deg, #6b4e3d, #8a6a52); }
+.home-cat[data-cat="Philosophy"] { background: linear-gradient(135deg, #4a5e3d, #6a7e52); }
+.home-cat[data-cat="Literature"] { background: linear-gradient(135deg, #3d4e6b, #526a8a); }
+.home-cat[data-cat="Esoteric"]   { background: linear-gradient(135deg, #5e3d5e, #7a527a); }
+.home-cat .home-cat-label { font-weight: normal; letter-spacing: 0.02em; }
 .home-cat .home-cat-count {
   font-size: 13px;
-  color: var(--chrome-muted);
+  color: rgba(255,255,255,0.7);
   margin-top: 8px;
   font-family: system-ui, sans-serif;
 }
@@ -822,20 +825,21 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  padding: 8px 14px;
+  padding: 9px 16px;
   font-size: 14px;
+  font-weight: 600;
   font-family: system-ui, sans-serif;
-  color: var(--chrome-active);
-  background: var(--reader-bg);
-  border: 1px solid var(--chrome-border);
+  color: white;
+  background: var(--chrome-active);
+  border: none;
   border-radius: 6px;
   cursor: pointer;
-  transition: background 0.15s, border-color 0.15s;
+  transition: background 0.15s, box-shadow 0.15s;
   flex-shrink: 0;
 }
 #browse-back:hover {
-  background: #f0ece5;
-  border-color: var(--chrome-active);
+  background: #5a3a1a;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 #browse-breadcrumb {
   font-size: 15px;
@@ -869,36 +873,41 @@ body {
   align-content: start;
 }
 .browse-tile {
-  background: var(--reader-bg);
+  background: white;
   border: 1px solid var(--chrome-border);
+  border-left: 4px solid var(--chrome-active);
   border-radius: 6px;
-  padding: 14px 16px;
+  padding: 16px 18px;
   cursor: pointer;
-  transition: border-color 0.15s, box-shadow 0.15s, transform 0.08s;
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.1s, background 0.15s;
 }
 .browse-tile:hover {
-  border-color: var(--chrome-active);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  transform: translateY(-1px);
+  border-left-color: #5a3a1a;
+  background: #faf6f0;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
+}
+.browse-tile:active {
+  transform: translateY(0);
 }
 .browse-tile .tile-title {
   font-family: Georgia, serif;
-  font-size: 15px;
+  font-size: 16px;
   color: var(--chrome-fg);
-  margin-bottom: 2px;
+  margin-bottom: 3px;
 }
 .browse-tile .tile-count {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--chrome-muted);
 }
 .browse-tile .tile-author {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--chrome-muted);
   margin-top: 4px;
 }
 .browse-tile .tile-star {
-  color: var(--chrome-active);
-  margin-right: 2px;
+  color: #c49a3a;
+  margin-right: 3px;
 }
 
 @media (max-width: 720px) {
