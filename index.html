@@ -761,27 +761,32 @@ body {
 
 /* ── Wrapped reading mode ────────────────────────────────────────── */
 
-#reader-inner.wrap-mode #passages {
-  max-width: 700px;
-}
 #reader-inner.wrap-mode .passage {
   display: inline;
   padding: 0;
+  padding-left: 0;
   margin: 0;
+  margin-bottom: 0;
+  position: static;
 }
 #reader-inner.wrap-mode .passage .ref {
-  font-size: 0.7em;
+  font-size: 0.65em;
   color: var(--chrome-muted);
   vertical-align: super;
-  position: static;
-  margin: 0 2px;
+  position: static !important;
+  left: auto !important;
+  width: auto !important;
+  text-align: left !important;
+  margin: 0 1px 0 3px;
   padding: 0;
-  opacity: 0.5;
+  opacity: 0.4;
+  display: inline;
 }
 #reader-inner.wrap-mode .passage .ref:hover { opacity: 1; }
 #reader-inner.wrap-mode .footnote-body {
   display: block;
-  margin: 8px 0 8px 20px;
+  margin: 8px 0 8px 0;
+  padding-left: 0;
 }
 #reader-inner.wrap-mode .chapter-heading {
   display: block;
