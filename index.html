@@ -880,8 +880,8 @@ body {
 }
 #browse-tiles {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 14px;
   flex: 1;
   overflow-y: auto;
   align-content: start;
@@ -889,39 +889,57 @@ body {
 .browse-tile {
   background: white;
   border: 1px solid var(--chrome-border);
-  border-left: 4px solid var(--chrome-active);
-  border-radius: 6px;
-  padding: 16px 18px;
+  border-radius: 10px;
+  padding: 22px 16px 18px;
   cursor: pointer;
-  transition: border-color 0.15s, box-shadow 0.15s, transform 0.1s, background 0.15s;
+  text-align: center;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.12s, background 0.2s;
 }
 .browse-tile:hover {
-  border-left-color: #5a3a1a;
-  background: #faf6f0;
-  box-shadow: 0 3px 12px rgba(0,0,0,0.1);
-  transform: translateY(-2px);
+  border-color: var(--chrome-active);
+  background: #fdfaf6;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  transform: translateY(-3px);
 }
 .browse-tile:active {
   transform: translateY(0);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
 }
 .browse-tile .tile-title {
   font-family: Georgia, serif;
   font-size: 16px;
   color: var(--chrome-fg);
-  margin-bottom: 3px;
-}
-.browse-tile .tile-count {
-  font-size: 12px;
-  color: var(--chrome-muted);
+  line-height: 1.25;
+  margin-bottom: 0;
 }
 .browse-tile .tile-author {
   font-size: 12px;
   color: var(--chrome-muted);
-  margin-top: 4px;
+  margin-top: 6px;
+  font-family: system-ui, sans-serif;
+}
+.browse-tile .tile-year {
+  font-size: 11px;
+  color: var(--chrome-border);
+  margin-top: 3px;
+  font-family: system-ui, sans-serif;
+}
+.browse-tile .tile-count {
+  font-size: 11px;
+  color: var(--chrome-muted);
+  margin-top: 6px;
+  font-family: system-ui, sans-serif;
+  letter-spacing: 0.02em;
 }
 .browse-tile .tile-star {
   color: #c49a3a;
-  margin-right: 3px;
+  margin-right: 2px;
+}
+.browse-tile .tile-divider {
+  width: 24px;
+  height: 1px;
+  background: var(--chrome-border);
+  margin: 8px auto 0;
 }
 
 @media (max-width: 720px) {
@@ -4059,6 +4077,7 @@ function browseCategory(cat) {
   for (const [trd, texts] of sorted) {
     html += `<div class="browse-tile" onclick="browseTradition('${escH(cat)}','${escH(trd)}')">
       <div class="tile-title">${escH(trd)}</div>
+      <div class="tile-divider"></div>
       <div class="tile-count">${texts.length} text${texts.length !== 1 ? 's' : ''}</div>
     </div>`;
   }
@@ -4082,11 +4101,13 @@ function browseTradition(cat, trd) {
   for (const t of texts) {
     const count = t.entries.length;
     const authorStr = (t.author || []).filter(a => a && a !== 'Anonymous').join(', ');
-    const countBadge = count > 1 ? `<div class="tile-count">${count} translation${count > 1 ? 's' : ''}</div>` : '';
+    const yearVal = t.entries[0].year;
+    const countBadge = count > 1 ? `<div class="tile-count">${count} translations</div>` : '';
     html += `<div class="browse-tile" onclick="browseText('${escH(cat)}','${escH(trd)}','${escH(t.id)}')">
       <div class="tile-title">${escH(t.title)}</div>
       ${authorStr ? `<div class="tile-author">${escH(authorStr)}</div>` : ''}
-      ${countBadge}
+      ${yearVal ? `<div class="tile-year">${yearVal}</div>` : ''}
+      ${countBadge ? `<div class="tile-divider"></div>${countBadge}` : ''}
     </div>`;
   }
   $browseTiles.innerHTML = html;
@@ -4129,12 +4150,13 @@ function browseText(cat, trd, textId) {
   let html = '';
   for (const entry of sorted) {
     const label = translationLabel(entry) || entry.data_file;
-    const star = entry.quality === 'primary' ? '<span class="tile-star">★</span>' : '';
+    const star = entry.quality === 'primary' ? '<span class="tile-star">★ </span>' : '';
     const tr = (entry.translator || []).filter(t => t && t !== 'Anonymous').join(', ');
-    const year = entry.year ? ` (${entry.year})` : '';
+    const yearStr = entry.year || '';
     html += `<div class="browse-tile" onclick="browseOpen('${escH(entry.data_file)}')">
       <div class="tile-title">${star}${escH(label)}</div>
-      ${tr ? `<div class="tile-author">tr. ${escH(tr)}${year}</div>` : ''}
+      ${tr ? `<div class="tile-author">tr. ${escH(tr)}</div>` : ''}
+      ${yearStr ? `<div class="tile-year">${yearStr}</div>` : ''}
     </div>`;
   }
   $browseTiles.innerHTML = html;
