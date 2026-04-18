@@ -999,6 +999,68 @@ body {
 }
 #home-footer a:hover { text-decoration: underline; color: var(--chrome-active); }
 
+#home-recent-panel {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  width: 200px;
+  font-size: 13px;
+  font-family: system-ui, sans-serif;
+  color: var(--chrome-muted);
+}
+#home-recent-panel .welcome-section-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--chrome-muted);
+  margin-bottom: 6px;
+}
+#home-recent-panel #continue-btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: white;
+  border: 1px solid var(--chrome-border);
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-family: Georgia, serif;
+  color: var(--chrome-fg);
+  cursor: pointer;
+  transition: border-color 0.15s;
+  margin-bottom: 12px;
+}
+#home-recent-panel #continue-btn:hover { border-color: var(--chrome-active); }
+#home-recent-panel #recent-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+#home-recent-panel #recent-list li {
+  padding: 5px 0;
+  font-size: 12px;
+  cursor: pointer;
+  color: var(--chrome-fg);
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  transition: color 0.15s;
+}
+#home-recent-panel #recent-list li:hover { color: var(--chrome-active); }
+#home-recent-panel #recent-list li .recent-sub {
+  display: block;
+  font-size: 10px;
+  color: var(--chrome-muted);
+}
+
+@media (max-width: 700px) {
+  #home-recent-panel {
+    position: static;
+    width: auto;
+    max-width: 300px;
+    margin: 20px auto 0;
+    text-align: center;
+  }
+}
 @media (max-width: 500px) {
   #home-categories { grid-template-columns: 1fr; width: min(260px, 80vw); }
   .home-cat { aspect-ratio: 2.5; }
@@ -1988,19 +2050,21 @@ mark.search-hl-active {
               <a href="translators.html">Translators</a>
             </div>
           </div>
+          <div id="home-recent-panel">
+            <div id="welcome-continue" style="display:none;">
+              <div class="welcome-section-label">Continue reading</div>
+              <button type="button" id="continue-btn"></button>
+            </div>
+            <div id="welcome-recent" style="display:none;">
+              <div class="welcome-section-label">Recently read</div>
+              <ul id="recent-list"></ul>
+            </div>
+          </div>
           <div id="welcome-search" style="display:none;">
             <div class="welcome-section-label">Search across the corpus</div>
             <input type="search" id="global-search" placeholder="Find texts containing &hellip;" autocomplete="off">
             <div id="global-search-status"></div>
             <ul id="global-search-results"></ul>
-          </div>
-          <div id="welcome-continue" style="display:none;">
-            <div class="welcome-section-label">Continue reading</div>
-            <button type="button" id="continue-btn"></button>
-          </div>
-          <div id="welcome-recent" style="display:none;">
-            <div class="welcome-section-label">Recently read</div>
-            <ul id="recent-list"></ul>
           </div>
         </div>
 
