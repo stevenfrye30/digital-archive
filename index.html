@@ -946,10 +946,106 @@ body {
   box-shadow: 0 3px 10px rgba(0,0,0,0.15);
 }
 
+/* ── Browse toolbar ───────────────────────────────────────────────── */
+
+#browse-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 14px;
+  font-size: 12px;
+  font-family: system-ui, sans-serif;
+  color: var(--chrome-muted);
+  flex-wrap: wrap;
+}
+.bt-views {
+  display: flex;
+  gap: 2px;
+  background: var(--chrome-bg);
+  border-radius: 6px;
+  padding: 2px;
+}
+.bt-btn {
+  padding: 5px 10px;
+  border: none;
+  background: transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--chrome-muted);
+  transition: background 0.15s, color 0.15s;
+}
+.bt-btn.active { background: white; color: var(--chrome-fg); box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.bt-btn:hover { color: var(--chrome-fg); }
+.bt-sort, .bt-color { display: flex; align-items: center; gap: 4px; }
+.bt-sort select, .bt-color select {
+  padding: 4px 8px;
+  border: 1px solid var(--chrome-border);
+  border-radius: 4px;
+  background: white;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+/* ── Colored text tiles ──────────────────────────────────────────── */
+
+.text-tile.era-ancient  { border-left: 4px solid #8a6a3a; }
+.text-tile.era-classical { border-left: 4px solid #5a7a3a; }
+.text-tile.era-medieval  { border-left: 4px solid #3a5a7a; }
+.text-tile.era-early-modern { border-left: 4px solid #6a3a6a; }
+.text-tile.era-modern    { border-left: 4px solid #3a3a3a; }
+
+.text-tile.imp-1 { border-left: 4px solid #c4993a; }
+.text-tile.imp-2 { border-left: 4px solid #8a7a5a; }
+.text-tile.imp-3 { border-left: 4px solid #aaa; }
+
+/* Grid view for text tiles */
+#browse-tiles.tile-grid-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+}
+#browse-tiles.tile-grid-cards .text-tile {
+  flex-direction: column;
+  text-align: center;
+  padding: 20px 14px 16px;
+  border-left: none;
+  border-top: 4px solid var(--chrome-border);
+}
+#browse-tiles.tile-grid-cards .text-tile .tt-star { position: absolute; top: 6px; right: 8px; }
+#browse-tiles.tile-grid-cards .text-tile .tt-info { width: 100%; }
+#browse-tiles.tile-grid-cards .text-tile .tt-title {
+  white-space: normal;
+  font-size: 14px;
+  line-height: 1.3;
+}
+#browse-tiles.tile-grid-cards .text-tile .tt-meta { margin-top: 6px; white-space: normal; }
+#browse-tiles.tile-grid-cards .text-tile .tt-badge {
+  margin-top: 8px;
+  display: inline-block;
+}
+#browse-tiles.tile-grid-cards .text-tile { position: relative; }
+
+/* Era colors in grid */
+#browse-tiles.tile-grid-cards .text-tile.era-ancient  { border-top-color: #8a6a3a; }
+#browse-tiles.tile-grid-cards .text-tile.era-classical { border-top-color: #5a7a3a; }
+#browse-tiles.tile-grid-cards .text-tile.era-medieval  { border-top-color: #3a5a7a; }
+#browse-tiles.tile-grid-cards .text-tile.era-early-modern { border-top-color: #6a3a6a; }
+#browse-tiles.tile-grid-cards .text-tile.era-modern    { border-top-color: #3a3a3a; }
+#browse-tiles.tile-grid-cards .text-tile.imp-1 { border-top-color: #c4993a; }
+#browse-tiles.tile-grid-cards .text-tile.imp-2 { border-top-color: #8a7a5a; }
+#browse-tiles.tile-grid-cards .text-tile.imp-3 { border-top-color: #aaa; }
+
+/* Section dividers in grid mode */
+#browse-tiles.tile-grid-cards .tile-section-label {
+  grid-column: 1 / -1;
+}
+
 @media (max-width: 600px) {
   .cc-toc-list { grid-template-columns: 1fr; }
   .cc-title { font-size: 1.6em; }
   #continuous-cover { padding-top: 36px; }
+  #browse-tiles.tile-grid-cards { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
 }
 
 /* ── Home screen (4 category buttons) ────────────────────────────── */
@@ -2139,6 +2235,29 @@ mark.search-hl-active {
             <div id="browse-breadcrumb"></div>
           </div>
           <div id="browse-title"></div>
+          <div id="browse-toolbar" style="display:none;">
+            <div class="bt-views">
+              <button class="bt-btn active" data-view="grid" title="Grid">▦</button>
+              <button class="bt-btn" data-view="list" title="List">☰</button>
+            </div>
+            <div class="bt-sort">
+              <label>Sort:</label>
+              <select id="browse-sort">
+                <option value="importance">Importance</option>
+                <option value="alpha">A–Z</option>
+                <option value="year">Year</option>
+                <option value="author">Author</option>
+              </select>
+            </div>
+            <div class="bt-color">
+              <label>Color:</label>
+              <select id="browse-color">
+                <option value="none">None</option>
+                <option value="era">Era</option>
+                <option value="importance">Importance</option>
+              </select>
+            </div>
+          </div>
           <div id="browse-tiles"></div>
         </div>
         <div id="text-cover" style="display:none;">
@@ -4599,6 +4718,7 @@ function browseCategory(cat) {
   const traditions = browseTree[cat] || {};
   const sorted = Object.entries(traditions).sort((a, b) => b[1].length - a[1].length);
 
+  document.getElementById('browse-toolbar').style.display = 'none';
   $browseTiles.className = 'tile-grid';
   let html = '';
   for (const [trd, texts] of sorted) {
@@ -4610,7 +4730,27 @@ function browseCategory(cat) {
   $browseTiles.innerHTML = html;
 }
 
-/** Build HTML for a single text tile (compact row) */
+/** Determine era class from year */
+function _eraClass(year) {
+  if (!year) return '';
+  const y = parseInt(year);
+  if (isNaN(y)) return '';
+  if (y < -500)  return 'era-ancient';
+  if (y < 500)   return 'era-classical';
+  if (y < 1500)  return 'era-medieval';
+  if (y < 1800)  return 'era-early-modern';
+  return 'era-modern';
+}
+
+/** Determine importance class */
+function _impClass(rank) {
+  if (rank <= 5)   return 'imp-1';
+  if (rank <= 20)  return 'imp-2';
+  if (rank < 9999) return 'imp-3';
+  return '';
+}
+
+/** Build HTML for a single text tile */
 function _textTileHTML(t, cat, trd) {
   const count = t.entries.length;
   const authorArr = (t.author || []).filter(a => a && a !== 'Anonymous');
@@ -4619,7 +4759,11 @@ function _textTileHTML(t, cat, trd) {
   const meta = [authorStr, yearVal].filter(Boolean).join(' · ');
   const badge = count > 1 ? `<span class="tt-badge">${count} trans.</span>` : '';
   const star = t.rank < 9999 ? '<span class="tt-star">★</span>' : '<span class="tt-star"></span>';
-  return `<div class="text-tile" onclick="browseText('${escH(cat)}','${escH(trd)}','${escH(t.id)}')">
+  const colorMode = document.getElementById('browse-color').value;
+  let colorClass = '';
+  if (colorMode === 'era') colorClass = _eraClass(yearVal);
+  else if (colorMode === 'importance') colorClass = _impClass(t.rank);
+  return `<div class="text-tile ${colorClass}" onclick="browseText('${escH(cat)}','${escH(trd)}','${escH(t.id)}')">
     ${star}
     <div class="tt-info">
       <div class="tt-title">${escH(t.title)}</div>
@@ -4628,6 +4772,9 @@ function _textTileHTML(t, cat, trd) {
     ${badge}
   </div>`;
 }
+
+/** Current browse state for re-rendering */
+let _browseState = null;
 
 /** Level 2: show texts for a tradition */
 function browseTradition(cat, trd) {
@@ -4642,22 +4789,56 @@ function browseTradition(cat, trd) {
   $browseTitle.textContent = trd;
 
   const texts = (browseTree[cat] || {})[trd] || [];
-  $browseTiles.className = 'tile-list';
-  // Split into featured (ranked) and rest
-  const featured = texts.filter(t => t.rank < 9999);
-  const rest = texts.filter(t => t.rank >= 9999);
+  _browseState = { type: 'texts', cat, trd, texts };
+  document.getElementById('browse-toolbar').style.display = 'flex';
+  _renderTextTiles();
+}
+
+/** Re-render text tiles with current sort/color/view settings */
+function _renderTextTiles() {
+  if (!_browseState || _browseState.type !== 'texts') return;
+  const { cat, trd, texts } = _browseState;
+  const sortBy = document.getElementById('browse-sort').value;
+  const viewMode = document.querySelector('.bt-btn.active').dataset.view;
+
+  // Sort
+  const sorted = texts.slice();
+  if (sortBy === 'alpha') {
+    sorted.sort((a, b) => a.title.localeCompare(b.title));
+  } else if (sortBy === 'year') {
+    sorted.sort((a, b) => (a.entries[0].year || 9999) - (b.entries[0].year || 9999));
+  } else if (sortBy === 'author') {
+    sorted.sort((a, b) => {
+      const aa = (a.author || []).join('') || 'zzz';
+      const ba = (b.author || []).join('') || 'zzz';
+      return aa.localeCompare(ba);
+    });
+  } else {
+    // importance (default)
+    sorted.sort((a, b) => {
+      if (a.rank !== b.rank) return a.rank - b.rank;
+      return a.title.localeCompare(b.title);
+    });
+  }
+
+  // Set view class
+  $browseTiles.className = viewMode === 'grid' ? 'tile-grid-cards' : 'tile-list';
+
+  // Split featured/rest for importance sort
   let html = '';
-  if (featured.length > 0 && rest.length > 0) {
-    html += '<div class="tile-section-label">Featured</div>';
-  }
-  for (const t of featured) {
-    html += _textTileHTML(t, cat, trd);
-  }
-  if (featured.length > 0 && rest.length > 0) {
-    html += '<div class="tile-section-label">All texts</div>';
-  }
-  for (const t of rest) {
-    html += _textTileHTML(t, cat, trd);
+  if (sortBy === 'importance') {
+    const featured = sorted.filter(t => t.rank < 9999);
+    const rest = sorted.filter(t => t.rank >= 9999);
+    if (featured.length > 0 && rest.length > 0) {
+      html += '<div class="tile-section-label">Featured</div>';
+    }
+    for (const t of featured) html += _textTileHTML(t, cat, trd);
+    if (featured.length > 0 && rest.length > 0) {
+      html += '<div class="tile-section-label">All texts</div>';
+    }
+    for (const t of rest) html += _textTileHTML(t, cat, trd);
+  } else {
+    for (const t of sorted) html += _textTileHTML(t, cat, trd);
   }
   $browseTiles.innerHTML = html;
 }
@@ -4678,6 +4859,7 @@ function browseText(cat, trd, textId) {
 
   // Multiple translations — show chooser tiles
   showBrowse();
+  document.getElementById('browse-toolbar').style.display = 'none';
   browseHistory = [{fn: browseHome}, {fn: browseCategory, args: [cat]}, {fn: browseTradition, args: [cat, trd]}];
 
   const title = group[0].title;
@@ -4775,6 +4957,17 @@ function updateHomeCounts() {
       `${textCount} texts · ${tradCount} traditions`;
   });
 }
+
+// Wire browse toolbar
+document.querySelectorAll('.bt-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.bt-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    _renderTextTiles();
+  });
+});
+document.getElementById('browse-sort').addEventListener('change', _renderTextTiles);
+document.getElementById('browse-color').addEventListener('change', _renderTextTiles);
 
 // Wire home-screen category buttons
 document.querySelectorAll('.home-cat').forEach(btn => {
