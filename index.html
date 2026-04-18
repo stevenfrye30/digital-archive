@@ -3178,6 +3178,15 @@ function navTo(idx) {
   updateNav();
   clearSearch();
   filterAndRender();
+
+  // Update chapter heading
+  const existingHeader = $passages.querySelector('.chapter-heading');
+  if (existingHeader) existingHeader.remove();
+  const heading = document.createElement('div');
+  heading.className = 'chapter-heading';
+  heading.textContent = groupName(currentBook);
+  $passages.prepend(heading);
+
   $reader.scrollTop = 0;
 }
 
@@ -3534,11 +3543,19 @@ function enterReading(targetGroupKey) {
   buildBookSelector();
   buildTranslationSwitcher(currentEntry);
 
-  if (!needsGroupSelector()) {
-    $navBar.style.display    = 'flex';
-    $navPrev.disabled        = true;
-    $navNext.disabled        = true;
-    $navLocation.textContent = `${allPassages.length} passages`;
+  // Always show nav bar
+  $navBar.style.display = 'flex';
+  if (needsGroupSelector() && currentBook && currentBook !== '__fm__') {
+    // Structured text with chapters — enable prev/next
+    const idx = groupKeys.indexOf(currentBook);
+    if (idx >= 0) {
+      groupIndex = idx;
+      updateNav();
+    }
+  } else {
+    $navPrev.disabled = true;
+    $navNext.disabled = true;
+    $navLocation.textContent = `${allPassages.filter(p => !p.fm).length} passages`;
   }
 
   filterAndRender();
