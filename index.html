@@ -3363,8 +3363,7 @@ document.addEventListener('keydown', (e) => {
 
 async function loadText(entry, listItem) {
   if (activeItem) activeItem.classList.remove('active');
-  listItem.classList.add('active');
-  activeItem = listItem;
+  if (listItem) { listItem.classList.add('active'); activeItem = listItem; }
   currentEntry = entry;
 
   $welcome.style.display     = 'none';
