@@ -799,8 +799,9 @@ body {
   .home-cat { padding: 28px 20px; font-size: 18px; }
 }
 
-/* No scroll on home/browse — only reader passages scroll */
-#reader.browsing { overflow: hidden; }
+/* Home: no scroll. Browse + reading: scroll allowed */
+#reader.home     { overflow: hidden; }
+#reader.browsing { overflow-y: auto; }
 #reader.reading  { overflow-y: auto; }
 
 /* ── Browse view (center area tile navigation) ───────────────────── */
@@ -1645,7 +1646,7 @@ mark.search-hl-active {
 
     <div id="status"></div>
 
-    <div id="reader" class="browsing">
+    <div id="reader" class="home">
       <div id="reader-inner">
         <div id="welcome">
           <div id="welcome-home">
@@ -4110,9 +4111,9 @@ function browseOpen(dataFile) {
 /** Return to home (show welcome) */
 function browseHome() {
   $browse.style.display = 'none';
-  document.getElementById('controls').style.display = '';
+  document.getElementById('controls').style.display = 'none';
   document.getElementById('welcome').style.display = '';
-  document.getElementById('reader').className = 'browsing';
+  document.getElementById('reader').className = 'home';
 }
 
 /** Populate category counts on the home screen after index loads */
