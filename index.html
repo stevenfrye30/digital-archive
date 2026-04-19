@@ -859,6 +859,18 @@ body {
   margin-right: 6px;
 }
 .cc-cite-text { }
+.cc-restricted {
+  max-width: 480px;
+  margin: 12px auto;
+  padding: 8px 14px;
+  background: #fff3e0;
+  border: 1px solid #e8c080;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #8a5a1a;
+  text-align: center;
+  font-family: system-ui, sans-serif;
+}
 .cc-rule {
   width: 50px;
   height: 1px;
@@ -3762,6 +3774,7 @@ function showCover(data, entry) {
   if (trTxt)     html += `<div class="cc-translator">${escapeHTML(trTxt)}</div>`;
   if (dateParts.length) html += `<div class="cc-year">${escapeHTML(dateParts.join(' \u00b7 '))}</div>`;
   if (ssHtml)    html += `<div class="cc-source">${ssHtml}</div>`;
+  if (data.restricted) html += `<div class="cc-restricted">🔒 Restricted — copyrighted, local only. Not on public site.</div>`;
 
   // Generate MLA and APA citations
   const citeAuthor = authorTxt || 'Anonymous';

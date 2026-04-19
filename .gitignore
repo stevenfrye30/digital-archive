@@ -11,6 +11,10 @@ issues.html
 metadata_audit.html
 source_status.html
 
+# Restricted/copyrighted texts — local only, never push
+data/dead-sea-scrolls-*.json
+data/dead-sea-scrolls-*.json.gz
+
 # Local runtime
 .server.pid
 .claude/
