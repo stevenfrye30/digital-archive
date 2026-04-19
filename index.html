@@ -1012,6 +1012,27 @@ body {
   border-color: var(--chrome-active);
 }
 
+.cc-fm-btn-wrap {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.cc-fm-btn {
+  display: inline-block;
+  padding: 10px 24px;
+  font-size: 13px;
+  font-family: system-ui, sans-serif;
+  color: #8a5a1a;
+  background: #fff3e0;
+  border: 1px solid #e8c080;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+.cc-fm-btn:hover {
+  background: #ffe8c0;
+  border-color: #c4993a;
+}
+
 .cc-begin-wrap {
   text-align: center;
   margin-top: 24px;
@@ -3934,31 +3955,32 @@ function showCover(data, entry) {
     const k = String(p.path[0]);
     if (!seen.has(k)) { seen.add(k); keys.push(k); }
   }
-  const grouped = needsGroupSelector() && keys.length > 1;
+  const grouped = needsGroupSelector() && keys.length > 1 && keys.length <= 200;
+
+  // Check for front-matter passages
+  const hasFrontMatter = data.passages.some(p => p.fm);
+  const bodyCount = data.passages.filter(p => !p.fm).length;
 
   html += '<div id="continuous-toc">';
   html += `<div class="cc-toc-heading">Contents</div>`;
+
   if (grouped) {
-    html += `<div class="cc-toc-sub">${keys.length} ${hier[0] || 'section'}s \u00b7 ${data.passages.length.toLocaleString()} passages</div>`;
+    html += `<div class="cc-toc-sub">${keys.length} ${hier[0] || 'section'}s \u00b7 ${bodyCount.toLocaleString()} passages</div>`;
   } else {
-    html += `<div class="cc-toc-sub">${data.passages.length.toLocaleString()} passages</div>`;
+    html += `<div class="cc-toc-sub">${bodyCount.toLocaleString()} passages</div>`;
   }
-  // Check for front-matter passages
-  const hasFrontMatter = data.passages.some(p => p.fm);
+
+  // Front Matter button — always first if it exists
+  if (hasFrontMatter) {
+    html += '<div class="cc-fm-btn-wrap"><div class="cc-fm-btn" data-book="__fm__">✦ Front Matter</div></div>';
+  }
 
   html += '<ul class="cc-toc-list">';
-
-  // Add Front Matter entry if any passages are tagged
-  if (hasFrontMatter) {
-    html += `<li data-book="__fm__" class="cc-toc-front"><span class="cc-toc-num">✦</span><span class="cc-toc-name">Front Matter</span></li>`;
-  }
-
   if (grouped) {
     keys.forEach((k, i) => {
       html += `<li data-book="${escapeHTML(k)}"><span class="cc-toc-num">${i + 1}</span><span class="cc-toc-name">${escapeHTML(groupName(k))}</span></li>`;
     });
   } else {
-    // Non-structured: single "Read" entry
     html += `<li data-book="__all__"><span class="cc-toc-num">&rarr;</span><span class="cc-toc-name">Read the full text</span></li>`;
   }
   html += '</ul>';
@@ -3984,6 +4006,12 @@ function showCover(data, entry) {
       });
     });
   });
+
+  // Wire front-matter button
+  const fmBtn = $textHeader.querySelector('.cc-fm-btn');
+  if (fmBtn) {
+    fmBtn.addEventListener('click', () => enterReading('__fm__'));
+  }
 
   // Wire TOC clicks — each opens the reading view
   $textHeader.querySelectorAll('.cc-toc-list li').forEach(li => {
@@ -4079,7 +4107,7 @@ function showToc(data, entry) {
     if (!seen.has(k)) { seen.add(k); keys.push(k); }
   }
 
-  const grouped = needsGroupSelector() && keys.length > 1;
+  const grouped = needsGroupSelector() && keys.length > 1 && keys.length <= 200;
   $tocSubtitle.textContent = grouped
     ? `${keys.length} ${hier[0]}s \u00b7 ${data.passages.length.toLocaleString()} passages`
     : `${data.passages.length.toLocaleString()} passages`;
