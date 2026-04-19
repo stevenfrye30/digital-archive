@@ -1787,31 +1787,6 @@
       "importance_rank": null
     },
     {
-      "id": "georgian-folktales-wardrop",
-      "title": "Georgian Folk Tales",
-      "tradition": "Celtic",
-      "collection": "sacred",
-      "hierarchy": [
-        "chapter",
-        "verse"
-      ],
-      "data_file": "georgian-folktales-wardrop_wardrop.json",
-      "source": "sacredtexts",
-      "author": [
-        "Various"
-      ],
-      "translator": [
-        "Marjory Wardrop"
-      ],
-      "year": 1894,
-      "translation_label": "Georgian Folk Tales",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "popular",
-      "source_summary": "*Georgian Folk Tales* Marjory Wardrop (1894). Via SacredTexts.com.",
-      "importance_rank": null
-    },
-    {
       "id": "gods-fighting-men-gregory",
       "title": "Gods and Fighting Men",
       "tradition": "Celtic",
@@ -4808,31 +4783,6 @@
       "importance_rank": null
     },
     {
-      "id": "milton-paradise-lost",
-      "title": "Paradise Lost",
-      "tradition": "Christian",
-      "collection": "sacred",
-      "hierarchy": [
-        "chapter",
-        "verse"
-      ],
-      "data_file": "milton-paradise-lost_milton.json",
-      "source": "gutenberg",
-      "author": [
-        "John Milton"
-      ],
-      "translator": [
-        "John Milton"
-      ],
-      "year": 1667,
-      "translation_label": "Paradise Lost",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "popular",
-      "source_summary": "John Milton, *Paradise Lost* (1667). Via Project Gutenberg.",
-      "importance_rank": null
-    },
-    {
       "id": "hippolytus-philosophumena",
       "title": "Philosophumena",
       "tradition": "Christian",
@@ -7544,31 +7494,6 @@
       "importance_rank": null
     },
     {
-      "id": "murray-egyptian-legends",
-      "title": "Ancient Egyptian Legends",
-      "tradition": "Egyptian",
-      "collection": "sacred",
-      "hierarchy": [
-        "chapter",
-        "verse"
-      ],
-      "data_file": "murray-egyptian-legends_murray.json",
-      "source": "gutenberg",
-      "author": [
-        "Margaret Alice Murray"
-      ],
-      "translator": [
-        "Margaret Alice Murray"
-      ],
-      "year": 1920,
-      "translation_label": "Ancient Egyptian Legends",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "popular",
-      "source_summary": "*Ancient Egyptian Legends* Margaret Alice Murray (1920). Via Project Gutenberg.",
-      "importance_rank": null
-    },
-    {
       "id": "egyptian-myth-legend",
       "title": "Egyptian Myth and Legend",
       "tradition": "Egyptian",
@@ -7590,31 +7515,6 @@
       "volume_label": null,
       "quality": "popular",
       "source_summary": "*Egyptian Myth and Legend* by Donald Mackenzie. Via SacredTexts.com.",
-      "importance_rank": null
-    },
-    {
-      "id": "egyptian-myth-legend-mackenzie",
-      "title": "Egyptian Myth and Legend",
-      "tradition": "Egyptian",
-      "collection": "sacred",
-      "hierarchy": [
-        "chapter",
-        "verse"
-      ],
-      "data_file": "egyptian-myth-legend-mackenzie_mackenzie.json",
-      "source": "sacredtexts",
-      "author": [
-        "Donald A. Mackenzie"
-      ],
-      "translator": [
-        "Donald A. Mackenzie"
-      ],
-      "year": 1907,
-      "translation_label": "Egyptian Myth and Legend",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "popular",
-      "source_summary": "*Egyptian Myth and Legend* Donald A. Mackenzie (1907). Via SacredTexts.com.",
       "importance_rank": null
     },
     {
@@ -8440,32 +8340,6 @@
       "importance_rank": null
     },
     {
-      "id": "fairy-tales-modern-greece-gianakoulis",
-      "title": "Fairy Tales of Modern Greece",
-      "tradition": "Greek",
-      "collection": "sacred",
-      "hierarchy": [
-        "chapter",
-        "verse"
-      ],
-      "data_file": "fairy-tales-modern-greece-gianakoulis_gianakoulis.json",
-      "source": "sacredtexts",
-      "author": [
-        "Various"
-      ],
-      "translator": [
-        "Theodore P. Gianakoulis",
-        "Georgia H. MacPherson"
-      ],
-      "year": 1930,
-      "translation_label": "Fairy Tales of Modern Greece",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "popular",
-      "source_summary": null,
-      "importance_rank": null
-    },
-    {
       "id": "greek-popular-religion-nilsson",
       "title": "Greek Popular Religion",
       "tradition": "Greek",
@@ -8488,31 +8362,6 @@
       "volume_label": null,
       "quality": "popular",
       "source_summary": null,
-      "importance_rank": null
-    },
-    {
-      "id": "hesiod-homerica",
-      "title": "Hesiod, the Homeric Hymns, and Homerica",
-      "tradition": "Greek",
-      "collection": "sacred",
-      "hierarchy": [
-        "chapter",
-        "verse"
-      ],
-      "data_file": "hesiod-homerica_evelyn-white.json",
-      "source": "gutenberg",
-      "author": [
-        "Hesiod"
-      ],
-      "translator": [
-        "Hugh G. Evelyn-White"
-      ],
-      "year": 1914,
-      "translation_label": "Hesiod, the Homeric Hymns, and Homerica",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "popular",
-      "source_summary": "*Hesiod, the Homeric Hymns, and Homerica* by Hesiod. Translated by Hugh G. Evelyn-White (1914). Via Project Gutenberg.",
       "importance_rank": null
     },
     {
@@ -10039,31 +9888,6 @@
       "volume_label": null,
       "quality": "derivative",
       "source_summary": "*Occult Chemistry* Annie Besant (1900). Via Project Gutenberg.",
-      "importance_rank": null
-    },
-    {
-      "id": "sacred-books-of-the-east-max-muller",
-      "title": "Sacred Books of the East",
-      "tradition": "Hindu",
-      "collection": "sacred",
-      "hierarchy": [
-        "chapter",
-        "verse"
-      ],
-      "data_file": "sacred-books-of-the-east-max-muller_anonymous.json",
-      "source": "gutenberg",
-      "author": [
-        "Max Muller"
-      ],
-      "translator": [
-        "Max Muller"
-      ],
-      "year": 1900,
-      "translation_label": "Sacred Books of the East",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "derivative",
-      "source_summary": "*Sacred Books of the East* Max Muller (1900). Via Project Gutenberg.",
       "importance_rank": null
     },
     {
@@ -13613,31 +13437,6 @@
       "importance_rank": null
     },
     {
-      "id": "creation-myths-curtin",
-      "title": "Creation Myths of Primitive America",
-      "tradition": "Mesoamerican",
-      "collection": "sacred",
-      "hierarchy": [
-        "chapter",
-        "verse"
-      ],
-      "data_file": "creation-myths-curtin_curtin.json",
-      "source": "sacredtexts",
-      "author": [
-        "Various California Indians"
-      ],
-      "translator": [
-        "Jeremiah Curtin"
-      ],
-      "year": 1898,
-      "translation_label": "Creation Myths of Primitive America",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "popular",
-      "source_summary": "*Creation Myths of Primitive America* Jeremiah Curtin (1898). Via SacredTexts.com.",
-      "importance_rank": null
-    },
-    {
       "id": "dancing-gods-fergusson",
       "title": "Dancing Gods",
       "tradition": "Mesoamerican",
@@ -14884,31 +14683,6 @@
       "importance_rank": 1
     },
     {
-      "id": "folk-tales-russian-polevoi",
-      "title": "Folk Tales from the Russian",
-      "tradition": "Norse",
-      "collection": "sacred",
-      "hierarchy": [
-        "chapter",
-        "verse"
-      ],
-      "data_file": "folk-tales-russian-polevoi_polevoi.json",
-      "source": "sacredtexts",
-      "author": [
-        "Various"
-      ],
-      "translator": [
-        "Peter Nikolaevich Polevoi"
-      ],
-      "year": 1903,
-      "translation_label": "Folk Tales from the Russian",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "popular",
-      "source_summary": "*Folk Tales from the Russian* Peter Nikolaevich Polevoi (1903). Via SacredTexts.com.",
-      "importance_rank": null
-    },
-    {
       "id": "icelandic-sagas-vol3-dasent",
       "title": "Icelandic Sagas, Vol 3",
       "tradition": "Norse",
@@ -15183,30 +14957,6 @@
       "volume_label": null,
       "quality": "derivative",
       "source_summary": "*The Book of the Thousand Nights and a Night* by Anonymous. Translated by Anonymous (1885). Via Christian Classics Ethereal Library (CCEL).",
-      "importance_rank": null
-    },
-    {
-      "id": "common-sense-paine",
-      "title": "Common Sense",
-      "tradition": "Political Philosophy",
-      "collection": "sacred",
-      "hierarchy": [
-        "passage"
-      ],
-      "data_file": "common-sense-paine_paine.json",
-      "source": "sacredtexts",
-      "author": [
-        "Thomas Paine"
-      ],
-      "translator": [
-        "Thomas Paine"
-      ],
-      "year": 1776,
-      "translation_label": "Thomas Paine",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "primary",
-      "source_summary": "*Common Sense* by Thomas Paine. Via SacredTexts.com.",
       "importance_rank": null
     },
     {
@@ -15646,31 +15396,6 @@
       "volume_label": null,
       "quality": "derivative",
       "source_summary": "*Of a Happy Life, Benefits, Anger, and Clemency* by Seneca. Translated by Anonymous (None). Via Christian Classics Ethereal Library (CCEL).",
-      "importance_rank": null
-    },
-    {
-      "id": "seneca-physical-science",
-      "title": "Physical Science in the Time of Nero",
-      "tradition": "Stoic",
-      "collection": "sacred",
-      "hierarchy": [
-        "book",
-        "paragraph"
-      ],
-      "data_file": "seneca-physical-science_clarke.json",
-      "source": "gutenberg",
-      "author": [
-        "Seneca"
-      ],
-      "translator": [
-        "Anonymous"
-      ],
-      "year": null,
-      "translation_label": "Physical Science in the Time of Nero",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "derivative",
-      "source_summary": "*Physical Science in the Time of Nero* by Seneca. Translated by Anonymous (None). Via Christian Classics Ethereal Library (CCEL).",
       "importance_rank": null
     },
     {
@@ -16163,30 +15888,6 @@
       "quality": "primary",
       "source_summary": "*The Tibetan Book of the Dead (Bardo Thödol)* by Padmasambhava (attrib.). Translated by Kazi Dawa-Samdup and W. Y. Evans-Wentz (1927). Via Internet Archive.",
       "importance_rank": 30
-    },
-    {
-      "id": "tibetan-tantra-muses",
-      "title": "Esoteric Teachings of the Tibetan Tantra",
-      "tradition": "Tibetan Buddhist",
-      "collection": "sacred",
-      "hierarchy": [
-        "passage"
-      ],
-      "data_file": "tibetan-tantra-muses_muses.json",
-      "source": "sacredtexts",
-      "author": [
-        "C.A. Muses"
-      ],
-      "translator": [
-        "C.A. Muses"
-      ],
-      "year": 1961,
-      "translation_label": "C.A. Muses",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "popular",
-      "source_summary": "*Esoteric Teachings of the Tibetan Tantra* by C.A. Muses. Via SacredTexts.com.",
-      "importance_rank": null
     },
     {
       "id": "milarepa-evans-wentz",
@@ -19303,30 +19004,6 @@
       "volume_label": null,
       "quality": "popular",
       "source_summary": "*On the Natural Faculties* by Galen. Translated by Arthur John Brock (1916). Via Project Gutenberg.",
-      "importance_rank": null
-    },
-    {
-      "id": "darwin-origin-species-full",
-      "title": "On the Origin of Species",
-      "tradition": "Greek Philosophy",
-      "collection": "other",
-      "hierarchy": [
-        "section"
-      ],
-      "data_file": "darwin-origin-species-full_darwin.json",
-      "source": "gutenberg",
-      "author": [
-        "Charles Darwin"
-      ],
-      "translator": [
-        "Charles Darwin"
-      ],
-      "year": 1859,
-      "translation_label": "On the Origin of Species",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "popular",
-      "source_summary": "*On the Origin of Species* by Charles Darwin. Translated by Charles Darwin (1859). Via Project Gutenberg.",
       "importance_rank": null
     },
     {
@@ -23318,31 +22995,6 @@
       "volume_label": null,
       "quality": "popular",
       "source_summary": "*Discourse on the Method* by René Descartes. Translated by John Veitch (1850). Via Project Gutenberg.",
-      "importance_rank": null
-    },
-    {
-      "id": "burnet-early-greek",
-      "title": "Early Greek Philosophy",
-      "tradition": "Modern Philosophy",
-      "collection": "other",
-      "hierarchy": [
-        "chapter",
-        "verse"
-      ],
-      "data_file": "burnet-early-greek_burnet.json",
-      "source": "gutenberg",
-      "author": [
-        "John Burnet"
-      ],
-      "translator": [
-        "John Burnet"
-      ],
-      "year": 1892,
-      "translation_label": "Early Greek Philosophy",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "popular",
-      "source_summary": "*Early Greek Philosophy* by John Burnet. Translated by John Burnet (1892). Via Project Gutenberg.",
       "importance_rank": null
     },
     {
