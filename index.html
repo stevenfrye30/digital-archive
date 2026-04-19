@@ -510,13 +510,33 @@ body {
 /* ── Status bar ─────────────────────────────────────────────────────────────── */
 
 #status {
-  font-size: 11px;
+  font-size: 13px;
   color: var(--chrome-muted);
-  background: #e4e0d9;
+  background: var(--chrome-bg);
   border-bottom: 1px solid var(--chrome-border);
-  padding: 4px 16px;
+  padding: 10px 20px;
   display: none;
+  text-align: center;
+  font-family: system-ui, sans-serif;
 }
+#status.loading::before {
+  content: '';
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--chrome-border);
+  border-top-color: var(--chrome-active);
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+#status.error {
+  color: #a04040;
+  background: #fdf0f0;
+  border-bottom-color: #e8c0c0;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
 
 /* ── Reader area ─────────────────────────────────────────────────────────────── */
 
@@ -1756,15 +1776,21 @@ body {
   text-decoration: underline;
 }
 .passage.footnote-body {
-  font-size: 0.85em;
-  color: #666;
-  padding-left: 24px;
-  border-left: 2px solid #ddd;
+  font-size: 0.82em;
+  color: #777;
+  padding-left: 20px;
+  border-left: 2px solid #e0ddd5;
   margin-left: 8px;
+  margin-top: -0.5em;
+  display: none;
   transition: background-color 0.3s;
+}
+.passage.footnote-body.fn-visible {
+  display: block;
 }
 .passage.footnote-body.fn-flash {
   background-color: #fffbcc;
+  display: block;
 }
 .passage {
   position: relative;
@@ -3237,9 +3263,13 @@ function render(passages, query) {
             e.preventDefault();
             const target = $passages.querySelector(`.footnote-body[data-fn-number="${m[1]}"]`);
             if (target) {
-              target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-              target.classList.add('fn-flash');
-              setTimeout(() => target.classList.remove('fn-flash'), 1500);
+              // Toggle visibility
+              target.classList.toggle('fn-visible');
+              if (target.classList.contains('fn-visible')) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                target.classList.add('fn-flash');
+                setTimeout(() => target.classList.remove('fn-flash'), 1500);
+              }
             }
           });
           targetNode.appendChild(a);
@@ -4023,7 +4053,7 @@ function saveBookmark() {
   if (!pid) return;
   const rec = { data_file: currentEntry.data_file, title: currentEntry.title,
                 translator: (currentEntry.translator || []).join(', '),
-                pid, t: Date.now() };
+                pid, book: currentBook, t: Date.now() };
   try {
     localStorage.setItem('da-last', JSON.stringify(rec));
     // Update recents (dedupe by data_file, cap 5)
@@ -4158,12 +4188,11 @@ document.addEventListener('keydown', (e) => {
   if (e.key === '/' && !inField) {
     e.preventDefault();
     if ($searchGroup.style.display !== 'none') $search.focus();
-    else $sidebarSearch.focus();
     return;
   }
   if (e.key === 'Escape') {
     if (document.activeElement === $search) { $search.value = ''; $search.blur(); filterAndRender(); }
-    else if (document.activeElement === $sidebarSearch) { $sidebarSearch.value = ''; $sidebarSearch.blur(); filterSidebar(''); }
+    // (sidebar search removed)
     return;
   }
   if (inField) return;
@@ -4236,7 +4265,7 @@ async function loadText(entry, listItem) {
 
     clearStatus();
   } catch (err) {
-    setStatus(`Error: ${err.message}`);
+    setStatus(`Could not load text: ${err.message}`, 'error');
     console.error(err);
   }
 }
@@ -4367,13 +4396,15 @@ $trSelect.addEventListener('change', () => {
 
 // ── Status bar ────────────────────────────────────────────────────────────────
 
-function setStatus(msg) {
+function setStatus(msg, type = 'loading') {
   $status.textContent   = msg;
+  $status.className     = type;
   $status.style.display = 'block';
 }
 
 function clearStatus() {
   $status.style.display = 'none';
+  $status.className     = '';
 }
 
 // ── Sidebar ───────────────────────────────────────────────────────────────────
@@ -4423,262 +4454,32 @@ async function loadIndex() {
 }
 
 function renderSidebarTree({ firstLoad = false } = {}) {
-  $textList.innerHTML = '';
+  // Sidebar removed — this function now only builds lookup tables
+  // for deep-links, translation switcher, and recent-reads.
   for (const k of Object.keys(dataFileToEntry)) delete dataFileToEntry[k];
-  entryToLi = new Map();
   const textGroups = _cachedTextGroups || [];
 
   const params = new URLSearchParams(location.search);
   const requestedText = firstLoad ? params.get('text') : null;
   const requestedPid  = firstLoad ? params.get('p') : null;
   let autoLoaded = false;
-  // Tradition <li>s that need to be auto-expanded after the tree is built.
-  const traditionsToExpand = new Set();
 
-  // ── Step 2: apply primary-only filter ──────────────────────────────────
-  let filteredGroups = textGroups;
-  if (primaryOnly) {
-    filteredGroups = textGroups
-      .map(tg => ({ ...tg, entries: tg.entries.filter(e => e.quality === 'primary') }))
-      .filter(tg => tg.entries.length > 0);
-  }
-
-  // ── Step 3: bucket text-groups into bucket > tradition ─────────────────
-  const byCollection = new Map();   // bucket -> Map(tradition -> textGroup[])
-  for (const bucket of BUCKET_ORDER) byCollection.set(bucket, new Map());
-  for (const tg of filteredGroups) {
-    const trd = tg.tradition || '—';
-    const bucket = bucketFor(trd);
-    if (!byCollection.has(bucket)) byCollection.set(bucket, new Map());
-    const trMap = byCollection.get(bucket);
-    if (!trMap.has(trd)) trMap.set(trd, []);
-    trMap.get(trd).push(tg);
-  }
-  // Drop empty buckets
-  for (const [b, m] of Array.from(byCollection.entries())) {
-    if (m.size === 0) byCollection.delete(b);
-  }
-
-  const COLLECTION_LABELS = {};
-
-  // ── Step 4: render the tree ────────────────────────────────────────────
-  const collapseAllCollections = true;
-  for (const [col, trMap] of byCollection) {
-    const colLi = document.createElement('li');
-    colLi.className = 'collection-header';
-    if (collapseAllCollections) colLi.classList.add('collapsed');
-    const colTotal = Array.from(trMap.values())
-      .reduce((n, tgs) => n + tgs.reduce((m, g) => m + g.entries.length, 0), 0);
-    colLi.innerHTML =
-      `<span class="col-arrow">&#9660;</span>` +
-      `<span class="col-label">${escapeHTML(COLLECTION_LABELS[col] || col)}</span>` +
-      `<span class="col-count">${colTotal}</span>`;
-    // Click toggles collapse of all traditions in this collection
-    colLi.addEventListener('click', () => {
-      const collapsed = colLi.classList.toggle('collapsed');
-      let sib = colLi.nextElementSibling;
-      while (sib && !sib.classList.contains('collection-header')) {
-        sib.classList.toggle('col-hidden', collapsed);
-        sib = sib.nextElementSibling;
+  for (const tg of textGroups) {
+    for (const entry of tg.entries) {
+      dataFileToEntry[entry.data_file] = { entry, li: null };
+      if (requestedText && entry.data_file === requestedText && !autoLoaded) {
+        autoLoaded = true;
+        if (requestedPid) pendingPid = requestedPid;
+        loadText(entry);
       }
-    });
-    $textList.appendChild(colLi);
-
-    const trEntries = Array.from(trMap.entries()).sort((a, b) => {
-      const ca = a[1].reduce((n, g) => n + g.entries.length, 0);
-      const cb = b[1].reduce((n, g) => n + g.entries.length, 0);
-      return cb - ca || a[0].localeCompare(b[0]);
-    });
-    for (const [trd, tgs] of trEntries) {
-      // Tradition header
-      const trHeader = document.createElement('li');
-      trHeader.className = 'tradition-header';
-      if (collapseAllCollections) trHeader.classList.add('col-hidden');
-      const totalCount = tgs.reduce((n, g) => n + g.entries.length, 0);
-      trHeader.innerHTML =
-        `<span class="t-arrow">&#9654;</span>` +
-        `<span class="t-title">${escapeHTML(trd)}</span>` +
-        `<span class="t-count">${totalCount}</span>`;
-
-      // Tradition items container
-      const trItems = document.createElement('li');
-      trItems.className = 'tradition-items';
-      if (collapseAllCollections) trItems.classList.add('col-hidden');
-      const trUl = document.createElement('ul');
-      trUl.style.listStyle = 'none';
-      trUl.style.padding = '0';
-      trUl.style.margin = '0';
-
-      // Click toggles expand/collapse
-      trHeader.addEventListener('click', () => {
-        const open = trHeader.classList.toggle('expanded');
-        trItems.classList.toggle('expanded', open);
-      });
-
-      // Render each text-group inside this tradition
-      for (const group of tgs) {
-        if (group.entries.length === 1) {
-          // Solo text — single flat item
-          const entry = group.entries[0];
-          const li = document.createElement('li');
-          li.className = 'text-item solo';
-          const sub = entry.translator && entry.translator.length
-            ? entry.translator.join(', ')
-            : '';
-          const star = entry.quality === 'primary'
-            ? `<span class="q-star" title="Primary/canonical translation">&#9733;</span>` : '';
-          li.innerHTML =
-            `<div class="t-title">${star}${escapeHTML(entry.title)}</div>` +
-            (sub ? `<div class="t-sub">${escapeHTML(sub)}</div>` : '');
-          const auth = (entry.author || []).join(' ');
-          li.dataset.search = [entry.title, sub, auth, group.title, trd, col].join(' ').toLowerCase();
-          if (entry.source_summary) {
-            li.title = entry.source_summary.replace(/\*([^*]+)\*/g, '$1');
-          }
-          li.addEventListener('click', () => loadText(entry, li));
-          dataFileToEntry[entry.data_file] = { entry, li };
-          entryToLi.set(entry, li);
-          trUl.appendChild(li);
-
-          if (requestedText && entry.data_file === requestedText && !autoLoaded) {
-            autoLoaded = true;
-            traditionsToExpand.add(trHeader);
-            if (requestedPid) pendingPid = requestedPid;
-            loadText(entry, li);
-          }
-          continue;
-        }
-
-        // Multi-translation group — one sidebar item; click shows chooser cover
-        const li = document.createElement('li');
-        li.className = 'text-item group';
-        const star = group.entries.some(e => e.quality === 'primary')
-          ? `<span class="q-star" title="Primary/canonical translation available">&#9733;</span>` : '';
-        li.innerHTML =
-          `<div class="t-title">${star}${escapeHTML(group.title)}` +
-          `<span class="t-count">(${group.entries.length})</span></div>`;
-        const searchBits = [group.title, trd, col];
-        for (const e of group.entries) {
-          searchBits.push(e.title, translationLabel(e), (e.translator || []).join(' '));
-        }
-        li.dataset.search = searchBits.join(' ').toLowerCase();
-        const firstSum = group.entries.find(e => e.source_summary);
-        if (firstSum) {
-          li.title = firstSum.source_summary.replace(/\*([^*]+)\*/g, '$1');
-        }
-        li.addEventListener('click', () => showGroupCover(group, li));
-
-        // Register each entry for deep-link lookups / tr-switcher
-        for (const entry of group.entries) {
-          dataFileToEntry[entry.data_file] = { entry, li };
-          entryToLi.set(entry, li);
-          if (requestedText && entry.data_file === requestedText && !autoLoaded) {
-            autoLoaded = true;
-            traditionsToExpand.add(trHeader);
-            if (requestedPid) pendingPid = requestedPid;
-            loadText(entry, li);
-          }
-        }
-        trUl.appendChild(li);
-      }
-
-      trItems.appendChild(trUl);
-      $textList.appendChild(trHeader);
-      $textList.appendChild(trItems);
     }
   }
-
-  // ── Step 4: auto-expand traditions that contain the deep-linked text ──
-  for (const trHeader of traditionsToExpand) {
-    trHeader.classList.add('expanded');
-    trHeader.classList.remove('col-hidden');
-    const sib = trHeader.nextElementSibling;
-    if (sib) { sib.classList.add('expanded'); sib.classList.remove('col-hidden'); }
-    // Walk back to parent collection-header, un-collapse it
-    let prev = trHeader.previousElementSibling;
-    while (prev && !prev.classList.contains('collection-header'))
-      prev = prev.previousElementSibling;
-    if (prev) prev.classList.remove('collapsed');
-  }
-
-  // ── Step 5: collapse all collection headers by default; leave open only
-  //    those whose traditions contain an auto-expanded tradition. ─────────
-  $textList.querySelectorAll('.collection-header').forEach(colLi => {
-    let sib = colLi.nextElementSibling;
-    let hasExpandedTradition = false;
-    const siblings = [];
-    while (sib && !sib.classList.contains('collection-header')) {
-      siblings.push(sib);
-      if (sib.classList.contains('tradition-header') && sib.classList.contains('expanded')) {
-        hasExpandedTradition = true;
-      }
-      sib = sib.nextElementSibling;
-    }
-    if (!hasExpandedTradition) {
-      colLi.classList.add('collapsed');
-      siblings.forEach(s => s.classList.add('col-hidden'));
-    }
-  });
 
   if (firstLoad && !autoLoaded) renderWelcome();
   if (firstLoad) updateHomeCounts();
 }
 
-// ── Sidebar text search ───────────────────────────────────────────────────────
-
-function filterSidebar(qRaw) {
-  const q = (qRaw || '').trim().toLowerCase();
-  const searching = q.length > 0;
-
-  $textList.querySelectorAll('.text-item').forEach(li => {
-    const haystack = li.dataset.search || li.textContent.toLowerCase();
-    const match = !searching || haystack.includes(q);
-    li.classList.toggle('sb-hidden', !match);
-  });
-
-  // Multi-translation group headers
-  $textList.querySelectorAll('.text-group-header').forEach(h => {
-    const items = h.nextElementSibling;
-    if (!items) return;
-    const any = Array.from(items.querySelectorAll('.text-item'))
-      .some(li => !li.classList.contains('sb-hidden'));
-    h.classList.toggle('sb-hidden', !any);
-    items.classList.toggle('sb-hidden', !any);
-    if (searching && any) {
-      h.classList.add('expanded');
-      items.classList.add('expanded');
-    }
-  });
-
-  // Tradition headers
-  $textList.querySelectorAll('.tradition-header').forEach(h => {
-    const items = h.nextElementSibling;
-    if (!items) return;
-    const any = Array.from(items.querySelectorAll('.text-item'))
-      .some(li => !li.classList.contains('sb-hidden'));
-    h.classList.toggle('sb-hidden', !any);
-    items.classList.toggle('sb-hidden', !any);
-    if (searching && any) {
-      h.classList.add('expanded');
-      items.classList.add('expanded');
-    }
-  });
-
-  // Collection headers: hide if no following tradition has visible items
-  $textList.querySelectorAll('.collection-header').forEach(h => {
-    let sib = h.nextElementSibling;
-    let any = false;
-    while (sib && !sib.classList.contains('collection-header')) {
-      if (sib.classList.contains('tradition-header') && !sib.classList.contains('sb-hidden')) {
-        any = true; break;
-      }
-      sib = sib.nextElementSibling;
-    }
-    h.classList.toggle('sb-hidden', searching && !any);
-  });
-}
-
-$sidebarSearch.addEventListener('input', () => filterSidebar($sidebarSearch.value));
+// (Sidebar search removed — replaced by home page search)
 
 // ── Typography controls ───────────────────────────────────────────────────────
 
@@ -4708,31 +4509,7 @@ wire('ctrl-spacing', '--reader-leading', 'r-leading', v => v,        'ctrl-spaci
 wire('ctrl-bg',      '--reader-bg',      'r-bg',      v => v,        null);
 wire('ctrl-fg',      '--reader-fg',      'r-fg',      v => v,        null);
 
-// ── Primary-only filter toggle ────────────────────────────────────────────────
-(() => {
-  const primaryBtn = document.getElementById('filter-primary');
-  const allBtn = document.getElementById('filter-all');
-  if (!primaryBtn || !allBtn) return;
-  const sync = () => {
-    primaryBtn.classList.toggle('active', primaryOnly);
-    allBtn.classList.toggle('active', !primaryOnly);
-  };
-  sync();
-  primaryBtn.addEventListener('click', () => {
-    if (primaryOnly) return;
-    primaryOnly = true;
-    localStorage.setItem('sidebar-primary-only', 'true');
-    sync();
-    renderSidebarTree();
-  });
-  allBtn.addEventListener('click', () => {
-    if (!primaryOnly) return;
-    primaryOnly = false;
-    localStorage.setItem('sidebar-primary-only', 'false');
-    sync();
-    renderSidebarTree();
-  });
-})();
+// (Primary-only toggle removed — sidebar replaced by browse tiles)
 
 // ── Tools dropdown ────────────────────────────────────────────────────────────
 (() => {
