@@ -9,9 +9,9 @@
     "passages_checked": 1970067,
     "passages_verified": 1966859,
     "overall_pass_rate": 0.9984,
-    "raw_files_hashed": 22645,
-    "raw_bytes_hashed": 1018800584,
-    "raw_manifest_generated_at": "2026-04-19T08:18:55Z",
+    "raw_files_hashed": 22647,
+    "raw_bytes_hashed": 1020418834,
+    "raw_manifest_generated_at": "2026-04-19T09:27:40Z",
     "buckets": {
       "100%": 671,
       "99-100%": 316,
@@ -177,11 +177,11 @@
       "passages_pass": 19622
     },
     "Modern Philosophy": {
-      "total": 224,
-      "verified_100": 149,
-      "verified_95": 219,
-      "passages_total": 236672,
-      "passages_pass": 236365
+      "total": 223,
+      "verified_100": 148,
+      "verified_95": 218,
+      "passages_total": 235186,
+      "passages_pass": 234879
     },
     "Norse": {
       "total": 12,
@@ -212,11 +212,11 @@
       "passages_pass": 559
     },
     "Roman Philosophy": {
-      "total": 24,
+      "total": 23,
       "verified_100": 11,
-      "verified_95": 23,
-      "passages_total": 47546,
-      "passages_pass": 47520
+      "verified_95": 22,
+      "passages_total": 46893,
+      "passages_pass": 46868
     },
     "Shinto": {
       "total": 4,
@@ -240,11 +240,11 @@
       "passages_pass": 3817
     },
     "Stoic": {
-      "total": 4,
+      "total": 5,
       "verified_100": 2,
-      "verified_95": 4,
-      "passages_total": 4887,
-      "passages_pass": 4881
+      "verified_95": 5,
+      "passages_total": 5540,
+      "passages_pass": 5533
     },
     "Taoist": {
       "total": 13,
@@ -280,6 +280,13 @@
       "verified_95": 3,
       "passages_total": 13819,
       "passages_pass": 13802
+    },
+    "Secular / Other": {
+      "total": 1,
+      "verified_100": 1,
+      "verified_95": 1,
+      "passages_total": 1486,
+      "passages_pass": 1486
     }
   },
   "texts": [
@@ -4585,7 +4592,7 @@
       "collection": "sacred",
       "category": "Poetry",
       "raw_file": "02_raw_sources/Library_/Gutenberg.org/Paradise Lost_____John Milton.txt",
-      "raw_sha256": "3bde620e9a048539e5401422d4ad74bd91732dfe6dd1a2adcbfb138caae23289",
+      "raw_sha256": "21f90862510782e58b41e7449c5d9b9a0fcb8845d078a9289e1aad58c5e36a31",
       "text_id": "milton-paradise-lost",
       "translation_id": "milton",
       "status": "PASS",
@@ -4679,11 +4686,11 @@
         "Julian of Norwich"
       ],
       "translator": [
-        "Grace Warrack"
+        "Anonymous"
       ],
       "publisher": "Project Gutenberg",
-      "url": "https://www.gutenberg.org/ebooks/52958",
-      "year": 1901,
+      "url": "https://www.gutenberg.org/",
+      "year": 1395,
       "source_title": "Revelations of Divine Love",
       "tradition": "Christian",
       "collection": "sacred",
@@ -22930,43 +22937,17 @@
         "Jean-Jacques Rousseau"
       ],
       "translator": [
-        "W. Conyngham Mallory"
+        "Anonymous"
       ],
       "publisher": "Project Gutenberg",
       "url": "https://www.gutenberg.org/ebooks/3913",
       "year": 1782,
       "source_title": "The Confessions",
       "tradition": "Modern Philosophy",
-      "collection": "other",
-      "category": "Philosophy",
-      "raw_file": "02_raw_sources/Library_/Gutenberg.org/The Confessions_____Jean Jacques Rousseau.txt",
-      "raw_sha256": "3ab4d68f81e2da40c94418a8f6beb30aac82eafd8faaf546cdeeaf0d16d61b8a",
-      "text_id": "rousseau-confessions",
-      "translation_id": "rousseau",
-      "status": "PASS",
-      "pass_rate": 1.0,
-      "passages_pass": 1486,
-      "passages_checked": 1486,
-      "passages_total": 1494,
-      "note": ""
-    },
-    {
-      "title": "The Confessions",
-      "author": [
-        "Jean-Jacques Rousseau"
-      ],
-      "translator": [
-        "Anonymous"
-      ],
-      "publisher": "Project Gutenberg",
-      "url": "https://www.gutenberg.org/ebooks/3913",
-      "year": 1782,
-      "source_title": "The Confessions of J.J. Rousseau",
-      "tradition": "Modern Philosophy",
-      "collection": "other",
-      "category": "Philosophy",
-      "raw_file": "02_raw_sources/Library_/Gutenberg.org/The Confessions_____Jean Jacques Rousseau.txt",
-      "raw_sha256": "3ab4d68f81e2da40c94418a8f6beb30aac82eafd8faaf546cdeeaf0d16d61b8a",
+      "collection": "sacred",
+      "category": "Autobiography",
+      "raw_file": "02_raw_sources/Library_/Gutenberg.org/The Confessions_____Rousseau.txt",
+      "raw_sha256": "91fc68bea22019b73351d2f661a4c68d551f267fc57a44604f02131613ab809b",
       "text_id": "rousseau-confessions",
       "translation_id": "anonymous",
       "status": "PASS",
@@ -26500,32 +26481,6 @@
       "note": ""
     },
     {
-      "title": "Minor Dialogues & On Clemency",
-      "author": [
-        "Seneca"
-      ],
-      "translator": [
-        "Aubrey Stewart"
-      ],
-      "publisher": "Project Gutenberg",
-      "url": "https://www.gutenberg.org/ebooks/64030",
-      "year": 1889,
-      "source_title": "Minor Dialogues & On Clemency",
-      "tradition": "Roman Philosophy",
-      "collection": "other",
-      "category": "Philosophy",
-      "raw_file": "02_raw_sources/Library_/Gutenberg.org/Minor Dialogues - Together With the Dialogue on Clemency_____Lucius Seneca.txt",
-      "raw_sha256": "ed6f88191f9748d4e00c45b65c86b508677484d645d3bcb1061d43a6a947e07b",
-      "text_id": "seneca-minor-dialogues",
-      "translation_id": "stewart",
-      "status": "PARTIAL",
-      "pass_rate": 0.998468606431853,
-      "passages_pass": 652,
-      "passages_checked": 653,
-      "passages_total": 801,
-      "note": ""
-    },
-    {
       "title": "Morals of a Happy Life & Benefits & Anger and Clemency",
       "author": [
         "Seneca"
@@ -27312,6 +27267,32 @@
       "note": ""
     },
     {
+      "title": "Minor Dialogues and On Clemency",
+      "author": [
+        "Seneca"
+      ],
+      "translator": [
+        "Anonymous"
+      ],
+      "publisher": "Project Gutenberg",
+      "url": "https://www.gutenberg.org/",
+      "year": null,
+      "source_title": "Minor Dialogues and On Clemency",
+      "tradition": "Stoic",
+      "collection": "sacred",
+      "category": "Philosophy",
+      "raw_file": "02_raw_sources/Library_/Gutenberg.org/Minor Dialogues - Together With the Dialogue on Clemency_____Lucius Seneca.txt",
+      "raw_sha256": "ed6f88191f9748d4e00c45b65c86b508677484d645d3bcb1061d43a6a947e07b",
+      "text_id": "seneca-minor-dialogues",
+      "translation_id": "stewart",
+      "status": "PARTIAL",
+      "pass_rate": 0.998468606431853,
+      "passages_pass": 652,
+      "passages_checked": 653,
+      "passages_total": 801,
+      "note": ""
+    },
+    {
       "title": "Roman Stoicism",
       "author": [
         "E. Vernon Arnold"
@@ -28043,6 +28024,14 @@
       "passages_pass": 4298,
       "passages_checked": 4305,
       "passages_total": 5428,
+      "note": ""
+    },
+    {
+      "status": "PASS",
+      "pass_rate": 1.0,
+      "passages_pass": 1486,
+      "passages_checked": 1486,
+      "passages_total": 1494,
       "note": ""
     }
   ]

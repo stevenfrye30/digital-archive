@@ -3312,31 +3312,6 @@
       "importance_rank": 54
     },
     {
-      "id": "julian-revelations",
-      "title": "Revelations of Divine Love",
-      "tradition": "Christian",
-      "collection": "sacred",
-      "hierarchy": [
-        "chapter",
-        "verse"
-      ],
-      "data_file": "julian-revelations_warrack.json",
-      "source": "gutenberg",
-      "author": [
-        "Julian of Norwich"
-      ],
-      "translator": [
-        "Grace Warrack"
-      ],
-      "year": 1901,
-      "translation_label": "Revelations of Divine Love",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "popular",
-      "source_summary": "Julian of Norwich, *Revelations of Divine Love*. Grace Warrack trans. (1901). Via Project Gutenberg.",
-      "importance_rank": 55
-    },
-    {
       "id": "chesterton-orthodoxy",
       "title": "Orthodoxy",
       "tradition": "Christian",
@@ -4706,6 +4681,30 @@
       "volume_label": null,
       "quality": "popular",
       "source_summary": "Christina Rossetti, *Poems* (1904 collection). Via Project Gutenberg.",
+      "importance_rank": null
+    },
+    {
+      "id": "julian-revelations",
+      "title": "Revelations of Divine Love",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "paragraph"
+      ],
+      "data_file": "julian-revelations_warrack.json",
+      "source": "gutenberg",
+      "author": [
+        "Julian of Norwich"
+      ],
+      "translator": [
+        "Anonymous"
+      ],
+      "year": 1395,
+      "translation_label": "Revelations of Divine Love",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "derivative",
+      "source_summary": "*Revelations of Divine Love* by Julian of Norwich. Translated by Anonymous (1395). Via Christian Classics Ethereal Library (CCEL).",
       "importance_rank": null
     },
     {
@@ -7599,6 +7598,31 @@
       "volume_label": null,
       "quality": "derivative",
       "source_summary": "*Oedipus King of Thebes* by Sophocles. Translated by Sophocles (1900). Via Project Gutenberg.",
+      "importance_rank": null
+    },
+    {
+      "id": "paradise-lost",
+      "title": "Paradise Lost",
+      "tradition": "Greek Literature",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "passage"
+      ],
+      "data_file": "paradise-lost_anonymous.json",
+      "source": "gutenberg",
+      "author": [
+        "John Milton"
+      ],
+      "translator": [
+        "Anonymous"
+      ],
+      "year": 1667,
+      "translation_label": "Paradise Lost",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "derivative",
+      "source_summary": "*Paradise Lost* by John Milton. Translated by Anonymous (1667). Via Christian Classics Ethereal Library (CCEL).",
       "importance_rank": null
     },
     {
@@ -13284,6 +13308,80 @@
       "volume_label": null,
       "quality": "popular",
       "source_summary": "*The Songs of the Russian People* by William Ralston Shedden Ralston. Translated by W. R. S. Ralston (1872). Via Ellis & Green / Internet Archive.",
+      "importance_rank": null
+    },
+    {
+      "id": "seneca-minor-dialogues",
+      "title": "Minor Dialogues and On Clemency",
+      "tradition": "Stoic",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "paragraph"
+      ],
+      "data_file": "seneca-minor-dialogues_stewart.json",
+      "source": "gutenberg",
+      "author": [
+        "Seneca"
+      ],
+      "translator": [
+        "Anonymous"
+      ],
+      "year": null,
+      "translation_label": "Minor Dialogues and On Clemency",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "derivative",
+      "source_summary": "*Minor Dialogues and On Clemency* by Seneca. Translated by Anonymous (None). Via Christian Classics Ethereal Library (CCEL).",
+      "importance_rank": null
+    },
+    {
+      "id": "seneca-morals",
+      "title": "Of a Happy Life, Benefits, Anger, and Clemency",
+      "tradition": "Stoic",
+      "collection": "sacred",
+      "hierarchy": [
+        "paragraph"
+      ],
+      "data_file": "seneca-morals_aubrey-stewart.json",
+      "source": "gutenberg",
+      "author": [
+        "Seneca"
+      ],
+      "translator": [
+        "Anonymous"
+      ],
+      "year": null,
+      "translation_label": "Of a Happy Life, Benefits, Anger, and Clemency",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "derivative",
+      "source_summary": "*Of a Happy Life, Benefits, Anger, and Clemency* by Seneca. Translated by Anonymous (None). Via Christian Classics Ethereal Library (CCEL).",
+      "importance_rank": null
+    },
+    {
+      "id": "seneca-physical-science",
+      "title": "Physical Science in the Time of Nero",
+      "tradition": "Stoic",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "paragraph"
+      ],
+      "data_file": "seneca-physical-science_clarke.json",
+      "source": "gutenberg",
+      "author": [
+        "Seneca"
+      ],
+      "translator": [
+        "Anonymous"
+      ],
+      "year": null,
+      "translation_label": "Physical Science in the Time of Nero",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "derivative",
+      "source_summary": "*Physical Science in the Time of Nero* by Seneca. Translated by Anonymous (None). Via Christian Classics Ethereal Library (CCEL).",
       "importance_rank": null
     },
     {
