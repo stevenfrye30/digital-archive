@@ -1498,10 +1498,60 @@ body {
 }
 .tile-section-label:first-child { padding-top: 0; }
 
+/* ── Mobile responsive ────────────────────────────────────────────── */
+
 @media (max-width: 720px) {
-  #browse { padding: 20px 16px 60px; }
-  #browse-tiles { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; }
-  .browse-tile { padding: 14px 16px; }
+  /* Browse */
+  #browse { padding: 16px 12px 40px; }
+  #browse-tiles { gap: 8px; }
+  #browse-tiles.tile-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+  #browse-tiles.tile-grid-cards { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; }
+  .browse-tile { padding: 14px 12px; font-size: 14px; }
+  .browse-tile .tile-title { font-size: 14px; }
+  #browse-title { font-size: 20px; margin-bottom: 16px; }
+  #browse-toolbar { gap: 8px; font-size: 11px; }
+  #browse-nav { gap: 8px; }
+
+  /* Reader */
+  #reader { padding: 24px 16px 60px; }
+  .passage { padding-left: 0; margin-bottom: 0.8em; }
+  .passage .ref {
+    position: static;
+    display: block;
+    font-size: 0.75em;
+    margin-bottom: 2px;
+    width: auto;
+    text-align: left;
+  }
+
+  /* Controls */
+  #controls { padding: 8px 12px; gap: 8px; font-size: 11px; }
+  #ctrl-home, #ctrl-contents { padding: 5px 8px; font-size: 11px; }
+  .ctrl-group label { display: none; }
+  #ctrl-search-group { padding-left: 8px !important; }
+
+  /* Title page */
+  #continuous-cover { padding: 30px 16px 10px; }
+  .cc-title { font-size: 1.4em; }
+  .cc-toc-list { grid-template-columns: 1fr; }
+  .cc-citations { padding: 0 4px; }
+  .cc-cite { font-size: 11px; padding: 6px 8px; }
+
+  /* Nav bar */
+  #nav-bar { padding: 6px 12px; }
+  #nav-bar button { font-size: 12px; padding: 5px 10px; }
+
+  /* Info/meta */
+  #info-bar { padding: 6px 12px; }
+  #meta-toggle { font-size: 11px; padding: 5px 10px; }
+  #text-meta { padding: 12px; }
+
+  /* Translation bar */
+  #translation-bar { padding: 4px 12px; font-size: 11px; }
+  #translation-select { max-width: 180px; }
+
+  /* Chapter heading */
+  .chapter-heading { font-size: 1.3em; padding: 24px 0 20px; }
 }
 
 #cover-source-summary {
