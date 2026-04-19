@@ -3568,6 +3568,56 @@
       "importance_rank": null
     },
     {
+      "id": "eusebius-church-history",
+      "title": "Church History and Life of Constantine",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "paragraph"
+      ],
+      "data_file": "eusebius-church-history_ccel-schaff.json",
+      "source": "ccel",
+      "author": [
+        "Eusebius of Caesarea"
+      ],
+      "translator": [
+        "Multiple translators (ed. Philip Schaff)"
+      ],
+      "year": 1890,
+      "translation_label": "Church History and Life of Constantine",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "primary",
+      "source_summary": "*Church History and Life of Constantine* by Eusebius of Caesarea. Translated by Multiple translators (ed. Philip Schaff) (1890). Via Christian Classics Ethereal Library (CCEL).",
+      "importance_rank": null
+    },
+    {
+      "id": "augustine-city-of-god-ccel",
+      "title": "City of God and On Christian Doctrine (CCEL)",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "paragraph"
+      ],
+      "data_file": "augustine-city-of-god-ccel_ccel-schaff.json",
+      "source": "ccel",
+      "author": [
+        "Saint Augustine"
+      ],
+      "translator": [
+        "Multiple translators (ed. Philip Schaff)"
+      ],
+      "year": 1887,
+      "translation_label": "City of God and On Christian Doctrine (CCEL)",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "primary",
+      "source_summary": "*City of God and On Christian Doctrine (CCEL)* by Saint Augustine. Translated by Multiple translators (ed. Philip Schaff) (1887). Via Christian Classics Ethereal Library (CCEL).",
+      "importance_rank": null
+    },
+    {
       "id": "luther-genesis-vol1",
       "title": "Commentary on Genesis, Vol 1",
       "tradition": "Christian",
@@ -3615,6 +3665,31 @@
       "volume_label": null,
       "quality": "popular",
       "source_summary": "Martin Luther, *Commentary on the Epistle to the Galatians*. Theodore Graebner trans. (1939). Via Project Gutenberg.",
+      "importance_rank": null
+    },
+    {
+      "id": "augustine-confessions-enchiridion-ccel",
+      "title": "Confessions and Enchiridion (CCEL)",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "paragraph"
+      ],
+      "data_file": "augustine-confessions-enchiridion-ccel_ccel-schaff.json",
+      "source": "ccel",
+      "author": [
+        "Saint Augustine"
+      ],
+      "translator": [
+        "Multiple translators (ed. Philip Schaff)"
+      ],
+      "year": 1887,
+      "translation_label": "Confessions and Enchiridion (CCEL)",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "primary",
+      "source_summary": "*Confessions and Enchiridion (CCEL)* by Saint Augustine. Translated by Multiple translators (ed. Philip Schaff) (1887). Via Christian Classics Ethereal Library (CCEL).",
       "importance_rank": null
     },
     {
@@ -3789,6 +3864,126 @@
       "volume_label": null,
       "quality": "popular",
       "source_summary": "John Foxe, *Book of Martyrs* (orig. 1563). Via Project Gutenberg.",
+      "importance_rank": null
+    },
+    {
+      "id": "chrysostom-homilies-acts-romans",
+      "title": "Homilies on Acts and Romans",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "paragraph"
+      ],
+      "data_file": "chrysostom-homilies-acts-romans_ccel-schaff.json",
+      "source": "ccel",
+      "author": [
+        "John Chrysostom"
+      ],
+      "translator": [
+        "Multiple translators (ed. Philip Schaff)"
+      ],
+      "year": 1889,
+      "translation_label": "Homilies on Acts and Romans",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "primary",
+      "source_summary": "*Homilies on Acts and Romans* by John Chrysostom. Translated by Multiple translators (ed. Philip Schaff) (1889). Via Christian Classics Ethereal Library (CCEL).",
+      "importance_rank": null
+    },
+    {
+      "id": "chrysostom-homilies-corinthians",
+      "title": "Homilies on First and Second Corinthians",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "paragraph"
+      ],
+      "data_file": "chrysostom-homilies-corinthians_ccel-schaff.json",
+      "source": "ccel",
+      "author": [
+        "John Chrysostom"
+      ],
+      "translator": [
+        "Multiple translators (ed. Philip Schaff)"
+      ],
+      "year": 1889,
+      "translation_label": "Homilies on First and Second Corinthians",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "primary",
+      "source_summary": "*Homilies on First and Second Corinthians* by John Chrysostom. Translated by Multiple translators (ed. Philip Schaff) (1889). Via Christian Classics Ethereal Library (CCEL).",
+      "importance_rank": null
+    },
+    {
+      "id": "chrysostom-homilies-galatians-ephesians",
+      "title": "Homilies on Galatians, Ephesians, and more",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "paragraph"
+      ],
+      "data_file": "chrysostom-homilies-galatians-ephesians_ccel-schaff.json",
+      "source": "ccel",
+      "author": [
+        "John Chrysostom"
+      ],
+      "translator": [
+        "Multiple translators (ed. Philip Schaff)"
+      ],
+      "year": 1889,
+      "translation_label": "Homilies on Galatians, Ephesians, and more",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "primary",
+      "source_summary": "*Homilies on Galatians, Ephesians, and more* by John Chrysostom. Translated by Multiple translators (ed. Philip Schaff) (1889). Via Christian Classics Ethereal Library (CCEL).",
+      "importance_rank": null
+    },
+    {
+      "id": "chrysostom-homilies-timothy-hebrews",
+      "title": "Homilies on Timothy, Titus, Philemon, and Hebrews",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "paragraph"
+      ],
+      "data_file": "chrysostom-homilies-timothy-hebrews_ccel-schaff.json",
+      "source": "ccel",
+      "author": [
+        "John Chrysostom"
+      ],
+      "translator": [
+        "Multiple translators (ed. Philip Schaff)"
+      ],
+      "year": 1889,
+      "translation_label": "Homilies on Timothy, Titus, Philemon, and Hebrews",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "primary",
+      "source_summary": "*Homilies on Timothy, Titus, Philemon, and Hebrews* by John Chrysostom. Translated by Multiple translators (ed. Philip Schaff) (1889). Via Christian Classics Ethereal Library (CCEL).",
+      "importance_rank": null
+    },
+    {
+      "id": "chrysostom-homilies-matthew",
+      "title": "Homilies on the Gospel of Matthew",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "paragraph"
+      ],
+      "data_file": "chrysostom-homilies-matthew_ccel-schaff.json",
+      "source": "ccel",
+      "author": [
+        "John Chrysostom"
+      ],
+      "translator": [
+        "Multiple translators (ed. Philip Schaff)"
+      ],
+      "year": 1888,
+      "translation_label": "Homilies on the Gospel of Matthew",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "primary",
+      "source_summary": "*Homilies on the Gospel of Matthew* by John Chrysostom. Translated by Multiple translators (ed. Philip Schaff) (1888). Via Christian Classics Ethereal Library (CCEL).",
       "importance_rank": null
     },
     {
