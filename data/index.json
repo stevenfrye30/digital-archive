@@ -23599,30 +23599,6 @@
       "importance_rank": null
     },
     {
-      "id": "kitab-al-khazari-hartwig-hirschfeld-1",
-      "title": "Kitab al Khazari",
-      "tradition": "Modern Philosophy",
-      "collection": "other",
-      "hierarchy": [
-        "section"
-      ],
-      "data_file": "kitab-al-khazari-hartwig-hirschfeld-1_anonymous.json",
-      "source": "sacredtexts",
-      "author": [
-        "Hartwig Hirschfeld (1905) (NO)"
-      ],
-      "translator": [
-        "Hartwig Hirschfeld (1905) (NO)"
-      ],
-      "year": 1900,
-      "translation_label": "Kitab al Khazari",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "derivative",
-      "source_summary": null,
-      "importance_rank": null
-    },
-    {
       "id": "kundalini-the-mother-of-the-universe-rishi-singh-gherwal",
       "title": "Kundalini - The Mother of the Universe",
       "tradition": "Modern Philosophy",
