@@ -635,6 +635,32 @@
       "importance_rank": null
     },
     {
+      "id": "dialogues-buddha-rhys-davids",
+      "title": "Dialogues of the Buddha",
+      "tradition": "Buddhist",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "dialogues-buddha-rhys-davids_rhys-davids.json",
+      "source": "sacredtexts",
+      "author": [
+        "Anonymous"
+      ],
+      "translator": [
+        "T.W. Rhys Davids",
+        "C.A.F. Rhys Davids"
+      ],
+      "year": 1899,
+      "translation_label": "Dialogues of the Buddha",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "primary",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
       "id": "katyayana-jayarava",
       "title": "Discourse to Kātyāyana",
       "tradition": "Buddhist",
@@ -679,6 +705,31 @@
       "volume_label": null,
       "quality": "popular",
       "source_summary": "*Eastern Stories and Legends* Marie L. Shedlock (1920). Via Project Gutenberg.",
+      "importance_rank": null
+    },
+    {
+      "id": "tibetan-tantra-muses",
+      "title": "Esoteric Teachings of the Tibetan Tantra",
+      "tradition": "Buddhist",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "tibetan-tantra-muses_muses.json",
+      "source": "sacredtexts",
+      "author": [
+        "Various Tibetan masters"
+      ],
+      "translator": [
+        "Charles A. Muses"
+      ],
+      "year": 1961,
+      "translation_label": "Esoteric Teachings of the Tibetan Tantra",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
       "importance_rank": null
     },
     {
@@ -826,6 +877,79 @@
       "volume_label": null,
       "quality": "popular",
       "source_summary": "*Principal Teachings of the True Sect of Pure Land* Shugaku Yamabe, L. Adams Beck (ed.) (1915). Via SacredTexts.com.",
+      "importance_rank": null
+    },
+    {
+      "id": "therigatha-davids",
+      "title": "Psalms of the Sisters (Therīgāthā)",
+      "tradition": "Buddhist",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "therigatha-davids_rhys-davids.json",
+      "source": "sacredtexts",
+      "author": [
+        "Various"
+      ],
+      "translator": [
+        "Caroline A.F. Rhys Davids"
+      ],
+      "year": 1909,
+      "translation_label": "Psalms of the Sisters (Therīgāthā)",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "primary",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "she-rab-dong-bu-nagarjuna-tr-wl-camp",
+      "title": "She-rab Dong-bu",
+      "tradition": "Buddhist",
+      "collection": "sacred",
+      "hierarchy": [
+        "section"
+      ],
+      "data_file": "she-rab-dong-bu-nagarjuna-tr-wl-camp_anonymous.json",
+      "source": "sacredtexts",
+      "author": [
+        "Nagarjuna - tr-WL-Campbell (1919) (NO)"
+      ],
+      "translator": [
+        "Nagarjuna - tr-WL-Campbell (1919) (NO)"
+      ],
+      "year": 1900,
+      "translation_label": "She-rab Dong-bu",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "derivative",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "sherab-dongbu-campbell",
+      "title": "She-rab Dong-bu (The Prajñādaṇḍa)",
+      "tradition": "Buddhist",
+      "collection": "sacred",
+      "hierarchy": [
+        "section"
+      ],
+      "data_file": "sherab-dongbu-campbell_campbell.json",
+      "source": "sacredtexts",
+      "author": [
+        "Nāgārjuna (attributed)"
+      ],
+      "translator": [
+        "W.L. Campbell"
+      ],
+      "year": 1919,
+      "translation_label": "She-rab Dong-bu (The Prajñādaṇḍa)",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
       "importance_rank": null
     },
     {
@@ -1190,6 +1314,31 @@
       "volume_label": null,
       "quality": "popular",
       "source_summary": "*The Essence of Buddhism* Edwin Arnold (1892). Via Project Gutenberg.",
+      "importance_rank": null
+    },
+    {
+      "id": "gateless-gate-mumon",
+      "title": "The Gateless Gate (Mumonkan)",
+      "tradition": "Buddhist",
+      "collection": "sacred",
+      "hierarchy": [
+        "section"
+      ],
+      "data_file": "gateless-gate-mumon_senzaki-reps.json",
+      "source": "sacredtexts",
+      "author": [
+        "Wumen Huikai"
+      ],
+      "translator": [
+        "Nyogen Senzaki",
+        "Paul Reps"
+      ],
+      "year": 1934,
+      "translation_label": "The Gateless Gate (Mumonkan)",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
       "importance_rank": null
     },
     {
@@ -1610,6 +1759,31 @@
       "volume_label": null,
       "quality": "popular",
       "source_summary": "*Feuds of the Clans* Alexander MacGregor (1907). Via SacredTexts.com.",
+      "importance_rank": null
+    },
+    {
+      "id": "folk-tales-brittany-spence",
+      "title": "Folk Tales of Brittany",
+      "tradition": "Celtic",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "folk-tales-brittany-spence_masson.json",
+      "source": "sacredtexts",
+      "author": [
+        "Elsie Masson"
+      ],
+      "translator": [
+        "Elsie Masson"
+      ],
+      "year": 1929,
+      "translation_label": "Folk Tales of Brittany",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
       "importance_rank": null
     },
     {
@@ -4584,6 +4758,56 @@
       "importance_rank": null
     },
     {
+      "id": "pagan-regeneration-willoughby",
+      "title": "Pagan Regeneration",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "pagan-regeneration-willoughby_willoughby.json",
+      "source": "sacredtexts",
+      "author": [
+        "Harold R. Willoughby"
+      ],
+      "translator": [
+        "Harold R. Willoughby"
+      ],
+      "year": 1929,
+      "translation_label": "Pagan Regeneration",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "pageant-popes-farrow",
+      "title": "Pageant of the Popes",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "pageant-popes-farrow_farrow.json",
+      "source": "sacredtexts",
+      "author": [
+        "John Farrow"
+      ],
+      "translator": [
+        "John Farrow"
+      ],
+      "year": 1942,
+      "translation_label": "Pageant of the Popes",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
       "id": "milton-paradise-lost",
       "title": "Paradise Lost",
       "tradition": "Christian",
@@ -4681,6 +4905,31 @@
       "volume_label": null,
       "quality": "popular",
       "source_summary": "Christina Rossetti, *Poems* (1904 collection). Via Project Gutenberg.",
+      "importance_rank": null
+    },
+    {
+      "id": "prayers-middle-ages",
+      "title": "Prayers of the Middle Ages",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "prayers-middle-ages_potts.json",
+      "source": "gutenberg",
+      "author": [
+        "Various"
+      ],
+      "translator": [
+        "J. Manning Potts"
+      ],
+      "year": 1953,
+      "translation_label": "Prayers of the Middle Ages",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
       "importance_rank": null
     },
     {
@@ -4906,6 +5155,31 @@
       "volume_label": null,
       "quality": "popular",
       "source_summary": "Jan van Ruysbroeck, *The Adornment of the Spiritual Marriage*. C. A. Wynschenk Dom trans. (1916). Via SacredTexts.com.",
+      "importance_rank": null
+    },
+    {
+      "id": "the-amish-smith",
+      "title": "The Amish",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "the-amish-smith_smith.json",
+      "source": "sacredtexts",
+      "author": [
+        "Elmer L. Smith"
+      ],
+      "translator": [
+        "Elmer L. Smith"
+      ],
+      "year": 1958,
+      "translation_label": "The Amish",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
       "importance_rank": null
     },
     {
@@ -5331,6 +5605,920 @@
       "volume_label": null,
       "quality": "popular",
       "source_summary": "F. C. Conybeare, *The Historical Christ* (1914). Via Project Gutenberg.",
+      "importance_rank": null
+    },
+    {
+      "id": "bible",
+      "title": "The Holy Bible",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "chapter",
+        "verse"
+      ],
+      "data_file": "bible_kjv.json",
+      "source": "ebible",
+      "author": [],
+      "translator": [
+        "KJV Translators"
+      ],
+      "year": 1611,
+      "translation_label": "King James Version with Apocrypha",
+      "translation_short_label": "KJV",
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "bible",
+      "title": "The Holy Bible",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "chapter",
+        "verse"
+      ],
+      "data_file": "bible_asv.json",
+      "source": "ebible",
+      "author": [],
+      "translator": [
+        "ASV Revision Committee"
+      ],
+      "year": 1901,
+      "translation_label": "American Standard Version",
+      "translation_short_label": "ASV",
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "bible",
+      "title": "The Holy Bible",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "chapter",
+        "verse"
+      ],
+      "data_file": "bible_bbe.json",
+      "source": "ebible",
+      "author": [],
+      "translator": [
+        "Samuel Henry Hooke"
+      ],
+      "year": 1949,
+      "translation_label": "Bible in Basic English",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "bible",
+      "title": "The Holy Bible",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "chapter",
+        "verse"
+      ],
+      "data_file": "bible_brenton.json",
+      "source": "ebible",
+      "author": [],
+      "translator": [
+        "Lancelot C. L. Brenton"
+      ],
+      "year": 1851,
+      "translation_label": "Brenton Septuagint Translation",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "bible",
+      "title": "The Holy Bible",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "chapter",
+        "verse"
+      ],
+      "data_file": "bible_brenton_greek.json",
+      "source": "ebible",
+      "author": [],
+      "translator": [],
+      "year": 1851,
+      "translation_label": "Brenton Septuagint (Greek)",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "derivative",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "bible",
+      "title": "The Holy Bible",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "chapter",
+        "verse"
+      ],
+      "data_file": "bible_darby.json",
+      "source": "ebible",
+      "author": [],
+      "translator": [
+        "John Nelson Darby"
+      ],
+      "year": 1890,
+      "translation_label": "Darby Bible",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "bible",
+      "title": "The Holy Bible",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "chapter",
+        "verse"
+      ],
+      "data_file": "bible_douay.json",
+      "source": "ebible",
+      "author": [],
+      "translator": [
+        "Douay-Rheims Translators"
+      ],
+      "year": 1899,
+      "translation_label": "Douay-Rheims Bible (1899)",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "bible",
+      "title": "The Holy Bible",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "chapter",
+        "verse"
+      ],
+      "data_file": "bible_geneva.json",
+      "source": "ebible",
+      "author": [],
+      "translator": [
+        "Geneva Bible Translators"
+      ],
+      "year": 1599,
+      "translation_label": "Geneva Bible (1599)",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "bible",
+      "title": "The Holy Bible",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "chapter",
+        "verse"
+      ],
+      "data_file": "bible_lxx_eng.json",
+      "source": "ebible",
+      "author": [],
+      "translator": [],
+      "year": 2012,
+      "translation_label": "The Septuagint (2012 English Translation)",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "derivative",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "bible",
+      "title": "The Holy Bible",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "chapter",
+        "verse"
+      ],
+      "data_file": "bible_majority_nt.json",
+      "source": "ebible",
+      "author": [],
+      "translator": [],
+      "year": null,
+      "translation_label": "Majority Text New Testament (Greek)",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "derivative",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "bible",
+      "title": "The Holy Bible",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "chapter",
+        "verse"
+      ],
+      "data_file": "bible_peshitta.json",
+      "source": "peshitta",
+      "author": [],
+      "translator": [],
+      "year": null,
+      "translation_label": "Peshitta Old Testament (Syriac, ETCBC edition)",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "derivative",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "bible",
+      "title": "The Holy Bible",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "chapter",
+        "verse"
+      ],
+      "data_file": "bible_rv.json",
+      "source": "ebible",
+      "author": [],
+      "translator": [
+        "English Revised Version Committee"
+      ],
+      "year": 1885,
+      "translation_label": "Revised Version with Apocrypha",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "bible",
+      "title": "The Holy Bible",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "chapter",
+        "verse"
+      ],
+      "data_file": "bible_salkinson_nt.json",
+      "source": "ebible",
+      "author": [],
+      "translator": [
+        "Isaac Salkinson",
+        "Christian David Ginsburg"
+      ],
+      "year": 1885,
+      "translation_label": "Salkinson-Ginsburg Hebrew New Testament",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "bible",
+      "title": "The Holy Bible",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "chapter",
+        "verse"
+      ],
+      "data_file": "bible_sbl_nt.json",
+      "source": "ebible",
+      "author": [],
+      "translator": [
+        "Michael W. Holmes"
+      ],
+      "year": 2010,
+      "translation_label": "SBL Greek New Testament",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "bible",
+      "title": "The Holy Bible",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "chapter",
+        "verse"
+      ],
+      "data_file": "bible_textus_receptus.json",
+      "source": "ebible",
+      "author": [],
+      "translator": [
+        "Desiderius Erasmus"
+      ],
+      "year": 1516,
+      "translation_label": "Textus Receptus (Greek New Testament)",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "bible",
+      "title": "The Holy Bible",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "chapter",
+        "verse"
+      ],
+      "data_file": "bible_tyndale.json",
+      "source": "ebible",
+      "author": [],
+      "translator": [
+        "William Tyndale"
+      ],
+      "year": 1534,
+      "translation_label": "Tyndale New Testament",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "bible",
+      "title": "The Holy Bible",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "chapter",
+        "verse"
+      ],
+      "data_file": "bible_vulgate.json",
+      "source": "ebible",
+      "author": [],
+      "translator": [
+        "Jerome"
+      ],
+      "year": 1598,
+      "translation_label": "Vulgate Clementina (Latin)",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "bible",
+      "title": "The Holy Bible",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "chapter",
+        "verse"
+      ],
+      "data_file": "bible_web.json",
+      "source": "ebible",
+      "author": [],
+      "translator": [
+        "Michael Paul Johnson"
+      ],
+      "year": 2000,
+      "translation_label": "World English Bible",
+      "translation_short_label": "WEB",
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "bible",
+      "title": "The Holy Bible",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "chapter",
+        "verse"
+      ],
+      "data_file": "bible_wycliffe.json",
+      "source": "ebible",
+      "author": [],
+      "translator": [
+        "John Wycliffe"
+      ],
+      "year": 1382,
+      "translation_label": "Wycliffe Bible (selections)",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "bible",
+      "title": "The Holy Bible",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "chapter",
+        "verse"
+      ],
+      "data_file": "bible_ylt.json",
+      "source": "ebible",
+      "author": [],
+      "translator": [
+        "Robert Young"
+      ],
+      "year": 1862,
+      "translation_label": "Young's Literal Translation",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "bible",
+      "title": "The Holy Bible",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "chapter",
+        "verse"
+      ],
+      "data_file": "bible_bible-in-basic-english.json",
+      "source": "ebible",
+      "author": [],
+      "translator": [
+        "Samuel Henry Hooke"
+      ],
+      "year": 1949,
+      "translation_label": "Bible in Basic English",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "bible",
+      "title": "The Holy Bible",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "chapter",
+        "verse"
+      ],
+      "data_file": "bible_brenton-septuagint-greek.json",
+      "source": "ebible",
+      "author": [],
+      "translator": [],
+      "year": null,
+      "translation_label": "Brenton Septuagint (Greek)",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "derivative",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "bible",
+      "title": "The Holy Bible",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "chapter",
+        "verse"
+      ],
+      "data_file": "bible_brenton-septuagint-translation.json",
+      "source": "ebible",
+      "author": [],
+      "translator": [
+        "Lancelot Charles Lee Brenton"
+      ],
+      "year": 1844,
+      "translation_label": "Brenton Septuagint Translation",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "bible",
+      "title": "The Holy Bible",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "chapter",
+        "verse"
+      ],
+      "data_file": "bible_douay-rheims-bible.json",
+      "source": "ebible",
+      "author": [],
+      "translator": [
+        "Douay-Rheims Translators"
+      ],
+      "year": 1899,
+      "translation_label": "Douay-Rheims Bible",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "bible",
+      "title": "The Holy Bible",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "chapter",
+        "verse"
+      ],
+      "data_file": "bible_geneva-bible.json",
+      "source": "ebible",
+      "author": [],
+      "translator": [
+        "William Whittingham"
+      ],
+      "year": 1599,
+      "translation_label": "Geneva Bible",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "bible",
+      "title": "The Holy Bible",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "chapter",
+        "verse"
+      ],
+      "data_file": "bible_isaac-leeser-tanakh.json",
+      "source": "ebible",
+      "author": [],
+      "translator": [
+        "Isaac Leeser"
+      ],
+      "year": 1853,
+      "translation_label": "Isaac Leeser Tanakh",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "bible",
+      "title": "The Holy Bible",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "chapter",
+        "verse"
+      ],
+      "data_file": "bible_jps-tanakh.json",
+      "source": "ebible",
+      "author": [],
+      "translator": [
+        "Jewish Publication Society"
+      ],
+      "year": 1917,
+      "translation_label": "JPS Tanakh",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "bible",
+      "title": "The Holy Bible",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "chapter",
+        "verse"
+      ],
+      "data_file": "bible_lxx-septuagint.json",
+      "source": "ebible",
+      "author": [],
+      "translator": [],
+      "year": 2012,
+      "translation_label": "LXX Septuagint",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "derivative",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "bible",
+      "title": "The Holy Bible",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "chapter",
+        "verse"
+      ],
+      "data_file": "bible_majority-text-new-testament.json",
+      "source": "ebible",
+      "author": [],
+      "translator": [],
+      "year": null,
+      "translation_label": "Majority Text New Testament",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "derivative",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "bible",
+      "title": "The Holy Bible",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "chapter",
+        "verse"
+      ],
+      "data_file": "bible_masoretic-old-testament.json",
+      "source": "ebible",
+      "author": [],
+      "translator": [],
+      "year": null,
+      "translation_label": "Masoretic Old Testament",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "derivative",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "bible",
+      "title": "The Holy Bible",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "chapter",
+        "verse"
+      ],
+      "data_file": "bible_revised-version-with-apocrypha.json",
+      "source": "ebible",
+      "author": [],
+      "translator": [
+        "RV Revision Committee"
+      ],
+      "year": 1885,
+      "translation_label": "Revised Version with Apocrypha",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "bible",
+      "title": "The Holy Bible",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "chapter",
+        "verse"
+      ],
+      "data_file": "bible_salkinson-new-testament.json",
+      "source": "ebible",
+      "author": [],
+      "translator": [
+        "Isaac Salkinson",
+        "Christian David Ginsburg"
+      ],
+      "year": null,
+      "translation_label": "Salkinson New Testament",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "bible",
+      "title": "The Holy Bible",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "chapter",
+        "verse"
+      ],
+      "data_file": "bible_sbl-greek-new-testament.json",
+      "source": "ebible",
+      "author": [],
+      "translator": [],
+      "year": null,
+      "translation_label": "SBL Greek New Testament",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "derivative",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "bible",
+      "title": "The Holy Bible",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "chapter",
+        "verse"
+      ],
+      "data_file": "bible_textus-receptus.json",
+      "source": "ebible",
+      "author": [],
+      "translator": [],
+      "year": null,
+      "translation_label": "Textus Receptus",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "derivative",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "bible",
+      "title": "The Holy Bible",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "chapter",
+        "verse"
+      ],
+      "data_file": "bible_tyndale-new-testament.json",
+      "source": "ebible",
+      "author": [],
+      "translator": [
+        "William Tyndale"
+      ],
+      "year": 1526,
+      "translation_label": "Tyndale New Testament",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "bible",
+      "title": "The Holy Bible",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "chapter",
+        "verse"
+      ],
+      "data_file": "bible_vulgate-clementina.json",
+      "source": "ebible",
+      "author": [],
+      "translator": [],
+      "year": 1598,
+      "translation_label": "Vulgate Clementina",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "derivative",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "bible",
+      "title": "The Holy Bible",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "chapter",
+        "verse"
+      ],
+      "data_file": "bible_westminster-leningrad-codex.json",
+      "source": "ebible",
+      "author": [],
+      "translator": [],
+      "year": null,
+      "translation_label": "Westminster Leningrad Codex",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "derivative",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "bible",
+      "title": "The Holy Bible",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "chapter",
+        "verse"
+      ],
+      "data_file": "bible_wycliffe-bible.json",
+      "source": "ebible",
+      "author": [],
+      "translator": [
+        "John Wycliffe"
+      ],
+      "year": 1395,
+      "translation_label": "Wycliffe Bible",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "bible",
+      "title": "The Holy Bible",
+      "tradition": "Christian",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "chapter",
+        "verse"
+      ],
+      "data_file": "bible_youngs-literal-translation.json",
+      "source": "ebible",
+      "author": [],
+      "translator": [
+        "Robert Young"
+      ],
+      "year": 1862,
+      "translation_label": "Young's Literal Translation",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
       "importance_rank": null
     },
     {
@@ -7127,6 +8315,30 @@
       "importance_rank": null
     },
     {
+      "id": "gospel-of-thomas-various",
+      "title": "The Gospel of Thomas",
+      "tradition": "Gnostic",
+      "collection": "sacred",
+      "hierarchy": [
+        "section"
+      ],
+      "data_file": "gospel-of-thomas-various_lambdin.json",
+      "source": "sacredtexts",
+      "author": [
+        "Didymus Judas Thomas (attributed)"
+      ],
+      "translator": [
+        "Thomas Lambdin"
+      ],
+      "year": 1977,
+      "translation_label": "The Gospel of Thomas",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "primary",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
       "id": "astrology-greeks-romans-cumont",
       "title": "Astrology and Religion Among the Greeks and Romans",
       "tradition": "Greek",
@@ -7225,6 +8437,57 @@
       "volume_label": null,
       "quality": "popular",
       "source_summary": "*Fairy Tales of Modern Greece* by Theodore Gianakoulis, Georgia MacPherson. Via SacredTexts.com.",
+      "importance_rank": null
+    },
+    {
+      "id": "fairy-tales-modern-greece-gianakoulis",
+      "title": "Fairy Tales of Modern Greece",
+      "tradition": "Greek",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "fairy-tales-modern-greece-gianakoulis_gianakoulis.json",
+      "source": "sacredtexts",
+      "author": [
+        "Various"
+      ],
+      "translator": [
+        "Theodore P. Gianakoulis",
+        "Georgia H. MacPherson"
+      ],
+      "year": 1930,
+      "translation_label": "Fairy Tales of Modern Greece",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "greek-popular-religion-nilsson",
+      "title": "Greek Popular Religion",
+      "tradition": "Greek",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "greek-popular-religion-nilsson_nilsson.json",
+      "source": "sacredtexts",
+      "author": [
+        "Martin P. Nilsson"
+      ],
+      "translator": [
+        "Martin P. Nilsson"
+      ],
+      "year": 1940,
+      "translation_label": "Greek Popular Religion",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
       "importance_rank": null
     },
     {
@@ -8629,6 +9892,31 @@
       "importance_rank": null
     },
     {
+      "id": "kundalini-gherwal",
+      "title": "Kundalini: The Mother of the Universe",
+      "tradition": "Hindu",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "kundalini-gherwal_gherwal.json",
+      "source": "sacredtexts",
+      "author": [
+        "Rishi Singh Gherwal"
+      ],
+      "translator": [
+        "Rishi Singh Gherwal"
+      ],
+      "year": 1930,
+      "translation_label": "Kundalini: The Mother of the Universe",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
       "id": "mahabharata-of-krishna-dwaipayana-vyasa-vol-1-ganguli",
       "title": "Mahabharata of Krishna-Dwaipayana Vyasa - Vol 1",
       "tradition": "Hindu",
@@ -9155,6 +10443,30 @@
       "importance_rank": null
     },
     {
+      "id": "sama-veda-griffith",
+      "title": "The Sama Veda",
+      "tradition": "Hindu",
+      "collection": "sacred",
+      "hierarchy": [
+        "section"
+      ],
+      "data_file": "sama-veda-griffith_griffith.json",
+      "source": "sacredtexts",
+      "author": [
+        "Anonymous"
+      ],
+      "translator": [
+        "Ralph T.H. Griffith"
+      ],
+      "year": 1895,
+      "translation_label": "The Sama Veda",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "primary",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
       "id": "sanskrit-drama-keith",
       "title": "The Sanskrit Drama",
       "tradition": "Hindu",
@@ -9650,6 +10962,31 @@
       "volume_label": null,
       "quality": "primary",
       "source_summary": "*Vishnupuranam (Dutt)* Manmatha Nath Dutt (1894). Via Project Gutenberg.",
+      "importance_rank": null
+    },
+    {
+      "id": "yoga-vasishtha-gherwal",
+      "title": "Yoga Vasishtha, or Heaven Found",
+      "tradition": "Hindu",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "yoga-vasishtha-gherwal_gherwal.json",
+      "source": "sacredtexts",
+      "author": [
+        "Valmiki (attributed)"
+      ],
+      "translator": [
+        "Rishi Singh Gherwal"
+      ],
+      "year": 1930,
+      "translation_label": "Yoga Vasishtha, or Heaven Found",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
       "importance_rank": null
     },
     {
@@ -11536,6 +12873,56 @@
       "importance_rank": null
     },
     {
+      "id": "midrash-tales-maxims-rapaport",
+      "title": "Tales and Maxims from the Midrash",
+      "tradition": "Jewish",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "midrash-tales-maxims-rapaport_rapaport.json",
+      "source": "sacredtexts",
+      "author": [
+        "Various"
+      ],
+      "translator": [
+        "Samuel Rapaport"
+      ],
+      "year": 1907,
+      "translation_label": "Tales and Maxims from the Midrash",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "babylonian-talmud-rodkinson",
+      "title": "The Babylonian Talmud",
+      "tradition": "Jewish",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "babylonian-talmud-rodkinson_rodkinson.json",
+      "source": "sacredtexts",
+      "author": [
+        "Various"
+      ],
+      "translator": [
+        "Michael L. Rodkinson"
+      ],
+      "year": 1903,
+      "translation_label": "The Babylonian Talmud",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
       "id": "book-of-delight-abrahams",
       "title": "The Book of Delight and Other Papers",
       "tradition": "Jewish",
@@ -11632,6 +13019,31 @@
       "volume_label": null,
       "quality": "popular",
       "source_summary": "*The Essenes: Their History and Doctrines* Christian D. Ginsburg (1864). Via Project Gutenberg.",
+      "importance_rank": null
+    },
+    {
+      "id": "golden-mountain-levin",
+      "title": "The Golden Mountain",
+      "tradition": "Jewish",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "golden-mountain-levin_levin.json",
+      "source": "sacredtexts",
+      "author": [
+        "Meyer Levin"
+      ],
+      "translator": [
+        "Meyer Levin"
+      ],
+      "year": 1932,
+      "translation_label": "The Golden Mountain",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
       "importance_rank": null
     },
     {
@@ -11931,6 +13343,102 @@
       "importance_rank": null
     },
     {
+      "id": "tanakh",
+      "title": "The Tanakh",
+      "tradition": "Jewish",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "chapter",
+        "verse"
+      ],
+      "data_file": "tanakh_leeser.json",
+      "source": "ebible",
+      "author": [],
+      "translator": [
+        "Isaac Leeser"
+      ],
+      "year": 1853,
+      "translation_label": "The Twenty-four Books of the Holy Scriptures",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "tanakh",
+      "title": "The Tanakh",
+      "tradition": "Jewish",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "chapter",
+        "verse"
+      ],
+      "data_file": "tanakh_jps.json",
+      "source": "ebible",
+      "author": [],
+      "translator": [
+        "Jewish Publication Society"
+      ],
+      "year": 1917,
+      "translation_label": "JPS Tanakh (1917)",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "tanakh",
+      "title": "The Tanakh",
+      "tradition": "Jewish",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "chapter",
+        "verse"
+      ],
+      "data_file": "tanakh_masoretic.json",
+      "source": "ebible",
+      "author": [],
+      "translator": [
+        "The Masoretes"
+      ],
+      "year": null,
+      "translation_label": "Masoretic Text (Biblia Hebraica)",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "tanakh",
+      "title": "The Tanakh",
+      "tradition": "Jewish",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "chapter",
+        "verse"
+      ],
+      "data_file": "tanakh_wlc.json",
+      "source": "ebible",
+      "author": [],
+      "translator": [
+        "Westminster Theological Seminary"
+      ],
+      "year": 2016,
+      "translation_label": "Westminster Leningrad Codex",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
       "id": "josephus-wars-jews",
       "title": "The Wars of the Jews",
       "tradition": "Jewish",
@@ -11954,6 +13462,31 @@
       "volume_label": null,
       "quality": "popular",
       "source_summary": "*The Wars of the Jews* William Whiston (1737). Via Project Gutenberg.",
+      "importance_rank": null
+    },
+    {
+      "id": "wisdom-talmud-bokser",
+      "title": "The Wisdom of the Talmud",
+      "tradition": "Jewish",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "wisdom-talmud-bokser_bokser.json",
+      "source": "sacredtexts",
+      "author": [
+        "Ben Zion Bokser"
+      ],
+      "translator": [
+        "Ben Zion Bokser"
+      ],
+      "year": 1951,
+      "translation_label": "The Wisdom of the Talmud",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
       "importance_rank": null
     },
     {
@@ -12102,6 +13635,31 @@
       "volume_label": null,
       "quality": "popular",
       "source_summary": "*Creation Myths of Primitive America* Jeremiah Curtin (1898). Via SacredTexts.com.",
+      "importance_rank": null
+    },
+    {
+      "id": "dancing-gods-fergusson",
+      "title": "Dancing Gods",
+      "tradition": "Mesoamerican",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "dancing-gods-fergusson_fergusson.json",
+      "source": "sacredtexts",
+      "author": [
+        "Erna Fergusson"
+      ],
+      "translator": [
+        "Erna Fergusson"
+      ],
+      "year": 1931,
+      "translation_label": "Dancing Gods",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
       "importance_rank": null
     },
     {
@@ -12355,6 +13913,81 @@
       "importance_rank": null
     },
     {
+      "id": "tewa-songs-spinden",
+      "title": "Songs of the Tewa",
+      "tradition": "Mesoamerican",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "tewa-songs-spinden_spinden.json",
+      "source": "sacredtexts",
+      "author": [
+        "Various Tewa"
+      ],
+      "translator": [
+        "Herbert Spinden"
+      ],
+      "year": 1933,
+      "translation_label": "Songs of the Tewa",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "spider-woman-reichard",
+      "title": "Spider Woman",
+      "tradition": "Mesoamerican",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "spider-woman-reichard_reichard.json",
+      "source": "sacredtexts",
+      "author": [
+        "Gladys A. Reichard"
+      ],
+      "translator": [
+        "Gladys A. Reichard"
+      ],
+      "year": 1934,
+      "translation_label": "Spider Woman",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "nam-tales-thompson",
+      "title": "Tales of the North American Indians",
+      "tradition": "Mesoamerican",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "nam-tales-thompson_thompson.json",
+      "source": "sacredtexts",
+      "author": [
+        "Various"
+      ],
+      "translator": [
+        "Stith Thompson"
+      ],
+      "year": 1929,
+      "translation_label": "Tales of the North American Indians",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
       "id": "algonquin-legends-leland",
       "title": "The Algonquin Legends of New England",
       "tradition": "Mesoamerican",
@@ -12526,6 +14159,31 @@
       "volume_label": null,
       "quality": "popular",
       "source_summary": "*The Soul of the Indian* Charles A. Eastman (1911). Via SacredTexts.com.",
+      "importance_rank": null
+    },
+    {
+      "id": "thunderbird-tootooch-kirk",
+      "title": "The Thunder Bird Tootooch Legends",
+      "tradition": "Mesoamerican",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "thunderbird-tootooch-kirk_kirk.json",
+      "source": "sacredtexts",
+      "author": [
+        "W.J. Kirk"
+      ],
+      "translator": [
+        "W.J. Kirk"
+      ],
+      "year": 1937,
+      "translation_label": "The Thunder Bird Tootooch Legends",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
       "importance_rank": null
     },
     {
@@ -13176,6 +14834,31 @@
       "importance_rank": null
     },
     {
+      "id": "mozi",
+      "title": "Mozi",
+      "tradition": "Mohist",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "mozi_mei.json",
+      "source": "ctext",
+      "author": [
+        "Mozi"
+      ],
+      "translator": [
+        "W.P. Mei"
+      ],
+      "year": 1929,
+      "translation_label": "The Ethical and Political Works of Motse",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
       "id": "poetic-edda",
       "title": "The Poetic Edda",
       "tradition": "Norse",
@@ -13672,6 +15355,56 @@
       "volume_label": null,
       "quality": "primary",
       "source_summary": "*The Nō Plays of Japan* by Various Nō playwrights. Translated by Arthur Waley (1921). Via Project Gutenberg.",
+      "importance_rank": null
+    },
+    {
+      "id": "pillow-book-sei-shonagon",
+      "title": "The Pillow-Book of Sei Shōnagon",
+      "tradition": "Shinto",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "pillow-book-sei-shonagon_waley.json",
+      "source": "gutenberg",
+      "author": [
+        "Sei Shōnagon"
+      ],
+      "translator": [
+        "Arthur Waley"
+      ],
+      "year": 1928,
+      "translation_label": "The Pillow-Book of Sei Shōnagon",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "primary",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "genji-monogatari-suematsu",
+      "title": "The Tale of Genji (Abridged)",
+      "tradition": "Shinto",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "genji-monogatari-suematsu_suematsu.json",
+      "source": "sacredtexts",
+      "author": [
+        "Murasaki Shikibu"
+      ],
+      "translator": [
+        "Suematsu Kenchō"
+      ],
+      "year": 1900,
+      "translation_label": "The Tale of Genji (Abridged)",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
       "importance_rank": null
     },
     {
@@ -15579,6 +17312,31 @@
       "volume_label": null,
       "quality": "derivative",
       "source_summary": "*The Birds* by Aristophanes. (1900). Via Internet Archive.",
+      "importance_rank": null
+    },
+    {
+      "id": "the-buddhavam-sa-and-the-cariya-pit-aka-richard-morris-no",
+      "title": "The Buddhavaṃsa and the Cariyā-piṭaka",
+      "tradition": "Greek Literature",
+      "collection": "other",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "the-buddhavam-sa-and-the-cariya-pit-aka-richard-morris-no_anonymous.json",
+      "source": "sacredtexts",
+      "author": [
+        "Richard Morris(NO)"
+      ],
+      "translator": [
+        "Richard Morris(NO)"
+      ],
+      "year": 1900,
+      "translation_label": "The Buddhavaṃsa and the Cariyā-piṭaka",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "derivative",
+      "source_summary": null,
       "importance_rank": null
     },
     {
@@ -18841,6 +20599,56 @@
       "importance_rank": null
     },
     {
+      "id": "initiation-bailey",
+      "title": "Initiation, Human and Solar",
+      "tradition": "Hermetic",
+      "collection": "other",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "initiation-bailey_bailey.json",
+      "source": "sacredtexts",
+      "author": [
+        "Alice Bailey"
+      ],
+      "translator": [
+        "Alice Bailey"
+      ],
+      "year": 1922,
+      "translation_label": "Initiation, Human and Solar",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "internet-book-shadows",
+      "title": "Internet Book of Shadows",
+      "tradition": "Hermetic",
+      "collection": "other",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "internet-book-shadows_various.json",
+      "source": "sacredtexts",
+      "author": [
+        "Various"
+      ],
+      "translator": [
+        "Various"
+      ],
+      "year": 1999,
+      "translation_label": "Internet Book of Shadows",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
       "id": "steiner-higher-worlds",
       "title": "Knowledge of the Higher Worlds and Its Attainment",
       "tradition": "Hermetic",
@@ -19066,6 +20874,31 @@
       "importance_rank": null
     },
     {
+      "id": "huna-theory-long",
+      "title": "Self-Suggestion and the New Huna Theory of Mesmerism",
+      "tradition": "Hermetic",
+      "collection": "other",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "huna-theory-long_long.json",
+      "source": "sacredtexts",
+      "author": [
+        "Max Freedom Long"
+      ],
+      "translator": [
+        "Max Freedom Long"
+      ],
+      "year": 1958,
+      "translation_label": "Self-Suggestion and the New Huna Theory of Mesmerism",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
       "id": "shamanism-siberia-czaplicka",
       "title": "Shamanism in Siberia",
       "tradition": "Hermetic",
@@ -19113,6 +20946,31 @@
       "volume_label": null,
       "quality": "popular",
       "source_summary": "*Shibboleth: A Templar Monitor* G.W. Steinbrenner (1864). Via SacredTexts.com.",
+      "importance_rank": null
+    },
+    {
+      "id": "stolen-legacy-james",
+      "title": "Stolen Legacy",
+      "tradition": "Hermetic",
+      "collection": "other",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "stolen-legacy-james_james.json",
+      "source": "sacredtexts",
+      "author": [
+        "George G.M. James"
+      ],
+      "translator": [
+        "George G.M. James"
+      ],
+      "year": 1954,
+      "translation_label": "Stolen Legacy",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
       "importance_rank": null
     },
     {
@@ -19394,6 +21252,31 @@
       "importance_rank": null
     },
     {
+      "id": "flying-saucers-keyhoe",
+      "title": "The Flying Saucers Are Real",
+      "tradition": "Hermetic",
+      "collection": "other",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "flying-saucers-keyhoe_keyhoe.json",
+      "source": "sacredtexts",
+      "author": [
+        "Donald Keyhoe"
+      ],
+      "translator": [
+        "Donald Keyhoe"
+      ],
+      "year": 1950,
+      "translation_label": "The Flying Saucers Are Real",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
       "id": "great-pyramid-smyth",
       "title": "The Great Pyramid (A Miracle in Stone)",
       "tradition": "Hermetic",
@@ -19490,6 +21373,31 @@
       "volume_label": null,
       "quality": "popular",
       "source_summary": "*The Little Book of Life After Death* Mary C. Wadsworth (1904). Via Project Gutenberg.",
+      "importance_rank": null
+    },
+    {
+      "id": "lore-unicorn-shepard",
+      "title": "The Lore of the Unicorn",
+      "tradition": "Hermetic",
+      "collection": "other",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "lore-unicorn-shepard_shepard.json",
+      "source": "sacredtexts",
+      "author": [
+        "Odell Shepard"
+      ],
+      "translator": [
+        "Odell Shepard"
+      ],
+      "year": 1930,
+      "translation_label": "The Lore of the Unicorn",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
       "importance_rank": null
     },
     {
@@ -19693,6 +21601,31 @@
       "importance_rank": null
     },
     {
+      "id": "sacred-symbols-mu-churchward",
+      "title": "The Sacred Symbols of Mu",
+      "tradition": "Hermetic",
+      "collection": "other",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "sacred-symbols-mu-churchward_churchward.json",
+      "source": "sacredtexts",
+      "author": [
+        "James Churchward"
+      ],
+      "translator": [
+        "James Churchward"
+      ],
+      "year": 1933,
+      "translation_label": "The Sacred Symbols of Mu",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
       "id": "science-getting-rich-wattles",
       "title": "The Science of Getting Rich",
       "tradition": "Hermetic",
@@ -19715,6 +21648,31 @@
       "volume_label": null,
       "quality": "popular",
       "source_summary": "*The Science of Getting Rich* Wallace D. Wattles (1910). Via SacredTexts.com.",
+      "importance_rank": null
+    },
+    {
+      "id": "secret-science-miracles-long",
+      "title": "The Secret Science Behind Miracles",
+      "tradition": "Hermetic",
+      "collection": "other",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "secret-science-miracles-long_long.json",
+      "source": "sacredtexts",
+      "author": [
+        "Max Freedom Long"
+      ],
+      "translator": [
+        "Max Freedom Long"
+      ],
+      "year": 1948,
+      "translation_label": "The Secret Science Behind Miracles",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
       "importance_rank": null
     },
     {
@@ -19966,6 +21924,31 @@
       "volume_label": null,
       "quality": "popular",
       "source_summary": "*Thrice-Greatest Hermes, Vol 3* G.R.S. Mead (1906). Via SacredTexts.com.",
+      "importance_rank": null
+    },
+    {
+      "id": "wild-talents-fort",
+      "title": "Wild Talents",
+      "tradition": "Hermetic",
+      "collection": "other",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "wild-talents-fort_fort.json",
+      "source": "sacredtexts",
+      "author": [
+        "Charles Fort"
+      ],
+      "translator": [
+        "Charles Fort"
+      ],
+      "year": 1932,
+      "translation_label": "Wild Talents",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
       "importance_rank": null
     },
     {
@@ -22086,6 +24069,30 @@
       "importance_rank": null
     },
     {
+      "id": "kitab-al-khazari-hartwig-hirschfeld-1",
+      "title": "Kitab al Khazari",
+      "tradition": "Modern Philosophy",
+      "collection": "other",
+      "hierarchy": [
+        "section"
+      ],
+      "data_file": "kitab-al-khazari-hartwig-hirschfeld-1_anonymous.json",
+      "source": "sacredtexts",
+      "author": [
+        "Hartwig Hirschfeld (1905) (NO)"
+      ],
+      "translator": [
+        "Hartwig Hirschfeld (1905) (NO)"
+      ],
+      "year": 1900,
+      "translation_label": "Kitab al Khazari",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "derivative",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
       "id": "kundalini-the-mother-of-the-universe-rishi-singh-gherwal",
       "title": "Kundalini - The Mother of the Universe",
       "tradition": "Modern Philosophy",
@@ -22429,6 +24436,30 @@
       "volume_label": null,
       "quality": "derivative",
       "source_summary": "*Mental Radio* by Upton Sinclair (1930). Translated by Upton Sinclair (1930) (1900). Via SacredTexts.com.",
+      "importance_rank": null
+    },
+    {
+      "id": "midrash-tanuma-no",
+      "title": "Midrash Tanuma",
+      "tradition": "Modern Philosophy",
+      "collection": "other",
+      "hierarchy": [
+        "section"
+      ],
+      "data_file": "midrash-tanuma-no_anonymous.json",
+      "source": "sacredtexts",
+      "author": [
+        "(NO)"
+      ],
+      "translator": [
+        "(NO)"
+      ],
+      "year": 1900,
+      "translation_label": "Midrash Tanuma",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "derivative",
+      "source_summary": null,
       "importance_rank": null
     },
     {
@@ -24974,6 +27005,31 @@
       "importance_rank": null
     },
     {
+      "id": "the-sutta-nipata-v-fausboll-1881-no",
+      "title": "The Sutta-Nipata",
+      "tradition": "Modern Philosophy",
+      "collection": "other",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "the-sutta-nipata-v-fausboll-1881-no_anonymous.json",
+      "source": "sacredtexts",
+      "author": [
+        "V-Fausboll 1881 (NO)"
+      ],
+      "translator": [
+        "V-Fausboll 1881 (NO)"
+      ],
+      "year": 1900,
+      "translation_label": "The Sutta-Nipata",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "derivative",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
       "id": "jung-theory-psychoanalysis",
       "title": "The Theory of Psychoanalysis",
       "tradition": "Modern Philosophy",
@@ -24996,6 +27052,30 @@
       "volume_label": null,
       "quality": "popular",
       "source_summary": "*The Theory of Psychoanalysis* by C. G. Jung. Translated by C. G. Jung (1915). Via Project Gutenberg.",
+      "importance_rank": null
+    },
+    {
+      "id": "the-udana-gm-strong-1902-no",
+      "title": "The Udana",
+      "tradition": "Modern Philosophy",
+      "collection": "other",
+      "hierarchy": [
+        "section"
+      ],
+      "data_file": "the-udana-gm-strong-1902-no_anonymous.json",
+      "source": "sacredtexts",
+      "author": [
+        "GM-Strong (1902) (NO)"
+      ],
+      "translator": [
+        "GM-Strong (1902) (NO)"
+      ],
+      "year": 1900,
+      "translation_label": "The Udana",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "derivative",
+      "source_summary": null,
       "importance_rank": null
     },
     {
@@ -25744,6 +27824,55 @@
       "volume_label": null,
       "quality": "derivative",
       "source_summary": "*Wissenschaft der Logik - Band 1* by Hegel. Translated by Hegel (1900). Via Project Gutenberg.",
+      "importance_rank": null
+    },
+    {
+      "id": "yajur-veda-black-arthur-keith-1914-no",
+      "title": "Yajur Veda (black)",
+      "tradition": "Modern Philosophy",
+      "collection": "other",
+      "hierarchy": [
+        "section"
+      ],
+      "data_file": "yajur-veda-black-arthur-keith-1914-no_anonymous.json",
+      "source": "sacredtexts",
+      "author": [
+        "Arthur Keith (1914)(NO)"
+      ],
+      "translator": [
+        "Arthur Keith (1914)(NO)"
+      ],
+      "year": 1900,
+      "translation_label": "Yajur Veda (black)",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "derivative",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "yajur-veda-white-ralph-griffith-1899",
+      "title": "Yajur Veda (white)",
+      "tradition": "Modern Philosophy",
+      "collection": "other",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "yajur-veda-white-ralph-griffith-1899_anonymous.json",
+      "source": "sacredtexts",
+      "author": [
+        "Ralph Griffith (1899)(NO)"
+      ],
+      "translator": [
+        "Ralph Griffith (1899)(NO)"
+      ],
+      "year": 1900,
+      "translation_label": "Yajur Veda (white)",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "derivative",
+      "source_summary": null,
       "importance_rank": null
     },
     {

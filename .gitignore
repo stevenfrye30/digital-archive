@@ -14,6 +14,12 @@ source_status.html
 # Restricted/copyrighted texts — local only, never push
 data/dead-sea-scrolls-*.json
 data/dead-sea-scrolls-*.json.gz
+data/hesse-siddhartha*.json
+data/hesse-siddhartha*.json.gz
+data/gospel-ramakrishna*.json
+data/gospel-ramakrishna*.json.gz
+data/think-grow-rich*.json
+data/think-grow-rich*.json.gz
 
 # Local runtime
 .server.pid
