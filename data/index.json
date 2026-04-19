@@ -1544,23 +1544,22 @@
       "tradition": "Celtic",
       "collection": "sacred",
       "hierarchy": [
-        "chapter",
-        "verse"
+        "passage"
       ],
       "data_file": "celtic-fairy-tales_jacobs.json",
       "source": "sacredtexts",
       "author": [
-        "Various"
+        "Joseph Jacobs"
       ],
       "translator": [
         "Joseph Jacobs"
       ],
       "year": 1892,
-      "translation_label": "Celtic Fairy Tales",
+      "translation_label": "Joseph Jacobs",
       "translation_short_label": null,
       "volume_label": null,
       "quality": "popular",
-      "source_summary": "*Celtic Fairy Tales* Joseph Jacobs (1892). Via SacredTexts.com.",
+      "source_summary": "*Celtic Fairy Tales* by Joseph Jacobs. Via SacredTexts.com.",
       "importance_rank": null
     },
     {
@@ -5761,6 +5760,30 @@
       "importance_rank": null
     },
     {
+      "id": "folklore-holy-land",
+      "title": "Folk-lore of the Holy Land",
+      "tradition": "Comparative Religion",
+      "collection": "sacred",
+      "hierarchy": [
+        "passage"
+      ],
+      "data_file": "folklore-holy-land_hanauer.json",
+      "source": "sacredtexts",
+      "author": [
+        "J.E. Hanauer"
+      ],
+      "translator": [
+        "J.E. Hanauer"
+      ],
+      "year": 1907,
+      "translation_label": "J.E. Hanauer",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": "*Folk-lore of the Holy Land* by J.E. Hanauer. Via SacredTexts.com.",
+      "importance_rank": null
+    },
+    {
       "id": "analects",
       "title": "The Analects",
       "tradition": "Confucian",
@@ -6310,6 +6333,30 @@
       "importance_rank": null
     },
     {
+      "id": "ancient-egyptian-legends",
+      "title": "Ancient Egyptian Legends",
+      "tradition": "Egyptian",
+      "collection": "sacred",
+      "hierarchy": [
+        "passage"
+      ],
+      "data_file": "ancient-egyptian-legends_murray.json",
+      "source": "sacredtexts",
+      "author": [
+        "Margaret Murray"
+      ],
+      "translator": [
+        "Margaret Murray"
+      ],
+      "year": 1920,
+      "translation_label": "Margaret Murray",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": "*Ancient Egyptian Legends* by Margaret Murray. Via SacredTexts.com.",
+      "importance_rank": null
+    },
+    {
       "id": "murray-egyptian-legends",
       "title": "Ancient Egyptian Legends",
       "tradition": "Egyptian",
@@ -6332,6 +6379,30 @@
       "volume_label": null,
       "quality": "popular",
       "source_summary": "*Ancient Egyptian Legends* Margaret Alice Murray (1920). Via Project Gutenberg.",
+      "importance_rank": null
+    },
+    {
+      "id": "egyptian-myth-legend",
+      "title": "Egyptian Myth and Legend",
+      "tradition": "Egyptian",
+      "collection": "sacred",
+      "hierarchy": [
+        "passage"
+      ],
+      "data_file": "egyptian-myth-legend_mackenzie.json",
+      "source": "sacredtexts",
+      "author": [
+        "Donald Mackenzie"
+      ],
+      "translator": [
+        "Donald Mackenzie"
+      ],
+      "year": 1907,
+      "translation_label": "Donald Mackenzie",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": "*Egyptian Myth and Legend* by Donald Mackenzie. Via SacredTexts.com.",
       "importance_rank": null
     },
     {
@@ -6959,6 +7030,30 @@
       "importance_rank": null
     },
     {
+      "id": "gospel-of-thomas",
+      "title": "Gospel of Thomas",
+      "tradition": "Gnostic",
+      "collection": "sacred",
+      "hierarchy": [
+        "passage"
+      ],
+      "data_file": "gospel-of-thomas_various.json",
+      "source": "sacredtexts",
+      "author": [
+        "Various"
+      ],
+      "translator": [
+        "Various"
+      ],
+      "year": null,
+      "translation_label": "Various",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": "*Gospel of Thomas* by Various. Via SacredTexts.com.",
+      "importance_rank": null
+    },
+    {
       "id": "pistis-sophia-mead",
       "title": "Pistis Sophia",
       "tradition": "Gnostic",
@@ -7081,6 +7176,32 @@
       "volume_label": null,
       "quality": "popular",
       "source_summary": "*Euripides and His Age* by Gilbert Murray. Translated by Gilbert Murray (1913). Via SacredTexts.com.",
+      "importance_rank": null
+    },
+    {
+      "id": "fairy-tales-greece",
+      "title": "Fairy Tales of Modern Greece",
+      "tradition": "Greek",
+      "collection": "sacred",
+      "hierarchy": [
+        "passage"
+      ],
+      "data_file": "fairy-tales-greece_gianakoulis.json",
+      "source": "sacredtexts",
+      "author": [
+        "Theodore Gianakoulis",
+        "Georgia MacPherson"
+      ],
+      "translator": [
+        "Theodore Gianakoulis",
+        "Georgia MacPherson"
+      ],
+      "year": 1930,
+      "translation_label": "Theodore Gianakoulis",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": "*Fairy Tales of Modern Greece* by Theodore Gianakoulis, Georgia MacPherson. Via SacredTexts.com.",
       "importance_rank": null
     },
     {
@@ -11403,6 +11524,30 @@
       "importance_rank": null
     },
     {
+      "id": "creation-myths-america",
+      "title": "Creation Myths of Primitive America",
+      "tradition": "Mesoamerican",
+      "collection": "sacred",
+      "hierarchy": [
+        "passage"
+      ],
+      "data_file": "creation-myths-america_curtin.json",
+      "source": "sacredtexts",
+      "author": [
+        "Jeremiah Curtin"
+      ],
+      "translator": [
+        "Jeremiah Curtin"
+      ],
+      "year": 1898,
+      "translation_label": "Jeremiah Curtin",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": "*Creation Myths of Primitive America* by Jeremiah Curtin. Via SacredTexts.com.",
+      "importance_rank": null
+    },
+    {
       "id": "creation-myths-curtin",
       "title": "Creation Myths of Primitive America",
       "tradition": "Mesoamerican",
@@ -12729,6 +12874,30 @@
       "importance_rank": null
     },
     {
+      "id": "common-sense-paine",
+      "title": "Common Sense",
+      "tradition": "Political Philosophy",
+      "collection": "sacred",
+      "hierarchy": [
+        "passage"
+      ],
+      "data_file": "common-sense-paine_paine.json",
+      "source": "sacredtexts",
+      "author": [
+        "Thomas Paine"
+      ],
+      "translator": [
+        "Thomas Paine"
+      ],
+      "year": 1776,
+      "translation_label": "Thomas Paine",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "primary",
+      "source_summary": "*Common Sense* by Thomas Paine. Via SacredTexts.com.",
+      "importance_rank": null
+    },
+    {
       "id": "holy-piby",
       "title": "The Holy Piby",
       "tradition": "Rastafari",
@@ -12775,6 +12944,30 @@
       "volume_label": null,
       "quality": "popular",
       "source_summary": "*A Hundred Verses from Old Japan* by Various classical Japanese poets. Translated by William N. Porter (1909). Via SacredTexts.com.",
+      "importance_rank": null
+    },
+    {
+      "id": "folk-tales-japan",
+      "title": "Ancient Tales and Folk-lore of Japan",
+      "tradition": "Shinto",
+      "collection": "sacred",
+      "hierarchy": [
+        "passage"
+      ],
+      "data_file": "folk-tales-japan_smith.json",
+      "source": "sacredtexts",
+      "author": [
+        "Richard Smith"
+      ],
+      "translator": [
+        "Richard Smith"
+      ],
+      "year": 1918,
+      "translation_label": "Richard Smith",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": "*Ancient Tales and Folk-lore of Japan* by Richard Smith. Via SacredTexts.com.",
       "importance_rank": null
     },
     {
@@ -12970,6 +13163,54 @@
       "volume_label": null,
       "quality": "popular",
       "source_summary": "*The Sikh Religion, Volume 6* Max A. Macauliffe (1909). Via Internet Archive.",
+      "importance_rank": null
+    },
+    {
+      "id": "folk-tales-russian",
+      "title": "Folk Tales From the Russian",
+      "tradition": "Slavic",
+      "collection": "sacred",
+      "hierarchy": [
+        "passage"
+      ],
+      "data_file": "folk-tales-russian_blumenthal.json",
+      "source": "sacredtexts",
+      "author": [
+        "Verra de Blumenthal"
+      ],
+      "translator": [
+        "Verra de Blumenthal"
+      ],
+      "year": 1903,
+      "translation_label": "Verra de Blumenthal",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": "*Folk Tales From the Russian* by Verra de Blumenthal. Via SacredTexts.com.",
+      "importance_rank": null
+    },
+    {
+      "id": "georgian-folk-tales",
+      "title": "Georgian Folk Tales",
+      "tradition": "Slavic",
+      "collection": "sacred",
+      "hierarchy": [
+        "passage"
+      ],
+      "data_file": "georgian-folk-tales_wardrop.json",
+      "source": "sacredtexts",
+      "author": [
+        "Marjory Wardrop"
+      ],
+      "translator": [
+        "Marjory Wardrop"
+      ],
+      "year": 1894,
+      "translation_label": "Marjory Wardrop",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": "*Georgian Folk Tales* by Marjory Wardrop. Via SacredTexts.com.",
       "importance_rank": null
     },
     {
@@ -13486,6 +13727,30 @@
       "quality": "primary",
       "source_summary": "*The Tibetan Book of the Dead (Bardo Thödol)* by Padmasambhava (attrib.). Translated by Kazi Dawa-Samdup and W. Y. Evans-Wentz (1927). Via Internet Archive.",
       "importance_rank": 30
+    },
+    {
+      "id": "tibetan-tantra-muses",
+      "title": "Esoteric Teachings of the Tibetan Tantra",
+      "tradition": "Tibetan Buddhist",
+      "collection": "sacred",
+      "hierarchy": [
+        "passage"
+      ],
+      "data_file": "tibetan-tantra-muses_muses.json",
+      "source": "sacredtexts",
+      "author": [
+        "C.A. Muses"
+      ],
+      "translator": [
+        "C.A. Muses"
+      ],
+      "year": 1961,
+      "translation_label": "C.A. Muses",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": "*Esoteric Teachings of the Tibetan Tantra* by C.A. Muses. Via SacredTexts.com.",
+      "importance_rank": null
     },
     {
       "id": "milarepa-evans-wentz",

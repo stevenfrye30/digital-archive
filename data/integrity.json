@@ -11,7 +11,7 @@
     "overall_pass_rate": 0.9984,
     "raw_files_hashed": 22645,
     "raw_bytes_hashed": 1018800584,
-    "raw_manifest_generated_at": "2026-04-19T02:17:51Z",
+    "raw_manifest_generated_at": "2026-04-19T08:18:55Z",
     "buckets": {
       "100%": 671,
       "99-100%": 316,
@@ -128,11 +128,11 @@
       "passages_pass": 135851
     },
     "Islam": {
-      "total": 5,
-      "verified_100": 3,
-      "verified_95": 5,
-      "passages_total": 30671,
-      "passages_pass": 30668
+      "total": 29,
+      "verified_100": 20,
+      "verified_95": 28,
+      "passages_total": 53302,
+      "passages_pass": 53274
     },
     "Jain": {
       "total": 1,
@@ -245,13 +245,6 @@
       "verified_95": 4,
       "passages_total": 4887,
       "passages_pass": 4881
-    },
-    "Sufi": {
-      "total": 24,
-      "verified_100": 17,
-      "verified_95": 23,
-      "passages_total": 22631,
-      "passages_pass": 22606
     },
     "Taoist": {
       "total": 13,
@@ -1892,18 +1885,18 @@
     {
       "title": "Celtic Fairy Tales",
       "author": [
-        "Various"
+        "Joseph Jacobs"
       ],
       "translator": [
         "Joseph Jacobs"
       ],
       "publisher": "SacredTexts.com",
-      "url": "https://sacred-texts.com/neu/celt/cft/index.htm",
+      "url": "",
       "year": 1892,
-      "source_title": "Celtic Fairy Tales",
+      "source_title": "",
       "tradition": "Celtic",
       "collection": "sacred",
-      "category": "Folk Literature",
+      "category": "Folklore",
       "raw_file": "02_raw_sources/Library_/SacredTexts.com/Celtic Fairy Tales_____Joseph Jacobs (1892).txt",
       "raw_sha256": "39516fe2bb8eb20c5e4a4b9aa08831a76c97a2ca5a47ba32e51e170bdd26540c",
       "text_id": "celtic-fairy-tales",
@@ -15777,6 +15770,110 @@
       "note": ""
     },
     {
+      "title": "Arabian Poetry",
+      "author": [
+        "Various"
+      ],
+      "translator": [
+        "W.A. Clouston"
+      ],
+      "publisher": "SacredTexts.com",
+      "url": "https://sacred-texts.com/isl/arp/index.htm",
+      "year": 1881,
+      "source_title": "Arabian Poetry",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "category": "Poetry",
+      "raw_file": "02_raw_sources/Library_/SacredTexts.com/Arabian Poetry_____WA-Clouston (1881).txt",
+      "raw_sha256": "60cc68e3467146b396fb3b1eb2eedd451b1f6f9365648f878d41e8efff71f10d",
+      "text_id": "arabian-poetry-clouston",
+      "translation_id": "clouston",
+      "status": "PARTIAL",
+      "pass_rate": 0.9993783027665527,
+      "passages_pass": 3215,
+      "passages_checked": 3217,
+      "passages_total": 3625,
+      "note": ""
+    },
+    {
+      "title": "Arabian Wisdom",
+      "author": [
+        "Various"
+      ],
+      "translator": [
+        "John Wortabet"
+      ],
+      "publisher": "SacredTexts.com",
+      "url": "https://sacred-texts.com/isl/arw/index.htm",
+      "year": 1913,
+      "source_title": "Arabian Wisdom",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "category": "Literature",
+      "raw_file": "02_raw_sources/Library_/SacredTexts.com/Arabian Wisdom_____John Wortabet (1913).txt",
+      "raw_sha256": "bacad5058aac2efb13030547b940f02a21af4676280c31ed11dd9a0ac118eab0",
+      "text_id": "arabian-wisdom-wortabet",
+      "translation_id": "wortabet",
+      "status": "PASS",
+      "pass_rate": 1.0,
+      "passages_pass": 720,
+      "passages_checked": 720,
+      "passages_total": 782,
+      "note": ""
+    },
+    {
+      "title": "History (Literary) of the Arabs",
+      "author": [
+        "Reynold Nicholson"
+      ],
+      "translator": [
+        "Reynold Nicholson"
+      ],
+      "publisher": "Project Gutenberg",
+      "url": "",
+      "year": 1900,
+      "source_title": "History (Literary) of the Arabs",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "category": "Literature",
+      "raw_file": "02_raw_sources/Library_/Gutenberg.org/History (Literary) of the Arabs_____Reynold Nicholson.txt",
+      "raw_sha256": "ea5b23b8e7ee97b66b2daac1e6128c3da4ce66c65ca2d796df31506d590c4703",
+      "text_id": "history-literary-of-the-arabs-reynold-nicholson",
+      "translation_id": "anonymous",
+      "status": "PARTIAL",
+      "pass_rate": 0.9984276729559748,
+      "passages_pass": 4445,
+      "passages_checked": 4452,
+      "passages_total": 5387,
+      "note": ""
+    },
+    {
+      "title": "Oriental Mysticism",
+      "author": [
+        "E.H. Palmer"
+      ],
+      "translator": [
+        "E.H. Palmer"
+      ],
+      "publisher": "SacredTexts.com",
+      "url": "https://sacred-texts.com/isl/om/index.htm",
+      "year": 1867,
+      "source_title": "Oriental Mysticism",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "category": "Theology",
+      "raw_file": "02_raw_sources/Library_/SacredTexts.com/Oriental Mysticism_____EH-Palmer (1867).txt",
+      "raw_sha256": "e068884ef46ddcec686e912f1b499510f5d0df52e49e91373d2f286e638997a7",
+      "text_id": "oriental-mysticism-palmer",
+      "translation_id": "palmer",
+      "status": "PASS",
+      "pass_rate": 1.0,
+      "passages_pass": 509,
+      "passages_checked": 509,
+      "passages_total": 673,
+      "note": ""
+    },
+    {
       "title": "Quran",
       "author": [
         "(3) Yusuf Ali - Pickthall - MHShakir"
@@ -15855,6 +15952,476 @@
       "note": ""
     },
     {
+      "title": "Salámán and Absál",
+      "author": [
+        "Jami"
+      ],
+      "translator": [
+        "Edward FitzGerald"
+      ],
+      "publisher": "SacredTexts.com",
+      "url": "https://sacred-texts.com/isl/sba/index.htm",
+      "year": 1856,
+      "source_title": "Salámán and Absál",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "category": "Poetry",
+      "raw_file": "02_raw_sources/Library_/SacredTexts.com/Salaman and Absal_____Jami - tr-Edward Fitzgerald (1904).txt",
+      "raw_sha256": "d14ba610b46eafbcce37800877420e4b6d0240dae5899c7a88e6d42116fa4cf8",
+      "text_id": "salaman-absal-fitzgerald",
+      "translation_id": "fitzgerald",
+      "status": "PASS",
+      "pass_rate": 1.0,
+      "passages_pass": 249,
+      "passages_checked": 249,
+      "passages_total": 289,
+      "note": ""
+    },
+    {
+      "title": "Selections from the Poetry of the Afghans",
+      "author": [
+        "Various"
+      ],
+      "translator": [
+        "H.G. Raverty"
+      ],
+      "publisher": "SacredTexts.com",
+      "url": "https://sacred-texts.com/isl/poa/index.htm",
+      "year": 1862,
+      "source_title": "Selections from the Poetry of the Afghans",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "category": "Poetry",
+      "raw_file": "02_raw_sources/Library_/SacredTexts.com/Selections from the Poetry of the Afghans_____HG-Raverty (1868).txt",
+      "raw_sha256": "142736201005ae7880a3f1925d5b795a5c938de2e305890cb2e57a4d32a6c183",
+      "text_id": "afghan-poetry-dorn",
+      "translation_id": "raverty",
+      "status": "PARTIAL",
+      "pass_rate": 0.9969854754727323,
+      "passages_pass": 3638,
+      "passages_checked": 3649,
+      "passages_total": 4008,
+      "note": ""
+    },
+    {
+      "title": "Some religious and moral teachings",
+      "author": [
+        "Al-Ghazzali"
+      ],
+      "translator": [
+        "Al-Ghazzali"
+      ],
+      "publisher": "Project Gutenberg",
+      "url": "",
+      "year": 1900,
+      "source_title": "Some religious and moral teachings",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "category": "Literature",
+      "raw_file": "02_raw_sources/Library_/Gutenberg.org/Some religious and moral teachings_____Al-Ghazzali.txt",
+      "raw_sha256": "8d4a32c660bb54ee2e716236eaecc2c74ca9a081c54a6a63803dc3285995781e",
+      "text_id": "some-religious-and-moral-teachings-al-ghazzali",
+      "translation_id": "anonymous",
+      "status": "PASS",
+      "pass_rate": 1.0,
+      "passages_pass": 378,
+      "passages_checked": 378,
+      "passages_total": 469,
+      "note": ""
+    },
+    {
+      "title": "The Arab Conquests in Central Asia",
+      "author": [
+        "H.A.R. Gibb"
+      ],
+      "translator": [
+        "H.A.R. Gibb"
+      ],
+      "publisher": "Project Gutenberg",
+      "url": "https://www.gutenberg.org/ebooks/0",
+      "year": 1923,
+      "source_title": "The Arab Conquests in Central Asia",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "category": "History",
+      "raw_file": "02_raw_sources/Library_/Gutenberg.org/The Arab conquests in Central Asia_____HARGibb.txt",
+      "raw_sha256": "e2ce1bea99d183f9641c9fda07f45f528dd77edb6c4387b06abe7c72e38acf85",
+      "text_id": "arab-conquests-central-asia-gibb",
+      "translation_id": "gibb",
+      "status": "PASS",
+      "pass_rate": 1.0,
+      "passages_pass": 297,
+      "passages_checked": 297,
+      "passages_total": 317,
+      "note": ""
+    },
+    {
+      "title": "The Bustan of Sa'di",
+      "author": [
+        "Saadi"
+      ],
+      "translator": [
+        "A. Hart Edwards"
+      ],
+      "publisher": "SacredTexts.com",
+      "url": "https://sacred-texts.com/isl/bus/index.htm",
+      "year": 1911,
+      "source_title": "The Bustan of Sa'di",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "category": "Poetry",
+      "raw_file": "02_raw_sources/Library_/SacredTexts.com/The Bustan of Sadi_____A-Hart Edwards (1911).txt",
+      "raw_sha256": "379279c2afd40fc477b626fd8b32d6b9dd9312fe2c35c96b0f61ce9fa03166eb",
+      "text_id": "bustan-sadi-edwards",
+      "translation_id": "edwards",
+      "status": "PASS",
+      "pass_rate": 1.0,
+      "passages_pass": 884,
+      "passages_checked": 884,
+      "passages_total": 1032,
+      "note": ""
+    },
+    {
+      "title": "The Confessions of Al-Ghazzali",
+      "author": [
+        "Al-Ghazzali"
+      ],
+      "translator": [
+        "Claud Field"
+      ],
+      "publisher": "Project Gutenberg",
+      "url": "https://www.gutenberg.org/ebooks/29489",
+      "year": 1909,
+      "source_title": "The Confessions of Al-Ghazzali",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "category": "Theology",
+      "raw_file": "02_raw_sources/Library_/Gutenberg.org/The Confessions_____Al Ghazzali.txt",
+      "raw_sha256": "c84d104f88a950678c4ef2f3d08c9db5139dbb6787c5422da367986579c785dd",
+      "text_id": "ghazzali-confessions",
+      "translation_id": "field",
+      "status": "PASS",
+      "pass_rate": 1.0,
+      "passages_pass": 212,
+      "passages_checked": 212,
+      "passages_total": 229,
+      "note": ""
+    },
+    {
+      "title": "The Diwan of Abu'l-ʿAla al-Maʿarri",
+      "author": [
+        "Abu'l-ʿAla al-Maʿarri"
+      ],
+      "translator": [
+        "Reynold A. Nicholson"
+      ],
+      "publisher": "SacredTexts.com",
+      "url": "https://sacred-texts.com/isl/daa/index.htm",
+      "year": 1921,
+      "source_title": "The Diwan of Abu'l-ʿAla al-Maʿarri",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "category": "Poetry",
+      "raw_file": "02_raw_sources/Library_/SacredTexts.com/The Diwan of Abu'l-Ala_____Henry Baerlein (1909).txt",
+      "raw_sha256": "fbc50074cbc1a8bf15bdba2db69e91860e91a2bb955e95041c9b0a8834089217",
+      "text_id": "diwan-abu-al-ala-nicholson",
+      "translation_id": "nicholson-abulala",
+      "status": "PARTIAL",
+      "pass_rate": 0.9951690821256038,
+      "passages_pass": 206,
+      "passages_checked": 207,
+      "passages_total": 231,
+      "note": ""
+    },
+    {
+      "title": "The Diwan of Zeb-un-Nissa",
+      "author": [
+        "Zeb-un-Nissa"
+      ],
+      "translator": [
+        "Magan Lal",
+        "Jessie Duncan Westbrook"
+      ],
+      "publisher": "SacredTexts.com",
+      "url": "https://sacred-texts.com/isl/zun/index.htm",
+      "year": 1913,
+      "source_title": "The Diwan of Zeb-un-Nissa",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "category": "Poetry",
+      "raw_file": "02_raw_sources/Library_/SacredTexts.com/The Diwan of Zeb-un-Nissa_____Magan Lal & Jessie Westbrook (1913).txt",
+      "raw_sha256": "67c2b82a69f9be601f26809e6ddcb703e29d7f82c3d1d29544c6ca7dbf74aa20",
+      "text_id": "diwan-zeb-un-nissa-westbrook",
+      "translation_id": "westbrook",
+      "status": "PASS",
+      "pass_rate": 1.0,
+      "passages_pass": 400,
+      "passages_checked": 400,
+      "passages_total": 418,
+      "note": ""
+    },
+    {
+      "title": "The Festival of Spring",
+      "author": [
+        "Rumi"
+      ],
+      "translator": [
+        "William Hastie"
+      ],
+      "publisher": "Project Gutenberg",
+      "url": "https://www.gutenberg.org/ebooks/57214",
+      "year": 1903,
+      "source_title": "The Festival of Spring",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "category": "Poetry",
+      "raw_file": "02_raw_sources/Library_/Gutenberg.org/The Festival of Spring - from the Díván of Jeláleddín_____Rumi.txt",
+      "raw_sha256": "fe65a7a06d5a8498cce449c432fb6b27d1bc07dc7d1036969b706038e967468c",
+      "text_id": "rumi-divan-festival",
+      "translation_id": "hastie",
+      "status": "PASS",
+      "pass_rate": 1.0,
+      "passages_pass": 87,
+      "passages_checked": 87,
+      "passages_total": 143,
+      "note": ""
+    },
+    {
+      "title": "The Kashf al-Mahjub",
+      "author": [
+        "Ali ibn Usman al-Hujwiri"
+      ],
+      "translator": [
+        "Reynold A. Nicholson"
+      ],
+      "publisher": "Project Gutenberg",
+      "url": "https://www.gutenberg.org/ebooks/41825",
+      "year": 1911,
+      "source_title": "The Kashf al-Mahjub",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "category": "Theology",
+      "raw_file": "",
+      "raw_sha256": null,
+      "text_id": "hujviri-kashf",
+      "translation_id": "nicholson",
+      "status": "SKIP",
+      "pass_rate": 0.0,
+      "passages_pass": 0,
+      "passages_checked": 0,
+      "passages_total": 0,
+      "note": "no ingest config — cannot locate raw file"
+    },
+    {
+      "title": "The Kashf al-mahjúb (Oldest Persian treatise on Súfiism)",
+      "author": [
+        "Ali ibn Usman Hujviri"
+      ],
+      "translator": [
+        "Ali ibn Usman Hujviri"
+      ],
+      "publisher": "Project Gutenberg",
+      "url": "",
+      "year": 1900,
+      "source_title": "The Kashf al-mahjúb (Oldest Persian treatise on Súfiism)",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "category": "Literature",
+      "raw_file": "02_raw_sources/Library_/Gutenberg.org/The Kashf al-mahjúb (Oldest Persian treatise on Súfiism)_____Ali ibn Usman Hujviri.txt",
+      "raw_sha256": "762aeede04d5fa14e983b246fe4f434c8d4a42e49d7ae6a5e9a8f68870a108d3",
+      "text_id": "the-kashf-al-mahj-b-oldest-persian-treatise-ali-ibn-usman-hu",
+      "translation_id": "anonymous",
+      "status": "PARTIAL",
+      "pass_rate": 0.9973776223776224,
+      "passages_pass": 1141,
+      "passages_checked": 1144,
+      "passages_total": 1330,
+      "note": ""
+    },
+    {
+      "title": "The Love Letters",
+      "author": [
+        "Rumi"
+      ],
+      "translator": [
+        "Anonymous"
+      ],
+      "publisher": "SacredTexts.com",
+      "url": "https://sacred-texts.com/isl/ll/index.htm",
+      "year": 1905,
+      "source_title": "The Love Letters",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "category": "Poetry",
+      "raw_file": "02_raw_sources/Library_/SacredTexts.com/The Love Letters_____Abelard & Heloise (1901).txt",
+      "raw_sha256": "1a2a069ac12e10a47581ca08b5f8681e6567954b92e6afde66841cc53dfa290e",
+      "text_id": "love-letters-rumi",
+      "translation_id": "anonymous",
+      "status": "PASS",
+      "pass_rate": 1.0,
+      "passages_pass": 307,
+      "passages_checked": 307,
+      "passages_total": 323,
+      "note": ""
+    },
+    {
+      "title": "The Masnavi",
+      "author": [
+        "Rumi"
+      ],
+      "translator": [
+        "E.H. Whinfield"
+      ],
+      "publisher": "SacredTexts.com",
+      "url": "https://sacred-texts.com/isl/masnavi/",
+      "year": 1898,
+      "source_title": "The Masnavi",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "category": "Scripture",
+      "raw_file": "02_raw_sources/Library_/SacredTexts.com/The Masnavi_____Rumi - tr-EH-Whinfield (1898).txt",
+      "raw_sha256": "bfca6b6067951b4f9fb36e48a48a83820c151cee62edd7bbd853be64ba925b8f",
+      "text_id": "rumi-masnavi",
+      "translation_id": "whinfield",
+      "status": "PASS",
+      "pass_rate": 1.0,
+      "passages_pass": 118,
+      "passages_checked": 118,
+      "passages_total": 126,
+      "note": ""
+    },
+    {
+      "title": "The Masnavi",
+      "author": [
+        "Rumi"
+      ],
+      "translator": [
+        "James W. Redhouse"
+      ],
+      "publisher": "Project Gutenberg",
+      "url": "https://www.gutenberg.org/ebooks/22517",
+      "year": 1881,
+      "source_title": "The Mesnevi",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "category": "Scripture",
+      "raw_file": "02_raw_sources/Library_/Gutenberg.org/The Mesnevi_____Rumi.txt",
+      "raw_sha256": "e31e67ae3af483c1bfd7a6a3907318954dfdee0a1e920e0c216ad09f76a71879",
+      "text_id": "rumi-masnavi",
+      "translation_id": "redhouse",
+      "status": "PASS",
+      "pass_rate": 1.0,
+      "passages_pass": 160,
+      "passages_checked": 160,
+      "passages_total": 160,
+      "note": ""
+    },
+    {
+      "title": "The Mesnavi and the Acts of the Adepts",
+      "author": [
+        "Rumi",
+        "Aflaki"
+      ],
+      "translator": [
+        "James W. Redhouse"
+      ],
+      "publisher": "SacredTexts.com",
+      "url": "https://sacred-texts.com/isl/masnavi/index.htm",
+      "year": 1881,
+      "source_title": "The Mesnavi and the Acts of the Adepts",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "category": "Poetry",
+      "raw_file": "02_raw_sources/Library_/SacredTexts.com/The Mesnavi & The Acts of the Adepts_____James Redhouse (1881).txt",
+      "raw_sha256": "b1405c0d78f010daa90a8d15407fba2da07fe4eb04270835bdf6f667b87a35a8",
+      "text_id": "mesnavi-acts-adepts-redhouse",
+      "translation_id": "redhouse-acts",
+      "status": "PASS",
+      "pass_rate": 1.0,
+      "passages_pass": 2220,
+      "passages_checked": 2220,
+      "passages_total": 2580,
+      "note": ""
+    },
+    {
+      "title": "The Mesnevi",
+      "author": [
+        "Rumi"
+      ],
+      "translator": [
+        "Rumi"
+      ],
+      "publisher": "Project Gutenberg",
+      "url": "",
+      "year": 1900,
+      "source_title": "The Mesnevi",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "category": "Literature",
+      "raw_file": "02_raw_sources/Library_/Gutenberg.org/The Mesnevi_____Rumi.txt",
+      "raw_sha256": "e31e67ae3af483c1bfd7a6a3907318954dfdee0a1e920e0c216ad09f76a71879",
+      "text_id": "the-mesnevi-rumi",
+      "translation_id": "anonymous",
+      "status": "PASS",
+      "pass_rate": 1.0,
+      "passages_pass": 1910,
+      "passages_checked": 1910,
+      "passages_total": 2229,
+      "note": ""
+    },
+    {
+      "title": "The Mystics of Islam",
+      "author": [
+        "Reynold A. Nicholson"
+      ],
+      "translator": [
+        "Reynold A. Nicholson"
+      ],
+      "publisher": "Project Gutenberg",
+      "url": "https://www.gutenberg.org/ebooks/41566",
+      "year": 1914,
+      "source_title": "The Mystics of Islam",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "category": "Theology",
+      "raw_file": "02_raw_sources/Library_/Gutenberg.org/The Mystics of Islam_____Reynold Nicholson.txt",
+      "raw_sha256": "ea5ce533937544c518a475e27b77fc67e5cb161d9454ef043ed779448795676d",
+      "text_id": "nicholson-mystics-islam",
+      "translation_id": "nicholson",
+      "status": "PASS",
+      "pass_rate": 1.0,
+      "passages_pass": 842,
+      "passages_checked": 842,
+      "passages_total": 1016,
+      "note": ""
+    },
+    {
+      "title": "The Persian Mystics: Jalalu'd-din Rumi",
+      "author": [
+        "Rumi"
+      ],
+      "translator": [
+        "F. Hadland Davis"
+      ],
+      "publisher": "Project Gutenberg",
+      "url": "https://www.gutenberg.org/ebooks/52022",
+      "year": 1912,
+      "source_title": "The Persian Mystics: Jalalu'd-din Rumi",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "category": "Poetry",
+      "raw_file": "02_raw_sources/Library_/Gutenberg.org/The Persian Mystics_____Rumi.txt",
+      "raw_sha256": "1d6910cde00e8834e12f6f3335a6c162752443895f1aa3de8617aae17ee4d798",
+      "text_id": "persian-mystics-rumi",
+      "translation_id": "davis",
+      "status": "PASS",
+      "pass_rate": 1.0,
+      "passages_pass": 173,
+      "passages_checked": 173,
+      "passages_total": 177,
+      "note": ""
+    },
+    {
       "title": "The Religion of the Koran",
       "author": [
         "Arthur N. Wollaston"
@@ -15878,6 +16445,58 @@
       "passages_pass": 334,
       "passages_checked": 336,
       "passages_total": 361,
+      "note": ""
+    },
+    {
+      "title": "The Secret Rose Garden",
+      "author": [
+        "Mahmud Shabistari"
+      ],
+      "translator": [
+        "Florence Lederer"
+      ],
+      "publisher": "SacredTexts.com",
+      "url": "https://sacred-texts.com/isl/srg/index.htm",
+      "year": 1920,
+      "source_title": "The Secret Rose Garden",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "category": "Poetry",
+      "raw_file": "02_raw_sources/Library_/SacredTexts.com/The Secret Rose Garden_____Florence Lederer (1920).txt",
+      "raw_sha256": "9322a46ea51f0b93e1713f25a335ddc71ff00b7254a278550c4fe6d0c4b3981c",
+      "text_id": "secret-rose-garden-shabistari",
+      "translation_id": "lederer",
+      "status": "PARTIAL",
+      "pass_rate": 0.9966442953020134,
+      "passages_pass": 297,
+      "passages_checked": 298,
+      "passages_total": 385,
+      "note": ""
+    },
+    {
+      "title": "The Secrets of the Self (Asrār-i Khudī)",
+      "author": [
+        "Muhammad Iqbal"
+      ],
+      "translator": [
+        "Reynold A. Nicholson"
+      ],
+      "publisher": "Project Gutenberg",
+      "url": "https://www.gutenberg.org/ebooks/56438",
+      "year": 1920,
+      "source_title": "The Secrets of the Self (Asrār-i Khudī)",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "category": "Poetry",
+      "raw_file": "02_raw_sources/Library_/Gutenberg.org/The Secrets of the Self (Asrar-i Khudi)_____Sir Muhammad Iqbal.txt",
+      "raw_sha256": "8dc563cd8265350813c9f02bd33efba60b503f68d82023914b60d3c14fdd1f8a",
+      "text_id": "iqbal-secrets-of-self",
+      "translation_id": "nicholson",
+      "status": "PASS",
+      "pass_rate": 1.0,
+      "passages_pass": 198,
+      "passages_checked": 198,
+      "passages_total": 244,
       "note": ""
     },
     {
@@ -26716,632 +27335,6 @@
       "passages_pass": 4158,
       "passages_checked": 4163,
       "passages_total": 5279,
-      "note": ""
-    },
-    {
-      "title": "Arabian Poetry",
-      "author": [
-        "Various"
-      ],
-      "translator": [
-        "W.A. Clouston"
-      ],
-      "publisher": "SacredTexts.com",
-      "url": "https://sacred-texts.com/isl/arp/index.htm",
-      "year": 1881,
-      "source_title": "Arabian Poetry",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "category": "Poetry",
-      "raw_file": "02_raw_sources/Library_/SacredTexts.com/Arabian Poetry_____WA-Clouston (1881).txt",
-      "raw_sha256": "60cc68e3467146b396fb3b1eb2eedd451b1f6f9365648f878d41e8efff71f10d",
-      "text_id": "arabian-poetry-clouston",
-      "translation_id": "clouston",
-      "status": "PARTIAL",
-      "pass_rate": 0.9993783027665527,
-      "passages_pass": 3215,
-      "passages_checked": 3217,
-      "passages_total": 3625,
-      "note": ""
-    },
-    {
-      "title": "Arabian Wisdom",
-      "author": [
-        "Various"
-      ],
-      "translator": [
-        "John Wortabet"
-      ],
-      "publisher": "SacredTexts.com",
-      "url": "https://sacred-texts.com/isl/arw/index.htm",
-      "year": 1913,
-      "source_title": "Arabian Wisdom",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "category": "Literature",
-      "raw_file": "02_raw_sources/Library_/SacredTexts.com/Arabian Wisdom_____John Wortabet (1913).txt",
-      "raw_sha256": "bacad5058aac2efb13030547b940f02a21af4676280c31ed11dd9a0ac118eab0",
-      "text_id": "arabian-wisdom-wortabet",
-      "translation_id": "wortabet",
-      "status": "PASS",
-      "pass_rate": 1.0,
-      "passages_pass": 720,
-      "passages_checked": 720,
-      "passages_total": 782,
-      "note": ""
-    },
-    {
-      "title": "History (Literary) of the Arabs",
-      "author": [
-        "Reynold Nicholson"
-      ],
-      "translator": [
-        "Reynold Nicholson"
-      ],
-      "publisher": "Project Gutenberg",
-      "url": "",
-      "year": 1900,
-      "source_title": "History (Literary) of the Arabs",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "category": "Literature",
-      "raw_file": "02_raw_sources/Library_/Gutenberg.org/History (Literary) of the Arabs_____Reynold Nicholson.txt",
-      "raw_sha256": "ea5b23b8e7ee97b66b2daac1e6128c3da4ce66c65ca2d796df31506d590c4703",
-      "text_id": "history-literary-of-the-arabs-reynold-nicholson",
-      "translation_id": "anonymous",
-      "status": "PARTIAL",
-      "pass_rate": 0.9984276729559748,
-      "passages_pass": 4445,
-      "passages_checked": 4452,
-      "passages_total": 5387,
-      "note": ""
-    },
-    {
-      "title": "Oriental Mysticism",
-      "author": [
-        "E.H. Palmer"
-      ],
-      "translator": [
-        "E.H. Palmer"
-      ],
-      "publisher": "SacredTexts.com",
-      "url": "https://sacred-texts.com/isl/om/index.htm",
-      "year": 1867,
-      "source_title": "Oriental Mysticism",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "category": "Theology",
-      "raw_file": "02_raw_sources/Library_/SacredTexts.com/Oriental Mysticism_____EH-Palmer (1867).txt",
-      "raw_sha256": "e068884ef46ddcec686e912f1b499510f5d0df52e49e91373d2f286e638997a7",
-      "text_id": "oriental-mysticism-palmer",
-      "translation_id": "palmer",
-      "status": "PASS",
-      "pass_rate": 1.0,
-      "passages_pass": 509,
-      "passages_checked": 509,
-      "passages_total": 673,
-      "note": ""
-    },
-    {
-      "title": "Salámán and Absál",
-      "author": [
-        "Jami"
-      ],
-      "translator": [
-        "Edward FitzGerald"
-      ],
-      "publisher": "SacredTexts.com",
-      "url": "https://sacred-texts.com/isl/sba/index.htm",
-      "year": 1856,
-      "source_title": "Salámán and Absál",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "category": "Poetry",
-      "raw_file": "02_raw_sources/Library_/SacredTexts.com/Salaman and Absal_____Jami - tr-Edward Fitzgerald (1904).txt",
-      "raw_sha256": "d14ba610b46eafbcce37800877420e4b6d0240dae5899c7a88e6d42116fa4cf8",
-      "text_id": "salaman-absal-fitzgerald",
-      "translation_id": "fitzgerald",
-      "status": "PASS",
-      "pass_rate": 1.0,
-      "passages_pass": 249,
-      "passages_checked": 249,
-      "passages_total": 289,
-      "note": ""
-    },
-    {
-      "title": "Selections from the Poetry of the Afghans",
-      "author": [
-        "Various"
-      ],
-      "translator": [
-        "H.G. Raverty"
-      ],
-      "publisher": "SacredTexts.com",
-      "url": "https://sacred-texts.com/isl/poa/index.htm",
-      "year": 1862,
-      "source_title": "Selections from the Poetry of the Afghans",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "category": "Poetry",
-      "raw_file": "02_raw_sources/Library_/SacredTexts.com/Selections from the Poetry of the Afghans_____HG-Raverty (1868).txt",
-      "raw_sha256": "142736201005ae7880a3f1925d5b795a5c938de2e305890cb2e57a4d32a6c183",
-      "text_id": "afghan-poetry-dorn",
-      "translation_id": "raverty",
-      "status": "PARTIAL",
-      "pass_rate": 0.9969854754727323,
-      "passages_pass": 3638,
-      "passages_checked": 3649,
-      "passages_total": 4008,
-      "note": ""
-    },
-    {
-      "title": "Some religious and moral teachings",
-      "author": [
-        "Al-Ghazzali"
-      ],
-      "translator": [
-        "Al-Ghazzali"
-      ],
-      "publisher": "Project Gutenberg",
-      "url": "",
-      "year": 1900,
-      "source_title": "Some religious and moral teachings",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "category": "Literature",
-      "raw_file": "02_raw_sources/Library_/Gutenberg.org/Some religious and moral teachings_____Al-Ghazzali.txt",
-      "raw_sha256": "8d4a32c660bb54ee2e716236eaecc2c74ca9a081c54a6a63803dc3285995781e",
-      "text_id": "some-religious-and-moral-teachings-al-ghazzali",
-      "translation_id": "anonymous",
-      "status": "PASS",
-      "pass_rate": 1.0,
-      "passages_pass": 378,
-      "passages_checked": 378,
-      "passages_total": 469,
-      "note": ""
-    },
-    {
-      "title": "The Arab Conquests in Central Asia",
-      "author": [
-        "H.A.R. Gibb"
-      ],
-      "translator": [
-        "H.A.R. Gibb"
-      ],
-      "publisher": "Project Gutenberg",
-      "url": "https://www.gutenberg.org/ebooks/0",
-      "year": 1923,
-      "source_title": "The Arab Conquests in Central Asia",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "category": "History",
-      "raw_file": "02_raw_sources/Library_/Gutenberg.org/The Arab conquests in Central Asia_____HARGibb.txt",
-      "raw_sha256": "e2ce1bea99d183f9641c9fda07f45f528dd77edb6c4387b06abe7c72e38acf85",
-      "text_id": "arab-conquests-central-asia-gibb",
-      "translation_id": "gibb",
-      "status": "PASS",
-      "pass_rate": 1.0,
-      "passages_pass": 297,
-      "passages_checked": 297,
-      "passages_total": 317,
-      "note": ""
-    },
-    {
-      "title": "The Bustan of Sa'di",
-      "author": [
-        "Saadi"
-      ],
-      "translator": [
-        "A. Hart Edwards"
-      ],
-      "publisher": "SacredTexts.com",
-      "url": "https://sacred-texts.com/isl/bus/index.htm",
-      "year": 1911,
-      "source_title": "The Bustan of Sa'di",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "category": "Poetry",
-      "raw_file": "02_raw_sources/Library_/SacredTexts.com/The Bustan of Sadi_____A-Hart Edwards (1911).txt",
-      "raw_sha256": "379279c2afd40fc477b626fd8b32d6b9dd9312fe2c35c96b0f61ce9fa03166eb",
-      "text_id": "bustan-sadi-edwards",
-      "translation_id": "edwards",
-      "status": "PASS",
-      "pass_rate": 1.0,
-      "passages_pass": 884,
-      "passages_checked": 884,
-      "passages_total": 1032,
-      "note": ""
-    },
-    {
-      "title": "The Confessions of Al-Ghazzali",
-      "author": [
-        "Al-Ghazzali"
-      ],
-      "translator": [
-        "Claud Field"
-      ],
-      "publisher": "Project Gutenberg",
-      "url": "https://www.gutenberg.org/ebooks/29489",
-      "year": 1909,
-      "source_title": "The Confessions of Al-Ghazzali",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "category": "Theology",
-      "raw_file": "02_raw_sources/Library_/Gutenberg.org/The Confessions_____Al Ghazzali.txt",
-      "raw_sha256": "c84d104f88a950678c4ef2f3d08c9db5139dbb6787c5422da367986579c785dd",
-      "text_id": "ghazzali-confessions",
-      "translation_id": "field",
-      "status": "PASS",
-      "pass_rate": 1.0,
-      "passages_pass": 212,
-      "passages_checked": 212,
-      "passages_total": 229,
-      "note": ""
-    },
-    {
-      "title": "The Diwan of Abu'l-ʿAla al-Maʿarri",
-      "author": [
-        "Abu'l-ʿAla al-Maʿarri"
-      ],
-      "translator": [
-        "Reynold A. Nicholson"
-      ],
-      "publisher": "SacredTexts.com",
-      "url": "https://sacred-texts.com/isl/daa/index.htm",
-      "year": 1921,
-      "source_title": "The Diwan of Abu'l-ʿAla al-Maʿarri",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "category": "Poetry",
-      "raw_file": "02_raw_sources/Library_/SacredTexts.com/The Diwan of Abu'l-Ala_____Henry Baerlein (1909).txt",
-      "raw_sha256": "fbc50074cbc1a8bf15bdba2db69e91860e91a2bb955e95041c9b0a8834089217",
-      "text_id": "diwan-abu-al-ala-nicholson",
-      "translation_id": "nicholson-abulala",
-      "status": "PARTIAL",
-      "pass_rate": 0.9951690821256038,
-      "passages_pass": 206,
-      "passages_checked": 207,
-      "passages_total": 231,
-      "note": ""
-    },
-    {
-      "title": "The Diwan of Zeb-un-Nissa",
-      "author": [
-        "Zeb-un-Nissa"
-      ],
-      "translator": [
-        "Magan Lal",
-        "Jessie Duncan Westbrook"
-      ],
-      "publisher": "SacredTexts.com",
-      "url": "https://sacred-texts.com/isl/zun/index.htm",
-      "year": 1913,
-      "source_title": "The Diwan of Zeb-un-Nissa",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "category": "Poetry",
-      "raw_file": "02_raw_sources/Library_/SacredTexts.com/The Diwan of Zeb-un-Nissa_____Magan Lal & Jessie Westbrook (1913).txt",
-      "raw_sha256": "67c2b82a69f9be601f26809e6ddcb703e29d7f82c3d1d29544c6ca7dbf74aa20",
-      "text_id": "diwan-zeb-un-nissa-westbrook",
-      "translation_id": "westbrook",
-      "status": "PASS",
-      "pass_rate": 1.0,
-      "passages_pass": 400,
-      "passages_checked": 400,
-      "passages_total": 418,
-      "note": ""
-    },
-    {
-      "title": "The Festival of Spring",
-      "author": [
-        "Rumi"
-      ],
-      "translator": [
-        "William Hastie"
-      ],
-      "publisher": "Project Gutenberg",
-      "url": "https://www.gutenberg.org/ebooks/57214",
-      "year": 1903,
-      "source_title": "The Festival of Spring",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "category": "Poetry",
-      "raw_file": "02_raw_sources/Library_/Gutenberg.org/The Festival of Spring - from the Díván of Jeláleddín_____Rumi.txt",
-      "raw_sha256": "fe65a7a06d5a8498cce449c432fb6b27d1bc07dc7d1036969b706038e967468c",
-      "text_id": "rumi-divan-festival",
-      "translation_id": "hastie",
-      "status": "PASS",
-      "pass_rate": 1.0,
-      "passages_pass": 87,
-      "passages_checked": 87,
-      "passages_total": 143,
-      "note": ""
-    },
-    {
-      "title": "The Kashf al-Mahjub",
-      "author": [
-        "Ali ibn Usman al-Hujwiri"
-      ],
-      "translator": [
-        "Reynold A. Nicholson"
-      ],
-      "publisher": "Project Gutenberg",
-      "url": "https://www.gutenberg.org/ebooks/41825",
-      "year": 1911,
-      "source_title": "The Kashf al-Mahjub",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "category": "Theology",
-      "raw_file": "",
-      "raw_sha256": null,
-      "text_id": "hujviri-kashf",
-      "translation_id": "nicholson",
-      "status": "SKIP",
-      "pass_rate": 0.0,
-      "passages_pass": 0,
-      "passages_checked": 0,
-      "passages_total": 0,
-      "note": "no ingest config — cannot locate raw file"
-    },
-    {
-      "title": "The Kashf al-mahjúb (Oldest Persian treatise on Súfiism)",
-      "author": [
-        "Ali ibn Usman Hujviri"
-      ],
-      "translator": [
-        "Ali ibn Usman Hujviri"
-      ],
-      "publisher": "Project Gutenberg",
-      "url": "",
-      "year": 1900,
-      "source_title": "The Kashf al-mahjúb (Oldest Persian treatise on Súfiism)",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "category": "Literature",
-      "raw_file": "02_raw_sources/Library_/Gutenberg.org/The Kashf al-mahjúb (Oldest Persian treatise on Súfiism)_____Ali ibn Usman Hujviri.txt",
-      "raw_sha256": "762aeede04d5fa14e983b246fe4f434c8d4a42e49d7ae6a5e9a8f68870a108d3",
-      "text_id": "the-kashf-al-mahj-b-oldest-persian-treatise-ali-ibn-usman-hu",
-      "translation_id": "anonymous",
-      "status": "PARTIAL",
-      "pass_rate": 0.9973776223776224,
-      "passages_pass": 1141,
-      "passages_checked": 1144,
-      "passages_total": 1330,
-      "note": ""
-    },
-    {
-      "title": "The Love Letters",
-      "author": [
-        "Rumi"
-      ],
-      "translator": [
-        "Anonymous"
-      ],
-      "publisher": "SacredTexts.com",
-      "url": "https://sacred-texts.com/isl/ll/index.htm",
-      "year": 1905,
-      "source_title": "The Love Letters",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "category": "Poetry",
-      "raw_file": "02_raw_sources/Library_/SacredTexts.com/The Love Letters_____Abelard & Heloise (1901).txt",
-      "raw_sha256": "1a2a069ac12e10a47581ca08b5f8681e6567954b92e6afde66841cc53dfa290e",
-      "text_id": "love-letters-rumi",
-      "translation_id": "anonymous",
-      "status": "PASS",
-      "pass_rate": 1.0,
-      "passages_pass": 307,
-      "passages_checked": 307,
-      "passages_total": 323,
-      "note": ""
-    },
-    {
-      "title": "The Masnavi",
-      "author": [
-        "Rumi"
-      ],
-      "translator": [
-        "E.H. Whinfield"
-      ],
-      "publisher": "SacredTexts.com",
-      "url": "https://sacred-texts.com/isl/masnavi/",
-      "year": 1898,
-      "source_title": "The Masnavi",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "category": "Scripture",
-      "raw_file": "02_raw_sources/Library_/SacredTexts.com/The Masnavi_____Rumi - tr-EH-Whinfield (1898).txt",
-      "raw_sha256": "bfca6b6067951b4f9fb36e48a48a83820c151cee62edd7bbd853be64ba925b8f",
-      "text_id": "rumi-masnavi",
-      "translation_id": "whinfield",
-      "status": "PASS",
-      "pass_rate": 1.0,
-      "passages_pass": 118,
-      "passages_checked": 118,
-      "passages_total": 126,
-      "note": ""
-    },
-    {
-      "title": "The Masnavi",
-      "author": [
-        "Rumi"
-      ],
-      "translator": [
-        "James W. Redhouse"
-      ],
-      "publisher": "Project Gutenberg",
-      "url": "https://www.gutenberg.org/ebooks/22517",
-      "year": 1881,
-      "source_title": "The Mesnevi",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "category": "Scripture",
-      "raw_file": "02_raw_sources/Library_/Gutenberg.org/The Mesnevi_____Rumi.txt",
-      "raw_sha256": "e31e67ae3af483c1bfd7a6a3907318954dfdee0a1e920e0c216ad09f76a71879",
-      "text_id": "rumi-masnavi",
-      "translation_id": "redhouse",
-      "status": "PASS",
-      "pass_rate": 1.0,
-      "passages_pass": 160,
-      "passages_checked": 160,
-      "passages_total": 160,
-      "note": ""
-    },
-    {
-      "title": "The Mesnavi and the Acts of the Adepts",
-      "author": [
-        "Rumi",
-        "Aflaki"
-      ],
-      "translator": [
-        "James W. Redhouse"
-      ],
-      "publisher": "SacredTexts.com",
-      "url": "https://sacred-texts.com/isl/masnavi/index.htm",
-      "year": 1881,
-      "source_title": "The Mesnavi and the Acts of the Adepts",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "category": "Poetry",
-      "raw_file": "02_raw_sources/Library_/SacredTexts.com/The Mesnavi & The Acts of the Adepts_____James Redhouse (1881).txt",
-      "raw_sha256": "b1405c0d78f010daa90a8d15407fba2da07fe4eb04270835bdf6f667b87a35a8",
-      "text_id": "mesnavi-acts-adepts-redhouse",
-      "translation_id": "redhouse-acts",
-      "status": "PASS",
-      "pass_rate": 1.0,
-      "passages_pass": 2220,
-      "passages_checked": 2220,
-      "passages_total": 2580,
-      "note": ""
-    },
-    {
-      "title": "The Mesnevi",
-      "author": [
-        "Rumi"
-      ],
-      "translator": [
-        "Rumi"
-      ],
-      "publisher": "Project Gutenberg",
-      "url": "",
-      "year": 1900,
-      "source_title": "The Mesnevi",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "category": "Literature",
-      "raw_file": "02_raw_sources/Library_/Gutenberg.org/The Mesnevi_____Rumi.txt",
-      "raw_sha256": "e31e67ae3af483c1bfd7a6a3907318954dfdee0a1e920e0c216ad09f76a71879",
-      "text_id": "the-mesnevi-rumi",
-      "translation_id": "anonymous",
-      "status": "PASS",
-      "pass_rate": 1.0,
-      "passages_pass": 1910,
-      "passages_checked": 1910,
-      "passages_total": 2229,
-      "note": ""
-    },
-    {
-      "title": "The Mystics of Islam",
-      "author": [
-        "Reynold A. Nicholson"
-      ],
-      "translator": [
-        "Reynold A. Nicholson"
-      ],
-      "publisher": "Project Gutenberg",
-      "url": "https://www.gutenberg.org/ebooks/41566",
-      "year": 1914,
-      "source_title": "The Mystics of Islam",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "category": "Theology",
-      "raw_file": "02_raw_sources/Library_/Gutenberg.org/The Mystics of Islam_____Reynold Nicholson.txt",
-      "raw_sha256": "ea5ce533937544c518a475e27b77fc67e5cb161d9454ef043ed779448795676d",
-      "text_id": "nicholson-mystics-islam",
-      "translation_id": "nicholson",
-      "status": "PASS",
-      "pass_rate": 1.0,
-      "passages_pass": 842,
-      "passages_checked": 842,
-      "passages_total": 1016,
-      "note": ""
-    },
-    {
-      "title": "The Persian Mystics: Jalalu'd-din Rumi",
-      "author": [
-        "Rumi"
-      ],
-      "translator": [
-        "F. Hadland Davis"
-      ],
-      "publisher": "Project Gutenberg",
-      "url": "https://www.gutenberg.org/ebooks/52022",
-      "year": 1912,
-      "source_title": "The Persian Mystics: Jalalu'd-din Rumi",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "category": "Poetry",
-      "raw_file": "02_raw_sources/Library_/Gutenberg.org/The Persian Mystics_____Rumi.txt",
-      "raw_sha256": "1d6910cde00e8834e12f6f3335a6c162752443895f1aa3de8617aae17ee4d798",
-      "text_id": "persian-mystics-rumi",
-      "translation_id": "davis",
-      "status": "PASS",
-      "pass_rate": 1.0,
-      "passages_pass": 173,
-      "passages_checked": 173,
-      "passages_total": 177,
-      "note": ""
-    },
-    {
-      "title": "The Secret Rose Garden",
-      "author": [
-        "Mahmud Shabistari"
-      ],
-      "translator": [
-        "Florence Lederer"
-      ],
-      "publisher": "SacredTexts.com",
-      "url": "https://sacred-texts.com/isl/srg/index.htm",
-      "year": 1920,
-      "source_title": "The Secret Rose Garden",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "category": "Poetry",
-      "raw_file": "02_raw_sources/Library_/SacredTexts.com/The Secret Rose Garden_____Florence Lederer (1920).txt",
-      "raw_sha256": "9322a46ea51f0b93e1713f25a335ddc71ff00b7254a278550c4fe6d0c4b3981c",
-      "text_id": "secret-rose-garden-shabistari",
-      "translation_id": "lederer",
-      "status": "PARTIAL",
-      "pass_rate": 0.9966442953020134,
-      "passages_pass": 297,
-      "passages_checked": 298,
-      "passages_total": 385,
-      "note": ""
-    },
-    {
-      "title": "The Secrets of the Self (Asrār-i Khudī)",
-      "author": [
-        "Muhammad Iqbal"
-      ],
-      "translator": [
-        "Reynold A. Nicholson"
-      ],
-      "publisher": "Project Gutenberg",
-      "url": "https://www.gutenberg.org/ebooks/56438",
-      "year": 1920,
-      "source_title": "The Secrets of the Self (Asrār-i Khudī)",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "category": "Poetry",
-      "raw_file": "02_raw_sources/Library_/Gutenberg.org/The Secrets of the Self (Asrar-i Khudi)_____Sir Muhammad Iqbal.txt",
-      "raw_sha256": "8dc563cd8265350813c9f02bd33efba60b503f68d82023914b60d3c14fdd1f8a",
-      "text_id": "iqbal-secrets-of-self",
-      "translation_id": "nicholson",
-      "status": "PASS",
-      "pass_rate": 1.0,
-      "passages_pass": 198,
-      "passages_checked": 198,
-      "passages_total": 244,
       "note": ""
     },
     {
