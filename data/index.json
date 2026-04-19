@@ -9584,6 +9584,131 @@
       "importance_rank": 1
     },
     {
+      "id": "rumi-masnavi",
+      "title": "The Masnavi",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "rumi-masnavi_whinfield.json",
+      "source": "sacredtexts",
+      "author": [
+        "Rumi"
+      ],
+      "translator": [
+        "E.H. Whinfield"
+      ],
+      "year": 1898,
+      "translation_label": "The Masnavi",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": "*The Masnavi* E.H. Whinfield (1898). Via SacredTexts.com.",
+      "importance_rank": 10
+    },
+    {
+      "id": "rumi-masnavi",
+      "title": "The Masnavi",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "rumi-masnavi_redhouse.json",
+      "source": "gutenberg",
+      "author": [
+        "Rumi"
+      ],
+      "translator": [
+        "James W. Redhouse"
+      ],
+      "year": 1881,
+      "translation_label": "The Mesnevi",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": "*The Masnavi* E.H. Whinfield (1898). Via SacredTexts.com.",
+      "importance_rank": 10
+    },
+    {
+      "id": "the-mesnevi-rumi",
+      "title": "The Mesnevi",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "the-mesnevi-rumi_anonymous.json",
+      "source": "gutenberg",
+      "author": [
+        "Rumi"
+      ],
+      "translator": [
+        "Rumi"
+      ],
+      "year": 1900,
+      "translation_label": "The Mesnevi",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "derivative",
+      "source_summary": "*The Mesnevi* Rumi (1900). Via Project Gutenberg.",
+      "importance_rank": 10
+    },
+    {
+      "id": "bustan-sadi-edwards",
+      "title": "The Bustan of Sa'di",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "bustan-sadi-edwards_edwards.json",
+      "source": "sacredtexts",
+      "author": [
+        "Saadi"
+      ],
+      "translator": [
+        "A. Hart Edwards"
+      ],
+      "year": 1911,
+      "translation_label": "The Bustan of Sa'di",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": "*The Bustan of Sa'di* A. Hart Edwards (1911). Via SacredTexts.com.",
+      "importance_rank": 15
+    },
+    {
+      "id": "ghazzali-confessions",
+      "title": "The Confessions of Al-Ghazzali",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "ghazzali-confessions_field.json",
+      "source": "gutenberg",
+      "author": [
+        "Al-Ghazzali"
+      ],
+      "translator": [
+        "Claud Field"
+      ],
+      "year": 1909,
+      "translation_label": "The Confessions of Al-Ghazzali",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": "*The Confessions of Al-Ghazzali* Claud Field (1909). Via Project Gutenberg.",
+      "importance_rank": 20
+    },
+    {
       "id": "avicenna-soul",
       "title": "A Compendium on the Soul",
       "tradition": "Islam",
@@ -9609,6 +9734,432 @@
       "importance_rank": null
     },
     {
+      "id": "arabian-poetry-clouston",
+      "title": "Arabian Poetry",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "arabian-poetry-clouston_clouston.json",
+      "source": "sacredtexts",
+      "author": [
+        "Various"
+      ],
+      "translator": [
+        "W.A. Clouston"
+      ],
+      "year": 1881,
+      "translation_label": "Arabian Poetry",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": "*Arabian Poetry* W.A. Clouston (1881). Via SacredTexts.com.",
+      "importance_rank": null
+    },
+    {
+      "id": "arabian-wisdom-wortabet",
+      "title": "Arabian Wisdom",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "arabian-wisdom-wortabet_wortabet.json",
+      "source": "sacredtexts",
+      "author": [
+        "Various"
+      ],
+      "translator": [
+        "John Wortabet"
+      ],
+      "year": 1913,
+      "translation_label": "Arabian Wisdom",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": "*Arabian Wisdom* John Wortabet (1913). Via SacredTexts.com.",
+      "importance_rank": null
+    },
+    {
+      "id": "history-literary-of-the-arabs-reynold-nicholson",
+      "title": "History (Literary) of the Arabs",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "history-literary-of-the-arabs-reynold-nicholson_anonymous.json",
+      "source": "gutenberg",
+      "author": [
+        "Reynold Nicholson"
+      ],
+      "translator": [
+        "Reynold Nicholson"
+      ],
+      "year": 1900,
+      "translation_label": "History (Literary) of the Arabs",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "derivative",
+      "source_summary": "*History (Literary) of the Arabs* Reynold Nicholson (1900). Via Project Gutenberg.",
+      "importance_rank": null
+    },
+    {
+      "id": "oriental-mysticism-palmer",
+      "title": "Oriental Mysticism",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "oriental-mysticism-palmer_palmer.json",
+      "source": "sacredtexts",
+      "author": [
+        "E.H. Palmer"
+      ],
+      "translator": [
+        "E.H. Palmer"
+      ],
+      "year": 1867,
+      "translation_label": "Oriental Mysticism",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "primary",
+      "source_summary": "*Oriental Mysticism* E.H. Palmer (1867). Via SacredTexts.com.",
+      "importance_rank": null
+    },
+    {
+      "id": "salaman-absal-fitzgerald",
+      "title": "Salámán and Absál",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "salaman-absal-fitzgerald_fitzgerald.json",
+      "source": "sacredtexts",
+      "author": [
+        "Jami"
+      ],
+      "translator": [
+        "Edward FitzGerald"
+      ],
+      "year": 1856,
+      "translation_label": "Salámán and Absál",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": "*Salámán and Absál* Edward FitzGerald (1856). Via SacredTexts.com.",
+      "importance_rank": null
+    },
+    {
+      "id": "afghan-poetry-dorn",
+      "title": "Selections from the Poetry of the Afghans",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "afghan-poetry-dorn_raverty.json",
+      "source": "sacredtexts",
+      "author": [
+        "Various"
+      ],
+      "translator": [
+        "H.G. Raverty"
+      ],
+      "year": 1862,
+      "translation_label": "Selections from the Poetry of the Afghans",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": "*Selections from the Poetry of the Afghans* H.G. Raverty (1862). Via SacredTexts.com.",
+      "importance_rank": null
+    },
+    {
+      "id": "some-religious-and-moral-teachings-al-ghazzali",
+      "title": "Some religious and moral teachings",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "some-religious-and-moral-teachings-al-ghazzali_anonymous.json",
+      "source": "gutenberg",
+      "author": [
+        "Al-Ghazzali"
+      ],
+      "translator": [
+        "Al-Ghazzali"
+      ],
+      "year": 1900,
+      "translation_label": "Some religious and moral teachings",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "derivative",
+      "source_summary": "*Some religious and moral teachings* Al-Ghazzali (1900). Via Project Gutenberg.",
+      "importance_rank": null
+    },
+    {
+      "id": "arab-conquests-central-asia-gibb",
+      "title": "The Arab Conquests in Central Asia",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "arab-conquests-central-asia-gibb_gibb.json",
+      "source": "gutenberg",
+      "author": [
+        "H.A.R. Gibb"
+      ],
+      "translator": [
+        "H.A.R. Gibb"
+      ],
+      "year": 1923,
+      "translation_label": "The Arab Conquests in Central Asia",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": "*The Arab Conquests in Central Asia* H.A.R. Gibb (1923). Via Project Gutenberg.",
+      "importance_rank": null
+    },
+    {
+      "id": "diwan-abu-al-ala-nicholson",
+      "title": "The Diwan of Abu'l-ʿAla al-Maʿarri",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "diwan-abu-al-ala-nicholson_nicholson-abulala.json",
+      "source": "sacredtexts",
+      "author": [
+        "Abu'l-ʿAla al-Maʿarri"
+      ],
+      "translator": [
+        "Reynold A. Nicholson"
+      ],
+      "year": 1921,
+      "translation_label": "The Diwan of Abu'l-ʿAla al-Maʿarri",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "primary",
+      "source_summary": "*The Diwan of Abu'l-ʿAla al-Maʿarri* Reynold A. Nicholson (1921). Via SacredTexts.com.",
+      "importance_rank": null
+    },
+    {
+      "id": "diwan-zeb-un-nissa-westbrook",
+      "title": "The Diwan of Zeb-un-Nissa",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "diwan-zeb-un-nissa-westbrook_westbrook.json",
+      "source": "sacredtexts",
+      "author": [
+        "Zeb-un-Nissa"
+      ],
+      "translator": [
+        "Magan Lal",
+        "Jessie Duncan Westbrook"
+      ],
+      "year": 1913,
+      "translation_label": "The Diwan of Zeb-un-Nissa",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": "*The Diwan of Zeb-un-Nissa* Magan Lal, Jessie Duncan Westbrook (1913). Via SacredTexts.com.",
+      "importance_rank": null
+    },
+    {
+      "id": "rumi-divan-festival",
+      "title": "The Festival of Spring",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "rumi-divan-festival_hastie.json",
+      "source": "gutenberg",
+      "author": [
+        "Rumi"
+      ],
+      "translator": [
+        "William Hastie"
+      ],
+      "year": 1903,
+      "translation_label": "The Festival of Spring",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": "*The Festival of Spring* William Hastie (1903). Via Project Gutenberg.",
+      "importance_rank": null
+    },
+    {
+      "id": "hujviri-kashf",
+      "title": "The Kashf al-Mahjub",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "section"
+      ],
+      "data_file": "hujviri-kashf_nicholson.json",
+      "source": "gutenberg",
+      "author": [
+        "Ali ibn Usman al-Hujwiri"
+      ],
+      "translator": [
+        "Reynold A. Nicholson"
+      ],
+      "year": 1911,
+      "translation_label": "The Kashf al-Mahjub",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "primary",
+      "source_summary": "*The Kashf al-Mahjub* Reynold A. Nicholson (1911). Via Project Gutenberg.",
+      "importance_rank": null
+    },
+    {
+      "id": "the-kashf-al-mahj-b-oldest-persian-treatise-ali-ibn-usman-hu",
+      "title": "The Kashf al-mahjúb (Oldest Persian treatise on Súfiism)",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "the-kashf-al-mahj-b-oldest-persian-treatise-ali-ibn-usman-hu_anonymous.json",
+      "source": "gutenberg",
+      "author": [
+        "Ali ibn Usman Hujviri"
+      ],
+      "translator": [
+        "Ali ibn Usman Hujviri"
+      ],
+      "year": 1900,
+      "translation_label": "The Kashf al-mahjúb (Oldest Persian treatise on Súfiism)",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "derivative",
+      "source_summary": "*The Kashf al-mahjúb (Oldest Persian treatise on Súfiism)* Ali ibn Usman Hujviri (1900). Via Project Gutenberg.",
+      "importance_rank": null
+    },
+    {
+      "id": "love-letters-rumi",
+      "title": "The Love Letters",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "love-letters-rumi_anonymous.json",
+      "source": "sacredtexts",
+      "author": [
+        "Rumi"
+      ],
+      "translator": [
+        "Anonymous"
+      ],
+      "year": 1905,
+      "translation_label": "The Love Letters",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "derivative",
+      "source_summary": "*The Love Letters* Anonymous (1905). Via SacredTexts.com.",
+      "importance_rank": null
+    },
+    {
+      "id": "mesnavi-acts-adepts-redhouse",
+      "title": "The Mesnavi and the Acts of the Adepts",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "mesnavi-acts-adepts-redhouse_redhouse-acts.json",
+      "source": "sacredtexts",
+      "author": [
+        "Rumi",
+        "Aflaki"
+      ],
+      "translator": [
+        "James W. Redhouse"
+      ],
+      "year": 1881,
+      "translation_label": "The Mesnavi and the Acts of the Adepts",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": "*The Mesnavi and the Acts of the Adepts* James W. Redhouse (1881). Via SacredTexts.com.",
+      "importance_rank": null
+    },
+    {
+      "id": "nicholson-mystics-islam",
+      "title": "The Mystics of Islam",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "nicholson-mystics-islam_nicholson.json",
+      "source": "gutenberg",
+      "author": [
+        "Reynold A. Nicholson"
+      ],
+      "translator": [
+        "Reynold A. Nicholson"
+      ],
+      "year": 1914,
+      "translation_label": "The Mystics of Islam",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "primary",
+      "source_summary": "*The Mystics of Islam* Reynold A. Nicholson (1914). Via Project Gutenberg.",
+      "importance_rank": null
+    },
+    {
+      "id": "persian-mystics-rumi",
+      "title": "The Persian Mystics: Jalalu'd-din Rumi",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "persian-mystics-rumi_davis.json",
+      "source": "gutenberg",
+      "author": [
+        "Rumi"
+      ],
+      "translator": [
+        "F. Hadland Davis"
+      ],
+      "year": 1912,
+      "translation_label": "The Persian Mystics: Jalalu'd-din Rumi",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": "*The Persian Mystics: Jalalu'd-din Rumi* F. Hadland Davis (1912). Via Project Gutenberg.",
+      "importance_rank": null
+    },
+    {
       "id": "wollaston-religion-koran",
       "title": "The Religion of the Koran",
       "tradition": "Islam",
@@ -9631,6 +10182,56 @@
       "volume_label": null,
       "quality": "popular",
       "source_summary": "*The Religion of the Koran* Arthur N. Wollaston (1911). Via SacredTexts.com.",
+      "importance_rank": null
+    },
+    {
+      "id": "secret-rose-garden-shabistari",
+      "title": "The Secret Rose Garden",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "secret-rose-garden-shabistari_lederer.json",
+      "source": "sacredtexts",
+      "author": [
+        "Mahmud Shabistari"
+      ],
+      "translator": [
+        "Florence Lederer"
+      ],
+      "year": 1920,
+      "translation_label": "The Secret Rose Garden",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": "*The Secret Rose Garden* Florence Lederer (1920). Via SacredTexts.com.",
+      "importance_rank": null
+    },
+    {
+      "id": "iqbal-secrets-of-self",
+      "title": "The Secrets of the Self (Asrār-i Khudī)",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "iqbal-secrets-of-self_nicholson.json",
+      "source": "gutenberg",
+      "author": [
+        "Muhammad Iqbal"
+      ],
+      "translator": [
+        "Reynold A. Nicholson"
+      ],
+      "year": 1920,
+      "translation_label": "The Secrets of the Self (Asrār-i Khudī)",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "primary",
+      "source_summary": "*The Secrets of the Self (Asrār-i Khudī)* Reynold A. Nicholson (1920). Via Project Gutenberg.",
       "importance_rank": null
     },
     {
@@ -12393,607 +12994,6 @@
       "volume_label": null,
       "quality": "popular",
       "source_summary": "*The Songs of the Russian People* by William Ralston Shedden Ralston. Translated by W. R. S. Ralston (1872). Via Ellis & Green / Internet Archive.",
-      "importance_rank": null
-    },
-    {
-      "id": "rumi-masnavi",
-      "title": "The Masnavi",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "hierarchy": [
-        "chapter",
-        "verse"
-      ],
-      "data_file": "rumi-masnavi_whinfield.json",
-      "source": "sacredtexts",
-      "author": [
-        "Rumi"
-      ],
-      "translator": [
-        "E.H. Whinfield"
-      ],
-      "year": 1898,
-      "translation_label": "The Masnavi",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "popular",
-      "source_summary": "*The Masnavi* E.H. Whinfield (1898). Via SacredTexts.com.",
-      "importance_rank": 10
-    },
-    {
-      "id": "rumi-masnavi",
-      "title": "The Masnavi",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "hierarchy": [
-        "chapter",
-        "verse"
-      ],
-      "data_file": "rumi-masnavi_redhouse.json",
-      "source": "gutenberg",
-      "author": [
-        "Rumi"
-      ],
-      "translator": [
-        "James W. Redhouse"
-      ],
-      "year": 1881,
-      "translation_label": "The Mesnevi",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "popular",
-      "source_summary": "*The Masnavi* E.H. Whinfield (1898). Via SacredTexts.com.",
-      "importance_rank": 10
-    },
-    {
-      "id": "the-mesnevi-rumi",
-      "title": "The Mesnevi",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "hierarchy": [
-        "chapter",
-        "verse"
-      ],
-      "data_file": "the-mesnevi-rumi_anonymous.json",
-      "source": "gutenberg",
-      "author": [
-        "Rumi"
-      ],
-      "translator": [
-        "Rumi"
-      ],
-      "year": 1900,
-      "translation_label": "The Mesnevi",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "derivative",
-      "source_summary": "*The Mesnevi* Rumi (1900). Via Project Gutenberg.",
-      "importance_rank": 10
-    },
-    {
-      "id": "bustan-sadi-edwards",
-      "title": "The Bustan of Sa'di",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "hierarchy": [
-        "chapter",
-        "verse"
-      ],
-      "data_file": "bustan-sadi-edwards_edwards.json",
-      "source": "sacredtexts",
-      "author": [
-        "Saadi"
-      ],
-      "translator": [
-        "A. Hart Edwards"
-      ],
-      "year": 1911,
-      "translation_label": "The Bustan of Sa'di",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "popular",
-      "source_summary": "*The Bustan of Sa'di* A. Hart Edwards (1911). Via SacredTexts.com.",
-      "importance_rank": 15
-    },
-    {
-      "id": "ghazzali-confessions",
-      "title": "The Confessions of Al-Ghazzali",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "hierarchy": [
-        "chapter",
-        "verse"
-      ],
-      "data_file": "ghazzali-confessions_field.json",
-      "source": "gutenberg",
-      "author": [
-        "Al-Ghazzali"
-      ],
-      "translator": [
-        "Claud Field"
-      ],
-      "year": 1909,
-      "translation_label": "The Confessions of Al-Ghazzali",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "popular",
-      "source_summary": "*The Confessions of Al-Ghazzali* Claud Field (1909). Via Project Gutenberg.",
-      "importance_rank": 20
-    },
-    {
-      "id": "arabian-poetry-clouston",
-      "title": "Arabian Poetry",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "hierarchy": [
-        "chapter",
-        "verse"
-      ],
-      "data_file": "arabian-poetry-clouston_clouston.json",
-      "source": "sacredtexts",
-      "author": [
-        "Various"
-      ],
-      "translator": [
-        "W.A. Clouston"
-      ],
-      "year": 1881,
-      "translation_label": "Arabian Poetry",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "popular",
-      "source_summary": "*Arabian Poetry* W.A. Clouston (1881). Via SacredTexts.com.",
-      "importance_rank": null
-    },
-    {
-      "id": "arabian-wisdom-wortabet",
-      "title": "Arabian Wisdom",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "hierarchy": [
-        "chapter",
-        "verse"
-      ],
-      "data_file": "arabian-wisdom-wortabet_wortabet.json",
-      "source": "sacredtexts",
-      "author": [
-        "Various"
-      ],
-      "translator": [
-        "John Wortabet"
-      ],
-      "year": 1913,
-      "translation_label": "Arabian Wisdom",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "popular",
-      "source_summary": "*Arabian Wisdom* John Wortabet (1913). Via SacredTexts.com.",
-      "importance_rank": null
-    },
-    {
-      "id": "history-literary-of-the-arabs-reynold-nicholson",
-      "title": "History (Literary) of the Arabs",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "hierarchy": [
-        "chapter",
-        "verse"
-      ],
-      "data_file": "history-literary-of-the-arabs-reynold-nicholson_anonymous.json",
-      "source": "gutenberg",
-      "author": [
-        "Reynold Nicholson"
-      ],
-      "translator": [
-        "Reynold Nicholson"
-      ],
-      "year": 1900,
-      "translation_label": "History (Literary) of the Arabs",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "derivative",
-      "source_summary": "*History (Literary) of the Arabs* Reynold Nicholson (1900). Via Project Gutenberg.",
-      "importance_rank": null
-    },
-    {
-      "id": "oriental-mysticism-palmer",
-      "title": "Oriental Mysticism",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "hierarchy": [
-        "chapter",
-        "verse"
-      ],
-      "data_file": "oriental-mysticism-palmer_palmer.json",
-      "source": "sacredtexts",
-      "author": [
-        "E.H. Palmer"
-      ],
-      "translator": [
-        "E.H. Palmer"
-      ],
-      "year": 1867,
-      "translation_label": "Oriental Mysticism",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "primary",
-      "source_summary": "*Oriental Mysticism* E.H. Palmer (1867). Via SacredTexts.com.",
-      "importance_rank": null
-    },
-    {
-      "id": "salaman-absal-fitzgerald",
-      "title": "Salámán and Absál",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "hierarchy": [
-        "chapter",
-        "verse"
-      ],
-      "data_file": "salaman-absal-fitzgerald_fitzgerald.json",
-      "source": "sacredtexts",
-      "author": [
-        "Jami"
-      ],
-      "translator": [
-        "Edward FitzGerald"
-      ],
-      "year": 1856,
-      "translation_label": "Salámán and Absál",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "popular",
-      "source_summary": "*Salámán and Absál* Edward FitzGerald (1856). Via SacredTexts.com.",
-      "importance_rank": null
-    },
-    {
-      "id": "afghan-poetry-dorn",
-      "title": "Selections from the Poetry of the Afghans",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "hierarchy": [
-        "chapter",
-        "verse"
-      ],
-      "data_file": "afghan-poetry-dorn_raverty.json",
-      "source": "sacredtexts",
-      "author": [
-        "Various"
-      ],
-      "translator": [
-        "H.G. Raverty"
-      ],
-      "year": 1862,
-      "translation_label": "Selections from the Poetry of the Afghans",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "popular",
-      "source_summary": "*Selections from the Poetry of the Afghans* H.G. Raverty (1862). Via SacredTexts.com.",
-      "importance_rank": null
-    },
-    {
-      "id": "some-religious-and-moral-teachings-al-ghazzali",
-      "title": "Some religious and moral teachings",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "hierarchy": [
-        "chapter",
-        "verse"
-      ],
-      "data_file": "some-religious-and-moral-teachings-al-ghazzali_anonymous.json",
-      "source": "gutenberg",
-      "author": [
-        "Al-Ghazzali"
-      ],
-      "translator": [
-        "Al-Ghazzali"
-      ],
-      "year": 1900,
-      "translation_label": "Some religious and moral teachings",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "derivative",
-      "source_summary": "*Some religious and moral teachings* Al-Ghazzali (1900). Via Project Gutenberg.",
-      "importance_rank": null
-    },
-    {
-      "id": "arab-conquests-central-asia-gibb",
-      "title": "The Arab Conquests in Central Asia",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "hierarchy": [
-        "chapter",
-        "verse"
-      ],
-      "data_file": "arab-conquests-central-asia-gibb_gibb.json",
-      "source": "gutenberg",
-      "author": [
-        "H.A.R. Gibb"
-      ],
-      "translator": [
-        "H.A.R. Gibb"
-      ],
-      "year": 1923,
-      "translation_label": "The Arab Conquests in Central Asia",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "popular",
-      "source_summary": "*The Arab Conquests in Central Asia* H.A.R. Gibb (1923). Via Project Gutenberg.",
-      "importance_rank": null
-    },
-    {
-      "id": "diwan-abu-al-ala-nicholson",
-      "title": "The Diwan of Abu'l-ʿAla al-Maʿarri",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "hierarchy": [
-        "chapter",
-        "verse"
-      ],
-      "data_file": "diwan-abu-al-ala-nicholson_nicholson-abulala.json",
-      "source": "sacredtexts",
-      "author": [
-        "Abu'l-ʿAla al-Maʿarri"
-      ],
-      "translator": [
-        "Reynold A. Nicholson"
-      ],
-      "year": 1921,
-      "translation_label": "The Diwan of Abu'l-ʿAla al-Maʿarri",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "primary",
-      "source_summary": "*The Diwan of Abu'l-ʿAla al-Maʿarri* Reynold A. Nicholson (1921). Via SacredTexts.com.",
-      "importance_rank": null
-    },
-    {
-      "id": "diwan-zeb-un-nissa-westbrook",
-      "title": "The Diwan of Zeb-un-Nissa",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "hierarchy": [
-        "chapter",
-        "verse"
-      ],
-      "data_file": "diwan-zeb-un-nissa-westbrook_westbrook.json",
-      "source": "sacredtexts",
-      "author": [
-        "Zeb-un-Nissa"
-      ],
-      "translator": [
-        "Magan Lal",
-        "Jessie Duncan Westbrook"
-      ],
-      "year": 1913,
-      "translation_label": "The Diwan of Zeb-un-Nissa",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "popular",
-      "source_summary": "*The Diwan of Zeb-un-Nissa* Magan Lal, Jessie Duncan Westbrook (1913). Via SacredTexts.com.",
-      "importance_rank": null
-    },
-    {
-      "id": "rumi-divan-festival",
-      "title": "The Festival of Spring",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "hierarchy": [
-        "chapter",
-        "verse"
-      ],
-      "data_file": "rumi-divan-festival_hastie.json",
-      "source": "gutenberg",
-      "author": [
-        "Rumi"
-      ],
-      "translator": [
-        "William Hastie"
-      ],
-      "year": 1903,
-      "translation_label": "The Festival of Spring",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "popular",
-      "source_summary": "*The Festival of Spring* William Hastie (1903). Via Project Gutenberg.",
-      "importance_rank": null
-    },
-    {
-      "id": "hujviri-kashf",
-      "title": "The Kashf al-Mahjub",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "hierarchy": [
-        "section"
-      ],
-      "data_file": "hujviri-kashf_nicholson.json",
-      "source": "gutenberg",
-      "author": [
-        "Ali ibn Usman al-Hujwiri"
-      ],
-      "translator": [
-        "Reynold A. Nicholson"
-      ],
-      "year": 1911,
-      "translation_label": "The Kashf al-Mahjub",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "primary",
-      "source_summary": "*The Kashf al-Mahjub* Reynold A. Nicholson (1911). Via Project Gutenberg.",
-      "importance_rank": null
-    },
-    {
-      "id": "the-kashf-al-mahj-b-oldest-persian-treatise-ali-ibn-usman-hu",
-      "title": "The Kashf al-mahjúb (Oldest Persian treatise on Súfiism)",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "hierarchy": [
-        "chapter",
-        "verse"
-      ],
-      "data_file": "the-kashf-al-mahj-b-oldest-persian-treatise-ali-ibn-usman-hu_anonymous.json",
-      "source": "gutenberg",
-      "author": [
-        "Ali ibn Usman Hujviri"
-      ],
-      "translator": [
-        "Ali ibn Usman Hujviri"
-      ],
-      "year": 1900,
-      "translation_label": "The Kashf al-mahjúb (Oldest Persian treatise on Súfiism)",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "derivative",
-      "source_summary": "*The Kashf al-mahjúb (Oldest Persian treatise on Súfiism)* Ali ibn Usman Hujviri (1900). Via Project Gutenberg.",
-      "importance_rank": null
-    },
-    {
-      "id": "love-letters-rumi",
-      "title": "The Love Letters",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "hierarchy": [
-        "chapter",
-        "verse"
-      ],
-      "data_file": "love-letters-rumi_anonymous.json",
-      "source": "sacredtexts",
-      "author": [
-        "Rumi"
-      ],
-      "translator": [
-        "Anonymous"
-      ],
-      "year": 1905,
-      "translation_label": "The Love Letters",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "derivative",
-      "source_summary": "*The Love Letters* Anonymous (1905). Via SacredTexts.com.",
-      "importance_rank": null
-    },
-    {
-      "id": "mesnavi-acts-adepts-redhouse",
-      "title": "The Mesnavi and the Acts of the Adepts",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "hierarchy": [
-        "chapter",
-        "verse"
-      ],
-      "data_file": "mesnavi-acts-adepts-redhouse_redhouse-acts.json",
-      "source": "sacredtexts",
-      "author": [
-        "Rumi",
-        "Aflaki"
-      ],
-      "translator": [
-        "James W. Redhouse"
-      ],
-      "year": 1881,
-      "translation_label": "The Mesnavi and the Acts of the Adepts",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "popular",
-      "source_summary": "*The Mesnavi and the Acts of the Adepts* James W. Redhouse (1881). Via SacredTexts.com.",
-      "importance_rank": null
-    },
-    {
-      "id": "nicholson-mystics-islam",
-      "title": "The Mystics of Islam",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "hierarchy": [
-        "chapter",
-        "verse"
-      ],
-      "data_file": "nicholson-mystics-islam_nicholson.json",
-      "source": "gutenberg",
-      "author": [
-        "Reynold A. Nicholson"
-      ],
-      "translator": [
-        "Reynold A. Nicholson"
-      ],
-      "year": 1914,
-      "translation_label": "The Mystics of Islam",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "primary",
-      "source_summary": "*The Mystics of Islam* Reynold A. Nicholson (1914). Via Project Gutenberg.",
-      "importance_rank": null
-    },
-    {
-      "id": "persian-mystics-rumi",
-      "title": "The Persian Mystics: Jalalu'd-din Rumi",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "hierarchy": [
-        "chapter",
-        "verse"
-      ],
-      "data_file": "persian-mystics-rumi_davis.json",
-      "source": "gutenberg",
-      "author": [
-        "Rumi"
-      ],
-      "translator": [
-        "F. Hadland Davis"
-      ],
-      "year": 1912,
-      "translation_label": "The Persian Mystics: Jalalu'd-din Rumi",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "popular",
-      "source_summary": "*The Persian Mystics: Jalalu'd-din Rumi* F. Hadland Davis (1912). Via Project Gutenberg.",
-      "importance_rank": null
-    },
-    {
-      "id": "secret-rose-garden-shabistari",
-      "title": "The Secret Rose Garden",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "hierarchy": [
-        "chapter",
-        "verse"
-      ],
-      "data_file": "secret-rose-garden-shabistari_lederer.json",
-      "source": "sacredtexts",
-      "author": [
-        "Mahmud Shabistari"
-      ],
-      "translator": [
-        "Florence Lederer"
-      ],
-      "year": 1920,
-      "translation_label": "The Secret Rose Garden",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "popular",
-      "source_summary": "*The Secret Rose Garden* Florence Lederer (1920). Via SacredTexts.com.",
-      "importance_rank": null
-    },
-    {
-      "id": "iqbal-secrets-of-self",
-      "title": "The Secrets of the Self (Asrār-i Khudī)",
-      "tradition": "Sufi",
-      "collection": "sacred",
-      "hierarchy": [
-        "chapter",
-        "verse"
-      ],
-      "data_file": "iqbal-secrets-of-self_nicholson.json",
-      "source": "gutenberg",
-      "author": [
-        "Muhammad Iqbal"
-      ],
-      "translator": [
-        "Reynold A. Nicholson"
-      ],
-      "year": 1920,
-      "translation_label": "The Secrets of the Self (Asrār-i Khudī)",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "primary",
-      "source_summary": "*The Secrets of the Self (Asrār-i Khudī)* Reynold A. Nicholson (1920). Via Project Gutenberg.",
       "importance_rank": null
     },
     {
