@@ -8068,6 +8068,30 @@
       "importance_rank": null
     },
     {
+      "id": "apocryphon-of-john",
+      "title": "The Apocryphon of John",
+      "tradition": "Gnostic",
+      "collection": "sacred",
+      "hierarchy": [
+        "section"
+      ],
+      "data_file": "apocryphon-of-john_wisse.json",
+      "source": "nag-hammadi-library",
+      "author": [
+        "Anonymous"
+      ],
+      "translator": [
+        "Frederik Wisse"
+      ],
+      "year": 1977,
+      "translation_label": "The Apocryphon of John",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
       "id": "gnostics-remains-king",
       "title": "The Gnostics and Their Remains",
       "tradition": "Gnostic",
@@ -8090,6 +8114,31 @@
       "volume_label": null,
       "quality": "popular",
       "source_summary": "*The Gnostics and Their Remains* C.W. King (1887). Via SacredTexts.com.",
+      "importance_rank": null
+    },
+    {
+      "id": "gospel-of-mary",
+      "title": "The Gospel of Mary",
+      "tradition": "Gnostic",
+      "collection": "sacred",
+      "hierarchy": [
+        "chapter",
+        "verse"
+      ],
+      "data_file": "gospel-of-mary_anonymous.json",
+      "source": "early-christian-writings",
+      "author": [
+        "Anonymous"
+      ],
+      "translator": [
+        "Anonymous"
+      ],
+      "year": null,
+      "translation_label": "The Gospel of Mary",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "derivative",
+      "source_summary": null,
       "importance_rank": null
     },
     {
@@ -8137,6 +8186,30 @@
       "translation_short_label": null,
       "volume_label": null,
       "quality": "primary",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
+      "id": "gospel-of-truth",
+      "title": "The Gospel of Truth",
+      "tradition": "Gnostic",
+      "collection": "sacred",
+      "hierarchy": [
+        "section"
+      ],
+      "data_file": "gospel-of-truth_grant.json",
+      "source": "early-christian-writings",
+      "author": [
+        "Valentinus (attributed)"
+      ],
+      "translator": [
+        "Robert M. Grant"
+      ],
+      "year": null,
+      "translation_label": "The Gospel of Truth",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
       "source_summary": null,
       "importance_rank": null
     },
@@ -26437,6 +26510,31 @@
       "importance_rank": null
     },
     {
+      "id": "kierkegaard-sickness-unto-death",
+      "title": "The Sickness Unto Death",
+      "tradition": "Modern Philosophy",
+      "collection": "other",
+      "hierarchy": [
+        "section",
+        "paragraph"
+      ],
+      "data_file": "kierkegaard-sickness-unto-death_lowrie.json",
+      "source": "internet-archive",
+      "author": [
+        "Søren Kierkegaard"
+      ],
+      "translator": [
+        "Walter Lowrie"
+      ],
+      "year": 1941,
+      "translation_label": "The Sickness Unto Death",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
       "id": "the-siksha-patri-of-the-svami-narayana-sect-monier-williams",
       "title": "The Siksha-Patri of the Svami-Narayana Sect",
       "tradition": "Modern Philosophy",
@@ -27182,6 +27280,32 @@
       "volume_label": null,
       "quality": "primary",
       "source_summary": "*Thus Spake Zarathustra* by Friedrich Nietzsche. Translated by Thomas Common (1909). Via Project Gutenberg.",
+      "importance_rank": null
+    },
+    {
+      "id": "wittgenstein-tractatus",
+      "title": "Tractatus Logico-Philosophicus",
+      "tradition": "Modern Philosophy",
+      "collection": "other",
+      "hierarchy": [
+        "proposition",
+        "sub-proposition"
+      ],
+      "data_file": "wittgenstein-tractatus_ogden.json",
+      "source": "gutenberg",
+      "author": [
+        "Ludwig Wittgenstein"
+      ],
+      "translator": [
+        "C. K. Ogden",
+        "F. P. Ramsey"
+      ],
+      "year": 1922,
+      "translation_label": "Tractatus Logico-Philosophicus",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
       "importance_rank": null
     },
     {
