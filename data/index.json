@@ -1317,31 +1317,6 @@
       "importance_rank": null
     },
     {
-      "id": "gateless-gate-mumon",
-      "title": "The Gateless Gate (Mumonkan)",
-      "tradition": "Buddhist",
-      "collection": "sacred",
-      "hierarchy": [
-        "section"
-      ],
-      "data_file": "gateless-gate-mumon_senzaki-reps.json",
-      "source": "sacredtexts",
-      "author": [
-        "Wumen Huikai"
-      ],
-      "translator": [
-        "Nyogen Senzaki",
-        "Paul Reps"
-      ],
-      "year": 1934,
-      "translation_label": "The Gateless Gate (Mumonkan)",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "popular",
-      "source_summary": null,
-      "importance_rank": null
-    },
-    {
       "id": "gospel-of-buddha",
       "title": "The Gospel of Buddha",
       "tradition": "Buddhist",
@@ -1660,31 +1635,6 @@
       "volume_label": null,
       "quality": "popular",
       "source_summary": "*Carmina Gadelica, Vol 1* Alexander Carmichael (1900). Via SacredTexts.com.",
-      "importance_rank": null
-    },
-    {
-      "id": "carmina-gadelica-vol2",
-      "title": "Carmina Gadelica, Vol 2",
-      "tradition": "Celtic",
-      "collection": "sacred",
-      "hierarchy": [
-        "chapter",
-        "verse"
-      ],
-      "data_file": "carmina-gadelica-vol2_carmichael.json",
-      "source": "sacredtexts",
-      "author": [
-        "Alexander Carmichael"
-      ],
-      "translator": [
-        "Alexander Carmichael"
-      ],
-      "year": 1900,
-      "translation_label": "Carmina Gadelica, Vol 2",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "popular",
-      "source_summary": "*Carmina Gadelica, Vol 2* Alexander Carmichael (1900). Via SacredTexts.com.",
       "importance_rank": null
     },
     {
@@ -2653,30 +2603,6 @@
       "volume_label": "JPS Tanakh (1917)",
       "quality": "popular",
       "source_summary": "JPS Tanakh (1917). Via eBible.org.",
-      "importance_rank": 1
-    },
-    {
-      "id": "bible",
-      "title": "Bible",
-      "tradition": "Christian",
-      "collection": "sacred",
-      "hierarchy": [
-        "section"
-      ],
-      "data_file": "bible_kjv.json",
-      "source": "gutenberg",
-      "author": [
-        "KJV"
-      ],
-      "translator": [
-        "KJV"
-      ],
-      "year": 1900,
-      "translation_label": "Bible",
-      "translation_short_label": "KJV",
-      "volume_label": "King James Version (1611)",
-      "quality": "derivative",
-      "source_summary": "King James Version of the Bible (1611/1769). Via Project Gutenberg.",
       "importance_rank": 1
     },
     {
@@ -7098,30 +7024,6 @@
       "importance_rank": null
     },
     {
-      "id": "confucian-canon-chi-eng-confucius-tr-james-l",
-      "title": "Confucian Canon - Chi & Eng",
-      "tradition": "Confucian",
-      "collection": "sacred",
-      "hierarchy": [
-        "section"
-      ],
-      "data_file": "confucian-canon-chi-eng-confucius-tr-james-l_anonymous.json",
-      "source": "sacredtexts",
-      "author": [
-        "Confucius - tr-James Legge (1893)"
-      ],
-      "translator": [
-        "Confucius - tr-James Legge (1893)"
-      ],
-      "year": 1900,
-      "translation_label": "Confucian Canon - Chi & Eng",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "derivative",
-      "source_summary": "*Confucian Canon - Chi & Eng* Confucius - tr-James Legge (1893) (1900). Via SacredTexts.com.",
-      "importance_rank": null
-    },
-    {
       "id": "more-translations-chinese-waley",
       "title": "More Translations from the Chinese",
       "tradition": "Confucian",
@@ -10662,30 +10564,6 @@
       "volume_label": null,
       "quality": "popular",
       "source_summary": "*The Yoga-Vāsiṣṭha Mahā-Rāmāyaṇa, Vol 4 pt 2* Vihārī-Lāla Mitra (1891). Via Project Gutenberg.",
-      "importance_rank": null
-    },
-    {
-      "id": "sikshapatri-svaminarayana",
-      "title": "The Śikṣāpatrī of the Svāminārāyaṇa Sect",
-      "tradition": "Hindu",
-      "collection": "sacred",
-      "hierarchy": [
-        "section"
-      ],
-      "data_file": "sikshapatri-svaminarayana_monier-williams.json",
-      "source": "gutenberg",
-      "author": [
-        "Sahajanand Swami"
-      ],
-      "translator": [
-        "Monier Monier-Williams"
-      ],
-      "year": 1882,
-      "translation_label": "The Śikṣāpatrī of the Svāminārāyaṇa Sect",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "primary",
-      "source_summary": "*The Śikṣāpatrī of the Svāminārāyaṇa Sect* Monier Monier-Williams (1882). Via Project Gutenberg.",
       "importance_rank": null
     },
     {
