@@ -7104,6 +7104,30 @@
       "importance_rank": null
     },
     {
+      "id": "gospel-of-philip",
+      "title": "The Gospel of Philip",
+      "tradition": "Gnostic",
+      "collection": "sacred",
+      "hierarchy": [
+        "paragraph"
+      ],
+      "data_file": "gospel-of-philip_isenberg.json",
+      "source": "gnosisorg",
+      "author": [
+        "Anonymous"
+      ],
+      "translator": [
+        "Wesley W. Isenberg"
+      ],
+      "year": null,
+      "translation_label": "The Gospel of Philip",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": "*The Gospel of Philip* by Anonymous. Translated by Wesley W. Isenberg (None). Via Christian Classics Ethereal Library (CCEL).",
+      "importance_rank": null
+    },
+    {
       "id": "astrology-greeks-romans-cumont",
       "title": "Astrology and Religion Among the Greeks and Romans",
       "tradition": "Greek",
