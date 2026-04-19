@@ -12571,6 +12571,31 @@
       "importance_rank": null
     },
     {
+      "id": "rousseau-confessions",
+      "title": "The Confessions",
+      "tradition": "Modern Philosophy",
+      "collection": "sacred",
+      "hierarchy": [
+        "book",
+        "paragraph"
+      ],
+      "data_file": "rousseau-confessions_anonymous.json",
+      "source": "gutenberg",
+      "author": [
+        "Jean-Jacques Rousseau"
+      ],
+      "translator": [
+        "Anonymous"
+      ],
+      "year": 1782,
+      "translation_label": "The Confessions",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "derivative",
+      "source_summary": "*The Confessions* by Jean-Jacques Rousseau. Translated by Anonymous (1782). Via Christian Classics Ethereal Library (CCEL).",
+      "importance_rank": null
+    },
+    {
       "id": "poetic-edda",
       "title": "The Poetic Edda",
       "tradition": "Norse",
@@ -23370,56 +23395,6 @@
       "volume_label": null,
       "quality": "derivative",
       "source_summary": "*The Colloquies of Erasmus - Vol 1* by Erasmus. Translated by Erasmus (1900). Via Project Gutenberg.",
-      "importance_rank": null
-    },
-    {
-      "id": "rousseau-confessions",
-      "title": "The Confessions",
-      "tradition": "Modern Philosophy",
-      "collection": "other",
-      "hierarchy": [
-        "chapter",
-        "verse"
-      ],
-      "data_file": "rousseau-confessions_rousseau.json",
-      "source": "gutenberg",
-      "author": [
-        "Jean-Jacques Rousseau"
-      ],
-      "translator": [
-        "W. Conyngham Mallory"
-      ],
-      "year": 1782,
-      "translation_label": "The Confessions",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "popular",
-      "source_summary": "*The Confessions* by Jean-Jacques Rousseau. Translated by W. Conyngham Mallory (1782). Via Project Gutenberg.",
-      "importance_rank": null
-    },
-    {
-      "id": "rousseau-confessions",
-      "title": "The Confessions",
-      "tradition": "Modern Philosophy",
-      "collection": "other",
-      "hierarchy": [
-        "chapter",
-        "verse"
-      ],
-      "data_file": "rousseau-confessions_anonymous.json",
-      "source": "gutenberg",
-      "author": [
-        "Jean-Jacques Rousseau"
-      ],
-      "translator": [
-        "Anonymous"
-      ],
-      "year": 1782,
-      "translation_label": "The Confessions of J.J. Rousseau",
-      "translation_short_label": null,
-      "volume_label": null,
-      "quality": "derivative",
-      "source_summary": "*The Confessions* by Jean-Jacques Rousseau. Translated by W. Conyngham Mallory (1782). Via Project Gutenberg.",
       "importance_rank": null
     },
     {
