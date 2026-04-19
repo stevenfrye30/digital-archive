@@ -48,6 +48,47 @@ body {
 
 /* ── Sidebar ─────────────────────────────────────────────────────────────────── */
 
+/* ── Reading progress bar ─────────────────────────────────────────── */
+#reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: var(--chrome-active);
+  z-index: 9999;
+  width: 0;
+  transition: width 0.1s;
+  pointer-events: none;
+}
+
+/* ── Back to top button ──────────────────────────────────────────── */
+#back-to-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--chrome-active);
+  color: white;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s, transform 0.15s;
+  z-index: 999;
+}
+#back-to-top.visible {
+  opacity: 0.8;
+  pointer-events: auto;
+}
+#back-to-top:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
 /* Sidebar removed — browse tiles replace sidebar navigation */
 
 #sidebar-header {
@@ -750,6 +791,27 @@ body {
 
 #cover-begin:active {
   transform: translateY(1px);
+}
+
+/* ── Load more button ────────────────────────────────────────────── */
+.load-more-btn {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  margin: 24px auto;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-family: system-ui, sans-serif;
+  color: var(--chrome-active);
+  background: var(--reader-bg);
+  border: 1px solid var(--chrome-border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+.load-more-btn:hover {
+  background: #f0ece5;
+  border-color: var(--chrome-active);
 }
 
 /* ── Chapter heading at top of reading view ──────────────────────── */
@@ -2263,6 +2325,8 @@ mark.search-hl-active {
   <!-- Hidden stubs for sidebar JS compatibility -->
   <div style="display:none"><ul id="text-list"></ul><input id="sidebar-search"></div>
 
+  <div id="reading-progress"></div>
+  <button id="back-to-top" onclick="document.getElementById('reader').scrollTop=0" title="Back to top">&uarr;</button>
   <div id="panel">
 
     <div id="controls" style="display:none;">
@@ -2377,6 +2441,7 @@ mark.search-hl-active {
               <a href="sources.html">Sources &amp; Attribution</a>
               <a href="integrity.html">Integrity</a>
               <a href="translators.html">Translators</a>
+              <a href="wishlist.html">Wishlist</a>
             </div>
           </div>
           <div id="home-recent-panel">
@@ -3254,10 +3319,11 @@ function renderFrontMatter() {
   return wrap;
 }
 
-function render(passages, query) {
-  const frag = document.createDocumentFragment();
+const RENDER_BATCH = 200;
+let _pendingPassages = [];
+let _pendingQuery = '';
 
-  for (const p of passages) {
+function _renderBatch(passages, query, frag) {
     const div = document.createElement('div');
     div.className = 'passage';
     div.dataset.pid = p.id;
@@ -3401,8 +3467,46 @@ function render(passages, query) {
 
     frag.appendChild(div);
   }
+}
+
+function render(passages, query) {
   $passages.innerHTML = '';
-  $passages.appendChild(frag);
+  const existing = $passages.querySelector('.chapter-heading');
+
+  if (passages.length <= RENDER_BATCH) {
+    const frag = document.createDocumentFragment();
+    _renderBatch(passages, query, frag);
+    $passages.appendChild(frag);
+    _pendingPassages = [];
+  } else {
+    // Render first batch, keep rest pending
+    const first = passages.slice(0, RENDER_BATCH);
+    _pendingPassages = passages.slice(RENDER_BATCH);
+    _pendingQuery = query;
+    const frag = document.createDocumentFragment();
+    _renderBatch(first, query, frag);
+    $passages.appendChild(frag);
+    _addLoadMoreBtn();
+  }
+}
+
+function _addLoadMoreBtn() {
+  const existing = $passages.querySelector('.load-more-btn');
+  if (existing) existing.remove();
+  if (_pendingPassages.length === 0) return;
+  const btn = document.createElement('button');
+  btn.className = 'load-more-btn';
+  btn.textContent = `Load ${Math.min(RENDER_BATCH, _pendingPassages.length)} more passages (${_pendingPassages.length} remaining)`;
+  btn.addEventListener('click', () => {
+    btn.remove();
+    const batch = _pendingPassages.slice(0, RENDER_BATCH);
+    _pendingPassages = _pendingPassages.slice(RENDER_BATCH);
+    const frag = document.createDocumentFragment();
+    _renderBatch(batch, _pendingQuery, frag);
+    $passages.appendChild(frag);
+    if (_pendingPassages.length > 0) _addLoadMoreBtn();
+  });
+  $passages.appendChild(btn);
 }
 
 // ── Group selector (Bible books / Quran surahs / Upanishads) ─────────────────
@@ -4150,6 +4254,21 @@ function renderWelcome() {
 }
 
 $reader.addEventListener('scroll', scheduleBookmark, { passive: true });
+
+// Reading progress bar + back-to-top
+const $progressBar = document.getElementById('reading-progress');
+const $backToTop = document.getElementById('back-to-top');
+$reader.addEventListener('scroll', () => {
+  const scrollTop = $reader.scrollTop;
+  const scrollHeight = $reader.scrollHeight - $reader.clientHeight;
+  if (scrollHeight > 0) {
+    const pct = Math.min(100, (scrollTop / scrollHeight) * 100);
+    $progressBar.style.width = pct + '%';
+  } else {
+    $progressBar.style.width = '0';
+  }
+  $backToTop.classList.toggle('visible', scrollTop > 400);
+}, { passive: true });
 
 // ── Global corpus search ─────────────────────────────────────────────────────
 

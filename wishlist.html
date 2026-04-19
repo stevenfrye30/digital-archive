@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wishlist — Digital Archive</title>
+<style>
+:root {
+  --reader-bg: #faf8f5; --reader-fg: #2c2c2c;
+  --chrome-bg: #eeebe5; --chrome-fg: #3a3530;
+  --chrome-border: #d8d3cc; --chrome-muted: #8a7a6a;
+  --chrome-active: #7a5c3a; --reader-font: Georgia, serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: system-ui, sans-serif; background: var(--chrome-bg); color: var(--chrome-fg); min-height: 100vh; }
+header { background: var(--reader-bg); border-bottom: 1px solid var(--chrome-border); padding: 24px 32px; }
+header h1 { font-family: var(--reader-font); font-size: 28px; font-weight: normal; color: var(--chrome-active); }
+header .breadcrumb { font-size: 14px; color: var(--chrome-muted); margin-bottom: 4px; }
+header .breadcrumb a { color: var(--chrome-active); text-decoration: none; }
+header .breadcrumb a:hover { text-decoration: underline; }
+main { max-width: 900px; margin: 0 auto; padding: 32px; }
+section { background: var(--reader-bg); border: 1px solid var(--chrome-border); border-radius: 6px; padding: 24px 28px; margin-bottom: 24px; }
+section h2 { font-family: var(--reader-font); font-size: 20px; font-weight: normal; color: var(--chrome-active); border-bottom: 1px solid var(--chrome-border); padding-bottom: 8px; margin-bottom: 16px; }
+p { margin-bottom: 12px; font-size: 14px; line-height: 1.6; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--chrome-border); }
+th { background: var(--chrome-bg); font-weight: 600; position: sticky; top: 0; }
+td.tradition { color: var(--chrome-muted); font-size: 12px; }
+td.source { font-size: 11px; color: var(--chrome-muted); }
+.tag { display: inline-block; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: 600; }
+.tag-manual { background: #fff3e0; color: #8a5a1a; }
+.tag-copyright { background: #fde; color: #a44; }
+.tag-notext { background: #e8e8e8; color: #666; }
+.priority { color: var(--chrome-active); font-weight: 600; }
+.acquired { background: #d8e8ca; }
+.acquired td { color: #3a5d28; }
+code { font-size: 12px; background: var(--chrome-bg); padding: 1px 4px; border-radius: 2px; }
+pre { background: var(--chrome-bg); padding: 12px; border-radius: 4px; font-size: 12px; overflow-x: auto; margin: 12px 0; }
+</style>
+</head>
+<body>
+<header>
+  <div class="breadcrumb"><a href="index.html">&larr; Digital Archive</a></div>
+  <h1>Library Wishlist</h1>
+</header>
+<main>
+
+<section>
+<h2>About</h2>
+<p>These texts are important enough to include in the library but cannot be fetched automatically. Most need manual browser download from their source sites. To add one: download the text, save as <code>.txt</code> in <code>02_raw_sources/</code>, then run the ingest pipeline.</p>
+</section>
+
+<section>
+<h2>Acquired (Restricted — Copyrighted)</h2>
+<table>
+<tr><th>Text</th><th>Tradition</th><th>Status</th></tr>
+<tr class="acquired"><td>Dead Sea Scrolls (Garcia Martinez)</td><td class="tradition">Jewish</td><td><span class="tag tag-copyright">🔒 Local only</span> 6,416 passages</td></tr>
+<tr class="acquired"><td>Dead Sea Scrolls (Vermes)</td><td class="tradition">Jewish</td><td><span class="tag tag-copyright">🔒 Local only</span> 7,811 passages</td></tr>
+<tr class="acquired"><td>Siddhartha (Hesse)</td><td class="tradition">Buddhist</td><td><span class="tag tag-copyright">🔒 Local only</span></td></tr>
+<tr class="acquired"><td>Gospel of Sri Ramakrishna</td><td class="tradition">Hindu</td><td><span class="tag tag-copyright">🔒 Local only</span></td></tr>
+<tr class="acquired"><td>Think and Grow Rich</td><td class="tradition">Philosophy</td><td><span class="tag tag-copyright">🔒 Local only</span></td></tr>
+</table>
+</section>
+
+<section>
+<h2>Needed — Manual Download</h2>
+<table>
+<tr><th>Text</th><th>Tradition</th><th>Why Important</th><th>Source</th></tr>
+<tr><td class="priority">I Ching (Book of Changes)</td><td class="tradition">Chinese</td><td>THE divination/wisdom text of Chinese civilization</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/ich/</td></tr>
+<tr><td class="priority">Guru Granth Sahib</td><td class="tradition">Sikh</td><td>THE Sikh scripture — have commentary but not the text itself</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/skh/granth/</td></tr>
+<tr><td class="priority">Heart Sutra</td><td class="tradition">Buddhist</td><td>Most recited Mahayana text (260 characters)</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/bud/</td></tr>
+<tr><td>Sahih Bukhari</td><td class="tradition">Islam</td><td>Most authoritative Sunni hadith collection</td><td class="source"><span class="tag tag-manual">Manual</span> sunnah.com</td></tr>
+<tr><td>Sahih Muslim</td><td class="tradition">Islam</td><td>Second most authoritative hadith</td><td class="source"><span class="tag tag-manual">Manual</span> sunnah.com</td></tr>
+<tr><td>Al-Ghazali Ihya Ulum al-Din</td><td class="tradition">Islam</td><td>Greatest Islamic theological work</td><td class="source"><span class="tag tag-manual">Manual</span> archive.org</td></tr>
+<tr><td>Ibn Khaldun Muqaddimah</td><td class="tradition">Islam</td><td>Invented sociology/historiography</td><td class="source"><span class="tag tag-manual">Manual</span> archive.org</td></tr>
+<tr><td>Hafiz Divan</td><td class="tradition">Islam</td><td>Greatest Persian poet alongside Rumi</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/isl/</td></tr>
+<tr><td>Zohar (selections)</td><td class="tradition">Jewish</td><td>Central Kabbalah text</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/jud/</td></tr>
+<tr><td>Mishnah</td><td class="tradition">Jewish</td><td>Foundation of rabbinic Judaism</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/jud/</td></tr>
+<tr><td>Apocryphon of John</td><td class="tradition">Gnostic</td><td>Most important Gnostic cosmological text</td><td class="source"><span class="tag tag-manual">Manual</span> gnosis.org</td></tr>
+<tr><td>Gospel of Mary</td><td class="tradition">Gnostic</td><td>Major early Christian text</td><td class="source"><span class="tag tag-manual">Manual</span> gnosis.org</td></tr>
+<tr><td>Gospel of Truth</td><td class="tradition">Gnostic</td><td>Valentinian meditation on salvation</td><td class="source"><span class="tag tag-manual">Manual</span> gnosis.org</td></tr>
+<tr><td>Book of Common Prayer</td><td class="tradition">Christian</td><td>Foundational Protestant/Anglican liturgy</td><td class="source"><span class="tag tag-manual">Manual</span> archive.org</td></tr>
+<tr><td>Philokalia (selections)</td><td class="tradition">Christian</td><td>Eastern Orthodox spirituality anthology</td><td class="source"><span class="tag tag-manual">Manual</span> archive.org</td></tr>
+<tr><td>Pseudo-Dionysius Mystical Theology</td><td class="tradition">Christian</td><td>Shaped all Christian mysticism</td><td class="source"><span class="tag tag-manual">Manual</span> ccel.org</td></tr>
+<tr><td>Platform Sutra</td><td class="tradition">Buddhist</td><td>Foundational Zen text</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/bud/</td></tr>
+<tr><td>Bodhicaryavatara (Shantideva)</td><td class="tradition">Buddhist</td><td>Core Tibetan Buddhist text — Way of the Bodhisattva</td><td class="source"><span class="tag tag-manual">Manual</span> archive.org</td></tr>
+<tr><td>Vimalakirti Sutra</td><td class="tradition">Buddhist</td><td>Key Mahayana on lay enlightenment</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/bud/</td></tr>
+<tr><td>Lankavatara Sutra</td><td class="tradition">Buddhist</td><td>Foundational for Zen/Chan</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/bud/</td></tr>
+<tr><td>Milindapanha</td><td class="tradition">Buddhist</td><td>Greco-Buddhist philosophical dialogue</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/bud/</td></tr>
+<tr><td>Ashtavakra Gita</td><td class="tradition">Hindu</td><td>Radical Advaita Vedanta text</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/hin/</td></tr>
+<tr><td>Arthashastra (Kautilya)</td><td class="tradition">Hindu</td><td>Indian political philosophy — "Indian Machiavelli"</td><td class="source"><span class="tag tag-manual">Manual</span> archive.org</td></tr>
+<tr><td>Narada Bhakti Sutras</td><td class="tradition">Hindu</td><td>Foundational devotional text</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/hin/</td></tr>
+<tr><td>Brahma Sutras</td><td class="tradition">Hindu</td><td>Vedanta triple canon (with Gita + Upanishads)</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/hin/</td></tr>
+<tr><td>Vivekachudamani (Shankara)</td><td class="tradition">Hindu</td><td>"Crest-Jewel of Discrimination"</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/hin/</td></tr>
+<tr><td>Liezi</td><td class="tradition">Chinese</td><td>Third great Taoist classic</td><td class="source"><span class="tag tag-manual">Manual</span> archive.org</td></tr>
+<tr><td>Book of Rites (Li Ji)</td><td class="tradition">Chinese</td><td>Confucian Five Classics</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/cfu/</td></tr>
+<tr><td>Classic of History (Shu Jing)</td><td class="tradition">Chinese</td><td>Confucian Five Classics</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/cfu/</td></tr>
+<tr><td>Spring and Autumn Annals</td><td class="tradition">Chinese</td><td>Confucian Five Classics</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/cfu/</td></tr>
+<tr><td>Kierkegaard Sickness Unto Death</td><td class="tradition">Philosophy</td><td>Essential existentialism</td><td class="source"><span class="tag tag-notext">No plain text</span></td></tr>
+<tr><td>Wittgenstein Tractatus</td><td class="tradition">Philosophy</td><td>Transformed 20th century philosophy</td><td class="source"><span class="tag tag-notext">PDF/TeX only</span></td></tr>
+<tr><td>Hegel Phenomenology of Spirit</td><td class="tradition">Philosophy</td><td>Foundation of Continental philosophy</td><td class="source"><span class="tag tag-notext">Not on Gutenberg</span></td></tr>
+<tr><td>Newton Principia</td><td class="tradition">Science</td><td>Most important scientific work ever written</td><td class="source"><span class="tag tag-notext">No plain text</span></td></tr>
+<tr><td>Galileo Dialogue on Two World Systems</td><td class="tradition">Science</td><td>Launched modern science</td><td class="source"><span class="tag tag-notext">Not on Gutenberg</span></td></tr>
+</table>
+</section>
+
+<section>
+<h2>Quality Wishlist (removed for integrity reasons)</h2>
+<p>These texts were in the library but removed because they fell below the 95% passage-verification threshold. They can be restored once better raw sources are found.</p>
+<table>
+<tr><th>Text</th><th>Issue</th></tr>
+<tr><td>Shahnameh (Zimmern)</td><td>Zimmern translation not in raw sources</td></tr>
+<tr><td>Han Feizi</td><td>Space-separated footnotes throughout raw</td></tr>
+<tr><td>Xunzi</td><td>OCR-corrupted Internet Archive scan</td></tr>
+<tr><td>Aristotle Politics</td><td>Wrong edition raw link</td></tr>
+<tr><td>Five Stages of Greek Religion</td><td>Heavy scholarly apparatus markers</td></tr>
+<tr><td>Sutta-Nipata (Fausboll)</td><td>Pali formatting issues</td></tr>
+<tr><td>Devils of Loudun</td><td>OCR caret markers throughout</td></tr>
+<tr><td>Ambedkar Castes in India</td><td>Inline footnotes with spaces</td></tr>
+<tr><td>Chinese Mystic (Lionel Giles)</td><td>Multiple passage artifacts</td></tr>
+<tr><td>Mahabharata (Ganguli short)</td><td>Only 18 passages, better version exists</td></tr>
+</table>
+</section>
+
+<section>
+<h2>How to Add a Wishlist Text</h2>
+<pre>1. Download the text from the source in your browser
+2. Save as .txt in 02_raw_sources/Library_/SacredTexts.com/ (or appropriate dir)
+3. Tell Claude: "ingest [filename]"
+4. Pipeline runs automatically:
+   python 05_scripts/tag_frontmatter.py --write
+   python 05_scripts/export_reader_data.py
+   python 05_scripts/gzip_web_data.py
+   cd 03_web_app && git add ... && git push</pre>
+</section>
+
+</main>
+</body>
+</html>
