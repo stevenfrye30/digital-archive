@@ -29362,6 +29362,127 @@
       "quality": "popular",
       "source_summary": "*Aradia, or the Gospel of the Witches* by Charles Godfrey Leland. Translated by Charles G. Leland (1899). Via David Nutt / Internet Archive.",
       "importance_rank": null
+    },
+    {
+      "id": "dead-sea-scrolls-garcia-martinez",
+      "title": "Dead Sea Scrolls (Garcia Martinez)",
+      "tradition": "Jewish",
+      "collection": "sacred",
+      "hierarchy": [
+        "Scroll",
+        "Section"
+      ],
+      "data_file": "dead-sea-scrolls-garcia-martinez_garcia-martinez.json",
+      "source": null,
+      "author": [],
+      "translator": [
+        "Garcia Martinez"
+      ],
+      "year": 1994,
+      "translation_label": "Garcia Martinez",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "primary",
+      "source_summary": null,
+      "importance_rank": null,
+      "restricted": true
+    },
+    {
+      "id": "dead-sea-scrolls-vermes",
+      "title": "Dead Sea Scrolls (Vermes)",
+      "tradition": "Jewish",
+      "collection": "sacred",
+      "hierarchy": [
+        "Scroll",
+        "Section"
+      ],
+      "data_file": "dead-sea-scrolls-vermes_vermes.json",
+      "source": null,
+      "author": [],
+      "translator": [
+        "Vermes"
+      ],
+      "year": 1997,
+      "translation_label": "Vermes",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "primary",
+      "source_summary": null,
+      "importance_rank": null,
+      "restricted": true
+    },
+    {
+      "id": "hesse-siddhartha",
+      "title": "Siddhartha",
+      "tradition": "Buddhist",
+      "collection": "other",
+      "hierarchy": [
+        "Chapter"
+      ],
+      "data_file": "hesse-siddhartha_hilda-rosner.json",
+      "source": null,
+      "author": [
+        "Hermann Hesse"
+      ],
+      "translator": [
+        "Hilda Rosner"
+      ],
+      "year": 1951,
+      "translation_label": "Hilda Rosner",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "primary",
+      "source_summary": null,
+      "importance_rank": null,
+      "restricted": true
+    },
+    {
+      "id": "gospel-ramakrishna-nikhilananda",
+      "title": "The Gospel of Sri Ramakrishna",
+      "tradition": "Hindu",
+      "collection": "sacred",
+      "hierarchy": [
+        "Chapter"
+      ],
+      "data_file": "gospel-ramakrishna-nikhilananda_nikhilananda.json",
+      "source": null,
+      "author": [
+        "Mahendranath Gupta"
+      ],
+      "translator": [
+        "Swami Nikhilananda"
+      ],
+      "year": 1942,
+      "translation_label": "Nikhilananda",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "primary",
+      "source_summary": null,
+      "importance_rank": null,
+      "restricted": true
+    },
+    {
+      "id": "think-grow-rich-hill",
+      "title": "Think and Grow Rich",
+      "tradition": null,
+      "collection": "other",
+      "hierarchy": [
+        "Chapter"
+      ],
+      "data_file": "think-grow-rich-hill_hill.json",
+      "source": null,
+      "author": [
+        "Napoleon Hill"
+      ],
+      "translator": [],
+      "year": 1937,
+      "translation_label": null,
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "primary",
+      "source_summary": null,
+      "importance_rank": null,
+      "restricted": true
     }
   ]
 }
