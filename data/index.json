@@ -12619,6 +12619,54 @@
       "importance_rank": null
     },
     {
+      "id": "emerson-essays-first",
+      "title": "Essays, First Series",
+      "tradition": "Modern Philosophy",
+      "collection": "sacred",
+      "hierarchy": [
+        "paragraph"
+      ],
+      "data_file": "emerson-essays-first_emerson.json",
+      "source": "gutenberg",
+      "author": [
+        "Ralph Waldo Emerson"
+      ],
+      "translator": [
+        "Anonymous"
+      ],
+      "year": 1841,
+      "translation_label": "Essays, First Series",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "derivative",
+      "source_summary": "*Essays, First Series* by Ralph Waldo Emerson. Translated by Anonymous (1841). Via Christian Classics Ethereal Library (CCEL).",
+      "importance_rank": null
+    },
+    {
+      "id": "kierkegaard-fear-trembling",
+      "title": "Fear and Trembling",
+      "tradition": "Modern Philosophy",
+      "collection": "sacred",
+      "hierarchy": [
+        "paragraph"
+      ],
+      "data_file": "kierkegaard-fear-trembling_lowrie.json",
+      "source": "gutenberg",
+      "author": [
+        "Søren Kierkegaard"
+      ],
+      "translator": [
+        "Anonymous"
+      ],
+      "year": 1843,
+      "translation_label": "Fear and Trembling",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "derivative",
+      "source_summary": "*Fear and Trembling* by Søren Kierkegaard. Translated by Anonymous (1843). Via Christian Classics Ethereal Library (CCEL).",
+      "importance_rank": null
+    },
+    {
       "id": "rousseau-confessions",
       "title": "The Confessions",
       "tradition": "Modern Philosophy",
@@ -12944,6 +12992,30 @@
       "volume_label": null,
       "quality": "popular",
       "source_summary": "*The Volsunga Saga* Eirikr Magnusson, William Morris (1888). Via Project Gutenberg.",
+      "importance_rank": null
+    },
+    {
+      "id": "arabian-nights-burton",
+      "title": "The Book of the Thousand Nights and a Night",
+      "tradition": "Persian Literature",
+      "collection": "sacred",
+      "hierarchy": [
+        "paragraph"
+      ],
+      "data_file": "arabian-nights-burton_burton.json",
+      "source": "gutenberg",
+      "author": [
+        "Anonymous"
+      ],
+      "translator": [
+        "Anonymous"
+      ],
+      "year": 1885,
+      "translation_label": "The Book of the Thousand Nights and a Night",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "derivative",
+      "source_summary": "*The Book of the Thousand Nights and a Night* by Anonymous. Translated by Anonymous (1885). Via Christian Classics Ethereal Library (CCEL).",
       "importance_rank": null
     },
     {
