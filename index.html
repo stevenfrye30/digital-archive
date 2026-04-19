@@ -1225,6 +1225,25 @@ body {
   margin-top: 2px;
 }
 
+#home-restricted {
+  margin-top: clamp(12px, 2vh, 20px);
+}
+.home-restricted-btn {
+  padding: 8px 20px;
+  font-size: 13px;
+  font-family: system-ui, sans-serif;
+  color: #8a5a1a;
+  background: #fff3e0;
+  border: 1px solid #e8c080;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+.home-restricted-btn:hover {
+  background: #ffe8c0;
+  border-color: #c4993a;
+}
+
 #home-footer {
   margin-top: clamp(12px, 3vh, 32px);
   display: flex;
@@ -2350,6 +2369,9 @@ mark.search-hl-active {
             <div id="home-search">
               <input type="search" id="home-search-input" placeholder="Search all texts…" autocomplete="off">
               <ul id="home-search-results"></ul>
+            </div>
+            <div id="home-restricted" style="display:none;">
+              <button class="home-restricted-btn" onclick="browseRestricted()">🔒 Restricted Library</button>
             </div>
             <div id="home-footer">
               <a href="sources.html">Sources &amp; Attribution</a>
@@ -4845,9 +4867,54 @@ function browseHome() {
   reader.style.overflow = 'hidden';
 }
 
+/** Browse restricted texts */
+function browseRestricted() {
+  if (!browseTree) browseTree = buildBrowseData();
+  showBrowse();
+  browseHistory = [{fn: browseHome}];
+  $browseCrumb.innerHTML = `<a onclick="browseHome()">Home</a><span class="sep">›</span>Restricted`;
+  $browseTitle.textContent = '🔒 Restricted Library';
+  document.getElementById('browse-toolbar').style.display = 'none';
+  $browseTiles.className = 'tile-list';
+
+  // Find all restricted texts
+  const restricted = [];
+  for (const [id, entries] of Object.entries(indexGroups)) {
+    for (const e of entries) {
+      if (e.restricted) {
+        restricted.push(e);
+      }
+    }
+  }
+
+  if (restricted.length === 0) {
+    $browseTiles.innerHTML = '<div style="text-align:center;color:var(--chrome-muted);padding:40px;">No restricted texts available locally.</div>';
+    return;
+  }
+
+  let html = '<div class="tile-section-label">Copyrighted — local only, not on public site</div>';
+  for (const e of restricted) {
+    const tr = (e.translator || []).join(', ');
+    const meta = [tr, e.year].filter(Boolean).join(' · ');
+    html += `<div class="text-tile" onclick="browseOpen('${escH(e.data_file)}')">
+      <span class="tt-star">🔒</span>
+      <div class="tt-info">
+        <div class="tt-title">${escH(e.title)} — ${escH(e.translation_short_label || tr)}</div>
+        ${meta ? `<div class="tt-meta">${escH(meta)}</div>` : ''}
+      </div>
+    </div>`;
+  }
+  $browseTiles.innerHTML = html;
+}
+
 /** Populate category counts on the home screen after index loads */
 function updateHomeCounts() {
   if (!browseTree) browseTree = buildBrowseData();
+
+  // Show restricted button if any restricted texts exist
+  const hasRestricted = Object.values(indexGroups).some(entries => entries.some(e => e.restricted));
+  const restrictedPanel = document.getElementById('home-restricted');
+  if (restrictedPanel) restrictedPanel.style.display = hasRestricted ? 'block' : 'none';
   document.querySelectorAll('.home-cat').forEach(btn => {
     const cat = btn.dataset.cat;
     const traditions = browseTree[cat] || {};
