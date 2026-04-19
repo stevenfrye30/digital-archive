@@ -2337,6 +2337,97 @@ mark.search-hl-active {
   font-weight: 500;
 }
 
+/* ── Dark mode ─────────────────────────────────────────────────────── */
+
+[data-theme="dark"] {
+  --reader-bg:     #1a1a1e;
+  --reader-fg:     #d4d0c8;
+  --chrome-bg:     #222226;
+  --chrome-fg:     #c8c4bc;
+  --chrome-border: #3a3a3e;
+  --chrome-muted:  #8a8680;
+  --chrome-active: #c4a060;
+}
+[data-theme="dark"] #home-search-input,
+[data-theme="dark"] #home-recent-panel #continue-btn {
+  background: #2a2a2e;
+  color: var(--chrome-fg);
+  border-color: var(--chrome-border);
+}
+[data-theme="dark"] #home-search-results,
+[data-theme="dark"] .bt-sort select {
+  background: #2a2a2e;
+  color: var(--chrome-fg);
+  border-color: var(--chrome-border);
+}
+[data-theme="dark"] #home-search-results li:hover { background: #333338; }
+[data-theme="dark"] .home-restricted-btn {
+  background: #3a3020;
+  color: #d4a040;
+  border-color: #5a4a2a;
+}
+[data-theme="dark"] .home-restricted-btn:hover {
+  background: #4a4030;
+  border-color: #7a6a3a;
+}
+[data-theme="dark"] .tile-card { background: #2a2a2e; border-color: var(--chrome-border); }
+[data-theme="dark"] .tile-card:hover { border-color: var(--chrome-active); background: #303035; }
+[data-theme="dark"] .tile-list-item { border-color: var(--chrome-border); }
+[data-theme="dark"] .tile-list-item:hover { background: #2a2a2e; }
+[data-theme="dark"] .cc-section { background: var(--reader-bg); border-color: var(--chrome-border); }
+[data-theme="dark"] .cc-toc-btn { background: #2a2a2e; border-color: var(--chrome-border); color: var(--chrome-fg); }
+[data-theme="dark"] .cc-toc-btn:hover { background: #333338; border-color: var(--chrome-active); }
+[data-theme="dark"] .passage { border-bottom-color: var(--chrome-border); }
+[data-theme="dark"] code { background: #2a2a2e; }
+[data-theme="dark"] mark.search-hl { background: #5a4a10; color: #f0e0a0; }
+[data-theme="dark"] .chapter-heading { color: var(--chrome-active); border-bottom-color: var(--chrome-border); }
+[data-theme="dark"] #ctrl-search,
+[data-theme="dark"] #ctrl-book { background: #2a2a2e; color: var(--chrome-fg); border-color: var(--chrome-border); }
+[data-theme="dark"] #back-to-top { background: var(--chrome-active); }
+[data-theme="dark"] .tag-restricted { background: #3a3020; color: #d4a040; }
+[data-theme="dark"] #compare-btn { background: #3a3520; border-color: #5a4a1e; color: #d4c080; }
+[data-theme="dark"] #compare-btn.active { background: #5a4a1e; color: #faf6ec; }
+[data-theme="dark"] #info-bar { background: var(--chrome-bg); border-color: var(--chrome-border); }
+[data-theme="dark"] #text-meta { background: var(--reader-bg); border-color: var(--chrome-border); }
+[data-theme="dark"] #nav-bar { background: var(--chrome-bg); border-color: var(--chrome-border); }
+[data-theme="dark"] #nav-bar button { color: var(--chrome-fg); }
+[data-theme="dark"] #nav-bar button:hover { background: rgba(255,255,255,0.06); }
+[data-theme="dark"] #translation-bar { background: var(--chrome-bg); border-color: var(--chrome-border); }
+[data-theme="dark"] #translation-bar select { background: #2a2a2e; color: var(--chrome-fg); border-color: var(--chrome-border); }
+[data-theme="dark"] .cc-cover-meta dt { color: var(--chrome-muted); }
+[data-theme="dark"] .cc-btn { background: #2a2a2e; border-color: var(--chrome-border); color: var(--chrome-fg); }
+[data-theme="dark"] .cc-btn:hover { background: #333338; border-color: var(--chrome-active); }
+[data-theme="dark"] .cc-btn.primary { background: var(--chrome-active); color: #1a1a1e; }
+[data-theme="dark"] .toc-link { color: var(--chrome-active); }
+
+/* Dark mode toggle */
+#dark-toggle {
+  background: none;
+  border: 1px solid var(--chrome-border);
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 12px;
+  color: var(--chrome-muted);
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+#dark-toggle:hover { color: var(--chrome-active); border-color: var(--chrome-active); }
+
+/* ── Reading progress badge ────────────────────────────────────────── */
+
+.progress-badge {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--chrome-active);
+  background: rgba(122,92,58,0.1);
+  padding: 1px 5px;
+  border-radius: 3px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+[data-theme="dark"] .progress-badge { background: rgba(196,160,96,0.15); }
+
   </style>
 </head>
 <body>
@@ -2463,6 +2554,7 @@ mark.search-hl-active {
               <a href="integrity.html">Integrity</a>
               <a href="translators.html">Translators</a>
               <a href="wishlist.html">Wishlist</a>
+              <button id="dark-toggle" onclick="toggleDarkMode()">Dark</button>
             </div>
           </div>
           <div id="home-recent-panel">
@@ -2547,6 +2639,26 @@ mark.search-hl-active {
 </div>
 
 <script>
+
+// ── Dark mode (apply before paint) ───────────────────────────────────────────
+
+(function() {
+  const saved = localStorage.getItem('da-dark-mode');
+  if (saved === 'true') document.documentElement.setAttribute('data-theme', 'dark');
+})();
+
+function toggleDarkMode() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  if (isDark) {
+    document.documentElement.removeAttribute('data-theme');
+    localStorage.setItem('da-dark-mode', 'false');
+  } else {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    localStorage.setItem('da-dark-mode', 'true');
+  }
+  const btn = document.getElementById('dark-toggle');
+  if (btn) btn.textContent = isDark ? 'Dark' : 'Light';
+}
 
 // ── Surah name map (1-indexed) ────────────────────────────────────────────────
 
@@ -4218,20 +4330,36 @@ function saveBookmark() {
   if (!currentEntry) return;
   const pid = topVisiblePassage();
   if (!pid) return;
+  // Calculate reading progress %
+  const scrollTop = $reader.scrollTop;
+  const scrollMax = $reader.scrollHeight - $reader.clientHeight;
+  const pct = scrollMax > 0 ? Math.round((scrollTop / scrollMax) * 100) : 0;
   const rec = { data_file: currentEntry.data_file, title: currentEntry.title,
                 translator: (currentEntry.translator || []).join(', '),
-                pid, book: currentBook, t: Date.now() };
+                pid, book: currentBook, pct, t: Date.now() };
   try {
     localStorage.setItem('da-last', JSON.stringify(rec));
+    // Save per-text progress
+    const progRaw = localStorage.getItem('da-progress') || '{}';
+    const prog = JSON.parse(progRaw);
+    prog[currentEntry.data_file] = pct;
+    localStorage.setItem('da-progress', JSON.stringify(prog));
     // Update recents (dedupe by data_file, cap 5)
     const raw = localStorage.getItem('da-recents');
     let list = []; try { list = raw ? JSON.parse(raw) : []; } catch (e) {}
     list = list.filter(x => x.data_file !== rec.data_file);
     list.unshift({ data_file: rec.data_file, title: rec.title,
-                   translator: rec.translator, pid, t: rec.t });
+                   translator: rec.translator, pid, pct, t: rec.t });
     list = list.slice(0, 5);
     localStorage.setItem('da-recents', JSON.stringify(list));
   } catch (e) {}
+}
+
+function getReadingProgress(dataFile) {
+  try {
+    const prog = JSON.parse(localStorage.getItem('da-progress') || '{}');
+    return prog[dataFile] || 0;
+  } catch (e) { return 0; }
 }
 
 function scheduleBookmark() {
@@ -4249,7 +4377,9 @@ function renderWelcome() {
   try { recents = JSON.parse(localStorage.getItem('da-recents') || '[]'); } catch (e) {}
 
   if (last && dataFileToEntry[last.data_file]) {
-    $continueBtn.textContent = last.title + (last.translator ? ' — ' + last.translator : '');
+    const lastPct = last.pct || getReadingProgress(last.data_file);
+    const pctBadge = lastPct > 0 ? ` (${lastPct}%)` : '';
+    $continueBtn.textContent = last.title + (last.translator ? ' — ' + last.translator : '') + pctBadge;
     $continueBtn.onclick = () => {
       const { entry, li } = dataFileToEntry[last.data_file];
       pendingPid = last.pid;
@@ -4267,7 +4397,9 @@ function renderWelcome() {
       if (last && r.data_file === last.data_file) continue;
       const li = document.createElement('li');
       const sub = r.translator ? `<span class="recent-sub">${escapeHTML(r.translator)}</span>` : '';
-      li.innerHTML = escapeHTML(r.title) + sub;
+      const rPct = r.pct || getReadingProgress(r.data_file);
+      const rBadge = rPct > 0 ? `<span class="progress-badge">${rPct}%</span>` : '';
+      li.innerHTML = escapeHTML(r.title) + rBadge + sub;
       li.addEventListener('click', () => {
         const { entry, li: sidebarLi } = dataFileToEntry[r.data_file];
         pendingPid = r.pid;
@@ -4658,6 +4790,9 @@ function renderSidebarTree({ firstLoad = false } = {}) {
 
   if (firstLoad && !autoLoaded) renderWelcome();
   if (firstLoad) updateHomeCounts();
+  // Sync dark mode toggle label
+  const dtBtn = document.getElementById('dark-toggle');
+  if (dtBtn) dtBtn.textContent = document.documentElement.getAttribute('data-theme') === 'dark' ? 'Light' : 'Dark';
 }
 
 // (Sidebar search removed — replaced by home page search)
@@ -4831,10 +4966,12 @@ function _textTileHTML(t, cat, trd) {
   let colorClass = '';
   if (colorMode === 'era') colorClass = _eraClass(yearVal);
   else if (colorMode === 'importance') colorClass = _impClass(t.rank);
+  const progPct = getReadingProgress(t.entries[0].data_file);
+  const progBadge = progPct > 0 ? `<span class="progress-badge">${progPct}%</span>` : '';
   return `<div class="text-tile ${colorClass}" onclick="browseText('${escH(cat)}','${escH(trd)}','${escH(t.id)}')">
     ${star}
     <div class="tt-info">
-      <div class="tt-title">${escH(t.title)}</div>
+      <div class="tt-title">${escH(t.title)}${progBadge}</div>
       ${meta ? `<div class="tt-meta">${escH(meta)}</div>` : ''}
     </div>
     ${badge}
@@ -5083,12 +5220,18 @@ function updateHomeCounts() {
       const q = input.value.trim().toLowerCase();
       if (q.length < 2) { results.classList.remove('open'); results.innerHTML = ''; return; }
       const matches = [];
+      const qWords = q.split(/\s+/).filter(w => w.length >= 2);
       for (const [id, entries] of Object.entries(indexGroups)) {
         const e = entries[0];
-        const hay = [e.title, (e.author||[]).join(' '), e.tradition, id].join(' ').toLowerCase();
-        if (hay.includes(q)) {
+        const hay = [
+          e.title, (e.author||[]).join(' '), e.tradition,
+          (e.translator||[]).join(' '), e.collection,
+          e.source_summary, e.translation_label, id
+        ].join(' ').toLowerCase();
+        const allMatch = qWords.every(w => hay.includes(w));
+        if (allMatch) {
           matches.push(e);
-          if (matches.length >= 12) break;
+          if (matches.length >= 15) break;
         }
       }
       if (matches.length === 0) {
