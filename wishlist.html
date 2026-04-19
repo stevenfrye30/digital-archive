@@ -36,6 +36,7 @@ td.source { font-size: 11px; color: var(--chrome-muted); }
 .acquired td { color: #3a5d28; }
 code { font-size: 12px; background: var(--chrome-bg); padding: 1px 4px; border-radius: 2px; }
 pre { background: var(--chrome-bg); padding: 12px; border-radius: 4px; font-size: 12px; overflow-x: auto; margin: 12px 0; }
+.tier-label { font-size: 12px; color: var(--chrome-muted); margin-bottom: 12px; font-style: italic; }
 </style>
 </head>
 <body>
@@ -47,7 +48,8 @@ pre { background: var(--chrome-bg); padding: 12px; border-radius: 4px; font-size
 
 <section>
 <h2>About</h2>
-<p>These texts are important enough to include in the library but cannot be fetched automatically. Most need manual browser download from their source sites. To add one: download the text, save as <code>.txt</code> in <code>02_raw_sources/</code>, then run the ingest pipeline.</p>
+<p>Texts important enough to include in the library but not yet acquired. Most need manual browser download from their source sites (sacred-texts.com is Cloudflare-protected). To add one: download the text, save as <code>.txt</code> in <code>02_raw_sources/</code>, then tell Claude to ingest it.</p>
+<p>Library currently has <strong>1,200 texts</strong> across 38 traditions.</p>
 </section>
 
 <section>
@@ -63,52 +65,72 @@ pre { background: var(--chrome-bg); padding: 12px; border-radius: 4px; font-size
 </section>
 
 <section>
-<h2>Acquired (Ready to Ingest)</h2>
-<p>Raw source files downloaded. Run the ingest pipeline to add these to the library.</p>
+<h2>Tier 1 — Critical Gaps</h2>
+<p class="tier-label">Foundational texts whose absence is a glaring hole in the library.</p>
 <table>
-<tr><th>Text</th><th>Tradition</th><th>Raw File</th></tr>
-<tr class="acquired"><td>Apocryphon of John</td><td class="tradition">Gnostic</td><td class="source">gnosis.org/Apocryphon_of_John.txt (47 KB)</td></tr>
-<tr class="acquired"><td>Gospel of Mary</td><td class="tradition">Gnostic</td><td class="source">gnosis.org/Gospel_of_Mary.txt (7 KB)</td></tr>
-<tr class="acquired"><td>Gospel of Truth</td><td class="tradition">Gnostic</td><td class="source">gnosis.org/Gospel_of_Truth.txt (30 KB)</td></tr>
-<tr class="acquired"><td>Wittgenstein Tractatus</td><td class="tradition">Philosophy</td><td class="source">Gutenberg.org/Tractatus_Logico-Philosophicus.txt (126 KB)</td></tr>
-<tr class="acquired"><td>Kierkegaard Sickness Unto Death</td><td class="tradition">Philosophy</td><td class="source">Internetarchive/Sickness_Unto_Death_Kierkegaard.txt (339 KB, OCR)</td></tr>
+<tr><th>Text</th><th>Tradition</th><th>Why Critical</th><th>Source</th></tr>
+<tr><td class="priority">I Ching (Book of Changes)</td><td class="tradition">Chinese</td><td>THE divination/wisdom text of Chinese civilization</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/ich/</td></tr>
+<tr><td class="priority">Guru Granth Sahib</td><td class="tradition">Sikh</td><td>THE Sikh scripture — have commentary but not the text itself</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/skh/granth/</td></tr>
+<tr><td class="priority">Heart Sutra</td><td class="tradition">Buddhist</td><td>Most recited Mahayana text (260 characters)</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/bud/</td></tr>
+<tr><td class="priority">Hatha Yoga Pradipika</td><td class="tradition">Hindu</td><td>Foundation of all yoga practice</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/hin/</td></tr>
+<tr><td class="priority">Avatamsaka Sutra (selections)</td><td class="tradition">Buddhist</td><td>Basis of Huayan/Kegon — foundational Mahayana</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/bud/</td></tr>
+<tr><td class="priority">Prajnaparamita in 8,000 Lines</td><td class="tradition">Buddhist</td><td>"Mother of all Buddhas" — the core Mahayana source text</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/bud/</td></tr>
+<tr><td class="priority">Sahih Bukhari</td><td class="tradition">Islam</td><td>Most authoritative Sunni hadith collection</td><td class="source"><span class="tag tag-manual">Manual</span> sunnah.com</td></tr>
+<tr><td class="priority">Sahih Muslim</td><td class="tradition">Islam</td><td>Second most authoritative hadith</td><td class="source"><span class="tag tag-manual">Manual</span> sunnah.com</td></tr>
+<tr><td class="priority">Zohar (selections)</td><td class="tradition">Jewish</td><td>Central Kabbalah text</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/jud/</td></tr>
+<tr><td class="priority">Mishnah</td><td class="tradition">Jewish</td><td>Foundation of rabbinic Judaism</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/jud/</td></tr>
+<tr><td class="priority">Tattvartha Sutra</td><td class="tradition">Jain</td><td>Only text accepted by ALL Jain sects</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/jai/</td></tr>
+<tr><td class="priority">Meister Eckhart Sermons</td><td class="tradition">Christian</td><td>Greatest Christian mystic — not on Gutenberg</td><td class="source"><span class="tag tag-manual">Manual</span> ccel.org or archive.org</td></tr>
 </table>
 </section>
 
 <section>
-<h2>Needed — Manual Download</h2>
+<h2>Tier 2 — Important Additions</h2>
+<p class="tier-label">Major texts that would significantly strengthen existing traditions.</p>
 <table>
 <tr><th>Text</th><th>Tradition</th><th>Why Important</th><th>Source</th></tr>
-<tr><td class="priority">I Ching (Book of Changes)</td><td class="tradition">Chinese</td><td>THE divination/wisdom text of Chinese civilization</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/ich/</td></tr>
-<tr><td class="priority">Guru Granth Sahib</td><td class="tradition">Sikh</td><td>THE Sikh scripture — have commentary but not the text itself</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/skh/granth/</td></tr>
-<tr><td class="priority">Heart Sutra</td><td class="tradition">Buddhist</td><td>Most recited Mahayana text (260 characters)</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/bud/</td></tr>
-<tr><td>Sahih Bukhari</td><td class="tradition">Islam</td><td>Most authoritative Sunni hadith collection</td><td class="source"><span class="tag tag-manual">Manual</span> sunnah.com</td></tr>
-<tr><td>Sahih Muslim</td><td class="tradition">Islam</td><td>Second most authoritative hadith</td><td class="source"><span class="tag tag-manual">Manual</span> sunnah.com</td></tr>
 <tr><td>Al-Ghazali Ihya Ulum al-Din</td><td class="tradition">Islam</td><td>Greatest Islamic theological work</td><td class="source"><span class="tag tag-manual">Manual</span> archive.org</td></tr>
+<tr><td>Ibn Arabi Fusus al-Hikam</td><td class="tradition">Islam</td><td>Most important Sufi metaphysical text</td><td class="source"><span class="tag tag-manual">Manual</span> archive.org</td></tr>
 <tr><td>Ibn Khaldun Muqaddimah</td><td class="tradition">Islam</td><td>Invented sociology/historiography</td><td class="source"><span class="tag tag-manual">Manual</span> archive.org</td></tr>
 <tr><td>Hafiz Divan</td><td class="tradition">Islam</td><td>Greatest Persian poet alongside Rumi</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/isl/</td></tr>
-<tr><td>Zohar (selections)</td><td class="tradition">Jewish</td><td>Central Kabbalah text</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/jud/</td></tr>
-<tr><td>Mishnah</td><td class="tradition">Jewish</td><td>Foundation of rabbinic Judaism</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/jud/</td></tr>
-<tr><td>Book of Common Prayer</td><td class="tradition">Christian</td><td>Foundational Protestant/Anglican liturgy</td><td class="source"><span class="tag tag-manual">Manual</span> archive.org</td></tr>
-<tr><td>Philokalia (selections)</td><td class="tradition">Christian</td><td>Eastern Orthodox spirituality anthology</td><td class="source"><span class="tag tag-manual">Manual</span> archive.org</td></tr>
+<tr><td>Platform Sutra</td><td class="tradition">Buddhist</td><td>Foundational Zen text — sixth patriarch Huineng</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/bud/</td></tr>
+<tr><td>Bodhicaryavatara (Shantideva)</td><td class="tradition">Buddhist</td><td>Way of the Bodhisattva — core Tibetan Buddhist text</td><td class="source"><span class="tag tag-manual">Manual</span> archive.org</td></tr>
+<tr><td>Vimalakirti Sutra</td><td class="tradition">Buddhist</td><td>Key Mahayana text on lay enlightenment</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/bud/</td></tr>
+<tr><td>Lankavatara Sutra</td><td class="tradition">Buddhist</td><td>Foundational for Zen/Chan Buddhism</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/bud/</td></tr>
 <tr><td>Pseudo-Dionysius Mystical Theology</td><td class="tradition">Christian</td><td>Shaped all Christian mysticism</td><td class="source"><span class="tag tag-manual">Manual</span> ccel.org</td></tr>
-<tr><td>Platform Sutra</td><td class="tradition">Buddhist</td><td>Foundational Zen text</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/bud/</td></tr>
-<tr><td>Bodhicaryavatara (Shantideva)</td><td class="tradition">Buddhist</td><td>Core Tibetan Buddhist text — Way of the Bodhisattva</td><td class="source"><span class="tag tag-manual">Manual</span> archive.org</td></tr>
-<tr><td>Vimalakirti Sutra</td><td class="tradition">Buddhist</td><td>Key Mahayana on lay enlightenment</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/bud/</td></tr>
-<tr><td>Lankavatara Sutra</td><td class="tradition">Buddhist</td><td>Foundational for Zen/Chan</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/bud/</td></tr>
-<tr><td>Milindapanha</td><td class="tradition">Buddhist</td><td>Greco-Buddhist philosophical dialogue</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/bud/</td></tr>
+<tr><td>Philokalia (selections)</td><td class="tradition">Christian</td><td>Eastern Orthodox spirituality anthology</td><td class="source"><span class="tag tag-manual">Manual</span> archive.org</td></tr>
 <tr><td>Ashtavakra Gita</td><td class="tradition">Hindu</td><td>Radical Advaita Vedanta text</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/hin/</td></tr>
-<tr><td>Arthashastra (Kautilya)</td><td class="tradition">Hindu</td><td>Indian political philosophy — "Indian Machiavelli"</td><td class="source"><span class="tag tag-manual">Manual</span> archive.org</td></tr>
-<tr><td>Narada Bhakti Sutras</td><td class="tradition">Hindu</td><td>Foundational devotional text</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/hin/</td></tr>
 <tr><td>Brahma Sutras</td><td class="tradition">Hindu</td><td>Vedanta triple canon (with Gita + Upanishads)</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/hin/</td></tr>
 <tr><td>Vivekachudamani (Shankara)</td><td class="tradition">Hindu</td><td>"Crest-Jewel of Discrimination"</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/hin/</td></tr>
+<tr><td>Devi Bhagavata Purana</td><td class="tradition">Hindu</td><td>Central Shakta/goddess tradition text</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/hin/</td></tr>
+<tr><td>Kalpa Sutra</td><td class="tradition">Jain</td><td>Lives of the Jinas — key Jain hagiography</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/jai/</td></tr>
 <tr><td>Liezi</td><td class="tradition">Chinese</td><td>Third great Taoist classic</td><td class="source"><span class="tag tag-manual">Manual</span> archive.org</td></tr>
 <tr><td>Book of Rites (Li Ji)</td><td class="tradition">Chinese</td><td>Confucian Five Classics</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/cfu/</td></tr>
 <tr><td>Classic of History (Shu Jing)</td><td class="tradition">Chinese</td><td>Confucian Five Classics</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/cfu/</td></tr>
+<tr><td>Records of the Grand Historian</td><td class="tradition">Chinese</td><td>Sima Qian — China's foundational history</td><td class="source"><span class="tag tag-manual">Manual</span> archive.org</td></tr>
+</table>
+</section>
+
+<section>
+<h2>Tier 3 — Would Strengthen the Collection</h2>
+<p class="tier-label">Notable texts that round out the library but aren't urgent gaps.</p>
+<table>
+<tr><th>Text</th><th>Tradition</th><th>Why Notable</th><th>Source</th></tr>
+<tr><td>Milindapanha</td><td class="tradition">Buddhist</td><td>Greco-Buddhist philosophical dialogue</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/bud/</td></tr>
+<tr><td>Book of Common Prayer</td><td class="tradition">Christian</td><td>Foundational Anglican liturgy</td><td class="source"><span class="tag tag-manual">Manual</span> archive.org</td></tr>
+<tr><td>Arthashastra (Kautilya)</td><td class="tradition">Hindu</td><td>Indian political philosophy — "Indian Machiavelli"</td><td class="source"><span class="tag tag-manual">Manual</span> archive.org</td></tr>
+<tr><td>Narada Bhakti Sutras</td><td class="tradition">Hindu</td><td>Foundational devotional text</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/hin/</td></tr>
 <tr><td>Spring and Autumn Annals</td><td class="tradition">Chinese</td><td>Confucian Five Classics</td><td class="source"><span class="tag tag-manual">Manual</span> sacred-texts.com/cfu/</td></tr>
+<tr><td>Journey to the West</td><td class="tradition">Chinese</td><td>One of Four Great Chinese Novels</td><td class="source"><span class="tag tag-manual">Manual</span> archive.org</td></tr>
+<tr><td>Dream of the Red Chamber</td><td class="tradition">Chinese</td><td>Greatest Chinese novel</td><td class="source"><span class="tag tag-manual">Manual</span> archive.org</td></tr>
+<tr><td>Nahjul Balagha (better source)</td><td class="tradition">Islam</td><td>Current OCR version has artifacts — find cleaner source</td><td class="source"><span class="tag tag-notext">Quality upgrade</span></td></tr>
 <tr><td>Hegel Phenomenology of Spirit</td><td class="tradition">Philosophy</td><td>Foundation of Continental philosophy</td><td class="source"><span class="tag tag-notext">Not on Gutenberg</span></td></tr>
 <tr><td>Newton Principia</td><td class="tradition">Science</td><td>Most important scientific work ever written</td><td class="source"><span class="tag tag-notext">No plain text</span></td></tr>
+<tr><td>Euclid Elements</td><td class="tradition">Science</td><td>Most influential textbook ever — only LaTeX on Gutenberg</td><td class="source"><span class="tag tag-notext">TeX only</span></td></tr>
 <tr><td>Galileo Dialogue on Two World Systems</td><td class="tradition">Science</td><td>Launched modern science</td><td class="source"><span class="tag tag-notext">Not on Gutenberg</span></td></tr>
+<tr><td>Black Elk Speaks</td><td class="tradition">Indigenous</td><td>Most important Native American spiritual text</td><td class="source"><span class="tag tag-copyright">Copyrighted</span></td></tr>
+<tr><td>Heidegger Being and Time</td><td class="tradition">Philosophy</td><td>Essential existentialism</td><td class="source"><span class="tag tag-copyright">Copyrighted</span></td></tr>
+<tr><td>Simone Weil Gravity and Grace</td><td class="tradition">Philosophy</td><td>Mystical philosophy</td><td class="source"><span class="tag tag-copyright">Copyrighted</span></td></tr>
 </table>
 </section>
 
