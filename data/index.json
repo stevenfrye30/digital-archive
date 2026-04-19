@@ -10142,6 +10142,28 @@
       "importance_rank": null
     },
     {
+      "id": "rig-veda-griffith",
+      "title": "The Hymns of the Rigveda",
+      "tradition": "Hindu",
+      "collection": "sacred",
+      "hierarchy": [
+        "section"
+      ],
+      "data_file": "rig-veda-griffith_griffith.json",
+      "source": "internet-archive",
+      "author": [],
+      "translator": [
+        "Ralph T.H. Griffith"
+      ],
+      "year": 1889,
+      "translation_label": "The Hymns of the Rigveda",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "primary",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
       "id": "kama-sutra-burton",
       "title": "The Kama Sutra of Vatsyayana",
       "tradition": "Hindu",
@@ -11574,6 +11596,30 @@
       "importance_rank": null
     },
     {
+      "id": "nahjul-balagha",
+      "title": "Nahjul Balagha (Peak of Eloquence)",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "section"
+      ],
+      "data_file": "nahjul-balagha_al-jibouri.json",
+      "source": "internet-archive",
+      "author": [
+        "Imam Ali ibn Abu Talib"
+      ],
+      "translator": [
+        "Yasin T. Al-Jibouri"
+      ],
+      "year": null,
+      "translation_label": "Nahjul Balagha (Peak of Eloquence)",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
       "id": "oriental-mysticism-palmer",
       "title": "Oriental Mysticism",
       "tradition": "Islam",
@@ -11696,6 +11742,31 @@
       "volume_label": null,
       "quality": "popular",
       "source_summary": "*The Arab Conquests in Central Asia* H.A.R. Gibb (1923). Via Project Gutenberg.",
+      "importance_rank": null
+    },
+    {
+      "id": "conference-of-the-birds",
+      "title": "The Conference of the Birds",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "section"
+      ],
+      "data_file": "conference-of-the-birds_darbandi-davis.json",
+      "source": "internet-archive",
+      "author": [
+        "Farid ud-Din Attar"
+      ],
+      "translator": [
+        "Afkham Darbandi",
+        "Dick Davis"
+      ],
+      "year": 1984,
+      "translation_label": "The Conference of the Birds",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
       "importance_rank": null
     },
     {
@@ -12023,6 +12094,28 @@
       "quality": "popular",
       "source_summary": "*Jaina Sutras, Part 2* Hermann Jacobi (1895). Via SacredTexts.com.",
       "importance_rank": 2
+    },
+    {
+      "id": "uttaradhyayana-sutra",
+      "title": "Uttaradhyayana Sutra",
+      "tradition": "Jain",
+      "collection": "sacred",
+      "hierarchy": [
+        "section"
+      ],
+      "data_file": "uttaradhyayana-sutra_jacobi.json",
+      "source": "internet-archive",
+      "author": [],
+      "translator": [
+        "Hermann Jacobi"
+      ],
+      "year": 1895,
+      "translation_label": "Uttaradhyayana Sutra",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
     },
     {
       "id": "talmud-polano",
@@ -14861,6 +14954,30 @@
       "importance_rank": null
     },
     {
+      "id": "prose-edda",
+      "title": "The Prose Edda (Younger Edda)",
+      "tradition": "Norse",
+      "collection": "sacred",
+      "hierarchy": [
+        "section"
+      ],
+      "data_file": "prose-edda_anderson.json",
+      "source": "gutenberg",
+      "author": [
+        "Snorri Sturluson"
+      ],
+      "translator": [
+        "Rasmus B. Anderson"
+      ],
+      "year": 1879,
+      "translation_label": "The Prose Edda (Younger Edda)",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
+    },
+    {
       "id": "volsunga-saga",
       "title": "The Volsunga Saga",
       "tradition": "Norse",
@@ -15939,6 +16056,31 @@
       "quality": "popular",
       "source_summary": "*The Zend-Avesta, Part 3: Yasna, Visparad, Afrinagan, and Gahs* Lawrence Heyworth Mills (1887). Via Internet Archive.",
       "importance_rank": 3
+    },
+    {
+      "id": "don-quixote",
+      "title": "Don Quixote",
+      "tradition": null,
+      "collection": "other",
+      "hierarchy": [
+        "chapter",
+        "paragraph"
+      ],
+      "data_file": "don-quixote_ormsby.json",
+      "source": "gutenberg",
+      "author": [
+        "Miguel de Cervantes"
+      ],
+      "translator": [
+        "John Ormsby"
+      ],
+      "year": 1885,
+      "translation_label": "Don Quixote",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": null,
+      "importance_rank": null
     },
     {
       "id": "art-of-war",
