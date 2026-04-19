@@ -9753,6 +9753,466 @@
       "importance_rank": 1
     },
     {
+      "id": "quran",
+      "title": "The Holy Quran",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "surah",
+        "ayah"
+      ],
+      "data_file": "quran_saheeh.json",
+      "source": "tanzil",
+      "author": [],
+      "translator": [
+        "Saheeh International"
+      ],
+      "year": 1997,
+      "translation_label": "Saheeh International",
+      "translation_short_label": "Saheeh Intl.",
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": "The Holy Quran in 20 translations: Saheeh International, Arberry, Pickthall, Yusuf Ali, Talal Itani, Uthmani, Maududi, Ahmed Raza Khan, and more. Via Tanzil.net.",
+      "importance_rank": 1
+    },
+    {
+      "id": "quran",
+      "title": "The Holy Quran",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "surah",
+        "ayah"
+      ],
+      "data_file": "quran_arberry.json",
+      "source": "tanzil",
+      "author": [],
+      "translator": [
+        "Arthur John Arberry"
+      ],
+      "year": 1955,
+      "translation_label": "The Koran Interpreted",
+      "translation_short_label": "Arberry",
+      "volume_label": null,
+      "quality": "primary",
+      "source_summary": "The Holy Quran in 20 translations: Saheeh International, Arberry, Pickthall, Yusuf Ali, Talal Itani, Uthmani, Maududi, Ahmed Raza Khan, and more. Via Tanzil.net.",
+      "importance_rank": 1
+    },
+    {
+      "id": "quran",
+      "title": "The Holy Quran",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "surah",
+        "ayah"
+      ],
+      "data_file": "quran_pickthall.json",
+      "source": "tanzil",
+      "author": [],
+      "translator": [
+        "Marmaduke Pickthall"
+      ],
+      "year": 1930,
+      "translation_label": "The Meaning of the Glorious Quran",
+      "translation_short_label": "Pickthall",
+      "volume_label": null,
+      "quality": "primary",
+      "source_summary": "The Holy Quran in 20 translations: Saheeh International, Arberry, Pickthall, Yusuf Ali, Talal Itani, Uthmani, Maududi, Ahmed Raza Khan, and more. Via Tanzil.net.",
+      "importance_rank": 1
+    },
+    {
+      "id": "quran",
+      "title": "The Holy Quran",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "surah",
+        "ayah"
+      ],
+      "data_file": "quran_yusufali.json",
+      "source": "tanzil",
+      "author": [],
+      "translator": [
+        "Abdullah Yusuf Ali"
+      ],
+      "year": 1934,
+      "translation_label": "Abdullah Yusuf Ali",
+      "translation_short_label": "Yusuf Ali",
+      "volume_label": null,
+      "quality": "primary",
+      "source_summary": "The Holy Quran in 20 translations: Saheeh International, Arberry, Pickthall, Yusuf Ali, Talal Itani, Uthmani, Maududi, Ahmed Raza Khan, and more. Via Tanzil.net.",
+      "importance_rank": 1
+    },
+    {
+      "id": "quran",
+      "title": "The Holy Quran",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "surah",
+        "ayah"
+      ],
+      "data_file": "quran_talal_itani.json",
+      "source": "tanzil",
+      "author": [],
+      "translator": [
+        "Talal Itani"
+      ],
+      "year": 2012,
+      "translation_label": "Quran in English: Clear and Easy to Read",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": "The Holy Quran in 20 translations: Saheeh International, Arberry, Pickthall, Yusuf Ali, Talal Itani, Uthmani, Maududi, Ahmed Raza Khan, and more. Via Tanzil.net.",
+      "importance_rank": 1
+    },
+    {
+      "id": "quran",
+      "title": "The Holy Quran",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "surah",
+        "ayah"
+      ],
+      "data_file": "quran_uthmani.json",
+      "source": "tanzil",
+      "author": [],
+      "translator": [
+        "Compilers of the Uthmanic codex"
+      ],
+      "year": null,
+      "translation_label": "Al-Qur'ān al-Karīm (Uthmani script)",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": "The Holy Quran in 20 translations: Saheeh International, Arberry, Pickthall, Yusuf Ali, Talal Itani, Uthmani, Maududi, Ahmed Raza Khan, and more. Via Tanzil.net.",
+      "importance_rank": 1
+    },
+    {
+      "id": "quran",
+      "title": "The Holy Quran",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "surah",
+        "ayah"
+      ],
+      "data_file": "quran_maududi.json",
+      "source": "tanzil",
+      "author": [],
+      "translator": [
+        "Abul A'ala Maududi"
+      ],
+      "year": 1972,
+      "translation_label": "Tafhim al-Quran",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": "The Holy Quran in 20 translations: Saheeh International, Arberry, Pickthall, Yusuf Ali, Talal Itani, Uthmani, Maududi, Ahmed Raza Khan, and more. Via Tanzil.net.",
+      "importance_rank": 1
+    },
+    {
+      "id": "quran",
+      "title": "The Holy Quran",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "surah",
+        "ayah"
+      ],
+      "data_file": "quran_ahmed_raza_khan.json",
+      "source": "tanzil",
+      "author": [],
+      "translator": [
+        "Ahmed Raza Khan"
+      ],
+      "year": 1910,
+      "translation_label": "Kanz ul-Iman (Urdu)",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": "The Holy Quran in 20 translations: Saheeh International, Arberry, Pickthall, Yusuf Ali, Talal Itani, Uthmani, Maududi, Ahmed Raza Khan, and more. Via Tanzil.net.",
+      "importance_rank": 1
+    },
+    {
+      "id": "quran",
+      "title": "The Holy Quran",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "surah",
+        "ayah"
+      ],
+      "data_file": "quran_bahasa_indonesia.json",
+      "source": "tanzil",
+      "author": [],
+      "translator": [
+        "Indonesian Ministry of Religious Affairs"
+      ],
+      "year": null,
+      "translation_label": "Al-Qur'an dan Terjemahannya",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": "The Holy Quran in 20 translations: Saheeh International, Arberry, Pickthall, Yusuf Ali, Talal Itani, Uthmani, Maududi, Ahmed Raza Khan, and more. Via Tanzil.net.",
+      "importance_rank": 1
+    },
+    {
+      "id": "quran",
+      "title": "The Holy Quran",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "surah",
+        "ayah"
+      ],
+      "data_file": "quran_elmalili.json",
+      "source": "tanzil",
+      "author": [],
+      "translator": [
+        "Elmalılı Hamdi Yazır"
+      ],
+      "year": 1935,
+      "translation_label": "Hak Dini Kur'an Dili",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": "The Holy Quran in 20 translations: Saheeh International, Arberry, Pickthall, Yusuf Ali, Talal Itani, Uthmani, Maududi, Ahmed Raza Khan, and more. Via Tanzil.net.",
+      "importance_rank": 1
+    },
+    {
+      "id": "quran",
+      "title": "The Holy Quran",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "surah",
+        "ayah"
+      ],
+      "data_file": "quran_ma_jian.json",
+      "source": "tanzil",
+      "author": [],
+      "translator": [
+        "Ma Jian"
+      ],
+      "year": 1981,
+      "translation_label": "古蘭經 (The Qur'an in Chinese)",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": "The Holy Quran in 20 translations: Saheeh International, Arberry, Pickthall, Yusuf Ali, Talal Itani, Uthmani, Maududi, Ahmed Raza Khan, and more. Via Tanzil.net.",
+      "importance_rank": 1
+    },
+    {
+      "id": "quran",
+      "title": "The Holy Quran",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "surah",
+        "ayah"
+      ],
+      "data_file": "quran_fooladvand.json",
+      "source": "tanzil",
+      "author": [],
+      "translator": [
+        "Mohammad Mahdi Fooladvand"
+      ],
+      "year": 1994,
+      "translation_label": "ترجمهٔ قرآن (Persian translation of the Qur'an)",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": "The Holy Quran in 20 translations: Saheeh International, Arberry, Pickthall, Yusuf Ali, Talal Itani, Uthmani, Maududi, Ahmed Raza Khan, and more. Via Tanzil.net.",
+      "importance_rank": 1
+    },
+    {
+      "id": "quran",
+      "title": "The Holy Quran",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "surah",
+        "ayah"
+      ],
+      "data_file": "quran_abul-aala-maududi.json",
+      "source": "tanzil",
+      "author": [],
+      "translator": [
+        "Abul A'ala Maududi"
+      ],
+      "year": null,
+      "translation_label": "Abul A'ala Maududi",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": "The Holy Quran in 20 translations: Saheeh International, Arberry, Pickthall, Yusuf Ali, Talal Itani, Uthmani, Maududi, Ahmed Raza Khan, and more. Via Tanzil.net.",
+      "importance_rank": 1
+    },
+    {
+      "id": "quran",
+      "title": "The Holy Quran",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "surah",
+        "ayah"
+      ],
+      "data_file": "quran_ahmed-raza-khan-urdu.json",
+      "source": "tanzil",
+      "author": [],
+      "translator": [
+        "Ahmed Raza Khan"
+      ],
+      "year": null,
+      "translation_label": "Ahmed Raza Khan",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": "The Holy Quran in 20 translations: Saheeh International, Arberry, Pickthall, Yusuf Ali, Talal Itani, Uthmani, Maududi, Ahmed Raza Khan, and more. Via Tanzil.net.",
+      "importance_rank": 1
+    },
+    {
+      "id": "quran",
+      "title": "The Holy Quran",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "surah",
+        "ayah"
+      ],
+      "data_file": "quran_bahasa-indonesia-indonesian.json",
+      "source": "tanzil",
+      "author": [],
+      "translator": [
+        "Indonesian Ministry of Religious Affairs"
+      ],
+      "year": null,
+      "translation_label": "Indonesian Ministry of Religious Affairs",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": "The Holy Quran in 20 translations: Saheeh International, Arberry, Pickthall, Yusuf Ali, Talal Itani, Uthmani, Maududi, Ahmed Raza Khan, and more. Via Tanzil.net.",
+      "importance_rank": 1
+    },
+    {
+      "id": "quran",
+      "title": "The Holy Quran",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "surah",
+        "ayah"
+      ],
+      "data_file": "quran_elmalili-hamdi-yazir.json",
+      "source": "tanzil",
+      "author": [],
+      "translator": [
+        "Elmalili Hamdi Yazir"
+      ],
+      "year": null,
+      "translation_label": "Elmalili Hamdi Yazir",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": "The Holy Quran in 20 translations: Saheeh International, Arberry, Pickthall, Yusuf Ali, Talal Itani, Uthmani, Maududi, Ahmed Raza Khan, and more. Via Tanzil.net.",
+      "importance_rank": 1
+    },
+    {
+      "id": "quran",
+      "title": "The Holy Quran",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "surah",
+        "ayah"
+      ],
+      "data_file": "quran_ma-jian-chinese.json",
+      "source": "tanzil",
+      "author": [],
+      "translator": [
+        "Ma Jian"
+      ],
+      "year": null,
+      "translation_label": "Ma Jian",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": "The Holy Quran in 20 translations: Saheeh International, Arberry, Pickthall, Yusuf Ali, Talal Itani, Uthmani, Maududi, Ahmed Raza Khan, and more. Via Tanzil.net.",
+      "importance_rank": 1
+    },
+    {
+      "id": "quran",
+      "title": "The Holy Quran",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "surah",
+        "ayah"
+      ],
+      "data_file": "quran_mohammad-mahdi-fooladvand.json",
+      "source": "tanzil",
+      "author": [],
+      "translator": [
+        "Mohammad Mahdi Fooladvand"
+      ],
+      "year": null,
+      "translation_label": "Mohammad Mahdi Fooladvand",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": "The Holy Quran in 20 translations: Saheeh International, Arberry, Pickthall, Yusuf Ali, Talal Itani, Uthmani, Maududi, Ahmed Raza Khan, and more. Via Tanzil.net.",
+      "importance_rank": 1
+    },
+    {
+      "id": "quran",
+      "title": "The Holy Quran",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "surah",
+        "ayah"
+      ],
+      "data_file": "quran_talal-itani.json",
+      "source": "tanzil",
+      "author": [],
+      "translator": [
+        "Talal Itani"
+      ],
+      "year": null,
+      "translation_label": "Talal Itani",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": "The Holy Quran in 20 translations: Saheeh International, Arberry, Pickthall, Yusuf Ali, Talal Itani, Uthmani, Maududi, Ahmed Raza Khan, and more. Via Tanzil.net.",
+      "importance_rank": 1
+    },
+    {
+      "id": "quran",
+      "title": "The Holy Quran",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "surah",
+        "ayah"
+      ],
+      "data_file": "quran_uthmani-tanzil.json",
+      "source": "tanzil",
+      "author": [],
+      "translator": [
+        "Uthmani Script"
+      ],
+      "year": null,
+      "translation_label": "Uthmani Script",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": "The Holy Quran in 20 translations: Saheeh International, Arberry, Pickthall, Yusuf Ali, Talal Itani, Uthmani, Maududi, Ahmed Raza Khan, and more. Via Tanzil.net.",
+      "importance_rank": 1
+    },
+    {
       "id": "rumi-masnavi",
       "title": "The Masnavi",
       "tradition": "Islam",
@@ -9900,6 +10360,30 @@
       "volume_label": null,
       "quality": "popular",
       "source_summary": "*A Compendium on the Soul* Edward Abbott van Dyck (1906). Via Project Gutenberg.",
+      "importance_rank": null
+    },
+    {
+      "id": "manual-of-hadith",
+      "title": "A Manual of Hadith",
+      "tradition": "Islam",
+      "collection": "sacred",
+      "hierarchy": [
+        "paragraph"
+      ],
+      "data_file": "manual-of-hadith_muhammad-ali.json",
+      "source": "sacredtexts",
+      "author": [
+        "Maulana Muhammad Ali"
+      ],
+      "translator": [
+        "Maulana Muhammad Ali"
+      ],
+      "year": 1944,
+      "translation_label": "A Manual of Hadith",
+      "translation_short_label": null,
+      "volume_label": null,
+      "quality": "popular",
+      "source_summary": "*A Manual of Hadith* by Maulana Muhammad Ali. Translated by Maulana Muhammad Ali (1944). Via Christian Classics Ethereal Library (CCEL).",
       "importance_rank": null
     },
     {
