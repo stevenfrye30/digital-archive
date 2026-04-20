@@ -2962,6 +2962,7 @@
       "tradition": "Christian",
       "collection": "sacred",
       "hierarchy": [
+        "book",
         "chapter",
         "verse"
       ],
