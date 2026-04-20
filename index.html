@@ -3090,6 +3090,7 @@ let _pendingPassages = [];
 let _pendingQuery = '';
 
 function _renderBatch(passages, query, frag) {
+  for (const p of passages) {
     const div = document.createElement('div');
     div.className = 'passage';
     div.dataset.pid = p.id;
